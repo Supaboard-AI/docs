@@ -1,0 +1,87 @@
+---
+title: "Clickhouse"
+---
+
+Connect Supaboard to a ClickHouse database for direct querying, schema discovery, and AI-powered analysis.
+
+---
+
+## Before you connect
+
+**Network access** — Supaboard connects from a fixed set of egress IPs. Add them to your ClickHouse server or ClickHouse Cloud service's IP allow-list before attempting a connection. The current IP list is shown inside the connector form under **Whitelist IPs**.
+
+**Database user permissions** — The user you provide needs at minimum:
+- `SELECT` privilege on the target database and tables
+
+See [Recommended database user permissions](#recommended-database-user-permissions) for the exact SQL.
+
+---
+
+## Connection fields
+
+| Field | Default | Required | Description |
+|---|---|---|---|
+| **Display Name** | — | Yes | Label shown in the Supaboard UI |
+| **Host** | `localhost` | Yes | Hostname or IP of your ClickHouse server |
+| **Port** | `9000` | Yes | ClickHouse native TCP port (see note below) |
+| **Username** | — | No | ClickHouse user; defaults to `default` if left blank |
+| **Password** | — | No | Password for the ClickHouse user |
+| **Database** | — | Yes | Database name to connect to |
+
+> **Port note** — Supaboard connects over the native TCP protocol on port `9000`. This is different from the HTTP interface (port `8123`) and the HTTPS interface (port `8443`). ClickHouse Cloud uses port `9440` for secure native TCP — check your Cloud service details if `9000` does not connect.
+
+---
+
+## Finding your connection details
+
+### ClickHouse Cloud
+
+1. Open [clickhouse.cloud](https://clickhouse.cloud) and select your service.
+2. On the service detail page, go to **Connect**.
+3. Select **Native** as the connection method.
+4. Copy the **Host** (format: `xxxxx.clickhouse.cloud`) and **Port** (typically `9440` for secure native TCP on ClickHouse Cloud).
+5. Use the **default** user or a custom user you have created.
+6. Under **Security → IP Access List**, add each Supaboard egress IP to allow connections.
+
+> ClickHouse Cloud uses port `9440` (TLS-enabled native TCP), not `9000`. Update the **Port** field accordingly.
+
+**Documentation:** [ClickHouse Cloud connection details](https://clickhouse.com/docs/en/cloud/get-started/query-endpoints) · [IP access list](https://clickhouse.com/docs/en/cloud/security/setting-ip-filters)
+
+### Self-hosted ClickHouse
+
+1. Your **Host** is the server's IP address or hostname.
+2. The default native TCP **Port** is `9000`.
+3. Check `/etc/clickhouse-server/config.xml` (or `config.d/`) for any custom port configuration.
+4. Ensure the server's firewall allows inbound TCP on port `9000` from Supaboard egress IPs.
+
+**Documentation:** [ClickHouse server configuration](https://clickhouse.com/docs/en/operations/server-configuration-parameters/settings) · [Access control and account management](https://clickhouse.com/docs/en/operations/access-rights)
+
+---
+
+## Recommended database user permissions
+
+```sql
+-- Create a read-only user
+CREATE USER supaboard IDENTIFIED BY 'strong_password_here';
+
+-- Grant SELECT on a specific database
+GRANT SELECT ON your_database.* TO supaboard;
+
+-- Optionally allow database discovery
+GRANT SHOW DATABASES ON *.* TO supaboard;
+GRANT SHOW TABLES ON your_database.* TO supaboard;
+```
+
+Replace `your_database` with the target database name. For multiple databases, repeat the `GRANT SELECT` line for each one.
+
+---
+
+## Troubleshooting
+
+| Error | Likely cause | Fix |
+|---|---|---|
+| `Connection refused` | Wrong host/port or firewall blocking | Verify host and port; add Supaboard IPs to the allow-list |
+| `Authentication failed` | Wrong username or password | Verify credentials; confirm user exists with `SELECT name FROM system.users` |
+| `Database X doesn't exist` | Database name typo | Check with `SHOW DATABASES` |
+| `Code 516: supaboard: Authentication failed` | User exists but wrong password | Reset the user password: `ALTER USER supaboard IDENTIFIED BY 'new_password'` |
+| Timeout on port 9000 | ClickHouse Cloud uses port 9440 | Update **Port** to `9440` for ClickHouse Cloud services |

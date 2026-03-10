@@ -1,0 +1,143 @@
+---
+title: 'Redshift'
+---
+
+Connect Supaboard to an Amazon Redshift cluster or Serverless workgroup for direct querying, schema discovery, and AI-powered analysis.
+
+---
+
+## Before you connect
+
+**Network access** — Supaboard connects from a fixed set of egress IPs. Add them to your Redshift cluster's VPC security group before attempting a connection. The current IP list is shown inside the connector form under **Whitelist IPs**.
+
+For clusters in a private VPC, use an SSH tunnel through a bastion host in the same VPC.
+
+**Database user permissions** — The user you provide needs at minimum:
+- `CONNECT` on the database
+- `USAGE` on the target schema(s)
+- `SELECT` on the tables you want to expose
+
+See [Recommended database user permissions](#recommended-database-user-permissions) for the exact SQL.
+
+**SSL** — Redshift enforces SSL by default. Supaboard always connects with SSL to Redshift — there is no SSL toggle for this connector.
+
+---
+
+## Connection fields
+
+| Field | Default | Required | Description |
+|---|---|---|---|
+| **Display Name** | — | Yes | Label shown in the Supaboard UI |
+| **Host** | — | Yes | Redshift cluster endpoint or Serverless endpoint (see below) |
+| **Port** | `5439` | Yes | Redshift port |
+| **Database** | — | Yes | Database name |
+| **Schema** | `public` | No | Default schema for queries |
+| **Username** | — | Yes | Database user |
+| **Password** | — | Yes | Password for the database user |
+
+> **SSL** — Supaboard always uses SSL when connecting to Redshift. No toggle is needed.
+
+---
+
+## SSH Tunnel fields
+
+Shown when the **SSH Tunnel** toggle is enabled.
+
+| Field | Default | Required | Description |
+|---|---|---|---|
+| **SSH Host** | — | Yes | Hostname or IP of the SSH bastion server |
+| **SSH Port** | `22` | Yes | SSH port on the bastion server |
+| **SSH Username** | — | Yes | SSH login username |
+| **SSH Connection Type** | `Private Key` | Yes | `Private Key` or `Password` |
+| **SSH Private Key** | — | If Private Key | PEM-encoded private key |
+| **SSH Passphrase** | — | No | Passphrase for an encrypted private key |
+| **SSH Password** | — | If Password | Password for SSH password authentication |
+
+---
+
+## Finding your connection details
+
+### Amazon Redshift Console
+
+**Provisioned cluster endpoint:**
+
+1. Open the [Redshift Console](https://console.aws.amazon.com/redshiftv2/) and go to **Clusters**.
+2. Select your cluster.
+3. Under **General information**, copy the **Endpoint** — it looks like:
+   ```text
+   cluster-name.xxxxxxxxxx.region.redshift.amazonaws.com:5439/database
+   ```
+4. Use the hostname part (before the colon) as **Host**, `5439` as **Port**, and the database name (after the final `/`) as **Database**.
+
+**Documentation:** [Connecting to a cluster](https://docs.aws.amazon.com/redshift/latest/mgmt/connecting-to-cluster.html) · [Authorizing inbound access](https://docs.aws.amazon.com/redshift/latest/mgmt/managing-clusters-vpc.html)
+
+**Redshift Serverless endpoint:**
+
+1. In the Redshift Console, go to **Serverless dashboard**.
+2. Select your workgroup.
+3. Under **Workgroup details**, copy the **Endpoint** — it looks like:
+   ```text
+   workgroup-name.accountid.region.redshift-serverless.amazonaws.com:5439/database
+   ```
+4. Parse the same way as provisioned clusters above.
+
+**Documentation:** [Connecting to Redshift Serverless](https://docs.aws.amazon.com/redshift/latest/mgmt/serverless-connecting.html)
+
+**VPC and security group:**
+
+1. On the cluster or workgroup detail page, find the **VPC security group**.
+2. Open the security group in the EC2 Console.
+3. Add an inbound rule: **Type** = Custom TCP, **Port** = 5439, **Source** = each Supaboard egress IP (as `/32` CIDR rules).
+
+---
+
+## SSH Tunnel
+
+Use an SSH tunnel when your Redshift cluster is in a private VPC with no public endpoint.
+
+**When to use it:**
+- Cluster is not publicly accessible (most production configurations)
+- Security policy requires all external traffic to pass through a bastion host
+
+**Checklist:**
+- [ ] The bastion host is in the same VPC as the Redshift cluster
+- [ ] The bastion host's security group allows SSH (port 22) from Supaboard egress IPs
+- [ ] The Redshift cluster's security group allows port 5439 from the bastion host's security group
+- [ ] The SSH user has permission to forward connections
+- [ ] If using a private key, it is in PEM format
+
+---
+
+## Recommended database user permissions
+
+```sql
+-- Create a dedicated read-only user
+CREATE USER supaboard WITH PASSWORD 'strong_password_here';
+
+-- Grant connect on the database (run as superuser)
+GRANT CONNECT ON DATABASE your_database TO supaboard;
+
+-- Grant schema access
+GRANT USAGE ON SCHEMA public TO supaboard;
+
+-- Grant table access
+GRANT SELECT ON ALL TABLES IN SCHEMA public TO supaboard;
+
+-- Grant access to future tables
+ALTER DEFAULT PRIVILEGES IN SCHEMA public
+  GRANT SELECT ON TABLES TO supaboard;
+```
+
+Replace `public` with each schema you want to expose.
+
+---
+
+## Troubleshooting
+
+| Error | Likely cause | Fix |
+|---|---|---|
+| `Connection refused` or timeout | VPC security group blocking Supaboard IPs | Add Supaboard egress IPs to the Redshift security group |
+| `FATAL: password authentication failed` | Wrong username or password | Verify credentials in the Redshift Console under **Database users** |
+| `FATAL: database "X" does not exist` | Database name typo | Check database name in the Redshift Console |
+| `Endpoint not publicly accessible` | Cluster has no public IP | Enable **Publicly accessible** on the cluster, or use an SSH tunnel |
+| `SSL SYSCALL error` | SSL certificate issue | Redshift uses a public AWS CA certificate — no manual cert upload needed |

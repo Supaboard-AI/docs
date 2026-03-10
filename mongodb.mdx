@@ -1,0 +1,119 @@
+---
+title: "MongoDB"
+---
+
+Connect Supaboard to a MongoDB database using a standard connection string (URI).
+
+---
+
+## Before you connect
+
+**Network access** — Supaboard connects from a fixed set of egress IPs. For MongoDB Atlas, add them to your cluster's IP access list under **Security → Network Access**. The current IP list is shown inside the connector form under **Whitelist IPs**.
+
+**Database user permissions** — The user in your connection string needs at minimum:
+- `read` role on the target database
+
+See [Recommended database user permissions](#recommended-database-user-permissions) for instructions.
+
+---
+
+## Connection fields
+
+| Field | Default | Required | Description |
+|---|---|---|---|
+| **Display Name** | — | Yes | Label shown in the Supaboard UI |
+| **Connection String** | — | Yes | Full MongoDB URI (see format below) |
+
+---
+
+## Connection string format
+
+Supaboard accepts a full MongoDB URI. The standard format is:
+
+```text
+mongodb+srv://username:password@cluster-host/?authSource=admin
+```
+
+For non-SRV connections (self-hosted or older Atlas clusters):
+
+```text
+mongodb://username:password@host:27017/database?authSource=admin
+```
+
+| Part | Description |
+|---|---|
+| `mongodb+srv://` | Use `+srv` for Atlas and DNS-based clusters; use `mongodb://` for direct host connections |
+| `username:password` | MongoDB user credentials — URL-encode special characters (e.g. `@` → `%40`) |
+| `cluster-host` | Cluster hostname (Atlas) or server IP/hostname (self-hosted) |
+| `database` | Optional — the specific database to connect to; if omitted, Supaboard auto-discovers |
+| `authSource=admin` | The authentication database — usually `admin` for Atlas |
+
+---
+
+## Finding your connection details
+
+### MongoDB Atlas
+
+1. Open [cloud.mongodb.com](https://cloud.mongodb.com) and select your project.
+2. In the **Clusters** view, click **Connect** on your cluster.
+3. Select **Drivers** (or **Connect your application**).
+4. Choose any driver — you only need the connection string, not the code snippet.
+5. Copy the connection string. It will look like:
+   ```text
+   mongodb+srv://<username>:<password>@cluster0.xxxxx.mongodb.net/?retryWrites=true&w=majority
+   ```
+6. Replace `<username>` and `<password>` with your Atlas database user credentials.
+7. Paste the full string into the **Connection String** field in Supaboard.
+
+**Documentation:** [Connect to a cluster](https://www.mongodb.com/docs/atlas/connect-to-database-deployment/) · [Connection string URI format](https://www.mongodb.com/docs/manual/reference/connection-string/)
+
+**Adding Supaboard IPs to Atlas:**
+
+Atlas requires you to explicitly allow external IPs before any connection can succeed.
+
+1. In your Atlas project, go to **Security → Network Access**.
+2. Click **Add IP Address**.
+3. Add each Supaboard egress IP individually (found in the connector form under **Whitelist IPs**).
+4. Click **Confirm**.
+
+> Atlas IP access list changes take effect immediately. You do not need to restart your cluster.
+
+**Documentation:** [Configure IP access list entries](https://www.mongodb.com/docs/atlas/security/ip-access-list/)
+
+---
+
+## Recommended database user permissions
+
+In MongoDB Atlas:
+
+1. Go to **Security → Database Access**.
+2. Click **Add New Database User**.
+3. Choose **Password** authentication.
+4. Set a username and strong password.
+5. Under **Database User Privileges**, select **Built-in Role → Read Only** (or use a custom role scoped to specific databases).
+6. Click **Add User**.
+7. Use this username and password in your connection string.
+
+For self-hosted MongoDB:
+
+```javascript
+use your_database
+db.createUser({
+  user: "supaboard",
+  pwd: "strong_password_here",
+  roles: [{ role: "read", db: "your_database" }]
+})
+```
+
+---
+
+## Troubleshooting
+
+| Error | Likely cause | Fix |
+|---|---|---|
+| `connection refused` | Atlas IP access list missing Supaboard IPs | Add all Supaboard egress IPs under **Security → Network Access** |
+| `Authentication failed` | Wrong username or password in the URI | Verify credentials in Atlas under **Security → Database Access** |
+| `bad auth : authentication failed` | Wrong `authSource` | Add `?authSource=admin` to the URI |
+| `URI must include hostname` | Malformed connection string | Check that the URI starts with `mongodb://` or `mongodb+srv://` |
+| `querySrv ENODATA` | DNS resolution failing for `+srv` URI | Try switching to a direct `mongodb://` URI with explicit host and port |
+| Special characters in password | URI parsing error | URL-encode special characters: `@` → `%40`, `#` → `%23`, `:` → `%3A` |

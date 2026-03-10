@@ -1,0 +1,110 @@
+---
+title: 'BigQuery'
+---
+
+Connect Supaboard to Google BigQuery using either OAuth (Google sign-in) or a Service Account JSON key.
+
+---
+
+## Before you connect
+
+**IAM permissions** — The Google identity or service account you use needs:
+- `BigQuery Data Viewer` — to read datasets and tables
+- `BigQuery Job User` — to run query jobs
+
+Both roles are required. `BigQuery Data Viewer` alone does not allow running queries.
+
+**Network access** — BigQuery is a managed Google service accessible over the public internet. No firewall configuration is required.
+
+---
+
+## Authentication methods
+
+### OAuth (Google sign-in)
+
+The simplest method. Supaboard opens a Google sign-in flow in your browser. The connection is tied to your personal Google account and inherits that account's BigQuery permissions.
+
+**Best for:** Individual analysts with existing BigQuery access via their Google account.
+
+### Service Account JSON
+
+A service account key file grants Supaboard its own identity in GCP, independent of any individual user. The connection remains valid even if team members leave.
+
+**Best for:** Shared workspace connections, automated pipelines, production environments.
+
+---
+
+## Connection fields
+
+| Field | Default | Required | Description |
+|---|---|---|---|
+| **Display Name** | — | Yes | Label shown in the Supaboard UI |
+| **Dataset** | — | Yes (after auth) | BigQuery dataset to connect to; auto-discovers available datasets |
+
+Authentication fields depend on the selected method:
+
+**OAuth** — no additional fields; click **Authenticate with Google** to complete sign-in.
+
+**Service Account JSON** — upload or paste your service account key file (JSON format).
+
+---
+
+## Finding your connection details
+
+### Google Cloud IAM Console
+
+**Creating a service account and downloading the JSON key:**
+
+1. Open [IAM & Admin → Service Accounts](https://console.cloud.google.com/iam-admin/serviceaccounts) in the Google Cloud Console.
+2. Click **Create Service Account**.
+3. Give it a name (e.g. `supaboard-bigquery`) and click **Create and Continue**.
+4. On the **Grant this service account access to project** step, add two roles:
+   - `BigQuery Data Viewer`
+   - `BigQuery Job User`
+5. Click **Done**.
+6. Click on the new service account, then go to the **Keys** tab.
+7. Click **Add Key → Create new key → JSON → Create**.
+8. The JSON key file downloads automatically — keep it secure.
+9. Upload this file in the Supaboard BigQuery connector form.
+
+**Documentation:** [Create and manage service account keys](https://cloud.google.com/iam/docs/keys-create-delete) · [BigQuery predefined roles](https://cloud.google.com/bigquery/docs/access-control#bigquery)
+
+**Finding your Dataset ID:**
+
+1. Open [BigQuery Studio](https://console.cloud.google.com/bigquery) in the Cloud Console.
+2. In the Explorer panel, expand your project.
+3. Dataset names are listed directly under the project — these are the values to use in the **Dataset** field.
+
+> Service account keys are long-lived credentials. Store the downloaded JSON file securely and rotate it periodically under **IAM & Admin → Service Accounts → Keys**.
+
+---
+
+## Recommended database user permissions
+
+**Documentation:** [BigQuery access control overview](https://cloud.google.com/bigquery/docs/access-control) · [Dataset-level access controls](https://cloud.google.com/bigquery/docs/dataset-access-controls)
+
+For a service account, assign the following IAM roles at the project level (or dataset level for finer-grained control):
+
+| Role | Purpose |
+|---|---|
+| `roles/bigquery.dataViewer` | Read access to datasets and tables |
+| `roles/bigquery.jobUser` | Permission to run query jobs |
+
+To restrict access to a specific dataset rather than the whole project:
+1. Open BigQuery Studio and click on the dataset.
+2. Go to **Sharing → Permissions**.
+3. Click **Add Principal**, enter the service account email, and assign `BigQuery Data Viewer`.
+
+You still need `BigQuery Job User` at the **project** level for query execution.
+
+---
+
+## Troubleshooting
+
+| Error | Likely cause | Fix |
+|---|---|---|
+| `Access Denied: BigQuery: User does not have bigquery.jobs.create` | Missing `BigQuery Job User` role | Add `roles/bigquery.jobUser` to the service account at the project level |
+| `Access Denied: Table` | Service account lacks dataset read access | Add `BigQuery Data Viewer` to the dataset or project |
+| `Invalid key` | Wrong or malformed JSON key file | Re-download the JSON key from GCP; ensure the file is complete |
+| `Project not found` | Project ID in the JSON key doesn't exist or was deleted | Verify the project is active in the GCP Console |
+| `Dataset not found` | Dataset ID typo or wrong project | Check dataset name in BigQuery Studio; dataset names are case-sensitive |

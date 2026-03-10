@@ -1,0 +1,115 @@
+---
+title: "Databricks"
+---
+
+Connect Supaboard to a Databricks workspace using a personal access token and cluster HTTP path.
+
+---
+
+## Before you connect
+
+**Network access** — Databricks workspaces are accessible over HTTPS (port 443). No special firewall rules are typically needed for cloud-hosted workspaces. If your workspace is behind a private network or VPN, ensure Supaboard's egress IPs can reach it. The current IP list is shown inside the connector form under **Whitelist IPs**.
+
+**Cluster requirements** — The cluster referenced by your HTTP path must be running when Supaboard connects. Terminated or auto-terminated clusters will cause connection failures.
+
+**Permissions** — The user whose access token you use needs:
+- `CAN ATTACH TO` permission on the cluster
+- `SELECT` access on the target catalogs and schemas
+
+---
+
+## Connection fields
+
+| Field | Default | Required | Description |
+|---|---|---|---|
+| **Display Name** | — | Yes | Label shown in the Supaboard UI |
+| **Token** | — | Yes | Databricks personal access token (PAT) |
+| **Hostname** | — | Yes | Databricks workspace URL (without `https://`) |
+| **Port** | `443` | Yes | HTTPS port — do not change |
+| **HTTP Path** | — | Yes | Cluster or SQL warehouse JDBC/ODBC HTTP path |
+| **Catalog** | `default` | No | Unity Catalog name; leave blank for the default catalog |
+| **Schema** | `default` | No | Default schema for queries |
+
+---
+
+## Finding your connection details
+
+### Databricks Workspace
+
+**Personal access token (Token):**
+
+1. In your Databricks workspace, click your username in the top-right corner.
+2. Go to **Settings → Developer**.
+3. Under **Access tokens**, click **Manage**.
+4. Click **Generate new token**, add a comment (e.g. `supaboard`), set a lifetime, and click **Generate**.
+5. Copy the token — it is only shown once.
+
+**Documentation:** [Databricks personal access tokens](https://docs.databricks.com/en/dev-tools/auth/pat.html)
+
+**Hostname:**
+
+Your hostname is the workspace URL without `https://`. It looks like:
+```text
+adb-1234567890123456.7.azuredatabricks.net
+```
+or for AWS:
+```text
+dbc-xxxxxxxx-xxxx.cloud.databricks.com
+```
+
+Find it in your browser's address bar when logged into Databricks.
+
+**HTTP Path:**
+
+The HTTP Path identifies a specific cluster or SQL warehouse.
+
+*For a cluster:*
+1. Go to **Compute** in the sidebar.
+2. Click on your cluster name.
+3. Scroll to **Advanced options** and click the **JDBC/ODBC** tab.
+4. Copy the **HTTP path** value (format: `/sql/1.0/endpoints/xxxxxxxxxxxxxxxx` or `/sql/protocolv1/o/...`).
+
+*For a SQL warehouse:*
+1. Go to **SQL Warehouses** in the sidebar.
+2. Click on your warehouse.
+3. Go to the **Connection details** tab.
+4. Copy the **HTTP path**.
+
+> SQL warehouses are recommended over interactive clusters for BI tools — they are purpose-built for query workloads and auto-scale automatically.
+
+**Documentation:** [JDBC/ODBC connection details](https://docs.databricks.com/en/integrations/jdbc-odbc-bi.html) · [SQL warehouses overview](https://docs.databricks.com/en/compute/sql-warehouse/index.html)
+
+---
+
+## Recommended database user permissions
+
+In Unity Catalog, grant the token owner the following privileges:
+
+```sql
+-- Grant access to a specific catalog
+GRANT USE CATALOG ON CATALOG your_catalog TO `user@example.com`;
+
+-- Grant access to a specific schema
+GRANT USE SCHEMA ON SCHEMA your_catalog.your_schema TO `user@example.com`;
+
+-- Grant SELECT on tables
+GRANT SELECT ON TABLE your_catalog.your_schema.your_table TO `user@example.com`;
+
+-- Or grant SELECT on all tables in a schema
+GRANT SELECT ON SCHEMA your_catalog.your_schema TO `user@example.com`;
+```
+
+For legacy (non-Unity Catalog) workspaces, ensure the user has the `data_access` group membership or equivalent.
+
+---
+
+## Troubleshooting
+
+| Error | Likely cause | Fix |
+|---|---|---|
+| `403 Forbidden` | Invalid or expired access token | Generate a new PAT in **Settings → Developer → Access tokens** |
+| `Cluster not found` | Cluster terminated or HTTP path is wrong | Start the cluster; verify the HTTP path in **Compute → JDBC/ODBC** tab |
+| `PERMISSION_DENIED` | User lacks access to catalog or schema | Grant `USE CATALOG`, `USE SCHEMA`, and `SELECT` privileges |
+| Connection timeout | Workspace behind private network | Ensure Supaboard egress IPs can reach the workspace hostname on port 443 |
+| `Invalid hostname` | Hostname includes `https://` | Remove the `https://` prefix from the **Hostname** field |
+| Cluster auto-terminating | Cluster shuts down during schema discovery | Increase the auto-termination timeout or switch to a SQL warehouse |

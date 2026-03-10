@@ -1,0 +1,123 @@
+---
+title: 'Snowflake'
+---
+
+Connect Supaboard to a Snowflake account for direct querying, schema discovery, and AI-powered analysis.
+
+---
+
+## Before you connect
+
+**Network access** — Snowflake is cloud-hosted and generally accessible over the internet. No firewall changes are needed in most configurations. If your Snowflake account uses **network policies**, add Supaboard's egress IPs to an allowed policy. The current IP list is shown inside the connector form under **Whitelist IPs**.
+
+**Account permissions** — The role used to connect needs at minimum:
+- `USAGE` on the warehouse
+- `USAGE` on the database
+- `USAGE` on the target schema(s)
+- `SELECT` on the tables you want to expose
+
+See [Recommended database user permissions](#recommended-database-user-permissions) for the exact SQL.
+
+---
+
+## Connection fields
+
+| Field | Default | Required | Description |
+|---|---|---|---|
+| **Display Name** | — | Yes | Label shown in the Supaboard UI |
+| **Host** | — | Yes | Your Snowflake account identifier (see below) |
+| **Username** | — | Yes | Snowflake user login name |
+| **Password/PAT** | — | Yes | User password or personal access token |
+| **Database** | — | No | Database name; Supaboard auto-discovers if left blank |
+| **Schema** | — | No | Schema name; Supaboard auto-discovers if left blank |
+| **Warehouse** | `COMPUTE_WH` | No | Virtual warehouse used for queries |
+
+---
+
+## Finding your connection details
+
+### Snowflake Console
+
+**Account identifier (Host)**
+
+Your account identifier is in the format `orgname-accountname`. To find it:
+
+1. Log in to [app.snowflake.com](https://app.snowflake.com).
+2. Click your account name in the bottom-left corner.
+3. Hover over your account to reveal the full account identifier.
+4. It follows the pattern `ORGNAME-ACCOUNTNAME` (e.g. `acme-prod123`).
+
+Use this as your **Host** value in Supaboard (without `.snowflakecomputing.com`).
+
+**Documentation:** [Account identifiers](https://docs.snowflake.com/en/user-guide/admin-account-identifier) · [Connecting to Snowflake](https://docs.snowflake.com/en/user-guide/connecting)
+
+**Username**
+
+Your Snowflake login username. Administrators can find all users under **Admin → Users & Roles**.
+
+**Warehouse**
+
+Virtual warehouses are listed under **Admin → Warehouses**. The default is typically `COMPUTE_WH`. Supaboard uses this warehouse to execute queries — choose an appropriately sized one.
+
+> **Warehouse cost** — Each query Supaboard runs consumes warehouse credits while the warehouse is running. Use an auto-suspend setting (e.g. 1–5 minutes) on the warehouse to minimise idle credit consumption.
+
+**Documentation:** [Virtual warehouses overview](https://docs.snowflake.com/en/user-guide/warehouses-overview) · [Auto-suspend and auto-resume](https://docs.snowflake.com/en/user-guide/warehouses-considerations)
+
+---
+
+## Password vs Personal Access Token
+
+Supaboard accepts either a **password** or a **personal access token (PAT)** in the **Password/PAT** field.
+
+**Password** — the standard Snowflake user password. Simple to set up but not recommended for service accounts in security-sensitive environments.
+
+**Personal Access Token** — a long-lived token scoped to a specific user. Preferred for service account connections.
+
+To create a PAT:
+1. In Snowflake, go to **User Menu → My Profile → Personal Access Tokens**.
+2. Click **Generate Token**, set an expiry, and copy the token value.
+3. Paste the token into the **Password/PAT** field in Supaboard.
+
+**Documentation:** [Programmatic access tokens](https://docs.snowflake.com/en/user-guide/programmatic-access-tokens)
+
+---
+
+## Recommended database user permissions
+
+```sql
+-- Create a dedicated role and user
+CREATE ROLE supaboard_role;
+CREATE USER supaboard_user
+  PASSWORD = 'strong_password_here'
+  DEFAULT_ROLE = supaboard_role
+  DEFAULT_WAREHOUSE = COMPUTE_WH;
+
+GRANT ROLE supaboard_role TO USER supaboard_user;
+
+-- Grant warehouse access
+GRANT USAGE ON WAREHOUSE COMPUTE_WH TO ROLE supaboard_role;
+
+-- Grant database and schema access
+GRANT USAGE ON DATABASE your_database TO ROLE supaboard_role;
+GRANT USAGE ON ALL SCHEMAS IN DATABASE your_database TO ROLE supaboard_role;
+GRANT SELECT ON ALL TABLES IN DATABASE your_database TO ROLE supaboard_role;
+
+-- Grant access to future objects automatically
+GRANT USAGE ON FUTURE SCHEMAS IN DATABASE your_database TO ROLE supaboard_role;
+GRANT SELECT ON FUTURE TABLES IN DATABASE your_database TO ROLE supaboard_role;
+```
+
+Replace `your_database` and `COMPUTE_WH` with your actual values.
+
+---
+
+## Troubleshooting
+
+| Error | Likely cause | Fix |
+|---|---|---|
+| `Incorrect username or password` | Wrong credentials | Verify username and password/PAT in Snowflake |
+| `Account does not exist` | Wrong account identifier format | Use `orgname-accountname` format without `.snowflakecomputing.com` |
+| `IP not allowed` | Snowflake network policy blocking Supaboard IPs | Add Supaboard egress IPs to your Snowflake network policy |
+| `Warehouse suspended` | Warehouse not auto-resuming | Enable auto-resume on the warehouse under **Admin → Warehouses** |
+| `Insufficient privileges` | Role lacks USAGE or SELECT grants | Run the permission SQL above for the connecting role |
+| `No active warehouse selected` | Warehouse field left blank and user has no default warehouse | Enter a warehouse name in the **Warehouse** field |

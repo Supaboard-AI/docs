@@ -1,0 +1,176 @@
+---
+title: "Fivetran"
+---
+
+Supaboard integrates with **Fivetran** to bring data from 100+ SaaS tools, marketing platforms, and third-party services into your workspace — without writing or managing ETL pipelines.
+
+Fivetran-powered connectors are available on the **Business** and **Enterprise** plans.
+
+---
+
+## How it works
+
+1. **Select a connector** — choose a Fivetran-powered service from the New Connection grid.
+2. **Authenticate** — Supaboard opens Fivetran's OAuth flow; you sign in to the source service to grant read access.
+3. **Configure** — select the specific accounts, properties, or datasets to sync.
+4. **Sync** — Fivetran begins syncing data on its schedule into a queryable form.
+5. **Active** — once the first sync completes, the connection appears as **Active** in Supaboard and is available to agents and widgets.
+
+> **Sync schedule vs real-time** — Fivetran syncs on a schedule (typically every hour to every 24 hours depending on the connector and plan). Data in Supaboard reflects the most recent completed sync, not a live stream. Check the connection's **Info** tab to see the last sync timestamp.
+
+---
+
+## Available connectors
+
+### CRM
+
+| Connector             | Description                                                  |
+| --------------------- | ------------------------------------------------------------ |
+| **Salesforce**        | Leads, contacts, opportunities, accounts, and custom objects |
+| **HubSpot**           | CRM contacts, deals, companies, and marketing data           |
+| **Pipedrive**         | Deals, contacts, and pipeline stages                         |
+| **Zoho CRM**          | Contacts, leads, deals, and modules                          |
+| **Freshsales**        | Contacts, accounts, deals, and activities                    |
+| **Insightly**         | Contacts, organizations, opportunities, and projects         |
+| **Attio**             | Workspace records and relationship data                      |
+| **Outreach**          | Sequences, prospects, and engagement data                    |
+| **Bigin by Zoho CRM** | Small-business pipeline and contact data                     |
+
+### Marketing & Advertising
+
+| Connector            | Description                                             |
+| -------------------- | ------------------------------------------------------- |
+| **Google Ads**       | Campaigns, ad groups, keywords, and performance metrics |
+| **Meta Ads**         | Facebook and Instagram ad campaign performance          |
+| **LinkedIn Ads**     | Campaign analytics and ad performance                   |
+| **TikTok Ads**       | Ad campaigns, creatives, and performance data           |
+| **Microsoft Ads**    | Bing Ads campaign and keyword performance               |
+| **Amazon Ads**       | Sponsored Products, Brands, and Display ad metrics      |
+| **Pinterest Ads**    | Campaign performance and pin analytics                  |
+| **Snapchat Ads**     | Ad accounts, campaigns, and creative performance        |
+| **Reddit Ads**       | Campaign and ad group performance data                  |
+| **Apple Search Ads** | App Store ad campaign performance                       |
+| **Twitter/X Ads**    | Campaign performance and engagement metrics             |
+
+### Email & Communication
+
+| Connector          | Description                                              |
+| ------------------ | -------------------------------------------------------- |
+| **Mailchimp**      | Lists, campaigns, open/click rates, and e-commerce data  |
+| **Klaviyo**        | Email flows, campaigns, and subscriber metrics           |
+| **Brevo**          | Email campaigns, contacts, and transactional data        |
+| **SendGrid**       | Email sends, bounces, clicks, and deliverability metrics |
+| **Mailgun**        | Email logs, events, and delivery data                    |
+| **Postmark**       | Transactional email delivery and bounce data             |
+| **Twilio**         | SMS, voice, and messaging usage data                     |
+| **ActiveCampaign** | Contacts, automations, campaigns, and deals              |
+| **Lemlist**        | Outbound campaign sequences and engagement               |
+
+### Project Management
+
+| Connector        | Description                                |
+| ---------------- | ------------------------------------------ |
+| **Jira**         | Issues, sprints, projects, and board data  |
+| **Asana**        | Tasks, projects, teams, and workspaces     |
+| **Linear**       | Issues, cycles, projects, and team metrics |
+| **Monday.com**   | Boards, items, and workflow data           |
+| **Notion**       | Databases and page content                 |
+| **ClickUp**      | Tasks, spaces, folders, and time tracking  |
+| **Trello**       | Boards, cards, and list data               |
+| **Airtable**     | Bases, tables, and records                 |
+| **Confluence**   | Pages, spaces, and content metadata        |
+| **Coda**         | Docs, tables, and formula data             |
+| **Wrike**        | Projects, tasks, and time tracking         |
+| **Productboard** | Features, objectives, and feedback data    |
+
+### Customer Support
+
+| Connector      | Description                                        |
+| -------------- | -------------------------------------------------- |
+| **Zendesk**    | Tickets, agents, satisfaction scores, and SLA data |
+| **Freshdesk**  | Tickets, agents, contacts, and CSAT data           |
+| **Intercom**   | Conversations, contacts, companies, and events     |
+| **ServiceNow** | Incidents, requests, and ITSM workflow data        |
+| **Zoho Desk**  | Tickets, contacts, and support analytics           |
+
+### Analytics & Product
+
+| Connector              | Description                                           |
+| ---------------------- | ----------------------------------------------------- |
+| **Google Analytics 4** | Sessions, events, conversions, and user properties    |
+| **Mixpanel**           | Events, funnels, retention, and user profiles         |
+| **Amplitude**          | Events, user journeys, and behavioural analytics      |
+| **Heap**               | Auto-captured events and user sessions                |
+| **PostHog**            | Product events, sessions, and feature flags           |
+| **Segment**            | Track, identify, and group events                     |
+| **Fullstory**          | Session replay metadata and frustration signals       |
+| **Datadog**            | Infrastructure metrics, logs, and APM data            |
+| **Sentry**             | Errors, performance issues, and release data          |
+| **YouTube Analytics**  | Channel performance, video metrics, and audience data |
+
+### E-commerce & Payments
+
+| Connector       | Description                                   |
+| --------------- | --------------------------------------------- |
+| **Shopify**     | Orders, products, customers, and inventory    |
+| **WooCommerce** | Orders, customers, and product data           |
+| **BigCommerce** | Orders, products, and customer data           |
+| **Stripe**      | Charges, subscriptions, invoices, and payouts |
+| **PayPal**      | Transactions, invoices, and dispute data      |
+| **Chargebee**   | Subscriptions, invoices, and revenue metrics  |
+| **QuickBooks**  | Accounting data, invoices, expenses, and P&L  |
+| **Paddle**      | Subscriptions, transactions, and billing data |
+| **Razorpay**    | Payments, orders, and refund data             |
+
+### HR & People
+
+| Connector    | Description                                    |
+| ------------ | ---------------------------------------------- |
+| **BambooHR** | Employee profiles, time-off, and org structure |
+| **Rippling** | HR, payroll, and IT data                       |
+| **Workday**  | HCM, payroll, and financial data               |
+
+### Forms & Surveys
+
+| Connector        | Description                             |
+| ---------------- | --------------------------------------- |
+| **Typeform**     | Form responses and completion metrics   |
+| **SurveyMonkey** | Survey results and response data        |
+| **JotForm**      | Form submissions and response analytics |
+
+### Communication & Scheduling
+
+| Connector           | Description                                  |
+| ------------------- | -------------------------------------------- |
+| **Slack**           | Messages, channels, and workspace analytics  |
+| **Microsoft Teams** | Messages, channels, and meeting data         |
+| **Calendly**        | Scheduled events, invitees, and routing data |
+
+### Social & Content
+
+| Connector              | Description                                      |
+| ---------------------- | ------------------------------------------------ |
+| **Instagram Business** | Posts, stories, follower metrics, and engagement |
+| **Vimeo**              | Video performance and view analytics             |
+| **WordPress**          | Posts, pages, comments, and user data            |
+
+---
+
+## Plan availability
+
+| Plan           | Fivetran connectors |
+| -------------- | ------------------- |
+| **Individual** | Not available       |
+| **Business**   | All connectors      |
+| **Enterprise** | All connectors      |
+
+---
+
+## Fivetran documentation
+
+Each connector has detailed setup instructions, required permissions, and field references in the Fivetran documentation.
+
+- [Full connector catalogue](https://fivetran.com/docs/connectors)
+- Individual connector pages follow the pattern `https://fivetran.com/docs/connectors/{service}` — for example, [Salesforce](https://fivetran.com/docs/connectors/salesforce), [HubSpot](https://fivetran.com/docs/connectors/hubspot), [Shopify](https://fivetran.com/docs/connectors/shopify), [Google Ads](https://fivetran.com/docs/connectors/google-ads), [Stripe](https://fivetran.com/docs/connectors/stripe).
+- [Fivetran account setup and billing](https://fivetran.com/docs/getting-started)
+- [Fivetran data security and privacy](https://fivetran.com/docs/security)

@@ -1,0 +1,147 @@
+---
+title: "Microsoft SQL Server"
+---
+
+Connect Supaboard to a SQL Server instance — whether on Azure, AWS, GCP, or self-hosted — for direct querying, schema discovery, and AI-powered analysis.
+
+---
+
+## Before you connect
+
+**Network access** — Supaboard connects from a fixed set of egress IPs. Add them to your SQL Server firewall allow-list before attempting a connection. The current IP list is shown inside the connector form under **Whitelist IPs**.
+
+**Database user permissions** — The user you provide needs at minimum:
+- `CONNECT` on the database
+- `SELECT` on the target schema(s) and tables
+
+See [Recommended database user permissions](#recommended-database-user-permissions) for the exact SQL.
+
+---
+
+## Connection fields
+
+| Field | Default | Required | Description |
+|---|---|---|---|
+| **Display Name** | — | Yes | Label shown in the Supaboard UI |
+| **Host** | — | Yes | Hostname or IP of your SQL Server instance |
+| **Port** | `3342` | Yes | SQL Server port (see note below) |
+| **Database** | `master` | No | Database name; Supaboard auto-discovers if left blank |
+| **Schema** | `dbo` | No | Default schema for queries |
+| **Username** | — | Yes | SQL Server login |
+| **Password** | — | Yes | Password for the SQL Server login |
+| **Additional JDBC Parameters** | — | No | Extra key=value pairs appended to the JDBC URL |
+
+> **Port note** — The standard on-premises SQL Server port is `1433`. Azure SQL Database and many managed SQL Server instances use `1433` as well. Supaboard's default shows `3342` — update it to `1433` for Azure SQL or most RDS/Cloud SQL instances.
+
+---
+
+## SSH Tunnel fields
+
+Shown when the **SSH Tunnel** toggle is enabled.
+
+| Field | Default | Required | Description |
+|---|---|---|---|
+| **SSH Host** | — | Yes | Hostname or IP of the SSH bastion server |
+| **SSH Port** | `22` | Yes | SSH port on the bastion server |
+| **SSH Username** | — | Yes | SSH login username |
+| **SSH Connection Type** | `Private Key` | Yes | `Private Key` or `Password` |
+| **SSH Private Key** | — | If Private Key | PEM-encoded private key |
+| **SSH Passphrase** | — | No | Passphrase for an encrypted private key |
+| **SSH Password** | — | If Password | Password for SSH password authentication |
+
+---
+
+## Finding your connection details
+
+### Azure SQL
+
+1. Open your SQL server in the [Azure Portal](https://portal.azure.com).
+2. On the **Overview** page, copy **Server name** — this is your **Host** (format: `servername.database.windows.net`).
+3. The default **Port** is `1433`.
+4. Under **Security → Networking**, add a firewall rule for each Supaboard egress IP.
+5. Ensure **Allow Azure services and resources to access this server** is set if needed.
+
+Your **Database** name appears on the **SQL databases** page under the server.
+
+**Documentation:** [Azure SQL Database documentation](https://learn.microsoft.com/en-us/azure/azure-sql/database/) · [Configure firewall rules](https://learn.microsoft.com/en-us/azure/azure-sql/database/firewall-configure)
+
+### Amazon RDS for SQL Server
+
+1. Open the [RDS Console](https://console.aws.amazon.com/rds/) and select your instance.
+2. Under **Connectivity & security**, copy the **Endpoint** — this is your **Host**.
+3. The default **Port** is `1433`.
+4. Add Supaboard egress IPs to the instance's VPC security group (inbound TCP on port 1433).
+
+**Documentation:** [Connecting to a SQL Server DB instance](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_ConnectToMicrosoftSQLServerInstance.html) · [RDS for SQL Server overview](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_SQLServer.html)
+
+### Google Cloud SQL for SQL Server
+
+1. Open the [Cloud SQL Console](https://console.cloud.google.com/sql) and select your instance.
+2. Under **Connect to this instance**, copy the **Public IP address** — this is your **Host**.
+3. Default **Port** is `1433`.
+4. Under **Connections → Authorized networks**, add each Supaboard egress IP.
+
+**Documentation:** [Cloud SQL for SQL Server overview](https://cloud.google.com/sql/docs/sqlserver) · [Authorizing with IP addresses](https://cloud.google.com/sql/docs/sqlserver/authorize-networks)
+
+---
+
+## SSL
+
+Enable the **SSL** toggle when your database requires encrypted connections (recommended for Azure SQL and all cloud-hosted instances — Azure SQL enforces SSL by default).
+
+- **SSL Certificate** — paste the server's CA certificate in PEM format if your instance uses a self-signed or private CA. For Azure SQL and AWS RDS, the certificates are publicly trusted and no upload is needed.
+
+---
+
+## SSH Tunnel
+
+Use an SSH tunnel when your SQL Server instance is in a private network with no public IP.
+
+**When to use it:**
+- Instance is not publicly accessible
+- On-premises SQL Server behind a corporate firewall
+- Security policy requires all external traffic to pass through a bastion host
+
+**Checklist:**
+- [ ] The bastion server can reach the SQL Server host on port 1433
+- [ ] Supaboard's egress IPs are allowed on the bastion server's SSH port (default 22)
+- [ ] The SSH user has permission to forward connections
+- [ ] If using a private key, it is in PEM format
+
+---
+
+## Recommended database user permissions
+
+```sql
+-- Create a SQL Server login
+CREATE LOGIN supaboard WITH PASSWORD = 'Strong_Password_Here!';
+
+-- Create a database user mapped to the login
+USE your_database;
+CREATE USER supaboard FOR LOGIN supaboard;
+
+-- Grant read-only access to the default schema
+GRANT SELECT ON SCHEMA::dbo TO supaboard;
+
+-- Grant connect and select on the database
+GRANT CONNECT TO supaboard;
+```
+
+For multiple schemas, repeat the `GRANT SELECT ON SCHEMA` line for each schema you want to expose. For finer-grained control, grant SELECT on individual tables:
+
+```sql
+GRANT SELECT ON dbo.your_table TO supaboard;
+```
+
+---
+
+## Troubleshooting
+
+| Error | Likely cause | Fix |
+|---|---|---|
+| `Login failed for user` | Wrong username or password | Verify SQL Server login credentials |
+| `Cannot open server requested by the login` | Wrong database name or user lacks access | Confirm database name and that the user has CONNECT grant |
+| `Connection refused` or timeout | Firewall blocking Supaboard IPs, or wrong port | Add Supaboard IPs to the firewall; verify port (1433 for most cloud instances) |
+| `SSL required` | Server requires SSL but toggle is off | Enable the SSL toggle |
+| `Named Pipes Provider: Could not open connection` | Named Pipes enabled instead of TCP | Ensure TCP/IP is enabled in SQL Server Configuration Manager |
+| `User does not have permission to perform this action` | Insufficient schema/table grants | Run the `GRANT SELECT ON SCHEMA` statements above |

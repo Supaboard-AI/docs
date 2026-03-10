@@ -50,10 +50,25 @@
         ]
       },
       {
-        "tab": "Data Sources"
-      },
-      {
-        "tab": "Learn"
+        "tab": "Learn",
+        "groups": [
+          {
+            "group": "Data Sources",
+            "pages": [
+              "big-query",
+              "clickhouse",
+              "databricks",
+              "fivetran",
+              "microsoft-sql-server",
+              "mongodb",
+              "mysql",
+              "postgres",
+              "redshift",
+              "snowflake",
+              "supabase"
+            ]
+          }
+        ]
       }
     ]
   },
