@@ -107,5 +107,21 @@
       "github": "https://github.com/mintlify",
       "linkedin": "https://linkedin.com/company/mintlify"
     }
+  },
+  "styling": {
+    "eyebrows": "breadcrumbs"
+  },
+  "fonts": {
+    "family": "Montserrat",
+    "weight": 400
+  },
+  "background": {
+    "decoration": "grid"
+  },
+  "icons": {
+    "library": "fontawesome"
+  },
+  "thumbnails": {
+    "appearance": "light"
   }
 }
