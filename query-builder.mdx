@@ -1,6 +1,7 @@
 ---
-title: 'Query Builder'
+title: "Query Builder"
 mode: "wide"
+icon: "code"
 ---
 
 **Query Builder** is a code-first workspace for writing, running, and saving queries against your connected data sources. Unlike Ask Stella — which answers questions in natural language — Query Builder gives you direct control over the query itself, with a full code editor, schema autocomplete, and an AI assistant that can write or fix queries on demand.
@@ -14,17 +15,19 @@ Results render instantly as a table, chart, or KPI. Queries can be saved, reused
 Navigate to **Query Builder** in the sidebar to see all saved queries in your workspace.
 
 ### Display modes
+
 Toggle between **Card** and **List** view. Your preference is saved.
 
 **List view columns:**
 
-| Column | Description |
-|---|---|
-| **Name** | Query title |
+| Column           | Description                                               |
+| ---------------- | --------------------------------------------------------- |
+| **Name**         | Query title                                               |
 | **Data Sources** | Icons of the databases and tables this query runs against |
-| **Created** | Date the query was saved |
+| **Created**      | Date the query was saved                                  |
 
 ### Search
+
 Filter queries by title using the search bar — fuzzy matching is supported.
 
 Click any query to open it in the editor.
@@ -35,18 +38,18 @@ Click any query to open it in the editor.
 
 Click **New Query** to open the creation form.
 
-| Field | Required | Notes |
-|---|---|---|
-| **Query Name** | Yes | A descriptive title for the query — shown in the home list and when pinned to dashboards |
-| **Data Source** | Yes (at least one) | The database connections this query will run against. Inactive connections are excluded. |
-| **Query Language** | Yes | The language used to write the query (see below) |
+| Field              | Required           | Notes                                                                                    |
+| ------------------ | ------------------ | ---------------------------------------------------------------------------------------- |
+| **Query Name**     | Yes                | A descriptive title for the query — shown in the home list and when pinned to dashboards |
+| **Data Source**    | Yes (at least one) | The database connections this query will run against. Inactive connections are excluded. |
+| **Query Language** | Yes                | The language used to write the query (see below)                                         |
 
 ### Query languages
 
-| Language | When to use |
-|---|---|
-| **Native Query Language** | Write SQL (PostgreSQL, MySQL, Redshift, etc.) or the native query syntax for your database (e.g. MongoDB query language). Auto-detected from the connected data source. |
-| **Python** | Write Python to query one or more data sources, transform data, or combine results across databases. Requires the Python runner feature — see [Python Queries](#python-queries--multi-source-queries). |
+| Language                  | When to use                                                                                                                                                                                            |
+| ------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| **Native Query Language** | Write SQL (PostgreSQL, MySQL, Redshift, etc.) or the native query syntax for your database (e.g. MongoDB query language). Auto-detected from the connected data source.                                |
+| **Python**                | Write Python to query one or more data sources, transform data, or combine results across databases. Requires the Python runner feature — see [Python Queries](#python-queries--multi-source-queries). |
 
 Once created, the editor opens immediately.
 
@@ -66,11 +69,12 @@ Drag the divider between the two panes to resize them. The bottom pane starts co
 **Syntax highlighting** — Full syntax highlighting for SQL and other supported languages.
 
 **Schema autocomplete** — As you type, the editor suggests:
+
 - Database and schema names from your connected data sources
 - Table names within those databases
 - Common column names
 
-**Placeholder** — When the editor is empty, a prompt reads *"Start typing or generate with AI"*. Click the blue link to open the [AI Assistant](#ai-assistant) with your cursor focus.
+**Placeholder** — When the editor is empty, a prompt reads _"Start typing or generate with AI"_. Click the blue link to open the [AI Assistant](#ai-assistant) with your cursor focus.
 
 ---
 
@@ -79,15 +83,17 @@ Drag the divider between the two panes to resize them. The bottom pane starts co
 Click **Save and Run Query** to execute the code in the editor. The results appear in the bottom pane.
 
 ### Error handling
+
 If the query fails, the error message is displayed in the results pane. An **"Fix this error with AI"** button appears — clicking it opens the AI assistant with the error pre-loaded so Stella can diagnose and suggest a fix.
 
 ### AI-suggested changes
+
 When the AI assistant generates a query or modification, the editor switches to **diff mode** — showing your original code alongside the AI-suggested version with changes highlighted. Two buttons appear:
 
-| Button | Action |
-|---|---|
+| Button     | Action                                                       |
+| ---------- | ------------------------------------------------------------ |
 | **Accept** | Replaces your code with the AI-suggested version and runs it |
-| **Reject** | Discards the suggestion and restores your original code |
+| **Reject** | Discards the suggestion and restores your original code      |
 
 You must accept or reject a diff before you can type in the editor again.
 
@@ -119,11 +125,11 @@ An interactive visualisation of your query results.
 
 Displays a single computed metric from your query results.
 
-| Display style | Description |
-|---|---|
-| **Numeric** | A large formatted number — e.g. *1,234,567* |
-| **Percentage** | A value expressed as a percentage — e.g. *85%* |
-| **Trend** | A value with a directional indicator — e.g. *+12%* |
+| Display style  | Description                                         |
+| -------------- | --------------------------------------------------- |
+| **Numeric**    | A large formatted number — e.g. _1,234,567_         |
+| **Percentage** | A value expressed as a percentage — e.g. _85%_      |
+| **Trend**      | A value with a directional indicator — e.g. _\+12%_ |
 
 Pin to dashboard as a KPI widget.
 
@@ -138,10 +144,11 @@ The **AI Assistant** is a chat panel docked to the right side of the editor. Ope
 Type a request in plain English. The assistant reads your connected schemas and the current code in the editor, then generates a query or modification.
 
 **Examples:**
-- *"Show me the top 10 customers by revenue in the last 90 days"*
-- *"Add a filter for status = 'active'"*
-- *"Rewrite this to group by month instead of day"*
-- *"This query is slow — can you optimise it?"*
+
+- _"Show me the top 10 customers by revenue in the last 90 days"_
+- _"Add a filter for status = 'active'"_
+- _"Rewrite this to group by month instead of day"_
+- _"This query is slow — can you optimise it?"_
 
 The generated code is shown as a diff in the editor (see [Running a Query — AI-suggested changes](#running-a-query)). Review the diff and accept or reject it.
 
@@ -188,12 +195,15 @@ Pinned widgets retain their full configuration — query code, data source mappi
 All queries are saved and accessible from the Query Builder home.
 
 ### Rename
+
 Open the action menu (three-dot icon) on any query card or row and select **Rename**. Enter a new name and confirm.
 
 ### Delete
+
 Open the action menu and select **Delete**. A confirmation is required. Deleting a query does not remove any dashboard widgets that were pinned from it — those continue to work independently.
 
 ### Returning to a query
+
 Click any query from the home list to reopen it in the editor. The last saved code and output format are restored automatically.
 
 ---
@@ -205,12 +215,15 @@ Click any query from the home list to reopen it in the editor. The last saved co
 When enabled, two additional capabilities are unlocked:
 
 ### Python as the query language
+
 Write Python instead of SQL to query your data. Use Python when you need to:
+
 - Transform or reshape data after retrieval
 - Combine results from multiple tables with complex logic
 - Run calculations or aggregations that are difficult to express in SQL
 
 ### Multi-source queries
+
 Select more than one data source when creating a query. Multi-source queries are only available with Python as the language — Python acts as the glue that joins or merges data from separate databases.
 
 ---
@@ -219,13 +232,13 @@ Select more than one data source when creating a query. Multi-source queries are
 
 Access to Query Builder is controlled by the **Query Builder feature flag** on each user's workspace membership. Users without this flag cannot open Query Builder (see [Workspaces — Feature Access](./Workspaces.mdx#6-feature-access)).
 
-| Action | Minimum role |
-|---|---|
-| View saved queries | Viewer (with feature access) |
-| Open and run a query | Viewer (with feature access) |
-| Create a query | Editor |
-| Rename a query | Editor |
-| Delete a query | Editor |
-| Pin results to a dashboard | Editor |
-| Use the AI assistant | Editor |
+| Action                                | Minimum role                        |
+| ------------------------------------- | ----------------------------------- |
+| View saved queries                    | Viewer (with feature access)        |
+| Open and run a query                  | Viewer (with feature access)        |
+| Create a query                        | Editor                              |
+| Rename a query                        | Editor                              |
+| Delete a query                        | Editor                              |
+| Pin results to a dashboard            | Editor                              |
+| Use the AI assistant                  | Editor                              |
 | Create multi-source or Python queries | Editor (with Python runner feature) |
