@@ -12,11 +12,6 @@
     "global": {
       "anchors": [
         {
-          "anchor": "Login",
-          "icon": "key",
-          "href": "https://auth.supaboard.ai/events/auth"
-        },
-        {
           "anchor": "Blog",
           "icon": "book-bookmark",
           "href": "https://supaboard.ai/blogs"
@@ -56,6 +51,9 @@
       },
       {
         "tab": "Data Sources"
+      },
+      {
+        "tab": "Learn"
       }
     ]
   },
@@ -65,15 +63,11 @@
   },
   "navbar": {
     "links": [
-      {
-        "label": "Support",
-        "href": "mailto:dev@supaboard.cloud"
-      }
     ],
     "primary": {
       "type": "button",
-      "label": "Dashboard",
-      "href": "https://dashboard.mintlify.com"
+      "label": "Get Started",
+      "href": "https://auth.supaboard.ai/onboard/register"
     }
   },
   "contextual": {
