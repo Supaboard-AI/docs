@@ -1,80 +1,63 @@
 ---
 title: "Quickstart"
-description: "Start building awesome documentation in minutes"
+icon: "ship"
+description: "This quickstart walks you through the core features and offerings of Supaboard. By the end, you'll understand how to derive insights by asking questions, manage agents and create your dashboard with AI."
 ---
 
-## Get started in three steps
-
-Get your documentation site running locally and make your first customization.
-
-### Step 1: Set up your local environment
-
-<AccordionGroup>
-  <Accordion icon="copy" title="Clone your docs locally">
-    During the onboarding process, you created a GitHub repository with your docs content if you didn't already have one. You can find a link to this repository in your [dashboard](https://dashboard.mintlify.com).
-    
-    To clone the repository locally so that you can make and preview changes to your docs, follow the [Cloning a repository](https://docs.github.com/en/repositories/creating-and-managing-repositories/cloning-a-repository) guide in the GitHub docs.
-  </Accordion>
-  <Accordion icon="rectangle-terminal" title="Start the preview server">
-    1. Install the Mintlify CLI: `npm i -g mint`
-    2. Navigate to your docs directory and run: `mint dev`
-    3. Open `http://localhost:3000` to see your docs live!
-    
-    <Tip>Your preview updates automatically as you edit files.</Tip>
-  </Accordion>
-</AccordionGroup>
-
-### Step 2: Deploy your changes
-
-<AccordionGroup>
-  <Accordion icon="github" title="Install our GitHub app">
-    Install the Mintlify GitHub app from your [dashboard](https://dashboard.mintlify.com/settings/organization/github-app).
-    
-    Our GitHub app automatically deploys your changes to your docs site, so you don't need to manage deployments yourself.
-</Accordion>
-<Accordion icon="palette" title="Update your site name and colors">
-    For a first change, let's update the name and colors of your docs site.
-
-    1. Open `docs.json` in your editor.
-    2. Change the `"name"` field to your project name.
-    3. Update the `"colors"` to match your brand.
-    4. Save and see your changes instantly at `http://localhost:3000`.
-
-    <Tip>Try changing the primary color to see an immediate difference!</Tip>
-  </Accordion>
-</AccordionGroup>
-
-### Step 3: Go live
-
-<Accordion icon="rocket" title="Publish your docs">
-  1. Commit and push your changes.
-  2. Your docs will update and be live in moments!
-</Accordion>
-
-## Next steps
-
-Now that you have your docs running, explore these key features:
-
-<CardGroup cols={2}>
-
-<Card title="Write Content" icon="pen-to-square" href="/essentials/markdown">
-  Learn MDX syntax and start writing your documentation.
+<Card icon="https://framerusercontent.com/images/0S3XhBBKzV0qjE4LjhFxGAHazU.png?scale-down-to=512&width=15&height=15" horizontal href="https://auth.supaboard.ai/onboard/register" title="Before you begin">
+  Signup with Supaboard
 </Card>
 
-<Card title="Customize style" icon="palette" href="/essentials/settings">
-  Make your docs match your brand perfectly.
-</Card>
+## Ask with Agent
 
-<Card title="Add code examples" icon="square-code" href="/essentials/code">
-  Include syntax-highlighted code blocks.
-</Card>
+After setting up your workspace and a data source, you will arrive at Ask Agent. By default we create our default agent called Stella. Stella can give you answers to questions pertaining to your database, provide metrics and more.
 
-<Card title="API documentation" icon="code" href="/api-reference/introduction">
-  Auto-generate API docs from OpenAPI specs.
-</Card>
+<Prompt description={`Tell me about this data`} icon="user-robot-xmarks" actions={["copy"]}>
+  Tell me about this data
+</Prompt>
 
-</CardGroup>
+Stella will query your database, read relevant data points, flag potential anomalies, and give you a holisitic understanding of what is there inside your data. This is one of the easiest way to understand both the capabilities of our agents and a starting point to make Supaboard truly yours.
+
+Once you have create your own agents, you can switch between them from the selector in the chat interface.
+
+## Create your first Agent
+
+Click on the **Agents** tab on the sidebar to open the agent explorer page. From here you can create an customise your own agents. From here you can:
+
+- Configure key aspects of your agent, such as name, what they do (description), whether they should improve themselves as you ask questions to them, etc.
+- Add or remove data sources, scope out what data sources and tables should your agent will have access to.
+- Provide a Master Rulesets that are followed in your business.
+- Add knowledge in form of raw csv, pdfs or docs that provide additional documentation about your business.
+- Granularly control what each of the tables contain.
 
 <Note>
-  **Need help?** See our [full documentation](https://mintlify.com/docs) or join our [community](https://mintlify.com/community).
+  The "Table Configuration" setting is designed for data analysts to further finetune the agent. If you are unsure, leave them untouched.
 </Note>
+
+Once your agent is setup, you can use it to ask questions and setup your first dashboard, ask questions and so much more.
+
+<Columns cols={2}>
+  <Column>
+    <Card icon="sparkles" title="Ask Agents">
+      Get Insights from your data
+    </Card>
+  </Column>
+  <Column>
+    <Card icon="dice-four" title="Dashboard">
+      Create your dashboards
+    </Card>
+  </Column>
+</Columns>
+
+<Columns cols={2}>
+  <Column>
+    <Card icon="sparkles" title="Data Sources">
+      Connect to 150+ data sources and apps
+    </Card>
+  </Column>
+  <Column>
+    <Card icon="sparkles" title="Query Builder">
+      Write database queries from scratch
+    </Card>
+  </Column>
+</Columns>
