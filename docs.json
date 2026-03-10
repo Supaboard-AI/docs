@@ -12,23 +12,25 @@
     "global": {
       "anchors": [
         {
-          "anchor": "Documentation",
-          "icon": "book-open-cover",
-          "href": "https://mintlify.com/docs"
+          "anchor": "Login",
+          "icon": "key",
+          "href": "https://auth.supaboard.ai/events/auth"
         },
         {
           "anchor": "Blog",
-          "icon": "newspaper",
-          "href": "https://mintlify.com/blog"
+          "icon": "book-bookmark",
+          "href": "https://supaboard.ai/blogs"
         }
       ]
     },
     "tabs": [
       {
         "tab": "Guides",
+        "icon": "life-ring",
         "groups": [
           {
             "group": "Getting started",
+            "icon": "flag-checkered",
             "pages": [
               "index",
               "quickstart",
@@ -37,6 +39,7 @@
           },
           {
             "group": "Features",
+            "icon": "flag-swallowtail",
             "pages": [
               "workspace",
               "ask-agents",
@@ -45,7 +48,8 @@
               "dashboard",
               "tools",
               "white-label",
-              "embed"
+              "embed",
+              "query-builder"
             ]
           }
         ]
