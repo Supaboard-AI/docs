@@ -109,6 +109,7 @@
     }
   },
   "styling": {
+    "eyebrows": "breadcrumbs"
   },
   "fonts": {
     "family": "Montserrat",
