@@ -61,13 +61,13 @@
   },
   "logo": {
     "light": "/images/logo-light.png",
-    "dark": "/logo/dark.svg"
+    "dark": "/images/logo-dark.png"
   },
   "navbar": {
     "links": [
       {
         "label": "Support",
-        "href": "mailto:hi@mintlify.com"
+        "href": "mailto:dev@supaboard.cloud"
       }
     ],
     "primary": {
@@ -96,7 +96,7 @@
     }
   },
   "styling": {
-    "eyebrows": "breadcrumbs"
+    "eyebrows": "section"
   },
   "fonts": {
     "family": "fkGroteskNeue",
