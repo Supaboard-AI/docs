@@ -116,5 +116,14 @@
   },
   "thumbnails": {
     "appearance": "light"
+  },
+  "metadata": {
+    "timestamp": true
+  },
+  "seo": {
+    "indexing": "navigable"
+  },
+  "interaction": {
+    "drilldown": true
   }
 }
