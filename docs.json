@@ -1,13 +1,13 @@
 {
   "$schema": "https://mintlify.com/docs.json",
-  "theme": "maple",
+  "theme": "almond",
   "name": "Supaboard Docs",
   "colors": {
-    "primary": "#16A34A",
-    "light": "#07C983",
-    "dark": "#15803D"
+    "primary": "#2e8ff2",
+    "light": "#0b99ff",
+    "dark": "#2376ca"
   },
-  "favicon": "/favicon.svg",
+  "favicon": "https://framerusercontent.com/images/0S3XhBBKzV0qjE4LjhFxGAHazU.png",
   "navigation": {
     "global": {
       "anchors": [
@@ -53,11 +53,14 @@
             ]
           }
         ]
+      },
+      {
+        "tab": "Data Sources"
       }
     ]
   },
   "logo": {
-    "light": "/logo/light.svg",
+    "light": "/images/logo-light.png",
     "dark": "/logo/dark.svg"
   },
   "navbar": {
@@ -96,11 +99,17 @@
     "eyebrows": "breadcrumbs"
   },
   "fonts": {
-    "family": "Montserrat",
-    "weight": 400
+    "family": "fkGroteskNeue",
+    "weight": 400,
+    "source": "https://r2cdn.perplexity.ai/fonts/FKGroteskNeue.woff2",
+    "format": "woff2"
   },
   "background": {
-    "decoration": "grid"
+    "decoration": "grid",
+    "color": {
+      "light": "#fafafc",
+      "dark": "#161619"
+    }
   },
   "icons": {
     "library": "fontawesome"
