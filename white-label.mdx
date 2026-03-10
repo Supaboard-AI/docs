@@ -1,0 +1,153 @@
+---
+title: 'White Label'
+---
+
+> **Enterprise plan only.** White Label is available exclusively on the Enterprise plan. Contact your account manager to enable it for your workspace.
+
+**White Label** lets you deliver a fully branded analytics and AI experience to your own users — under your name, your logo, and your domain. Your customers interact with dashboards and Ask Stella without ever seeing the Supaboard brand. It runs as a separate, lightweight application that you embed in your product or share as a standalone URL.
+
+---
+
+## How It Works
+
+When you configure White Label, Supaboard generates a unique **embed URL** for your workspace. Anyone who visits that URL — or has it embedded inside your product — gets a stripped-down, branded version of Supaboard that shows only the features you choose to expose.
+
+The embedded app is completely independent from the main Supaboard interface. Your users log in separately, see only your branding, and have no way to navigate to Supaboard's own UI.
+
+```
+Your product
+└── Embedded iframe (or standalone URL)
+    └── Your branded analytics app
+        ├── Dashboards (if enabled)
+        └── Ask Stella / AI chat (if enabled)
+```
+
+---
+
+## Accessing White Label Settings
+
+Navigate to **Settings → White Label** in the sidebar.
+
+The index page shows your current embed URL and a button to copy it to the clipboard. Click the **Edit** icon to open the configuration form.
+
+---
+
+## Your Embed URL
+
+Your embed URL is automatically generated from your workspace namespace. It is displayed on the White Label settings index page in read-only format.
+
+Click **Copy** to copy it to the clipboard. Share this URL with your users, embed it in an iframe in your product, or map a [custom domain](#custom-domain) to it.
+
+The URL encodes your workspace namespace so that the embedded app knows which configuration, dashboards, and agents to load.
+
+---
+
+## Branding
+
+All branding fields are optional — any field left blank falls back to your workspace's default settings.
+
+| Field | Description |
+|---|---|
+| **Name** | Your company or product name. Displayed in the embedded app's header and sidebar in place of "Supaboard". |
+| **Description** | A short subtitle shown alongside the name. |
+| **Logo** | Upload an image file. Displayed at 42×42px in the header. Replaces the Supaboard logo entirely. |
+| **Theme** | The colour scheme of the embedded app. |
+
+### Theme options
+
+| Option | Behaviour |
+|---|---|
+| **Light** | Always renders in light mode |
+| **Dark** | Always renders in dark mode |
+| **Auto** | Follows the user's operating system preference |
+
+---
+
+## Feature Toggles
+
+Control which sections of Supaboard are available to your embedded users. At least one feature must be enabled.
+
+| Feature | What it exposes |
+|---|---|
+| **Dashboard** | The full dashboard viewer — all dashboard groups and their pages, with all widget types (charts, KPIs, tables, filters, etc.) |
+| **Ask Agents** | The Ask Stella conversational AI interface — your users can chat with your configured agents in natural language |
+
+Features that are disabled do not appear in the embedded app's navigation at all — they are not hidden, they simply do not exist for the end user.
+
+> Restricting to **Dashboard only** is the right choice for read-only public-facing portals where AI chat is not appropriate. Enabling **Ask Agents only** works well for internal support tools or data assistants where a fixed dashboard isn't needed.
+
+---
+
+## Sidebar Visibility
+
+**Show Sidebar** — toggle on or off.
+
+| State | Behaviour |
+|---|---|
+| **On** (default) | The left navigation sidebar is visible. Users can browse between dashboards and features. |
+| **Off** | The sidebar is hidden. The embed fills the full width. Use this when you are controlling navigation yourself (e.g. embedding a single dashboard in a specific page of your product and driving navigation from your own UI). |
+
+---
+
+## AI Disclaimer
+
+An optional text block displayed to users inside the Ask Agents interface — typically used to communicate limitations, data freshness, or legal notices.
+
+Write any plain-text message in the **AI Disclaimer** field. It is shown as a notice within the chat interface so users see it before or during their conversations with agents.
+
+Example uses:
+- *"This assistant provides estimates based on available data. Always verify critical figures with your finance team."*
+- *"Data is refreshed every 24 hours. Figures may not reflect same-day activity."*
+
+---
+
+## Custom Domain
+
+Enter a domain in the **Custom Domain** field to serve the embedded app from your own URL (e.g. `analytics.yourcompany.com`) instead of the default Supaboard-hosted URL.
+
+Custom domain setup requires a DNS CNAME record pointing to Supaboard's servers. Contact your account manager for the target CNAME value and setup instructions.
+
+---
+
+## Authentication in the Embedded App
+
+Your embedded users authenticate separately from the main Supaboard app. Three methods are supported:
+
+| Method | Description |
+|---|---|
+| **Email & password** | Users log in with their Supaboard workspace credentials via a branded login page |
+| **Google OAuth** | Users sign in with a Google account |
+| **Microsoft OAuth** | Users sign in with a Microsoft / Azure AD account |
+
+The login page carries your branding (logo, name, theme) so it appears as a seamless part of your product.
+
+**MFA** — If multi-factor authentication is enabled for your workspace, users are prompted for an OTP code after the primary login step.
+
+**Session handling** — Once authenticated, sessions are stored locally in the user's browser. Users are not asked to log in again on subsequent visits until their session expires.
+
+---
+
+## What Your Users See
+
+Once configured, your users experience a fully branded application:
+
+- **Header and sidebar** show your logo and company name — no Supaboard branding
+- **Theme** (light/dark/auto) is applied globally across all pages
+- **Navigation** shows only the features you have enabled
+- **Login page** carries your branding
+- **Dashboards** render in view mode — users can interact with filters, hover on charts, drill through data, and export widgets, but cannot enter edit mode
+- **Ask Agents** provides the full conversational interface — conversations, message history, file attachments, and widget generation — within your branded shell
+
+Your users have no path to the main Supaboard interface, the workspace settings, or any administrative features.
+
+---
+
+## Permissions
+
+| Action | Minimum role |
+|---|---|
+| View White Label settings & embed URL | Admin · Owner |
+| Configure branding, features, sidebar, disclaimer | Admin · Owner |
+| Set custom domain | Owner |
+
+White Label configuration is workspace-level. Any Admin can edit the settings, but custom domain changes should be coordinated with the workspace Owner and your DNS administrator.

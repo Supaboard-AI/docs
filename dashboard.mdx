@@ -1,0 +1,459 @@
+---
+title: "Dashboard"
+---
+
+A **Dashboard** is a canvas of live data widgets arranged in a drag-and-drop grid. Dashboards live inside **Dashboard Groups** — think of groups as folders. Every widget on a dashboard queries your connected data sources in real time.
+
+---
+
+## Organisation — Groups & Dashboards
+
+Dashboards are always nested inside a **Dashboard Group**.
+
+```text
+Dashboard Group  (e.g. "Marketing")
+├── Dashboard    (e.g. "Campaign Overview")
+└── Dashboard    (e.g. "Ad Spend Breakdown")
+```
+
+A group can contain any number of dashboards, surfaced as tabs at the bottom of the screen. Groups have their own sharing and access control settings that apply to all dashboards within them.
+
+---
+
+## Creating a Dashboard Group
+
+From the main **Dashboards** page, click **New Group**.
+
+| Field                   | Notes                                                     |
+| ----------------------- | --------------------------------------------------------- |
+| **Name**                | Required. Displayed in the sidebar and on the group card. |
+| **Description**         | Optional. Shown on the group card.                        |
+| **Cover image / emoji** | Optional. Personalises the group card.                    |
+
+Once created, the group opens directly and you can start adding dashboards.
+
+---
+
+## Creating a Dashboard
+
+Inside an open group, click the **\+** tab at the far right of the tab bar. A new blank dashboard is created immediately and becomes the active tab.
+
+You can rename the dashboard by clicking its title in the header while in edit mode.
+
+---
+
+## Edit Mode vs View Mode
+
+Every dashboard has two modes. The current mode is shown in the top-right toolbar.
+
+### View mode
+
+The default for readers. Viewers can:
+
+- Interact with charts (hover tooltips, click to drill through)
+- Apply dashboard filters
+- Scroll and read all widget content
+- Export widgets
+- Open the chat panel
+
+### Edit mode
+
+Enabled by clicking **Edit** in the toolbar (requires Editor role or above). Editors can:
+
+- Add, move, resize, and delete widgets
+- Edit widget titles inline
+- Configure widget data and visualisation
+- Reorder dashboard tabs
+- Rename the dashboard and update its description
+- Undo / redo layout changes
+
+> Layout changes in edit mode are saved to the server continuously via the undo/redo stack. Navigating away does not lose unsaved work.
+
+---
+
+## The Dashboard Toolbar
+
+The top-right area of the dashboard contains contextual controls that change based on mode.
+
+### View mode controls
+
+| Control            | Description                                            |
+| ------------------ | ------------------------------------------------------ |
+| **Edit**           | Enter edit mode _(Editor and above)_                   |
+| **Access Control** | Manage who can view or edit this dashboard group       |
+| **Fullscreen**     | Expand the dashboard to fill the entire browser window |
+| **Export**         | Open the export panel (PDF, PowerPoint, embeds)        |
+| **Chat**           | Open the dashboard chat panel                          |
+
+### Edit mode controls
+
+| Control         | Description                                       |
+| --------------- | ------------------------------------------------- |
+| **Done**        | Return to view mode                               |
+| **Undo / Redo** | Cmd+Z / Cmd+Shift+Z — step through layout history |
+
+---
+
+## The Floating Widget Toolbar
+
+In edit mode, a **floating toolbar** appears in the top-right of the canvas. Each button inserts a new widget of that type onto the dashboard.
+
+| Button     | Widget inserted                           |
+| ---------- | ----------------------------------------- |
+| **Chart**  | A new chart widget bound to your data     |
+| **Table**  | A paginated data table widget             |
+| **KPI**    | A single headline metric card             |
+| **Filter** | An interactive filter control for viewers |
+| **Text**   | A rich-text block                         |
+| **Embed**  | An external URL embedded as an iframe     |
+| **Image**  | An uploaded image                         |
+
+Clicking a button inserts the widget into the grid and scrolls the canvas to it automatically.
+
+---
+
+## Widgets — Overview
+
+Widgets are the building blocks of a dashboard. Each type serves a distinct purpose.
+
+| Widget     | Purpose                                                 |
+| ---------- | ------------------------------------------------------- |
+| **Chart**  | Visualise data as bar, line, pie, scatter, and more     |
+| **KPI**    | Display a single headline metric with optional trend    |
+| **Table**  | Show data in a paginated, sortable grid                 |
+| **Filter** | Let viewers narrow down all widgets at once             |
+| **Text**   | Add formatted written content, headings, or annotations |
+| **Notes**  | A coloured annotation card with a title and body        |
+| **Image**  | Display an image by file upload                         |
+| **Memo**   | An AI-generated analytical summary                      |
+| **Embed**  | Embed any external URL inside an iframe                 |
+
+---
+
+## Widgets — In Depth
+
+### Chart
+
+Renders data as an interactive chart powered by ECharts.
+
+**Configuration:**
+
+- Select data source, database, and table
+- Map axes (x-axis field, y-axis metric)
+- Choose chart type: bar, line, area, pie, scatter, and others
+- Customise colours, legend, and axis labels
+
+**In view mode:**
+
+- Hover for tooltips
+- Click a data point to trigger [Data Drilling](#data-drilling) (if configured)
+
+**Export options:** PNG · SVG · PDF
+
+> Supaboard automatically switches between SVG rendering (under 400 data points) and Canvas rendering (400 and above) to keep charts performant at scale.
+
+---
+
+### KPI
+
+Displays a single computed metric.
+
+**Display styles:**
+
+- **Numeric** — raw number with optional formatting
+- **Percentage** — value expressed as a percentage
+- **Trend** — metric alongside a comparison value and direction indicator
+- **Comparison** — two values side by side
+- **Progress bar** — percentage shown as a filled bar
+
+Colour scheme and trend indicator style are configurable via the **KPI Visualisation** panel.
+
+---
+
+### Table
+
+Shows query results in a paginated, scrollable grid.
+
+**Configuration:**
+
+- Select which columns to display and their order
+- Set sort column and direction
+- Configure column header background colour
+- Apply **conditional formatting** — colour rows or cells based on value rules
+
+**Export options:** CSV · Excel (.xlsx)
+
+Export supports:
+
+- All data
+- Current page only
+- A specific row range
+
+---
+
+### Filter
+
+An interactive control placed on the canvas that lets viewers filter all compatible widgets simultaneously, without entering edit mode.
+
+**Filter types:**
+
+| Type            | UI control               | Operators                                                                |
+| --------------- | ------------------------ | ------------------------------------------------------------------------ |
+| **Categorical** | Multi-select dropdown    | equals · in                                                              |
+| **String**      | Text input or chip input | like · equals · in                                                       |
+| **Date**        | Date picker              | calendar range · month · quarter · relative range (before/after/between) |
+| **Numeric**     | Number input             | equals · greater than · less than · between                              |
+| **Boolean**     | Toggle switch            | —                                                                        |
+
+Filter widgets appear in a **sticky bar** at the top of the dashboard (not in the grid). When a viewer changes a filter value, every widget on the dashboard that references the same column updates its data automatically.
+
+---
+
+### Text
+
+A full rich-text editor block.
+
+**Formatting supported:**
+
+- Bold · Italic · Underline · Strikethrough
+- Headings and paragraph styles
+- Align left · centre · right · justify
+- Text colour and background colour
+- Hyperlinks
+- Emoji
+
+---
+
+### Image
+
+Upload an image file directly onto the dashboard. The image scales to fill the widget's grid cell. Hover in edit mode to reveal the delete button.
+
+---
+
+### Embed
+
+Embeds an external URL inside the widget using an iframe. Useful for third-party tools, live web pages, or internal apps you want alongside your data.
+
+---
+
+## Widget Operations
+
+All widget operations are accessible from the **widget header menu** (the three-dot icon that appears on hover).
+
+### In edit mode
+
+| Operation           | Description                                                                       |
+| ------------------- | --------------------------------------------------------------------------------- |
+| **Edit**            | Open the widget's data and visualisation configuration                            |
+| **Rename**          | Click the title directly to rename it inline                                      |
+| **Visualisation**   | Open the visual styling panel (chart type, colours, column formatting, KPI style) |
+| **Duplicate**       | Create an identical copy of the widget on the same dashboard                      |
+| **Move to**         | Transfer the widget to another dashboard within the same group                    |
+| **Insights & Info** | Open the insights and comments side panel                                         |
+| **Export**          | Export the widget's data                                                          |
+| **Delete**          | Remove the widget (confirmation required)                                         |
+
+### In view mode
+
+| Operation           | Description                                                  |
+| ------------------- | ------------------------------------------------------------ |
+| **Insights & Info** | Open insights and comments side panel                        |
+| **Export**          | Download chart as PNG/SVG/PDF or table as CSV/Excel          |
+| **Data drilling**   | Click a chart data point to drill into the underlying detail |
+
+### Resizing and moving
+
+In edit mode:
+
+- **Move** — drag the widget by its header or the blue drag handle on the left edge.
+- **Resize** — drag the handle at the bottom-right corner.
+
+Widgets snap to the grid. The layout is saved automatically as you make changes.
+
+---
+
+## Filters
+
+Filters operate at two levels:
+
+### Widget-level filters
+
+Configured inside an individual widget's data settings. They are fixed — viewers cannot change them. Use these to permanently scope a widget (e.g. "always show only the last 30 days").
+
+### Dashboard filters (Filter widget)
+
+Added to the dashboard canvas as a **Filter Widget**. Viewers can interact with these in view mode to dynamically narrow all compatible widgets at once. See the [Filter widget section](#filter) for the full list of types and operators.
+
+The filter bar is sticky — it stays visible at the top of the dashboard as viewers scroll down through the widgets.
+
+---
+
+## Undo & Redo
+
+Supaboard maintains a full layout history while you are in edit mode.
+
+| Action   | Shortcut               |
+| -------- | ---------------------- |
+| **Undo** | Cmd / Ctrl + Z         |
+| **Redo** | Cmd / Ctrl + Shift + Z |
+
+Each entry in the history captures the full grid state — widget positions, sizes, and additions/deletions. History is stored locally (IndexedDB) so it persists if you refresh the page mid-edit.
+
+---
+
+## Data Drilling
+
+On chart and table widgets, clicking a data point opens the **Data Drilling** modal — a deeper view into the data behind that point.
+
+The drill modal includes:
+
+- A breadcrumb trail showing the drill path
+- Date range controls for time-series data
+- A detailed table or chart of the drilled data
+- Back navigation to return up the drill hierarchy
+
+Dashboard-level filters are respected in the drilled view.
+
+---
+
+## Insights & Comments
+
+Every widget has an **Insights & Info** side panel, accessible from the widget header menu.
+
+**Insights tab** — AI-generated observations about the widget's current data. Stella analyses the data and highlights notable trends, outliers, or patterns.
+
+**Comments tab** — a threaded discussion thread scoped to this widget. Team members can leave notes, ask questions, or flag issues directly on the widget. Comments persist across sessions.
+
+**Info tab** — metadata about the widget: who created it, when it was last updated, and the underlying data source.
+
+---
+
+## Fullscreen Mode
+
+Click **Fullscreen** in the toolbar to expand the dashboard to fill the entire browser window. All browser chrome is hidden.
+
+An **exit button (✕)** appears in the top-right corner. Press **Escape** or click it to return to normal view.
+
+Fullscreen mode is useful for presenting dashboards on a large screen or during meetings.
+
+---
+
+## Chat Panel
+
+Click **Chat** in the toolbar to open a conversation panel on the right side of the dashboard. This is a dashboard-level chat thread separate from widget-level comments — use it for high-level discussion about the dashboard as a whole (e.g. "the numbers look off for March, can someone check the filter?").
+
+---
+
+## Export
+
+### Dashboard export
+
+Open the **Export panel** from the toolbar. Two options are available:
+
+| Format                | Description                                    |
+| --------------------- | ---------------------------------------------- |
+| **PDF**               | Exports the full dashboard as a multi-page PDF |
+| **PowerPoint (PPTX)** | Exports the dashboard as a slide deck          |
+
+Past exports are listed in the panel with infinite scroll — click any entry to download it again.
+
+### Widget export
+
+Individual widgets can be exported from their header menu:
+
+| Widget    | Formats                                      |
+| --------- | -------------------------------------------- |
+| **Chart** | PNG · SVG · PDF                              |
+| **Table** | CSV · Excel (.xlsx) with row range selection |
+
+---
+
+## Embedding
+
+Dashboards can be embedded in external applications. Open the **Export panel → Embed** tab to manage embed tokens.
+
+**Embed tokens** control how the dashboard appears when accessed externally:
+
+- Create new tokens with specific configuration
+- Delete tokens to revoke access
+- View all active tokens
+
+For full embed configuration (branding, feature toggles, domain), see [Mini-Board](./MiniBoard.mdx).
+
+---
+
+## Access Control & Sharing
+
+Click **Access Control** in the toolbar to manage who can view or edit the dashboard group.
+
+Access is set at the **group level** — it applies to all dashboards within the group.
+
+| Role in group     | What they can do                                            |
+| ----------------- | ----------------------------------------------------------- |
+| **Viewer**        | View dashboards, apply filters, export widgets              |
+| **Editor**        | All of the above + add/edit/delete widgets, enter edit mode |
+| **Admin / Owner** | All of the above + manage group access, delete the group    |
+
+The access list shows all workspace members. Toggle each user on or off. The workspace Owner and yourself cannot be removed.
+
+> Access control here is separate from workspace-level roles. A workspace Viewer can be granted Editor access on a specific group.
+
+---
+
+## Dashboard Tabs (Multi-page)
+
+Multiple dashboards in a group appear as **tabs at the bottom** of the screen.
+
+### Tab actions
+
+| Action               | How                                                   |
+| -------------------- | ----------------------------------------------------- |
+| **Switch dashboard** | Click any tab                                         |
+| **Add dashboard**    | Click the **\+** tab                                  |
+| **Rename dashboard** | Edit the title in the header while in edit mode       |
+| **Reorder tabs**     | Drag tabs left or right _(edit mode only)_            |
+| **Delete dashboard** | Hover the tab icon in edit mode → delete icon appears |
+
+> The last remaining dashboard in a group cannot be deleted.
+
+---
+
+## Duplicating a Dashboard Group
+
+From the dashboard group card on the main Dashboards page, open the action menu and select **Duplicate**.
+
+The duplicate modal lets you **remap data sources** — if your original group used one database connection, you can point the copy to a different connection. This is useful for creating environment-specific dashboards (staging vs production) or client-specific copies.
+
+The duplicate is created with " Copy" appended to the name and contains all dashboards, widgets, and layout configuration from the original.
+
+---
+
+## Deleting a Dashboard
+
+### Delete a single dashboard (tab)
+
+In edit mode, hover over the tab icon at the bottom — it reveals a delete icon. Click it and confirm. Not available if it is the last dashboard in the group.
+
+### Delete a dashboard group
+
+From the group card on the main Dashboards page, open the action menu and select **Delete**. This removes the group and all dashboards and widgets within it. **This cannot be undone.**
+
+---
+
+## Permissions
+
+| Action                        | Minimum role               |
+| ----------------------------- | -------------------------- |
+| View a dashboard              | Viewer (with group access) |
+| Apply filters                 | Viewer                     |
+| Export widgets                | Viewer                     |
+| Enter edit mode               | Editor                     |
+| Add / edit / delete widgets   | Editor                     |
+| Rename dashboard              | Editor                     |
+| Reorder tabs                  | Editor                     |
+| Create a new dashboard (tab)  | Editor                     |
+| Manage group access           | Admin · Owner              |
+| Delete a dashboard (tab)      | Admin · Owner              |
+| Delete a dashboard group      | Owner                      |
+| Duplicate a dashboard group   | Editor                     |
+| Embed / export full dashboard | Editor                     |

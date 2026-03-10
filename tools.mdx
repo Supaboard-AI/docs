@@ -1,0 +1,156 @@
+---
+title: 'Tools'
+---
+
+**Tools** are external integrations that Agents can call when answering questions. They are built on the [Model Context Protocol (MCP)](https://modelcontextprotocol.io/) — an open standard that lets AI models interact with outside systems: internal APIs, third-party services, custom scripts, or any HTTP/SSE endpoint you expose.
+
+When an agent needs information or capabilities that don't exist in your connected databases, it can invoke a Tool to fetch or compute what it needs. Tools extend what agents can do without requiring you to load everything into a data source.
+
+---
+
+## The Tools Page
+
+Navigate to **Tools** in the sidebar (or press **Cmd+9**) to see all tools registered in your workspace.
+
+### Display modes
+Toggle between **Card grid** and **Table** view using the view switcher.
+
+**Table view columns:**
+
+| Column | Description |
+|---|---|
+| **Name** | Tool name and icon |
+| **Type** | Transport type — `http` or `sse` |
+| **Call Count** | Total number of times this tool has been invoked by agents |
+| **Created By** | The workspace member who registered the tool |
+| **Shared With** | Avatars of members with explicit access |
+| **Created On** | Date the tool was registered |
+
+### Search
+Use the search bar to filter tools by name. Search is fuzzy — partial matches are included.
+
+### Refresh
+Click the **Refresh** button in the topbar to reload the tools list from the server.
+
+---
+
+## Adding a Tool
+
+Click **New Tool** to open the creation form.
+
+### Required fields
+
+| Field | Description |
+|---|---|
+| **Name** | A human-readable label for the tool — shown in the list, execution logs, and agent context |
+| **Type** | Transport type: `http` or `sse` (see [Transport Types](#transport-types--http-vs-sse)) |
+| **URL** | The endpoint Supaboard will call when the tool is invoked — e.g. `https://api.example.com/endpoint` |
+
+### Optional fields
+
+| Field | Description |
+|---|---|
+| **Token** | A Bearer token or API key sent with every request for authentication. Leave empty if the endpoint is public or uses a different auth method. |
+| **Icon** | Upload an image to represent this tool in the UI. Accepts any image format. |
+
+### What happens when you save
+
+1. Supaboard **pings the endpoint** to verify it is reachable before creating the record.
+2. If the ping succeeds, the tool is created and appears in the list.
+3. If the ping fails, the tool is not saved — check the URL, token, and that the server is running.
+
+> The connectivity check at creation time prevents broken tools from appearing in the list. If your server is temporarily down during setup, wait for it to come back online before adding the tool.
+
+---
+
+## Transport Types — HTTP vs SSE
+
+MCP supports two transport mechanisms. Choose the one that matches how your server is built.
+
+| Type | How it works | When to use |
+|---|---|---|
+| **HTTP** (`http`) | Standard request/response over HTTPS. Supaboard sends a POST request and waits for a response. | Most REST APIs, serverless functions, webhooks |
+| **SSE** (`sse`) | Server-Sent Events — the server streams back a response progressively. | Long-running operations, streaming outputs, real-time data |
+
+If you are unsure, start with `http`. It works for the vast majority of integrations.
+
+---
+
+## Tool Detail & Execution History
+
+Click any tool in the list to open its detail page.
+
+### Execution history panel (left)
+A chronological log of every time this tool was invoked. Each entry shows:
+- The tool name and icon
+- The exact timestamp of the execution
+
+Click any entry to load the full execution detail on the right.
+
+### Execution detail panel (right)
+
+| Section | What it shows |
+|---|---|
+| **Execution ID** | The unique ID for this invocation — copyable |
+| **Agent** | Which agent triggered this call |
+| **User** | Which workspace member's conversation caused the invocation |
+| **Timestamp** | Exact date and time |
+| **Instructions** | The instruction string passed to the tool by the agent |
+| **Input Parameters** | A table of every key-value parameter sent to the endpoint |
+| **Final Output** | The raw response returned by the tool's server — auto-formatted if valid JSON |
+
+All text fields have a **copy** button for easy sharing or debugging.
+
+> Execution history is your primary debugging surface. If an agent is giving unexpected answers when a tool is involved, check the Input Parameters and Final Output here to see exactly what was sent and received.
+
+---
+
+## Testing Connectivity
+
+You can test that a tool's endpoint is reachable at any time without running a full invocation.
+
+Open the tool's action menu (three-dot icon) and select **Test Connectivity**. Supaboard pings the configured URL and token and reports back:
+
+- **Success:** A toast confirms the endpoint is responding.
+- **Failure:** A toast shows the error — use this to diagnose network issues, expired tokens, or server downtime.
+
+---
+
+## Access Control
+
+By default, a tool is accessible to all workspace members. You can restrict it to specific users.
+
+Open the tool's action menu and select **Access Control**. A list of all workspace members appears with toggle switches:
+
+| State | Meaning |
+|---|---|
+| **Toggle on** | This member can use the tool |
+| **Toggle off** | This member cannot use the tool |
+| **Owner** (locked) | The workspace Owner always has access |
+| **You** (locked) | You cannot remove your own access |
+
+Click **Save Changes** to apply. Changes take effect immediately.
+
+---
+
+## Deleting a Tool
+
+Open the tool's action menu and select **Delete Tool**. The tool is removed immediately — no confirmation step.
+
+**What happens on deletion:**
+- The tool record and all its execution logs are removed.
+- Any agent that was invoking this tool will no longer be able to call it.
+- Active conversations that relied on this tool will receive errors if it is invoked again.
+
+---
+
+## Permissions
+
+| Action | Minimum role |
+|---|---|
+| View tools list | Viewer (with tool access) |
+| View tool detail and execution history | Viewer (with tool access) |
+| Add a new tool | Admin |
+| Test connectivity | Admin |
+| Manage access control | Admin · Owner |
+| Delete a tool | Admin · Owner |
