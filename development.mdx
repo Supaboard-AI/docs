@@ -1,94 +1,65 @@
 ---
-title: 'Development'
-description: 'Preview changes locally to update your docs'
+title: "Concepts"
 ---
 
-<Info>
-  **Prerequisites**:
-  - Node.js version 19 or higher
-  - A docs repository with a `docs.json` file
-</Info>
+Supaboard connects your data, visualises it in dashboards, and lets you query it in plain English through AI agents.
 
-Follow these steps to install and run Mintlify on your operating system.
+## How everything fits together
 
-<Steps>
-<Step title="Install the Mintlify CLI">
-
-```bash
-npm i -g mint
-```
-</Step>
-
-<Step title="Preview locally">
-
-Navigate to your docs directory where your `docs.json` file is located, and run the following command:
-
-```bash
-mint dev
+```text
+Workspace
+├── Data Sources   — your database / SaaS connections
+├── Dashboard Groups
+│   └── Dashboards — grids of widgets (charts, tables, KPIs, filters…)
+├── Agents         — AI assistants trained on your data
+├── Ask Stella     — chat interface powered by agents
+└── Tools          — external integrations agents can call
 ```
 
-A local preview of your documentation will be available at `http://localhost:3000`.
+---
 
-</Step>
-</Steps>
+## The 5 things you need to understand
 
-## Custom ports
+### 1. Workspace
 
-By default, Mintlify uses port 3000. You can customize the port Mintlify runs on by using the `--port` flag. For example, to run Mintlify on port 3333, use this command:
+Your organisation's private environment. Everything — data, dashboards, teammates, agents — lives inside it. You can belong to multiple workspaces and switch between them from the sidebar.
 
-```bash
-mint dev --port 3333
-```
+### 2. Data Sources
 
-If you attempt to run Mintlify on a port that's already in use, it will use the next available port:
+Connections to your databases (PostgreSQL, BigQuery, Snowflake, MySQL, Sheets, and more). Widgets and Agents pull live data through these. Connect one before building anything else.
 
-```md
-Port 3000 is already in use. Trying 3001 instead.
-```
+### 3. Dashboards & Widgets
 
-## Mintlify versions
+A **Dashboard** is a drag-and-drop canvas of **Widgets**. Toggle between **Edit mode** (build) and **View mode** (consume). Widgets come in 9 types:
 
-Please note that each CLI release is associated with a specific version of Mintlify. If your local preview does not align with the production version, please update the CLI:
+| Widget     | What it does                                                |
+| ---------- | ----------------------------------------------------------- |
+| **Chart**  | Bar, line, pie, scatter — any visualisation                 |
+| **KPI**    | A single headline metric with trend                         |
+| **Table**  | Paginated, sortable data grid                               |
+| **Filter** | Viewer-interactive controls that update all widgets at once |
+| **Text**   | Rich text block                                             |
+| **Image**  | Image by URL                                                |
+| **Embed**  | Any external URL in an iframe                               |
 
-```bash
-npm mint update
-```
+### 4. Agents
 
-## Validating links
+An AI assistant scoped to your data. You configure _what databases it can see_, give it a _knowledge base_ and _verified queries_, and it learns to answer questions accurately over time. Agents power Ask Stella.
 
-The CLI can assist with validating links in your documentation. To identify any broken links, use the following command:
+### 5. Ask Stella
 
-```bash
-mint broken-links
-```
+A chat interface where you type a question in plain English — "What were our top 5 products last quarter?" — and Stella queries your data and answers. No SQL required.
 
-## Deployment
+---
 
-If the deployment is successful, you should see the following:
+## Other things worth knowing
 
-<Frame>
-  <img src="/images/checks-passed.png" alt="Screenshot of a deployment confirmation message that says All checks have passed." style={{ borderRadius: '0.5rem' }} />
-</Frame>
+- **Dashboard Groups** are folders that organise related dashboards. Sharing is set at the group level.
+- **Roles** — Viewer → Editor → Admin → Owner. Admins can also restrict access per-feature or per-resource.
+- **Export** — Download any dashboard or widget as a PDF or PowerPoint from the toolbar.
+- **Mini-Board** — Embed dashboards in your own product with custom branding and feature toggles.
+- **Tools** — MCP servers that extend what Agents can do (e.g. calling an internal API).
 
-## Code formatting
+---
 
-We suggest using extensions on your IDE to recognize and format MDX. If you're a VSCode user, consider the [MDX VSCode extension](https://marketplace.visualstudio.com/items?itemName=unifiedjs.vscode-mdx) for syntax highlighting, and [Prettier](https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode) for code formatting.
-
-## Troubleshooting
-
-<AccordionGroup>
-  <Accordion title='Error: Could not load the "sharp" module using the darwin-arm64 runtime'>
-
-    This may be due to an outdated version of node. Try the following:
-    1. Remove the currently-installed version of the CLI: `npm remove -g mint`
-    2. Upgrade to Node v19 or higher.
-    3. Reinstall the CLI: `npm i -g mint`
-  </Accordion>
-
-  <Accordion title="Issue: Encountering an unknown error">
-  
-    Solution: Go to the root of your device and delete the `~/.mintlify` folder. Then run `mint dev` again.
-  </Accordion>
-</AccordionGroup>
-
-Curious about what changed in the latest CLI version? Check out the [CLI changelog](https://www.npmjs.com/package/mintlify?activeTab=versions).
+> **Start here:** Connect a Data Source → Create a Dashboard Group → Add a Dashboard → Drop in a Chart widget → Ask Stella a question about the same data.

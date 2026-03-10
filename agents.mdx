@@ -1,0 +1,290 @@
+---
+title: "Agents"
+---
+
+An **Agent** is an AI assistant you configure to understand your data. It knows which tables it can query, what the data means, how to interpret business terminology, and what rules to enforce. Once set up, it powers Ask Stella so your team can get accurate answers in plain English.
+
+---
+
+## Browsing Agents
+
+Navigate to **Agents** in the sidebar to see all agents in your workspace.
+
+### Display modes
+
+Toggle between two views using the view switcher in the top-right:
+
+| View          | What you see                                                          |
+| ------------- | --------------------------------------------------------------------- |
+| **Card grid** | Visual cards with agent name, description, and data source icons      |
+| **Table**     | Name · Description · Data Sources · Created by · Created on · Actions |
+
+---
+
+## Creating an Agent
+
+Click **New Agent** from the Agents page. A modal collects the minimum required to get started:
+
+| Field            | Required           | Notes                                                   |
+| ---------------- | ------------------ | ------------------------------------------------------- |
+| **Name**         | Yes                | Human-readable label shown across the UI                |
+| **Description**  | Yes                | A short summary of what this agent does                 |
+| **Data Sources** | Yes (at least one) | The database connections this agent is allowed to query |
+
+When selecting data sources, inactive connections are shown greyed out with an _(Inactive)_ label. Each entry shows `{source name} • {database}`.
+
+Once created, you are taken directly to the agent's setup page to configure everything else.
+
+---
+
+## Setup — Information & Data Access
+
+The **Setup** tab is the primary configuration page for an agent.
+
+### Information
+
+| Field           | Details                                                                                                             |
+| --------------- | ------------------------------------------------------------------------------------------------------------------- |
+| **Name**        | Rename the agent at any time                                                                                        |
+| **Description** | Update the summary shown in the agents list                                                                         |
+| **Image**       | Upload a custom image (PNG/JPG/etc, max 32 MB). Supaboard extracts the dominant colour for theming. _(Pro feature)_ |
+
+### Data source access
+
+Controls exactly which data the agent can see.
+
+- **Multi-select dropdown** — add or remove data source connections.
+- **Table-level scope** — expand any connected source to choose specific tables. All tables are included by default.
+- A count badge shows `{X} sources · {Y} tables` at a glance.
+
+#### Handling missing schema
+
+If a table's schema hasn't been generated, a warning appears. For each affected table:
+
+| Action                | What it does                                                 |
+| --------------------- | ------------------------------------------------------------ |
+| **Regenerate schema** | Re-scans the table and rebuilds its metadata                 |
+| **Hide table**        | Removes the table from the agent's scope without deleting it |
+| **Remove table**      | Permanently removes the table from the agent's configuration |
+
+> A missing schema means the agent doesn't know what the columns in that table mean. Resolve all schema warnings before expecting accurate answers.
+
+---
+
+## Setup — Overview (Instructions)
+
+The **Overview** is the agent's core instruction set — a freeform text block that tells it:
+
+- What this data represents
+- The business domain it operates in
+- How to interpret ambiguous questions
+- Any context about data quirks or conventions
+
+### Quick templates
+
+Supaboard offers domain-specific templates you can append to your overview. Templates are loaded based on the data sources you've connected. Click a template to add its suggested language.
+
+> The overview is the single most impactful thing you can write for an agent. A detailed, precise overview produces dramatically better answers than a vague one.
+
+---
+
+## Setup — Access & Controls
+
+### Enable Data Access
+
+**Toggle** — When on, Stella can drill into the actual data behind charts to provide deeper analysis and follow-up insights. When off, responses are limited to aggregated results.
+
+### Enable Self-Improvement
+
+**Toggle** — When on, Stella can update table descriptions, create new metrics and dimensions based on conversation patterns, and refine its understanding over time. Changes are tracked in changesets so you can review and approve them before they take effect.
+
+### User Access
+
+Controls which workspace members can chat with this agent.
+
+- **All users** (default) — every workspace member with Stella access can use the agent.
+- **Specific users** — only selected users can access the agent. You (the creator) and the workspace Owner are always included and cannot be removed.
+
+Select users from the dropdown, which shows all workspace members with their roles. Your own entry is marked _(you)_.
+
+---
+
+## Knowledge Base
+
+Navigate to the **Knowledge** tab to manage the agent's document library.
+
+The knowledge base gives the agent context beyond what's in the database — data dictionaries, business definitions, policy documents, or any reference material that helps it answer questions accurately.
+
+### Uploading files
+
+Drag files onto the upload zone or click to browse. Supported formats:
+
+| Format                   | Use case                                     |
+| ------------------------ | -------------------------------------------- |
+| **PDF**                  | Reports, data dictionaries, policy documents |
+| **CSV**                  | Reference data, lookup tables                |
+| **Excel (.xlsx / .xls)** | Structured reference data                    |
+| **Images**               | Diagrams, schemas, visual reference          |
+
+Multiple files can be selected at once.
+
+### Uploaded files table
+
+| Column           | Description                                               |
+| ---------------- | --------------------------------------------------------- |
+| **File Name**    | The uploaded file's name                                  |
+| **File Type**    | PDF, CSV, Excel, Image                                    |
+| **Chunks Added** | How many knowledge fragments were extracted from the file |
+| **Action**       | Preview or delete the file                                |
+
+Click a file name to preview its contents. Click the delete icon to remove it — the change is reflected immediately.
+
+---
+
+## Master Ruleset
+
+Navigate to the **Master Ruleset** tab to define hard rules that govern how the agent interprets and answers every query — these are not suggestions.
+
+Use rules to:
+
+- Enforce terminology — _"always call this field 'Net Revenue', not 'Revenue'"_
+- Define business logic — _"always filter to the current fiscal year unless the user specifies otherwise"_
+- Set formatting standards — _"always express percentages to 2 decimal places"_
+- Prevent certain response types
+
+### Managing rules
+
+**Create a rule manually:**
+
+1. Click **New Rule**.
+2. Enter a **Title** (short label) and **Description** (the rule in plain language).
+3. Save.
+
+**Import rules from a file:**
+
+1. Click **Browse File**.
+2. Upload a YAML or JSON file containing rule definitions.
+3. Supaboard extracts rules from the file automatically.
+
+**Edit or delete a rule:** Click the action menu on any rule row to open the editor. Changes can be undone within the editor before saving.
+
+**Search** rules by title or description using the search bar at the top of the table.
+
+---
+
+## Table Configuration
+
+Navigate to the **Table Configuration** tab to teach the agent what each table _means_ — context that a SQL schema alone cannot convey.
+
+### Navigating tables
+
+Use the two dropdowns at the top to select a **data source**, then a **table** within it. A warning icon appears next to sources with missing schema.
+
+### Per-table actions
+
+| Action                | What it does                                                        |
+| --------------------- | ------------------------------------------------------------------- |
+| **Hide / Show table** | Toggle whether Stella considers this table when answering questions |
+| **Regenerate schema** | Re-scans the table to refresh column metadata                       |
+
+### Configuration fields
+
+For each table, fill in four knowledge fields:
+
+| Field           | What to write                                                                                                          |
+| --------------- | ---------------------------------------------------------------------------------------------------------------------- |
+| **Summary**     | A plain-English description of what this table stores and its key associations with other tables                       |
+| **Granularity** | What each row represents — e.g. _"One row per order line item"_ or _"One row per daily user session"_                  |
+| **Gotchas**     | Known quirks, data quality issues, or caveats — e.g. _`"The deleted_at column is not reliably populated before 2022"`_ |
+| **Use Cases**   | Common questions this table helps answer — helps Stella know when to reach for it                                      |
+
+> Table Configuration is the second most impactful investment after the Overview. Granularity and Gotchas in particular prevent the most common categories of incorrect answers.
+
+---
+
+## Fine-Tuning (Verified Queries)
+
+Navigate to the **Fine Tuning** tab to manage **Verified Queries** — pre-written, validated SQL that the agent reuses for known questions.
+
+When a user asks something that closely matches a verified query, Stella uses it directly rather than generating a new one. This guarantees:
+
+- Correctness for high-stakes metrics
+- Consistent answers across all users
+- Faster responses (no generation step needed)
+
+### Adding a verified query
+
+Click **New Evaluation** and fill in:
+
+| Field                | Required | Notes                                |
+| -------------------- | -------- | ------------------------------------ |
+| **Title**            | Yes      | A short label for this query         |
+| **Description**      | No       | What question this query answers     |
+| **Database / Table** | Yes      | Selected from the agent's data scope |
+| **SQL Query**        | Yes      | The validated SQL to use             |
+
+### Managing verified queries
+
+- **Search** by title or description.
+- Click **View** on the query column to see the full SQL.
+- Use the action menu to **edit** or **delete** a query.
+
+---
+
+## Integrations
+
+The **Integrations** section within Setup connects the agent to external platforms.
+
+### Slack _(Business)_
+
+Connect the agent to a Slack workspace so team members can query it directly from Slack without opening Supaboard. Click **Connect** to start the OAuth flow. The connection is scoped to this specific agent.
+
+### Microsoft Teams _(Business)_
+
+Coming soon.
+
+---
+
+## Managing Agents
+
+### Duplicate
+
+Open the action menu (three-dot icon) on any agent and select **Duplicate**. You'll be prompted for a new name. The duplicate copies all configuration: data scope, overview, knowledge, ruleset, table config, and verified queries.
+
+### Delete
+
+Open the action menu and select **Delete**. A confirmation is required. Deletion is permanent — existing conversations that used this agent are preserved but can no longer generate new responses from it.
+
+### Unsaved changes
+
+Navigating away with unsaved edits triggers a confirmation prompt. Draft changes are encoded in the URL so you can copy the link and return to continue editing later.
+
+---
+
+## Permissions
+
+| Action                   | Minimum role required      |
+| ------------------------ | -------------------------- |
+| View agents list         | Viewer                     |
+| Open agent details       | Viewer                     |
+| Create agent             | Editor                     |
+| Edit agent configuration | Editor (own) · Admin (any) |
+| Duplicate agent          | Editor                     |
+| Delete agent             | Admin · Owner              |
+
+Agent-level access is separate from workspace role — even an Admin can be excluded from a specific agent if it has a restricted User Access list (see [Setup — Access & Controls](#5-setup--access--controls)).
+
+---
+
+## Agent Setup Checklist
+
+Use this to get a new agent to production quality:
+
+- Connect the right data sources and scope down to relevant tables only
+- Write a detailed **Overview** — explain the business domain, data conventions, and any ambiguities
+- Fill in **Table Configuration** for every table, especially Granularity and Gotchas
+- Upload a **Knowledge Base** with data dictionaries and reference documents
+- Define **Master Ruleset** rules for business-critical terminology and logic
+- Add **Verified Queries** for your 5–10 most frequently asked questions
+- Set **User Access** to the right people
+- Enable **Self-Improvement** once you are satisfied with baseline answer quality

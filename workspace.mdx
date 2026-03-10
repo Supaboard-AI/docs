@@ -1,0 +1,285 @@
+---
+title: "Workspaces"
+---
+
+A **Workspace** is your organisation's private environment inside Supaboard. Every resource you create — dashboards, data sources, agents, team members — belongs to a single workspace. You can be a member of multiple workspaces and switch between them at any time.
+
+## 1. Creating a Workspace
+
+You can create as many workspaces as you need — for example, one per product, client, or environment.
+
+### How to create one
+
+1. Open **Settings → Workspace** in the sidebar.
+2. Click **Add New Workspace**.
+3. Fill in the required fields:
+
+| Field      | Details                                                            |
+| ---------- | ------------------------------------------------------------------ |
+| **Name**   | Human-readable label for the workspace                             |
+| **Region** | Where your data is stored. Choose the region closest to your team. |
+
+### Available regions
+
+| Region ID      | Location                |
+| -------------- | ----------------------- |
+| `ap-south-1`   | Asia Pacific (India)    |
+| `eu-central-1` | Europe (Frankfurt)      |
+| `us-central-1` | United States (Central) |
+
+> **Important:** Region cannot be changed after the workspace is created. Choose carefully.
+
+Your email domain is automatically used to pre-fill the workspace domain. You become the **Owner** of any workspace you create.
+
+---
+
+## 2. Configuring Your Workspace
+
+Navigate to **Settings → Workspace** to edit your workspace profile. Changes are saved explicitly — click **Save Changes** when done.
+
+### Permissions required
+
+Only users with **Admin** or **Owner** role can edit workspace settings.
+
+---
+
+## 3. Inviting Team Members
+
+Navigate to **Settings → Team Members** and click **Invite Members**.
+
+### What you can configure per invite
+
+You can invite multiple people in a single batch. For each invitee, set:
+
+#### Role
+
+Controls what actions they can take across the workspace (see [Roles & Permissions](#5-roles--permissions)).
+
+- Viewer
+- Editor
+- Admin
+
+#### Feature access
+
+Restrict which Supaboard features they can use:
+
+| Feature key     | What it unlocks           |
+| --------------- | ------------------------- |
+| `dashboard`     | Build and view dashboards |
+| `stella`        | Use Ask Stella (AI chat)  |
+| `query_builder` | Use the query builder     |
+| `data_view`     | Access data sources       |
+
+Leave set to **All features** to give unrestricted feature access within their role.
+
+#### Resource access
+
+Optionally limit which data source connections the user can query. Set to **All resources** (default) or select specific ones.
+
+### Validation rules
+
+- Work email addresses only — personal domains (Gmail, Hotmail, Yahoo, etc.) are blocked.
+- Duplicate emails in a batch are flagged before sending.
+- Users who are already workspace members are detected and skipped.
+
+Once sent, each invitee receives a link. You can **copy the invite link** or **resend it** from the team member table while their status is _Invited_.
+
+---
+
+## 4. Managing Team Members
+
+The team members table (**Settings → Team Members**) lists everyone in the workspace with the following columns:
+
+| Column              | Description                               |
+| ------------------- | ----------------------------------------- |
+| **Name / Email**    | Avatar, display name, and email address   |
+| **Role**            | Current workspace role                    |
+| **Resource Access** | Number of data sources the user can query |
+| **Feature Access**  | Number of features enabled                |
+| **Joined**          | Date they joined the workspace            |
+| **Actions**         | Context menu of available actions         |
+
+### Filtering & sorting
+
+- Search by name or email.
+- Sort by username or role (ascending / descending).
+- Members are grouped by status: Active, Invited, Deactivated.
+
+### Available actions per member
+
+| Action                 | Who can perform it | Notes                                       |
+| ---------------------- | ------------------ | ------------------------------------------- |
+| **Copy invite link**   | Owner / Admin      | Available while status is _Invited_         |
+| **Resend invite**      | Owner / Admin      | Sends a fresh email to the invitee          |
+| **Transfer ownership** | Owner only         | Target must hold the Admin role             |
+| **Remove member**      | Owner only         | Cannot remove yourself or the current owner |
+
+### Transferring ownership
+
+Ownership can be handed to any current **Admin**. A confirmation is required. After transfer, the previous owner is downgraded to Admin.
+
+### Removing a member
+
+Removed members lose all access immediately. Their contributions (dashboards, queries) remain. You cannot remove the workspace owner or yourself.
+
+---
+
+## 5. Roles & Permissions
+
+Supaboard uses a four-tier role hierarchy. Higher roles include all permissions of lower roles.
+
+| Role       | Read | Create / Edit | Delete | Manage members | Workspace settings     |
+| ---------- | :--: | :-----------: | :----: | :------------: | :--------------------: |
+| **Viewer** | ✓    | —             | —      | —              | —                      |
+| **Editor** | ✓    | ✓             | —      | —              | —                      |
+| **Admin**  | ✓    | ✓             | ✓      | ✓              | ✓                      |
+| **Owner**  | ✓    | ✓             | ✓      | ✓              | ✓ + billing & deletion |
+
+### Role assignment rules
+
+- Only the **Owner** can change member roles.
+- You cannot change your own role.
+- You cannot change the Owner's role.
+
+---
+
+## 6. Feature Access
+
+Feature access is a per-user toggle that sits _on top of_ the role system. Even an Editor can be blocked from specific features.
+
+| Feature           | What it controls                              |
+| ----------------- | --------------------------------------------- |
+| **Dashboard**     | Creating and viewing dashboards               |
+| **Stella**        | AI chat and natural-language queries          |
+| **Query Builder** | Building and running custom queries           |
+| **Data View**     | Browsing and managing data source connections |
+
+> Only the **Owner** can modify a user's feature access.
+
+Set to **All features** (default) to grant full feature access. Restrict individual features when, for example, you want a user to view dashboards but not chat with Stella or browse raw data.
+
+---
+
+## 7. Resource Access
+
+Resource access limits which **data source connections** a user is allowed to query. This is independent of their role.
+
+- **All resources** (default) — the user can query any connected data source in the workspace.
+- **Specific resources** — the user can only query the data sources explicitly listed.
+
+This is useful when you have sensitive databases (e.g. production financials) that should only be accessible to a subset of the team, even if those users hold an Admin role.
+
+> Only the **Owner** can modify a user's resource access.
+
+---
+
+## 8. Workspace Invites
+
+When another workspace owner invites you, the invitation appears under **Settings → Workspace Invites**.
+
+### What you'll see
+
+- The name of the workspace you've been invited to.
+- An **Accept** button to join.
+
+Accepting the invite activates your membership and switches your active workspace to the one you just joined.
+
+---
+
+## 9. Usage Analytics
+
+**Settings → Usage** gives workspace admins a live view of how the team is using Supaboard.
+
+### Top-level KPIs
+
+| Metric                    | What it counts                            |
+| ------------------------- | ----------------------------------------- |
+| **Dashboards created**    | Total dashboards created in the workspace |
+| **Prompts used**          | Total AI (Stella) queries sent            |
+| **Queries executed**      | Total data queries run                    |
+| **Data sources accessed** | Distinct data sources queried             |
+
+### Filters
+
+- **Date range** — presets: 1 day, 7 days, 30 days, monthly, 1 year; or pick a custom range.
+- **User** — view usage for all members or drill into a specific person.
+
+### Charts
+
+- **Prompt usage over time** — line chart showing daily Stella query volume.
+- **Prompt usage heatmap** — a heat map broken down by day of week and hour of day, showing when your team queries most.
+
+### Leaderboard
+
+A ranked table of members by prompt activity:
+
+| Column       | Description             |
+| ------------ | ----------------------- |
+| Rank         | Ordered by prompt count |
+| User         | Avatar and name         |
+| Prompts      | Total AI queries sent   |
+| Dashboards   | Dashboards created      |
+| Data Sources | Data sources accessed   |
+
+Expand any row to view that user's full prompt history. You can also **export prompt history as CSV** for deeper analysis.
+
+---
+
+## 10. Plans & Billing
+
+**Settings → Plan & Billing** manages your workspace subscription.
+
+Your current plan card shows: plan name, price, days remaining, a progress bar, and next renewal date. To know more about plans: [Click here](https://supaboard.ai/pricing)
+
+### Billing management
+
+From the **Plan & Billing** page you can:
+
+- **View billing email and legal organisation name** — the details used on invoices.
+- **See next payment amount and date.**
+- **Update payment method** — change the card on file (last 4 digits shown).
+- **Manage billing address** — update the legal address used on invoices.
+- **View and download invoices** — full invoice history with PDF download per invoice.
+- **Cancel subscription** — triggers a confirmation modal with cancellation date shown. Access continues until the end of the billing period.
+- **Upgrade** — jump directly to plan selection and generate a payment link.
+
+> Billing is managed at the workspace level, not the user level. Only the **Owner** can access billing settings.
+
+---
+
+## 11. Switching Workspaces
+
+If you belong to multiple workspaces, switch between them directly from the sidebar. Click your current workspace name to open the workspace switcher, then select any workspace you're a member of.
+
+The switch is instant — all data, dashboards, agents, and settings shown in the UI update to reflect the selected workspace.
+
+---
+
+## Quick reference: Settings navigation
+
+| Path                             | What you manage                                             |
+| -------------------------------- | ----------------------------------------------------------- |
+| **Settings → Workspace**         | Workspace profile, name, logo, colour, region               |
+| **Settings → Team Members**      | Invite, manage, and remove members; assign roles and access |
+| **Settings → Workspace Invites** | Accept pending invitations from other workspaces            |
+| **Settings → Usage**             | Monitor AI and query usage across the team                  |
+| **Settings → Plan & Billing**    | Subscription, invoices, payment method, billing address     |
+| **Settings → Connections**       | Data source connections (see Data Sources docs)             |
+| **Settings → Mini-Board**        | Embedded board configuration (see Mini-Board docs)          |
+
+---
+
+## Permissions at a glance
+
+| Action                  | Viewer | Editor | Admin | Owner |
+| ----------------------- | :----: | :----: | :---: | :---: |
+| View workspace settings | ✓      | ✓      | ✓     | ✓     |
+| Edit workspace settings | —      | —      | ✓     | ✓     |
+| Invite team members     | —      | —      | ✓     | ✓     |
+| Change member roles     | —      | —      | —     | ✓     |
+| Change feature access   | —      | —      | —     | ✓     |
+| Change resource access  | —      | —      | —     | ✓     |
+| Remove members          | —      | —      | —     | ✓     |
+| Transfer ownership      | —      | —      | —     | ✓     |
+| Manage billing          | —      | —      | —     | ✓     |
+| View usage analytics    | —      | —      | ✓     | ✓     |
