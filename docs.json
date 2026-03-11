@@ -13,7 +13,7 @@
       "anchors": [
         {
           "anchor": "Blog",
-          "icon": "book-bookmark",
+          "icon": "/icons/report.svg",
           "href": "https://supaboard.ai/blogs"
         }
       ]
@@ -21,16 +21,16 @@
     "tabs": [
       {
         "tab": "Docs",
-        "icon": "life-ring",
+        "icon": "/icons/help.svg",
         "groups": [
           {
             "group": "Getting started",
-            "icon": "flag-checkered",
+            "icon": "/icons/rocket.svg",
             "pages": ["index", "quickstart", "development"]
           },
           {
             "group": "Features",
-            "icon": "flag-swallowtail",
+            "icon": "/icons/star.svg",
             "pages": [
               "workspace",
               "ask-agents",
@@ -47,9 +47,11 @@
       },
       {
         "tab": "Guides",
+        "icon": "/icons/bulb.svg",
         "groups": [
           {
             "group": "Data Sources",
+            "icon": "/icons/connections.svg",
             "pages": [
               "big-query",
               "clickhouse",
@@ -66,6 +68,7 @@
           },
           {
             "group": "Visualisation",
+            "icon": "/icons/chart.svg",
             "pages": [
               "table-widget",
               "chart-widget",
@@ -76,6 +79,7 @@
           },
           {
             "group": "Best Practices",
+            "icon": "/icons/checklist.svg",
             "pages": [
               "interacting-with-ai",
               "writing-sql-queries"
