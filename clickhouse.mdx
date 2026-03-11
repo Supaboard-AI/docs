@@ -1,13 +1,12 @@
 ---
 title: "Clickhouse"
-icon: "/icons/data.svg"
+mode: "wide"
 ---
 
 Connect Supaboard to a ClickHouse database for direct querying, schema discovery, and AI-powered analysis.
 
----
 
-## Before you connect
+# Before you connect
 
 **Network access** — Supaboard connects from a fixed set of egress IPs. Add them to your ClickHouse server or ClickHouse Cloud service's IP allow-list before attempting a connection. The current IP list is shown inside the connector form under **Whitelist IPs**.
 
@@ -16,9 +15,8 @@ Connect Supaboard to a ClickHouse database for direct querying, schema discovery
 
 See [Recommended database user permissions](#recommended-database-user-permissions) for the exact SQL.
 
----
 
-## Connection fields
+# Connection fields
 
 | Field | Default | Required | Description |
 |---|---|---|---|
@@ -31,11 +29,10 @@ See [Recommended database user permissions](#recommended-database-user-permissio
 
 > **Port note** — Supaboard connects over the native TCP protocol on port `9000`. This is different from the HTTP interface (port `8123`) and the HTTPS interface (port `8443`). ClickHouse Cloud uses port `9440` for secure native TCP — check your Cloud service details if `9000` does not connect.
 
----
 
-## Finding your connection details
+# Finding your connection details
 
-### ClickHouse Cloud
+## ClickHouse Cloud
 
 1. Open [clickhouse.cloud](https://clickhouse.cloud) and select your service.
 2. On the service detail page, go to **Connect**.
@@ -48,7 +45,7 @@ See [Recommended database user permissions](#recommended-database-user-permissio
 
 **Documentation:** [ClickHouse Cloud connection details](https://clickhouse.com/docs/en/cloud/get-started/query-endpoints) · [IP access list](https://clickhouse.com/docs/en/cloud/security/setting-ip-filters)
 
-### Self-hosted ClickHouse
+## Self-hosted ClickHouse
 
 1. Your **Host** is the server's IP address or hostname.
 2. The default native TCP **Port** is `9000`.
@@ -57,9 +54,8 @@ See [Recommended database user permissions](#recommended-database-user-permissio
 
 **Documentation:** [ClickHouse server configuration](https://clickhouse.com/docs/en/operations/server-configuration-parameters/settings) · [Access control and account management](https://clickhouse.com/docs/en/operations/access-rights)
 
----
 
-## Recommended database user permissions
+# Recommended database user permissions
 
 ```sql
 -- Create a read-only user
@@ -75,9 +71,8 @@ GRANT SHOW TABLES ON your_database.* TO supaboard;
 
 Replace `your_database` with the target database name. For multiple databases, repeat the `GRANT SELECT` line for each one.
 
----
 
-## Troubleshooting
+# Troubleshooting
 
 | Error | Likely cause | Fix |
 |---|---|---|

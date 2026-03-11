@@ -1,32 +1,28 @@
 ---
 title: "Dashboard Embeds"
 mode: "wide"
-icon: "/icons/embed.svg"
 ---
 
 **Dashboard Embeds** let you share any dashboard with an external audience by generating a shareable URL or an iframe snippet. The embedded dashboard is read-only — viewers can interact with charts and apply filters, but cannot edit anything.
 
 > Embeds are for sharing a *specific dashboard*. If you want to deliver a fully branded, multi-feature analytics experience to your own users under your own domain, see [White Label](./WhiteLabel.mdx) instead.
 
----
 
-## Opening the Embed Panel
+# Opening the Embed Panel
 
 Open a dashboard and click the **Export** button in the top-right toolbar. The export panel slides open on the right side. Select the **Embeds** tab.
 
 From here you can create new embed tokens and manage existing ones for this dashboard group.
 
----
 
-## Creating an Embed
+# Creating an Embed
 
 Click **Add New Embedding** to open the creation form. Configure the options below, then click **Create** to generate the embed token and URL.
 
 The embed URL is displayed immediately after creation. Copy it to your clipboard or embed it as an iframe in your product.
 
----
 
-## Expiration
+# Expiration
 
 Every embed has an **expiry date** — the date and time after which the embed token becomes invalid and the URL stops working.
 
@@ -40,9 +36,8 @@ Once an embed token expires, anyone with the link will see an error. Create a ne
 
 > Set a longer expiry for permanent, public-facing embeds. Use short expiry windows for temporary previews or client reviews.
 
----
 
-## Domain Restriction
+# Domain Restriction
 
 By default, an embed is accessible to anyone with the link. You can restrict it to specific domains so it only loads when embedded on your approved sites.
 
@@ -55,29 +50,28 @@ Add one or more domains to the **Domains** field (e.g. `yourcompany.com`, `app.y
 
 Domains are displayed with their favicon icon in the embed list for easy identification.
 
----
 
-## Filter Configuration
+# Filter Configuration
 
 If your dashboard has [Filter widgets](./Dashboards.mdx#filter), you can control how each one behaves in the embed — whether viewers see it, whether it affects the data, and what value it starts with.
 
-### Per-filter options
+## Per-filter options
 
 For each filter widget on the dashboard, three settings are available:
 
-#### Visibility
+### Visibility
 | State | What happens |
 |---|---|
 | **Visible** (default) | The filter is shown to viewers and they can change it |
 | **Hidden** | The filter is not shown in the UI, but it **still filters the data** — viewers see pre-filtered results without knowing a filter is active |
 
-#### Enabled / Disabled
+### Enabled / Disabled
 | State | What happens |
 |---|---|
 | **Enabled** (default) | The filter actively affects the query results |
 | **Disabled** | The filter is completely inactive — it does not filter the data at all, regardless of any preset value |
 
-#### Preset value
+### Preset value
 Set a default value that the filter starts with when the embed loads. Viewers can change it (if the filter is visible and enabled). Preset values are type-aware:
 
 | Filter type | Preset input |
@@ -88,7 +82,7 @@ Set a default value that the filter starts with when the embed loads. Viewers ca
 | **Numeric / Integer** | Number input |
 | **Boolean** | Toggle |
 
-### Common filter patterns
+## Common filter patterns
 
 **Lock viewers to a specific customer's data:**
 Set the relevant filter to *Hidden* + *Enabled* + a preset value equal to that customer's ID. Viewers see only their data and cannot change or see the filter.
@@ -99,15 +93,13 @@ Set the filter to *Visible* + *Enabled* + a preset value. Viewers start with a u
 **Turn off a filter entirely for this embed:**
 Set the filter to *Disabled*. The filter has no effect — useful when an embed is scoped to data where the filter is irrelevant.
 
----
 
-## Hide Dashboard Title
+# Hide Dashboard Title
 
 Toggle **Hide Title** to remove the dashboard name from the top of the embedded view. Useful when you are embedding the dashboard inside your own product that already provides the context.
 
----
 
-## Interactive Mode (Ask Stella in Embeds)
+# Interactive Mode (Ask Stella in Embeds)
 
 > **Pro feature.** Interactive Mode requires a plan that includes the `interactive_mode` capability. An upgrade prompt is shown if it is not available on your current plan.
 
@@ -120,9 +112,8 @@ When enabled, a Stella AI chat interface is available to viewers inside the embe
 
 If no agent is selected, the default workspace agent is used.
 
----
 
-## Managing Existing Embeds
+# Managing Existing Embeds
 
 All existing embed tokens for the current dashboard group are listed in the Embeds tab.
 
@@ -133,13 +124,12 @@ Each embed shows:
 - **Copy button** — copy the embed URL to the clipboard
 - **Delete button** — permanently revoke the embed token
 
-### Revoking an embed
+## Revoking an embed
 
 Click **Delete** on any embed to revoke it immediately. The token becomes invalid and the URL stops working for anyone who has it. This cannot be undone — create a new embed token if access needs to be restored.
 
----
 
-## What Viewers See
+# What Viewers See
 
 Embedded dashboards open in a clean, read-only view:
 
@@ -151,9 +141,8 @@ Embedded dashboards open in a clean, read-only view:
 - No edit controls, widget menus, or toolbar options are shown
 - Viewers do not need a Supaboard account to access an unrestricted embed
 
----
 
-## Permissions
+# Permissions
 
 | Action | Minimum role |
 |---|---|

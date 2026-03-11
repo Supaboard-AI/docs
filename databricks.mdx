@@ -1,13 +1,12 @@
 ---
 title: "Databricks"
-icon: "/icons/data.svg"
+mode: "wide"
 ---
 
 Connect Supaboard to a Databricks workspace using a personal access token and cluster HTTP path.
 
----
 
-## Before you connect
+# Before you connect
 
 **Network access** — Databricks workspaces are accessible over HTTPS (port 443). No special firewall rules are typically needed for cloud-hosted workspaces. If your workspace is behind a private network or VPN, ensure Supaboard's egress IPs can reach it. The current IP list is shown inside the connector form under **Whitelist IPs**.
 
@@ -17,9 +16,8 @@ Connect Supaboard to a Databricks workspace using a personal access token and cl
 - `CAN ATTACH TO` permission on the cluster
 - `SELECT` access on the target catalogs and schemas
 
----
 
-## Connection fields
+# Connection fields
 
 | Field | Default | Required | Description |
 |---|---|---|---|
@@ -31,11 +29,10 @@ Connect Supaboard to a Databricks workspace using a personal access token and cl
 | **Catalog** | `default` | No | Unity Catalog name; leave blank for the default catalog |
 | **Schema** | `default` | No | Default schema for queries |
 
----
 
-## Finding your connection details
+# Finding your connection details
 
-### Databricks Workspace
+## Databricks Workspace
 
 **Personal access token (Token):**
 
@@ -80,9 +77,8 @@ The HTTP Path identifies a specific cluster or SQL warehouse.
 
 **Documentation:** [JDBC/ODBC connection details](https://docs.databricks.com/en/integrations/jdbc-odbc-bi.html) · [SQL warehouses overview](https://docs.databricks.com/en/compute/sql-warehouse/index.html)
 
----
 
-## Recommended database user permissions
+# Recommended database user permissions
 
 In Unity Catalog, grant the token owner the following privileges:
 
@@ -102,9 +98,8 @@ GRANT SELECT ON SCHEMA your_catalog.your_schema TO `user@example.com`;
 
 For legacy (non-Unity Catalog) workspaces, ensure the user has the `data_access` group membership or equivalent.
 
----
 
-## Troubleshooting
+# Troubleshooting
 
 | Error | Likely cause | Fix |
 |---|---|---|

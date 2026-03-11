@@ -1,13 +1,12 @@
 ---
 title: 'Supabase'
-icon: "/icons/data.svg"
+mode: "wide"
 ---
 
 Connect Supaboard to a Supabase project's underlying PostgreSQL database for direct querying, schema discovery, and AI-powered analysis.
 
----
 
-## Before you connect
+# Before you connect
 
 **Network access** — Supabase projects are accessible over the internet. You do not need to whitelist Supaboard IPs for the direct connection, but if your project has **network restrictions** enabled (under Project Settings → Network), add Supaboard's egress IPs there. The current IP list is shown inside the connector form under **Whitelist IPs**.
 
@@ -15,9 +14,8 @@ Connect Supaboard to a Supabase project's underlying PostgreSQL database for dir
 
 **Database user permissions** — Use the `postgres` superuser or create a dedicated read-only user. See [Recommended database user permissions](#recommended-database-user-permissions).
 
----
 
-## Connection fields
+# Connection fields
 
 | Field | Default | Required | Description |
 |---|---|---|---|
@@ -30,11 +28,10 @@ Connect Supaboard to a Supabase project's underlying PostgreSQL database for dir
 
 > **SSL** — Supaboard always uses SSL when connecting to Supabase. No toggle is needed.
 
----
 
-## Finding your connection details
+# Finding your connection details
 
-### Supabase Dashboard
+## Supabase Dashboard
 
 1. Open [supabase.com/dashboard](https://supabase.com/dashboard) and select your project.
 2. Go to **Project Settings → Database**.
@@ -50,9 +47,8 @@ Connect Supaboard to a Supabase project's underlying PostgreSQL database for dir
 
 **Documentation:** [Connecting to your database](https://supabase.com/docs/guides/database/connecting-to-postgres) · [Connection pooling](https://supabase.com/docs/guides/database/connection-pooling)
 
----
 
-## Recommended database user permissions
+# Recommended database user permissions
 
 The `postgres` user has full access and works out of the box, but for security it is best practice to create a dedicated read-only user:
 
@@ -76,9 +72,8 @@ ALTER DEFAULT PRIVILEGES IN SCHEMA public
 
 If you use multiple schemas (e.g. `auth`, `storage`), repeat the `GRANT USAGE` and `GRANT SELECT` steps for each schema you want to expose to Supaboard.
 
----
 
-## Troubleshooting
+# Troubleshooting
 
 | Error | Likely cause | Fix |
 |---|---|---|

@@ -1,13 +1,12 @@
 ---
 title: "MySQL"
-icon: "/icons/data.svg"
+mode: "wide"
 ---
 
 Connect Supaboard to a MySQL database for direct querying, schema discovery, and AI-powered analysis.
 
----
 
-## Before you connect
+# Before you connect
 
 **Network access** — Supaboard connects from a fixed set of egress IPs. Add them to your database firewall allow-list before attempting a connection. The current IP list is shown inside the connector form under **Whitelist IPs**.
 
@@ -17,9 +16,8 @@ Connect Supaboard to a MySQL database for direct querying, schema discovery, and
 
 See [Recommended database user permissions](#recommended-database-user-permissions) for the exact SQL.
 
----
 
-## Connection fields
+# Connection fields
 
 | Field | Default | Required | Description |
 |---|---|---|---|
@@ -33,9 +31,8 @@ See [Recommended database user permissions](#recommended-database-user-permissio
 
 > **Boolean columns** — MySQL's `TINYINT(1)` type is interpreted as a boolean by many JDBC drivers. If your queries return `true`/`false` instead of `0`/`1` unexpectedly, add `tinyInt1isBit=false` to **Additional JDBC Parameters**.
 
----
 
-## SSH Tunnel fields
+# SSH Tunnel fields
 
 Shown when the **SSH Tunnel** toggle is enabled.
 
@@ -49,11 +46,10 @@ Shown when the **SSH Tunnel** toggle is enabled.
 | **SSH Passphrase** | — | No | Passphrase for an encrypted private key |
 | **SSH Password** | — | If Password | Password for SSH password authentication |
 
----
 
-## Finding your connection details
+# Finding your connection details
 
-### Amazon RDS for MySQL
+## Amazon RDS for MySQL
 
 1. Open the [RDS Console](https://console.aws.amazon.com/rds/) and select your DB instance.
 2. Under **Connectivity & security**, copy the **Endpoint** — this is your **Host**.
@@ -62,7 +58,7 @@ Shown when the **SSH Tunnel** toggle is enabled.
 
 **Documentation:** [Connecting to a MySQL DB instance](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_ConnectToInstance.html) · [RDS for MySQL overview](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_MySQL.html)
 
-### Amazon Aurora (MySQL-compatible)
+## Amazon Aurora (MySQL-compatible)
 
 1. In the RDS Console, open your Aurora cluster.
 2. Use the **Writer endpoint** as your **Host** for read/write access; use a **Reader endpoint** for read-only.
@@ -71,7 +67,7 @@ Shown when the **SSH Tunnel** toggle is enabled.
 
 **Documentation:** [Connecting to an Aurora MySQL cluster](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/Aurora.Connecting.html) · [Aurora MySQL overview](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/Aurora.AuroraMySQL.html)
 
-### Google Cloud SQL for MySQL
+## Google Cloud SQL for MySQL
 
 1. Open the [Cloud SQL Console](https://console.cloud.google.com/sql) and select your instance.
 2. Under **Connect to this instance**, copy the **Public IP address** as your **Host**.
@@ -80,7 +76,7 @@ Shown when the **SSH Tunnel** toggle is enabled.
 
 **Documentation:** [Cloud SQL for MySQL overview](https://cloud.google.com/sql/docs/mysql) · [Connecting overview](https://cloud.google.com/sql/docs/mysql/connect-overview) · [Authorizing with IP addresses](https://cloud.google.com/sql/docs/mysql/authorize-networks)
 
-### Azure Database for MySQL
+## Azure Database for MySQL
 
 1. Open your server in the [Azure Portal](https://portal.azure.com).
 2. On the **Overview** page, copy **Server name** — this is your **Host** (format: `server.mysql.database.azure.com`).
@@ -89,17 +85,15 @@ Shown when the **SSH Tunnel** toggle is enabled.
 
 **Documentation:** [Azure Database for MySQL documentation](https://learn.microsoft.com/en-us/azure/mysql/) · [Firewall rules](https://learn.microsoft.com/en-us/azure/mysql/flexible-server/concepts-firewall-rules)
 
----
 
-## SSL
+# SSL
 
 Enable the **SSL** toggle when your database requires encrypted connections (recommended for all cloud-hosted instances).
 
 - **SSL Certificate** — paste the server's CA certificate in PEM format if your database uses a self-signed or private CA certificate. Leave blank for certificates signed by a public CA.
 
----
 
-## SSH Tunnel
+# SSH Tunnel
 
 An SSH tunnel routes the database connection through a bastion host, keeping your database off the public internet entirely.
 
@@ -114,9 +108,8 @@ An SSH tunnel routes the database connection through a bastion host, keeping you
 - [ ] The SSH user has permission to forward connections (no `no-port-forwarding` in `authorized_keys`)
 - [ ] If using a private key, it is in PEM format (OpenSSH format may need conversion with `ssh-keygen -p -m PEM`)
 
----
 
-## Recommended database user permissions
+# Recommended database user permissions
 
 ```sql
 -- Create a dedicated read-only user (accessible from any host)
@@ -133,9 +126,8 @@ FLUSH PRIVILEGES;
 
 Replace `your_database` with the name of your database. To expose multiple databases, repeat the `GRANT SELECT` line for each one.
 
----
 
-## Troubleshooting
+# Troubleshooting
 
 | Error | Likely cause | Fix |
 |---|---|---|

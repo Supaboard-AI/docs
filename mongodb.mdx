@@ -1,13 +1,12 @@
 ---
 title: "MongoDB"
-icon: "/icons/data.svg"
+mode: "wide"
 ---
 
 Connect Supaboard to a MongoDB database using a standard connection string (URI).
 
----
 
-## Before you connect
+# Before you connect
 
 **Network access** — Supaboard connects from a fixed set of egress IPs. For MongoDB Atlas, add them to your cluster's IP access list under **Security → Network Access**. The current IP list is shown inside the connector form under **Whitelist IPs**.
 
@@ -16,18 +15,16 @@ Connect Supaboard to a MongoDB database using a standard connection string (URI)
 
 See [Recommended database user permissions](#recommended-database-user-permissions) for instructions.
 
----
 
-## Connection fields
+# Connection fields
 
 | Field | Default | Required | Description |
 |---|---|---|---|
 | **Display Name** | — | Yes | Label shown in the Supaboard UI |
 | **Connection String** | — | Yes | Full MongoDB URI (see format below) |
 
----
 
-## Connection string format
+# Connection string format
 
 Supaboard accepts a full MongoDB URI. The standard format is:
 
@@ -49,11 +46,10 @@ mongodb://username:password@host:27017/database?authSource=admin
 | `database` | Optional — the specific database to connect to; if omitted, Supaboard auto-discovers |
 | `authSource=admin` | The authentication database — usually `admin` for Atlas |
 
----
 
-## Finding your connection details
+# Finding your connection details
 
-### MongoDB Atlas
+## MongoDB Atlas
 
 1. Open [cloud.mongodb.com](https://cloud.mongodb.com) and select your project.
 2. In the **Clusters** view, click **Connect** on your cluster.
@@ -81,9 +77,8 @@ Atlas requires you to explicitly allow external IPs before any connection can su
 
 **Documentation:** [Configure IP access list entries](https://www.mongodb.com/docs/atlas/security/ip-access-list/)
 
----
 
-## Recommended database user permissions
+# Recommended database user permissions
 
 In MongoDB Atlas:
 
@@ -106,9 +101,8 @@ db.createUser({
 })
 ```
 
----
 
-## Troubleshooting
+# Troubleshooting
 
 | Error | Likely cause | Fix |
 |---|---|---|

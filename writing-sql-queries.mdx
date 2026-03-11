@@ -1,5 +1,298 @@
 ---
 title: 'Writing SQL Queries'
-icon: "/icons/query.svg"
+description: "These practices help ensure your queries produce **accurate, reliable, and easy-to-interpret results**. Following them prevents common mistakes like incorrect metrics, biased results, or misleading trends."
+mode: "wide"
 ---
 
+# Best Practices to Follow
+
+## Aggregate First, Then Filter
+
+Always perform **grouping and aggregation first**, then apply filters on those aggregated values.
+
+✔ Correct approach
+
+```sql
+SELECT customer_id, SUM(revenue) AS total_revenue
+FROM orders
+GROUP BY customer_id
+HAVING SUM(revenue) > 1000;
+```
+
+❌ Incorrect approach
+
+```sql
+WHERE revenue > 1000
+```
+
+Filtering raw rows can remove valid data and distort the results.
+
+## Use “Ratio of Sums” for Rates
+
+For metrics like **conversion rate, ROI, or engagement rate**, always divide the **total numerator by the total denominator**.
+
+✔ Correct
+
+```
+conversion_rate = total_conversions / total_sessions
+```
+
+❌ Avoid
+
+```
+average(daily_conversion_rate)
+```
+
+Averaging ratios often produces misleading results.
+
+## Keep Valid Zeros in Your Data
+
+Zero values can be meaningful.
+Do **not remove rows simply because a value is zero**.
+
+Example:
+
+If a day had **0 purchases**, that day still belongs in your analysis.
+
+Removing it can create **survivorship bias** and falsely inflate performance.
+
+## Keep Time Windows Consistent
+
+Each metric should use **one clear timeframe and attribution rule**.
+
+Avoid mixing:
+
+* different date ranges
+* different attribution windows
+* multiple time anchors
+
+Example:
+
+✔ Correct
+
+```
+Revenue from Jan 1 – Jan 31
+```
+
+❌ Incorrect
+
+```
+Revenue from Jan + conversions from Feb
+```
+
+## Preserve the Correct Data Grain
+
+Make sure the result returns **one row per entity or grouping level**.
+
+Examples of correct grain:
+
+* One row per **date**
+* One row per **customer**
+* One row per **campaign**
+
+Be careful with joins that **multiply rows** (called fan-out joins).
+
+## Aggregate Before Joining
+
+When possible:
+
+1. Aggregate your data first
+2. Then join it with other tables
+
+This prevents joins from **inflating metrics**.
+
+✔ Preferred pattern
+
+```
+aggregate → join → final result
+```
+
+## Use HAVING for Aggregated Filters
+
+Use `HAVING` when filtering aggregated values.
+
+Example:
+
+```sql
+HAVING SUM(revenue) > 5000
+```
+
+Also protect divisions from errors.
+
+Use safe division methods such as:
+
+* `NULLIF`
+* `SAFE_DIVIDE`
+* similar database-specific functions
+
+Example:
+
+```sql
+SUM(conversions) / NULLIF(SUM(visits),0)
+```
+
+## Include Human-Readable Labels
+
+IDs alone are difficult to interpret.
+
+Whenever possible, include **readable names alongside IDs**.
+
+Example:
+
+✔ Better result
+
+| campaign_id | campaign_name | revenue |
+| ----------- | ------------- | ------- |
+| 101         | Spring Sale   | 25000   |
+
+❌ Hard to read
+
+| campaign_id | revenue |
+| ----------- | ------- |
+| 101         | 25000   |
+
+## Always Make Time and Currency Clear
+
+When working with financial or time-based metrics, always specify:
+
+* date range
+* currency
+
+Example:
+
+```
+Revenue between Jan 1–Jan 31 (USD)
+```
+
+Clear context prevents misinterpretation.
+
+## Self-Check Before Submitting
+
+Before finalizing your query, quickly verify:
+
+### Completeness
+
+* Correct scope
+* Correct date range
+* Correct units and filters
+
+### Bias
+
+* No survivorship bias
+* No mixed time windows
+
+### Safety
+
+* No exposure of **PII or sensitive data**
+
+# ❌ Things to Avoid
+
+## Filtering Aggregates in WHERE
+
+Use `HAVING` instead of `WHERE` for aggregated values.
+
+## Averaging Ratios
+
+Avoid computing metrics like:
+
+```
+average(daily_conversion_rate)
+```
+
+Instead compute:
+
+```
+total_conversions / total_sessions
+```
+
+## Survivorship Bias
+
+Do not remove valid rows simply because their values are zero.
+
+## Mixing Attribution or Time Windows
+
+A metric should use **one consistent definition**.
+
+## Joins That Duplicate Rows
+
+Joins that multiply rows can inflate metrics.
+
+Always verify that joins maintain the **correct grain**.
+
+## Unsafe Division
+
+Never divide without protecting against zero denominators.
+
+Use safe division methods.
+
+## Exposing Sensitive Data
+
+Avoid returning:
+
+* personal data
+* private identifiers
+* confidential information
+
+unless explicitly required and permitted.
+
+## Missing Time Filters
+
+Time-based questions should always include a **date range**.
+
+Example:
+
+```
+sales in the last 30 days
+```
+
+## IDs Without Names
+
+Include readable labels when possible.
+
+IDs alone make results harder to interpret.
+
+# Guardrails
+
+These rules ensure your query outputs are **trustworthy and safe**.
+
+### Completeness
+
+Confirm the query includes:
+
+* correct scope
+* date range
+* filters
+* measurement units
+
+### Bias Prevention
+
+Ensure that:
+
+* time windows are consistent
+* attribution rules are consistent
+* valid zero values are preserved
+
+### Data Safety
+
+Never expose:
+
+* personally identifiable information
+* sensitive internal data
+
+unless explicitly allowed.
+
+### One Clear Query
+
+Provide **one clear query** (or a structured set of CTEs) that answers the question.
+
+Avoid multiple partial queries or fragmented logic.
+
+# Final Principle
+
+Following these practices ensures your metrics are:
+
+* **consistent**
+* **comparable**
+* **trustworthy**
+
+Well-structured queries lead to **better insights and better decisions**.

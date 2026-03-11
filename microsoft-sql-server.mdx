@@ -1,13 +1,12 @@
 ---
 title: "Microsoft SQL Server"
-icon: "/icons/data.svg"
+mode: "wide"
 ---
 
 Connect Supaboard to a SQL Server instance — whether on Azure, AWS, GCP, or self-hosted — for direct querying, schema discovery, and AI-powered analysis.
 
----
 
-## Before you connect
+# Before you connect
 
 **Network access** — Supaboard connects from a fixed set of egress IPs. Add them to your SQL Server firewall allow-list before attempting a connection. The current IP list is shown inside the connector form under **Whitelist IPs**.
 
@@ -17,9 +16,8 @@ Connect Supaboard to a SQL Server instance — whether on Azure, AWS, GCP, or se
 
 See [Recommended database user permissions](#recommended-database-user-permissions) for the exact SQL.
 
----
 
-## Connection fields
+# Connection fields
 
 | Field | Default | Required | Description |
 |---|---|---|---|
@@ -34,9 +32,8 @@ See [Recommended database user permissions](#recommended-database-user-permissio
 
 > **Port note** — The standard on-premises SQL Server port is `1433`. Azure SQL Database and many managed SQL Server instances use `1433` as well. Supaboard's default shows `3342` — update it to `1433` for Azure SQL or most RDS/Cloud SQL instances.
 
----
 
-## SSH Tunnel fields
+# SSH Tunnel fields
 
 Shown when the **SSH Tunnel** toggle is enabled.
 
@@ -50,11 +47,10 @@ Shown when the **SSH Tunnel** toggle is enabled.
 | **SSH Passphrase** | — | No | Passphrase for an encrypted private key |
 | **SSH Password** | — | If Password | Password for SSH password authentication |
 
----
 
-## Finding your connection details
+# Finding your connection details
 
-### Azure SQL
+## Azure SQL
 
 1. Open your SQL server in the [Azure Portal](https://portal.azure.com).
 2. On the **Overview** page, copy **Server name** — this is your **Host** (format: `servername.database.windows.net`).
@@ -66,7 +62,7 @@ Your **Database** name appears on the **SQL databases** page under the server.
 
 **Documentation:** [Azure SQL Database documentation](https://learn.microsoft.com/en-us/azure/azure-sql/database/) · [Configure firewall rules](https://learn.microsoft.com/en-us/azure/azure-sql/database/firewall-configure)
 
-### Amazon RDS for SQL Server
+## Amazon RDS for SQL Server
 
 1. Open the [RDS Console](https://console.aws.amazon.com/rds/) and select your instance.
 2. Under **Connectivity & security**, copy the **Endpoint** — this is your **Host**.
@@ -75,7 +71,7 @@ Your **Database** name appears on the **SQL databases** page under the server.
 
 **Documentation:** [Connecting to a SQL Server DB instance](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_ConnectToMicrosoftSQLServerInstance.html) · [RDS for SQL Server overview](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_SQLServer.html)
 
-### Google Cloud SQL for SQL Server
+## Google Cloud SQL for SQL Server
 
 1. Open the [Cloud SQL Console](https://console.cloud.google.com/sql) and select your instance.
 2. Under **Connect to this instance**, copy the **Public IP address** — this is your **Host**.
@@ -84,17 +80,15 @@ Your **Database** name appears on the **SQL databases** page under the server.
 
 **Documentation:** [Cloud SQL for SQL Server overview](https://cloud.google.com/sql/docs/sqlserver) · [Authorizing with IP addresses](https://cloud.google.com/sql/docs/sqlserver/authorize-networks)
 
----
 
-## SSL
+# SSL
 
 Enable the **SSL** toggle when your database requires encrypted connections (recommended for Azure SQL and all cloud-hosted instances — Azure SQL enforces SSL by default).
 
 - **SSL Certificate** — paste the server's CA certificate in PEM format if your instance uses a self-signed or private CA. For Azure SQL and AWS RDS, the certificates are publicly trusted and no upload is needed.
 
----
 
-## SSH Tunnel
+# SSH Tunnel
 
 Use an SSH tunnel when your SQL Server instance is in a private network with no public IP.
 
@@ -109,9 +103,8 @@ Use an SSH tunnel when your SQL Server instance is in a private network with no 
 - [ ] The SSH user has permission to forward connections
 - [ ] If using a private key, it is in PEM format
 
----
 
-## Recommended database user permissions
+# Recommended database user permissions
 
 ```sql
 -- Create a SQL Server login
@@ -134,9 +127,8 @@ For multiple schemas, repeat the `GRANT SELECT ON SCHEMA` line for each schema y
 GRANT SELECT ON dbo.your_table TO supaboard;
 ```
 
----
 
-## Troubleshooting
+# Troubleshooting
 
 | Error | Likely cause | Fix |
 |---|---|---|

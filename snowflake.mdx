@@ -1,13 +1,12 @@
 ---
 title: 'Snowflake'
-icon: "/icons/data.svg"
+mode: "wide"
 ---
 
 Connect Supaboard to a Snowflake account for direct querying, schema discovery, and AI-powered analysis.
 
----
 
-## Before you connect
+# Before you connect
 
 **Network access** — Snowflake is cloud-hosted and generally accessible over the internet. No firewall changes are needed in most configurations. If your Snowflake account uses **network policies**, add Supaboard's egress IPs to an allowed policy. The current IP list is shown inside the connector form under **Whitelist IPs**.
 
@@ -19,9 +18,8 @@ Connect Supaboard to a Snowflake account for direct querying, schema discovery, 
 
 See [Recommended database user permissions](#recommended-database-user-permissions) for the exact SQL.
 
----
 
-## Connection fields
+# Connection fields
 
 | Field | Default | Required | Description |
 |---|---|---|---|
@@ -33,11 +31,10 @@ See [Recommended database user permissions](#recommended-database-user-permissio
 | **Schema** | — | No | Schema name; Supaboard auto-discovers if left blank |
 | **Warehouse** | `COMPUTE_WH` | No | Virtual warehouse used for queries |
 
----
 
-## Finding your connection details
+# Finding your connection details
 
-### Snowflake Console
+## Snowflake Console
 
 **Account identifier (Host)**
 
@@ -64,9 +61,8 @@ Virtual warehouses are listed under **Admin → Warehouses**. The default is typ
 
 **Documentation:** [Virtual warehouses overview](https://docs.snowflake.com/en/user-guide/warehouses-overview) · [Auto-suspend and auto-resume](https://docs.snowflake.com/en/user-guide/warehouses-considerations)
 
----
 
-## Password vs Personal Access Token
+# Password vs Personal Access Token
 
 Supaboard accepts either a **password** or a **personal access token (PAT)** in the **Password/PAT** field.
 
@@ -81,9 +77,8 @@ To create a PAT:
 
 **Documentation:** [Programmatic access tokens](https://docs.snowflake.com/en/user-guide/programmatic-access-tokens)
 
----
 
-## Recommended database user permissions
+# Recommended database user permissions
 
 ```sql
 -- Create a dedicated role and user
@@ -110,9 +105,8 @@ GRANT SELECT ON FUTURE TABLES IN DATABASE your_database TO ROLE supaboard_role;
 
 Replace `your_database` and `COMPUTE_WH` with your actual values.
 
----
 
-## Troubleshooting
+# Troubleshooting
 
 | Error | Likely cause | Fix |
 |---|---|---|

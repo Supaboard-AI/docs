@@ -1,12 +1,11 @@
 ---
 title: "Concepts"
 mode: "wide"
-icon: "/icons/code.svg"
 ---
 
 Supaboard connects your data, visualises it in dashboards, and lets you query it in plain English through AI agents.
 
-## How everything fits together
+# How everything fits together
 
 ```text
 Workspace
@@ -18,19 +17,18 @@ Workspace
 └── Tools          — external integrations agents can call
 ```
 
----
 
-## The 5 things you need to understand
+# The 5 things you need to understand
 
-### 1. Workspace
+## 1. Workspace
 
 Your organisation's private environment. Everything — data, dashboards, teammates, agents — lives inside it. You can belong to multiple workspaces and switch between them from the sidebar.
 
-### 2. Data Sources
+## 2. Data Sources
 
 Connections to your databases (PostgreSQL, BigQuery, Snowflake, MySQL, Sheets, and more). Widgets and Agents pull live data through these. Connect one before building anything else.
 
-### 3. Dashboards & Widgets
+## 3. Dashboards & Widgets
 
 A **Dashboard** is a drag-and-drop canvas of **Widgets**. Toggle between **Edit mode** (build) and **View mode** (consume). Widgets come in 9 types:
 
@@ -44,17 +42,16 @@ A **Dashboard** is a drag-and-drop canvas of **Widgets**. Toggle between **Edit 
 | **Image**  | Image by URL                                                |
 | **Embed**  | Any external URL in an iframe                               |
 
-### 4. Agents
+## 4. Agents
 
 An AI assistant scoped to your data. You configure _what databases it can see_, give it a _knowledge base_ and _verified queries_, and it learns to answer questions accurately over time. Agents power Ask Stella.
 
-### 5. Ask Stella
+## 5. Ask Stella
 
 A chat interface where you type a question in plain English — "What were our top 5 products last quarter?" — and Stella queries your data and answers. No SQL required.
 
----
 
-## Other things worth knowing
+# Other things worth knowing
 
 - **Dashboard Groups** are folders that organise related dashboards. Sharing is set at the group level.
 - **Roles** — Viewer → Editor → Admin → Owner. Admins can also restrict access per-feature or per-resource.
@@ -62,6 +59,5 @@ A chat interface where you type a question in plain English — "What were our t
 - **Mini-Board** — Embed dashboards in your own product with custom branding and feature toggles.
 - **Tools** — MCP servers that extend what Agents can do (e.g. calling an internal API).
 
----
 
 > **Start here:** Connect a Data Source → Create a Dashboard Group → Add a Dashboard → Drop in a Chart widget → Ask Stella a question about the same data.

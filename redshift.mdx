@@ -1,13 +1,12 @@
 ---
 title: 'Redshift'
-icon: "/icons/data.svg"
+mode: "wide"
 ---
 
 Connect Supaboard to an Amazon Redshift cluster or Serverless workgroup for direct querying, schema discovery, and AI-powered analysis.
 
----
 
-## Before you connect
+# Before you connect
 
 **Network access** — Supaboard connects from a fixed set of egress IPs. Add them to your Redshift cluster's VPC security group before attempting a connection. The current IP list is shown inside the connector form under **Whitelist IPs**.
 
@@ -22,9 +21,8 @@ See [Recommended database user permissions](#recommended-database-user-permissio
 
 **SSL** — Redshift enforces SSL by default. Supaboard always connects with SSL to Redshift — there is no SSL toggle for this connector.
 
----
 
-## Connection fields
+# Connection fields
 
 | Field | Default | Required | Description |
 |---|---|---|---|
@@ -38,9 +36,8 @@ See [Recommended database user permissions](#recommended-database-user-permissio
 
 > **SSL** — Supaboard always uses SSL when connecting to Redshift. No toggle is needed.
 
----
 
-## SSH Tunnel fields
+# SSH Tunnel fields
 
 Shown when the **SSH Tunnel** toggle is enabled.
 
@@ -54,11 +51,10 @@ Shown when the **SSH Tunnel** toggle is enabled.
 | **SSH Passphrase** | — | No | Passphrase for an encrypted private key |
 | **SSH Password** | — | If Password | Password for SSH password authentication |
 
----
 
-## Finding your connection details
+# Finding your connection details
 
-### Amazon Redshift Console
+## Amazon Redshift Console
 
 **Provisioned cluster endpoint:**
 
@@ -90,9 +86,8 @@ Shown when the **SSH Tunnel** toggle is enabled.
 2. Open the security group in the EC2 Console.
 3. Add an inbound rule: **Type** = Custom TCP, **Port** = 5439, **Source** = each Supaboard egress IP (as `/32` CIDR rules).
 
----
 
-## SSH Tunnel
+# SSH Tunnel
 
 Use an SSH tunnel when your Redshift cluster is in a private VPC with no public endpoint.
 
@@ -107,9 +102,8 @@ Use an SSH tunnel when your Redshift cluster is in a private VPC with no public 
 - [ ] The SSH user has permission to forward connections
 - [ ] If using a private key, it is in PEM format
 
----
 
-## Recommended database user permissions
+# Recommended database user permissions
 
 ```sql
 -- Create a dedicated read-only user
@@ -131,9 +125,8 @@ ALTER DEFAULT PRIVILEGES IN SCHEMA public
 
 Replace `public` with each schema you want to expose.
 
----
 
-## Troubleshooting
+# Troubleshooting
 
 | Error | Likely cause | Fix |
 |---|---|---|

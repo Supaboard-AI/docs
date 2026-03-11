@@ -1,20 +1,18 @@
 ---
 title: "Tools"
 mode: "wide"
-icon: "/icons/tools.svg"
 ---
 
 **Tools** are external integrations that Agents can call when answering questions. They are built on the [Model Context Protocol (MCP)](https://modelcontextprotocol.io/) — an open standard that lets AI models interact with outside systems: internal APIs, third-party services, custom scripts, or any HTTP/SSE endpoint you expose.
 
 When an agent needs information or capabilities that don't exist in your connected databases, it can invoke a Tool to fetch or compute what it needs. Tools extend what agents can do without requiring you to load everything into a data source.
 
----
 
-## The Tools Page
+# The Tools Page
 
 Navigate to **Tools** in the sidebar (or press **Cmd+9**) to see all tools registered in your workspace.
 
-### Display modes
+## Display modes
 Toggle between **Card grid** and **Table** view using the view switcher.
 
 **Table view columns:**
@@ -28,19 +26,18 @@ Toggle between **Card grid** and **Table** view using the view switcher.
 | **Shared With** | Avatars of members with explicit access |
 | **Created On** | Date the tool was registered |
 
-### Search
+## Search
 Use the search bar to filter tools by name. Search is fuzzy — partial matches are included.
 
-### Refresh
+## Refresh
 Click the **Refresh** button in the topbar to reload the tools list from the server.
 
----
 
-## Adding a Tool
+# Adding a Tool
 
 Click **New Tool** to open the creation form.
 
-### Required fields
+## Required fields
 
 | Field | Description |
 |---|---|
@@ -48,14 +45,14 @@ Click **New Tool** to open the creation form.
 | **Type** | Transport type: `http` or `sse` (see [Transport Types](#transport-types--http-vs-sse)) |
 | **URL** | The endpoint Supaboard will call when the tool is invoked — e.g. `https://api.example.com/endpoint` |
 
-### Optional fields
+## Optional fields
 
 | Field | Description |
 |---|---|
 | **Token** | A Bearer token or API key sent with every request for authentication. Leave empty if the endpoint is public or uses a different auth method. |
 | **Icon** | Upload an image to represent this tool in the UI. Accepts any image format. |
 
-### What happens when you save
+## What happens when you save
 
 1. Supaboard **pings the endpoint** to verify it is reachable before creating the record.
 2. If the ping succeeds, the tool is created and appears in the list.
@@ -63,9 +60,8 @@ Click **New Tool** to open the creation form.
 
 > The connectivity check at creation time prevents broken tools from appearing in the list. If your server is temporarily down during setup, wait for it to come back online before adding the tool.
 
----
 
-## Transport Types — HTTP vs SSE
+# Transport Types — HTTP vs SSE
 
 MCP supports two transport mechanisms. Choose the one that matches how your server is built.
 
@@ -76,20 +72,19 @@ MCP supports two transport mechanisms. Choose the one that matches how your serv
 
 If you are unsure, start with `http`. It works for the vast majority of integrations.
 
----
 
-## Tool Detail & Execution History
+# Tool Detail & Execution History
 
 Click any tool in the list to open its detail page.
 
-### Execution history panel (left)
+## Execution history panel (left)
 A chronological log of every time this tool was invoked. Each entry shows:
 - The tool name and icon
 - The exact timestamp of the execution
 
 Click any entry to load the full execution detail on the right.
 
-### Execution detail panel (right)
+## Execution detail panel (right)
 
 | Section | What it shows |
 |---|---|
@@ -105,9 +100,8 @@ All text fields have a **copy** button for easy sharing or debugging.
 
 > Execution history is your primary debugging surface. If an agent is giving unexpected answers when a tool is involved, check the Input Parameters and Final Output here to see exactly what was sent and received.
 
----
 
-## Testing Connectivity
+# Testing Connectivity
 
 You can test that a tool's endpoint is reachable at any time without running a full invocation.
 
@@ -116,9 +110,8 @@ Open the tool's action menu (three-dot icon) and select **Test Connectivity**. S
 - **Success:** A toast confirms the endpoint is responding.
 - **Failure:** A toast shows the error — use this to diagnose network issues, expired tokens, or server downtime.
 
----
 
-## Access Control
+# Access Control
 
 By default, a tool is accessible to all workspace members. You can restrict it to specific users.
 
@@ -133,9 +126,8 @@ Open the tool's action menu and select **Access Control**. A list of all workspa
 
 Click **Save Changes** to apply. Changes take effect immediately.
 
----
 
-## Deleting a Tool
+# Deleting a Tool
 
 Open the tool's action menu and select **Delete Tool**. The tool is removed immediately — no confirmation step.
 
@@ -144,9 +136,8 @@ Open the tool's action menu and select **Delete Tool**. The tool is removed imme
 - Any agent that was invoking this tool will no longer be able to call it.
 - Active conversations that relied on this tool will receive errors if it is invoked again.
 
----
 
-## Permissions
+# Permissions
 
 | Action | Minimum role |
 |---|---|

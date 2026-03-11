@@ -1,14 +1,12 @@
 ---
 title: "KPI Widget"
 mode: "wide"
-icon: "/icons/dashboard.svg"
 ---
 
 The KPI widget surfaces a single headline metric — a number, percentage, trend, or comparison — pulled directly from a query result. It is designed to be read at a glance.
 
----
 
-## Reading the data
+# Reading the data
 
 The KPI widget takes the **first value** from the first row of your query result. Write your query to return exactly one meaningful value:
 
@@ -24,9 +22,8 @@ If your query returns multiple rows, only the first row is used. If it returns m
 
 **Null results** display as `—`. An empty result set (zero rows) also displays as `—`, not `0`.
 
----
 
-## KPI types
+# KPI types
 
 The KPI type controls how the query result is interpreted and displayed.
 
@@ -37,9 +34,8 @@ The KPI type controls how the query result is interpreted and displayed.
 | **Trend**      | Shows the current value alongside a change indicator (up/down) against a previous period                   |
 | **Comparison** | Shows two values side-by-side — the current value against a baseline                                       |
 
----
 
-## Display options
+# Display options
 
 Open the KPI widget settings to configure what is shown alongside the metric.
 
@@ -52,9 +48,8 @@ Open the KPI widget settings to configure what is shown alongside the metric.
 
 Prefix and suffix are visual only — they do not affect the underlying number or any calculations.
 
----
 
-## Number formatting
+# Number formatting
 
 Control how the raw numeric value is displayed.
 
@@ -67,9 +62,8 @@ Control how the raw numeric value is displayed.
 
 > **Multiply by and decimal places together** — a common pattern is to set **Multiply by** to `0.001` and **Decimal places** to `1` to display a value stored in milliseconds as `1.2 s`.
 
----
 
-## Compact notation
+# Compact notation
 
 Compact notation abbreviates large numbers so they fit cleanly in the widget.
 
@@ -83,9 +77,8 @@ Compact notation abbreviates large numbers so they fit cleanly in the widget.
 
 **Auto** is recommended for metrics whose value can vary across orders of magnitude (e.g. revenue that might be in the thousands one month and millions the next).
 
----
 
-## Trend graph
+# Trend graph
 
 Enable **Show mini graph** to display a small sparkline chart beneath the metric value. The sparkline is driven by the same query — it uses all rows returned, plotting each row as a point on the trend line.
 
@@ -105,9 +98,8 @@ The KPI displays the **last row's value** as the headline number, and all rows a
 
 > If you enable the trend graph but your query returns only one row, the sparkline will appear as a flat line.
 
----
 
-## Directional signals
+# Directional signals
 
 **KPI signals** show an up or down arrow next to the value to indicate direction. Useful for metrics where the viewer needs to know immediately whether the number is good or bad.
 
@@ -120,9 +112,8 @@ The KPI displays the **last row's value** as the headline number, and all rows a
 
 Choose **Negative** for metrics like error rate, churn, or cost — where a higher number is worse.
 
----
 
-## Icon
+# Icon
 
 The **Icon** field accepts an emoji character. It appears alongside the KPI title and acts as a quick visual identifier when multiple KPI widgets appear on the same dashboard.
 

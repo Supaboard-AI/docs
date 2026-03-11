@@ -1,13 +1,10 @@
 ---
 title: 'BigQuery'
-icon: "/icons/data.svg"
+description: "Connect Supaboard to Google BigQuery using either OAuth (Google sign-in) or a Service Account JSON key."
+mode: "wide"
 ---
 
-Connect Supaboard to Google BigQuery using either OAuth (Google sign-in) or a Service Account JSON key.
-
----
-
-## Before you connect
+# Before you connect
 
 **IAM permissions** — The Google identity or service account you use needs:
 - `BigQuery Data Viewer` — to read datasets and tables
@@ -17,25 +14,23 @@ Both roles are required. `BigQuery Data Viewer` alone does not allow running que
 
 **Network access** — BigQuery is a managed Google service accessible over the public internet. No firewall configuration is required.
 
----
 
-## Authentication methods
+# Authentication methods
 
-### OAuth (Google sign-in)
+## OAuth (Google sign-in)
 
 The simplest method. Supaboard opens a Google sign-in flow in your browser. The connection is tied to your personal Google account and inherits that account's BigQuery permissions.
 
 **Best for:** Individual analysts with existing BigQuery access via their Google account.
 
-### Service Account JSON
+## Service Account JSON
 
 A service account key file grants Supaboard its own identity in GCP, independent of any individual user. The connection remains valid even if team members leave.
 
 **Best for:** Shared workspace connections, automated pipelines, production environments.
 
----
 
-## Connection fields
+# Connection fields
 
 | Field | Default | Required | Description |
 |---|---|---|---|
@@ -48,11 +43,10 @@ Authentication fields depend on the selected method:
 
 **Service Account JSON** — upload or paste your service account key file (JSON format).
 
----
 
-## Finding your connection details
+# Finding your connection details
 
-### Google Cloud IAM Console
+## Google Cloud IAM Console
 
 **Creating a service account and downloading the JSON key:**
 
@@ -78,9 +72,8 @@ Authentication fields depend on the selected method:
 
 > Service account keys are long-lived credentials. Store the downloaded JSON file securely and rotate it periodically under **IAM & Admin → Service Accounts → Keys**.
 
----
 
-## Recommended database user permissions
+# Recommended database user permissions
 
 **Documentation:** [BigQuery access control overview](https://cloud.google.com/bigquery/docs/access-control) · [Dataset-level access controls](https://cloud.google.com/bigquery/docs/dataset-access-controls)
 
@@ -98,9 +91,8 @@ To restrict access to a specific dataset rather than the whole project:
 
 You still need `BigQuery Job User` at the **project** level for query execution.
 
----
 
-## Troubleshooting
+# Troubleshooting
 
 | Error | Likely cause | Fix |
 |---|---|---|
