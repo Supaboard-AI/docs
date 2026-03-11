@@ -51,7 +51,7 @@
         "groups": [
           {
             "group": "Data Sources",
-            "icon": "/icons/connections.svg",
+            "icon": "/icons/data.svg",
             "pages": [
               "big-query",
               "clickhouse",
