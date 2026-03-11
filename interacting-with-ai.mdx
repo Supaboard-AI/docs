@@ -1,0 +1,294 @@
+---
+title: "Writing Effective AI Prompts"
+mode: "wide"
+---
+
+AI systems respond directly to the **clarity and structure of your prompt**.\
+A well-written prompt produces **reliable insights**, while vague prompts often produce **ambiguous or misleading results**.
+
+This guide explains how to design prompts that clearly communicate:
+
+- Timeframe
+- Metric definition
+- Business intent
+- Required totals
+- Expected grouping
+
+---
+
+## Why Prompts Fail
+
+Most AI mistakes occur because prompts are unclear or incomplete.
+
+Common issues include:
+
+- Missing timeframe
+- Vague questions
+- Multiple KPIs in one prompt
+- Undefined scope
+- Missing numerator or denominator
+
+### Example of a Vague Prompt
+
+<Prompt description={`How is performance looking recently?`} icon="user-robot-xmarks" actions={["copy"]}>
+  How is performance looking recently?
+</Prompt>
+
+### Typical AI Result
+
+- Timeframe unclear
+- No defined metric
+- No measurable output
+
+---
+
+## What Makes a Good Prompt
+
+A strong prompt includes:
+
+| Component    | Purpose                                     |
+| ------------ | ------------------------------------------- |
+| Timeframe    | Defines the analysis period                 |
+| Metric       | Specifies exactly what should be calculated |
+| Totals       | Requests supporting numbers                 |
+| Context      | Explains business intent                    |
+| Segmentation | Defines grouping if needed                  |
+
+### Recommended Prompt Structure
+
+<Prompt description={`For a defined timeframe, calculate a specific metric and provide the supporting totals required to validate the result.`} icon="user-robot-xmarks" actions={["copy"]}>
+  For a defined timeframe, calculate a specific metric and provide the supporting totals required to validate the result.
+</Prompt>
+
+---
+
+# Prompt Design Examples
+
+Below are several examples showing how better prompt structure improves AI responses.
+
+---
+
+# Example 1 — Financial Impact Analysis
+
+### Business Intent
+
+Understand the financial impact of a specific operational issue.
+
+### Poor Prompt
+
+<Prompt description={`Show the number of failed transactions this month.`} icon="user-robot-xmarks" actions={["copy"]}>
+  Show the number of failed transactions this month.
+</Prompt>
+
+### Typical Result
+
+- May return only counts
+- Financial impact missing
+- Date logic may be incorrect
+
+### Improved Prompt
+
+<Prompt description={`For a specific month, calculate the total financial value associated with failed transactions.  Include both the number of failed transactions and the total value affected.`} icon="user-robot-xmarks" actions={["copy"]}>
+  For a specific month, calculate the total financial value associated with failed transactions. Include both the number of failed transactions and the total value affected.
+</Prompt>
+
+---
+
+# Example 2 — Month-to-Month Comparison
+
+### Business Intent
+
+Compare operational performance between two periods.
+
+### Poor Prompt
+
+<Prompt description={`How did this month perform compared to last month?`} icon="user-robot-xmarks" actions={["copy"]}>
+  How did this month perform compared to last month?
+</Prompt>
+
+### Typical Result
+
+- Months may be misinterpreted
+- Missing metrics
+- No explanation of change
+
+### Improved Prompt
+
+<Prompt description={`Provide the total revenue and total payments for two specified months.  Compare the values and explain the percentage difference.`} icon="user-robot-xmarks" actions={["copy"]}>
+  Provide the total revenue and total payments for two specified months.  
+  Compare the values and explain the percentage difference.
+</Prompt>
+
+---
+
+# Example 3 — Quality Rate Calculation
+
+### Business Intent
+
+Measure the quality of first-attempt submissions.
+
+### Poor Prompt
+
+<Prompt description={`What percentage of submissions failed?`} icon="user-robot-xmarks" actions={["copy"]}>
+  What percentage of submissions failed?
+</Prompt>
+
+### Typical Result
+
+- Denominator unclear
+- May mix different failure types
+- Missing timeframe
+
+### Improved Prompt
+
+<Prompt description={`Out of all submissions within the defined timeframe, calculate the percentage that failed on the first attempt. Provide total submissions and total failed submissions.`} icon="user-robot-xmarks" actions={["copy"]}>
+  Out of all submissions within the defined timeframe, calculate the percentage that failed on the first attempt.  
+  Provide total submissions and total failed submissions.
+</Prompt>
+
+---
+
+# Example 4 — Resolution Effectiveness
+
+### Business Intent
+
+Measure how effectively issues are resolved.
+
+### Poor Prompt
+
+<Prompt description={`What is the resolution rate over the past few months?`} icon="user-robot-xmarks" actions={["copy"]}>
+  What is the resolution rate over the past few months?
+</Prompt>
+
+### Typical Result
+
+- Resolution definition unclear
+- Timing logic missing
+
+### Improved Prompt
+
+<Prompt description={`For issues recorded during the last six months, calculate the percentage that were resolved successfully.  Use the issue creation date as the reference point and include total issues and total resolved cases.`} icon="user-robot-xmarks" actions={["copy"]}>
+  For issues recorded during the last six months, calculate the percentage that were resolved successfully.  
+  Use the issue creation date as the reference point and include total issues and total resolved cases.
+</Prompt>
+
+---
+
+# Example 5 — Activity to Revenue Conversion
+
+### Business Intent
+
+Understand how operational activity translates into revenue.
+
+### Poor Prompt
+
+<Prompt description={`How well did activity convert into revenue?`} icon="user-robot-xmarks" actions={["copy"]}>
+  How well did activity convert into revenue?
+</Prompt>
+
+### Typical Result
+
+- Conversion definition unclear
+- Missing timeframe
+- No financial breakdown
+
+### Improved Prompt
+
+<Prompt description={`For activities completed within a defined month, provide the total number of activities, total revenue generated, and total payments received.`} icon="user-robot-xmarks" actions={["copy"]}>
+  For activities completed within a defined month, provide the total number of activities, total revenue generated, and total payments received.
+</Prompt>
+
+---
+
+# Example 6 — Risk Exposure Analysis
+
+### Business Intent
+
+Identify risk drivers within older balances.
+
+### Poor Prompt
+
+<Prompt description={`Why is the outstanding balance high?`} icon="user-robot-xmarks" actions={["copy"]}>
+  Why is the outstanding balance high?
+</Prompt>
+
+### Typical Result
+
+- Subjective explanation
+- No aging definition
+- No breakdown
+
+### Improved Prompt
+
+<Prompt description={`Provide the total balance exceeding a defined aging threshold and break it down by category and responsible entity.`} icon="user-robot-xmarks" actions={["copy"]}>
+  Provide the total balance exceeding a defined aging threshold and break it down by category and responsible entity.
+</Prompt>
+
+---
+
+# Example 7 — Source Contribution Analysis
+
+### Business Intent
+
+Understand the contribution of different revenue sources.
+
+### Poor Prompt
+
+<Prompt description={`How much revenue came from customers?`} icon="user-robot-xmarks" actions={["copy"]}>
+  How much revenue came from customers?
+</Prompt>
+
+### Typical Result
+
+- No timeframe
+- No reference total
+- Missing percentages
+
+### Improved Prompt
+
+<Prompt description={`For the selected period, calculate the amount collected from customer payments and the percentage of total revenue this represents.`} icon="user-robot-xmarks" actions={["copy"]}>
+  For the selected period, calculate the amount collected from customer payments and the percentage of total revenue this represents.
+</Prompt>
+
+---
+
+# Best Practices for Writing Prompts
+
+### Always Include
+
+- Specific timeframe
+- Clear metric definition
+- Supporting totals
+- Business context
+- Segmentation if needed
+
+### Avoid
+
+- Vague questions
+- Multiple KPIs in one prompt
+- Undefined metrics
+- Subjective wording
+
+---
+
+# Recommended Prompt Template
+
+<Prompt description={`For a defined timeframe, calculate a specific metric.  Provide supporting totals and break down the result by relevant dimensions if required.`} icon="user-robot-xmarks" actions={["copy"]}>
+  For a defined timeframe, calculate a specific metric.  
+  Provide supporting totals and break down the result by relevant dimensions if required.
+</Prompt>
+
+---
+
+# Key Takeaway
+
+Good prompts lead to **clear, reliable AI outputs**.
+
+Every prompt should clearly define:
+
+- **When** the analysis occurs
+- **What metric** should be calculated
+- **How it should be measured**
+- **What totals support the result**
+
+Clear prompts → Clear answers.

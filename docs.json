@@ -20,7 +20,7 @@
     },
     "tabs": [
       {
-        "tab": "Guides",
+        "tab": "Docs",
         "icon": "life-ring",
         "groups": [
           {
@@ -50,7 +50,7 @@
         ]
       },
       {
-        "tab": "Learn",
+        "tab": "Guides",
         "groups": [
           {
             "group": "Data Sources",
@@ -71,9 +71,18 @@
           {
             "group": "Visualisation",
             "pages": [
-              "table",
-              "chart",
-              "kpi"
+              "table-widget",
+              "chart-widget",
+              "kpi-widget",
+              "insights-in-ask-agents",
+              "insights-in-dashboard"
+            ]
+          },
+          {
+            "group": "Best Practices",
+            "pages": [
+              "interacting-with-ai",
+              "writing-sql-queries"
             ]
           }
         ]

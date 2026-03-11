@@ -1,0 +1,162 @@
+---
+title: "Table Widget"
+mode: "wide"
+---
+
+The Table widget displays query results as a structured grid — rows and columns with full control over how each column looks, sorts, and highlights values.
+
+---
+
+## Reading the data
+
+Each row in the table corresponds to one row returned by the underlying query. Column headers are the field names from your query — you can rename them inside the widget without changing the query itself.
+
+The table paginates automatically for large result sets. The total row count is shown in the widget footer.
+
+**Null values** are displayed as an empty cell. They are sorted to the bottom when sorting ascending and to the top when sorting descending.
+
+**Numbers, dates, and text** are all displayed as returned by the database. Use [column controls](#column-controls) to add prefixes, suffixes, or formatting on top of the raw values.
+
+---
+
+## Sorting and filtering
+
+Open the widget settings to set a **default sort**:
+
+| Setting            | Description                                       |
+| ------------------ | ------------------------------------------------- |
+| **Sort column**    | The column to sort by when the widget first loads |
+| **Sort direction** | `Ascending` or `Descending`                       |
+
+Viewers can click any column header to sort interactively — this overrides the default sort for their session without changing the saved configuration.
+
+**Filter data** lets you apply a persistent filter condition to the query results (e.g. show only rows where `status = "active"`). This filter is applied before the table renders and is not visible to viewers as a control.
+
+---
+
+## Column controls
+
+Click any column header in edit mode, or open **Settings → Columns**, to configure a column.
+
+| Option               | Description                                                 |
+| -------------------- | ----------------------------------------------------------- |
+| **Rename**           | Change the display label shown in the header                |
+| **Width**            | Set a fixed pixel width for the column                      |
+| **Prefix**           | Text prepended to every value in the column (e.g. `$`, `€`) |
+| **Suffix**           | Text appended to every value (e.g. `%`, `ms`, `units`)      |
+| **Show header icon** | Display a small icon in the column header                   |
+
+Prefix and suffix are purely visual — they do not change the underlying value used in sorts or calculations.
+
+---
+
+## Conditional formatting
+
+Conditional formatting lets you apply styles to individual cells based on their value. Open **Settings → Columns → Conditional formatting** for any column.
+
+### Single color rules
+
+Rules are evaluated top-to-bottom. The first matching rule wins.
+
+Each rule has a **condition** and a **style** to apply when that condition is true.
+
+**Condition types:**
+
+| Condition                 | Applies when…                                          |
+| ------------------------- | ------------------------------------------------------ |
+| **Is empty**              | Cell has no value                                      |
+| **Is not empty**          | Cell has any value                                     |
+| **Equals**                | Value exactly matches the given input                  |
+| **Not equals**            | Value does not match                                   |
+| **Greater than**          | Numeric value exceeds the threshold                    |
+| **Greater than or equal** | Numeric value meets or exceeds the threshold           |
+| **Less than**             | Numeric value is below the threshold                   |
+| **Less than or equal**    | Numeric value is at or below the threshold             |
+| **Between**               | Numeric value falls between two thresholds (inclusive) |
+| **Text contains**         | String value includes the given text                   |
+| **Text does not contain** | String value does not include the given text           |
+| **Text starts with**      | String value begins with the given text                |
+| **Text ends with**        | String value ends with the given text                  |
+
+**Style options per rule:**
+
+| Style                | Description                             |
+| -------------------- | --------------------------------------- |
+| **Text color**       | Font color (any hex, RGB, or HSL value) |
+| **Background color** | Cell background color                   |
+| **Bold**             | Bold text                               |
+| **Italic**           | Italic text                             |
+| **Underline**        | Underlined text                         |
+| **Strikethrough**    | Struck-through text                     |
+
+Any combination of styles can be applied in a single rule.
+
+---
+
+## Color scale
+
+The **Scale** tab in conditional formatting applies a continuous color gradient across the column's values — useful for quickly spotting high and low values in numeric columns.
+
+Configure three anchor points:
+
+| Anchor  | Default type                | Description                                           |
+| ------- | --------------------------- | ----------------------------------------------------- |
+| **Min** | Minimum value in the column | Sets the color for the lowest value                   |
+| **Mid** | _(optional)_                | Midpoint color — leave blank for a two-color gradient |
+| **Max** | Maximum value in the column | Sets the color for the highest value                  |
+
+**Anchor types:**
+
+| Type           | Description                                               |
+| -------------- | --------------------------------------------------------- |
+| **Min / Max**  | Automatically uses the column's actual minimum or maximum |
+| **Number**     | A specific absolute value                                 |
+| **Percent**    | A percentage of the column's range (0–100)                |
+| **Percentile** | The nth percentile of values in the column                |
+
+Values between anchor points receive interpolated colors. Values outside the defined range receive the nearest anchor color.
+
+---
+
+## Table style
+
+Open **Settings → Style** to pick a predefined color theme for the entire table.
+
+| Style              | Appearance                                |
+| ------------------ | ----------------------------------------- |
+| **None**           | Plain table with no background colors     |
+| **Blue**           | Blue header with light blue row banding   |
+| **Orange**         | Orange header with warm banding           |
+| **Grey / Slate**   | Grey header with neutral banding          |
+| **Yellow / Amber** | Yellow header with warm banding           |
+| **Green**          | Green header with green banding           |
+| **Custom**         | Choose your own header and banding colors |
+
+### Custom style
+
+When **Custom** is selected, four color fields appear:
+
+| Field                     | Description                         |
+| ------------------------- | ----------------------------------- |
+| **Header color (light)**  | Header background in light mode     |
+| **Header color (dark)**   | Header background in dark mode      |
+| **Banding color (light)** | Alternating row color in light mode |
+| **Banding color (dark)**  | Alternating row color in dark mode  |
+
+Setting separate light/dark colors ensures the table looks correct in both themes.
+
+---
+
+## Pinned columns
+
+**Pinned columns** stay fixed at the left edge of the table while the remaining columns scroll horizontally. Useful for identifier columns (e.g. name, ID) that viewers need to keep visible.
+
+To pin a column: open **Settings → Columns**, select the column, and toggle **Pin column**. Multiple columns can be pinned; they appear in the order they are pinned.
+
+---
+
+## Column order
+
+Drag columns in the **Settings → Columns** panel to reorder them. The saved order persists for all viewers — individual viewers cannot reorder columns.
+
+To reset to the query's natural column order, drag columns back or use **Reset order**.

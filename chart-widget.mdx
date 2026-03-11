@@ -1,0 +1,255 @@
+---
+title: "Chart Widget"
+mode: "wide"
+---
+
+The Chart widget visualises query results as interactive graphics. A single query can drive any of 25+ chart types — changing the chart type never requires rewriting the query.
+
+---
+
+## Reading the data
+
+Supaboard maps query columns to chart dimensions automatically:
+
+- The **first non-numeric column** becomes the X-axis (categories or time values).
+- **Numeric columns** become series on the Y-axis.
+- For charts that need a third dimension (bubble, scatter, heatmap), a second non-numeric column becomes the grouping field.
+
+If the automatic mapping doesn't match your intent, use the **X-axis → Axis** and **Y-axis** field selectors in the settings panel to override it.
+
+**Null values** in numeric columns are treated as gaps in line and area charts, and as zero in bar and column charts.
+
+---
+
+## Chart types
+
+Select a chart type from the **Chart type** picker in the settings panel.
+
+### Trend over time
+
+| Type              | Best for                             |
+| ----------------- | ------------------------------------ |
+| **Line**          | A single metric over time            |
+| **Multiple line** | Comparing multiple metrics over time |
+| **Area**          | Showing volume or cumulative growth  |
+| **Multiple area** | Comparing multiple area series       |
+
+### Part-to-whole
+
+| Type               | Best for                                 |
+| ------------------ | ---------------------------------------- |
+| **Pie**            | Simple proportions (fewer than 7 slices) |
+| **Donut**          | Proportions with a center metric         |
+| **Treemap**        | Nested proportions by hierarchy          |
+| **Funnel**         | Drop-off across sequential stages        |
+| **Grouped funnel** | Comparing funnels side-by-side           |
+
+### Comparison
+
+| Type                    | Best for                                    |
+| ----------------------- | ------------------------------------------- |
+| **Bar**                 | Horizontal ranking of categories            |
+| **Column**              | Vertical ranking of categories              |
+| **Grouped bar**         | Side-by-side bars for multiple series       |
+| **Grouped column**      | Side-by-side columns for multiple series    |
+| **Stacked bar**         | Horizontal absolute totals by segment       |
+| **Stacked column**      | Vertical absolute totals by segment         |
+| **Stacked 100% bar**    | Horizontal proportional share per category  |
+| **Stacked 100% column** | Vertical proportional share per category    |
+| **Radar**               | Multi-variable comparison on a spider chart |
+| **Grouped radar**       | Multiple radar series on one chart          |
+
+### Distribution and correlation
+
+| Type                | Best for                                     |
+| ------------------- | -------------------------------------------- |
+| **Scatter**         | Correlation between two numeric variables    |
+| **Grouped scatter** | Correlation segmented by a category          |
+| **Bubble**          | Correlation with a third magnitude dimension |
+| **Heatmap**         | Density or intensity across a 2D grid        |
+
+### Specialised
+
+| Type          | Best for                                     |
+| ------------- | -------------------------------------------- |
+| **Combo**     | Mixing bar/column with a line on one chart   |
+| **Waterfall** | Cumulative contribution of sequential values |
+| **Sankey**    | Flow and distribution between categories     |
+| **Gauge**     | Single value against a defined range         |
+| **Map**       | Geographic data plotted on a map             |
+
+---
+
+## Basic settings
+
+These settings apply to all chart types.
+
+| Setting         | Description                                |
+| --------------- | ------------------------------------------ |
+| **Title**       | Display title shown above the chart        |
+| **Description** | Optional subtitle below the title          |
+| **Font size**   | Base font size for axis labels and legends |
+
+---
+
+## X-axis
+
+Controls the horizontal axis (or the category axis for horizontal bar charts).
+
+| Setting             | Description                                                 |
+| ------------------- | ----------------------------------------------------------- |
+| **Axis field**      | The query column used as X-axis categories                  |
+| **Sort**            | Sort categories: `None`, `Ascending`, or `Descending`       |
+| **Axis label**      | Toggle and text for the axis title label                    |
+| **Category labels** | Toggle the per-category tick labels on the axis             |
+| **Axis line**       | Show or hide the axis line itself                           |
+| **Label rotation**  | Rotate category labels: `0°`, `30°`, `45°`, `60°`, or `90°` |
+
+### Time-based X-axis
+
+When your X-axis contains dates or timestamps, enable **Timestamp mode** to unlock:
+
+| Setting            | Description                                                                            |
+| ------------------ | -------------------------------------------------------------------------------------- |
+| **Date unit**      | Aggregate or group by `Day`, `Week`, `Month`, `Quarter`, or `Year`                     |
+| **Timestamp sort** | Sort chronologically: `Ascending` or `Descending`                                      |
+| **Date format**    | Choose a preset format or enter a custom format string (e.g. `YYYY-MM-DD`, `MMM YYYY`) |
+
+### Custom range
+
+| Setting              | Description                                                          |
+| -------------------- | -------------------------------------------------------------------- |
+| **Custom range**     | Enable a fixed minimum and maximum for the X-axis                    |
+| **Show range break** | Display a break symbol (≈) when the axis skips a discontinuous range |
+
+---
+
+## Y-axis
+
+Controls the vertical axis (or the value axis for horizontal bar charts).
+
+| Setting              | Description                                                                     |
+| -------------------- | ------------------------------------------------------------------------------- |
+| **Axis label**       | Toggle and text for the Y-axis title                                            |
+| **Axis tick labels** | Toggle the numeric value labels on the axis                                     |
+| **Axis line**        | Show or hide the axis line                                                      |
+| **Auto range**       | Set a custom minimum and/or maximum for the axis                                |
+| **Scale**            | `Linear` (default), `Log` (logarithmic), or `Power`                             |
+| **Split axes**       | Automatically split into multiple Y-axes when series have very different scales |
+
+### Value formatting
+
+Y-axis tick labels can be formatted independently of the raw data:
+
+| Setting             | Description                                                                          |
+| ------------------- | ------------------------------------------------------------------------------------ |
+| **Style**           | `Number`, `Percent`, `Scientific`, or `Currency`                                     |
+| **Separator style** | `100,000,000` (Western) or `1,00,00,000` (Indian)                                    |
+| **Decimal places**  | Number of decimal places to show on the axis                                         |
+| **Multiply by**     | Scale factor applied before display (e.g. enter `0.001` to show values in thousands) |
+| **Prefix**          | Text prepended to every axis label                                                   |
+| **Suffix**          | Text appended to every axis label                                                    |
+
+---
+
+## Dual axis
+
+For multi-series charts (line, bar, column, combo), a second Y-axis can be added to plot series with different units or scales on the same chart.
+
+| Setting               | Description                                |
+| --------------------- | ------------------------------------------ |
+| **Enable dual axis**  | Toggle a second Y-axis on the right side   |
+| **Left axis label**   | Label for the primary (left) Y-axis        |
+| **Right axis label**  | Label for the secondary (right) Y-axis     |
+| **Series assignment** | Drag each series to the left or right axis |
+| **Left tick labels**  | Show/hide tick labels on the left axis     |
+| **Right tick labels** | Show/hide tick labels on the right axis    |
+
+---
+
+## Series colors
+
+Each series has a color swatch in the settings panel. Click any swatch to open a color picker and assign a custom hex color to that series. Colors are saved per-series by name — if the query returns the same column name on the next refresh, it retains its color.
+
+---
+
+## Data point labels
+
+Show the actual value on each data point or bar. Available for bar, column, pie, donut, area, bubble, scatter, and radar charts.
+
+| Setting         | Description                                                                                |
+| --------------- | ------------------------------------------------------------------------------------------ |
+| **Show labels** | Toggle value labels on data points                                                         |
+| **Position**    | `Top`, `Middle`, `Bottom`, `Inside`, or `Outside` (options vary by chart type)             |
+| **Angle**       | Rotate the label text                                                                      |
+| **Format**      | Compact notation: `None`, `K` (thousands), `M` (millions), `B` (billions), `T` (trillions) |
+| **Prefix**      | Text before the value                                                                      |
+| **Suffix**      | Text after the value                                                                       |
+| **Color**       | Label text color                                                                           |
+
+Labels can be configured **per series** — expand a specific series under **Data points → Series** to override the global settings for that series only.
+
+---
+
+## Grid lines and goal line
+
+### Grid lines
+
+| Setting             | Description                                   |
+| ------------------- | --------------------------------------------- |
+| **Show grid lines** | Toggle background grid lines                  |
+| **Layout**          | `Horizontal` (default), `Vertical`, or `Both` |
+
+### Goal line
+
+A goal line draws a horizontal reference line across the chart at a specific value — useful for targets, SLAs, or budgets.
+
+| Setting            | Description                                                   |
+| ------------------ | ------------------------------------------------------------- |
+| **Show goal line** | Toggle the goal line                                          |
+| **Value**          | The Y-axis value where the line is drawn                      |
+| **Label**          | Text label shown alongside the line (e.g. `Target`, `Budget`) |
+| **Color**          | Line color (defaults to a muted accent if not set)            |
+
+---
+
+## Legend
+
+| Setting         | Description                         |
+| --------------- | ----------------------------------- |
+| **Show legend** | Toggle the series legend            |
+| **Position**    | `Top`, `Bottom`, `Left`, or `Right` |
+
+Clicking a legend item in view mode toggles that series on and off interactively — this is a viewer-side interaction and does not change the saved configuration.
+
+---
+
+## Data zoom
+
+**Data zoom** adds a scrollable range slider below the chart, letting viewers pan and zoom into a subset of the data without changing the query.
+
+Available on all chart types except funnel and radar. Toggle it under **Settings → Data zoom**.
+
+---
+
+## Pie and donut options
+
+In addition to the standard chart settings, pie and donut charts have:
+
+### Center total (donut only)
+
+| Setting             | Description                                       |
+| ------------------- | ------------------------------------------------- |
+| **Show total**      | Display the sum of all slices in the donut center |
+| **Style**           | `Number`, `Percent`, `Scientific`, or `Currency`  |
+| **Decimal places**  | Precision of the center value                     |
+| **Prefix / Suffix** | Text around the center value                      |
+| **Multiply by**     | Scale factor before display                       |
+
+### Percentage labels
+
+| Setting                | Description                                                                 |
+| ---------------------- | --------------------------------------------------------------------------- |
+| **Percentage display** | `Off`, `In legend`, `On chart`, or `Both`                                   |
+| **Decimal places**     | Precision of the percentage shown                                           |
+| **Minimum slice %**    | Hide the label on slices smaller than this percentage (avoids overcrowding) |
