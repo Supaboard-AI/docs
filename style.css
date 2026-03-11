@@ -1,11 +1,11 @@
 /* SVG icons loaded as <img> lose currentColor context.
    These filters restore light/dark mode appearance. */
 
-img[src^="/icons/"] {
+img[src*="/icons/"] {
   filter: brightness(0) opacity(0.55);
 }
 
-.dark img[src^="/icons/"],
-[data-appearance="dark"] img[src^="/icons/"] {
+.dark img[src*="/icons/"],
+[data-appearance="dark"] img[src*="/icons/"] {
   filter: brightness(0) invert(1) opacity(0.7);
 }
