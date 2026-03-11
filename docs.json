@@ -67,6 +67,14 @@
               "snowflake",
               "supabase"
             ]
+          },
+          {
+            "group": "Visualisation",
+            "pages": [
+              "table",
+              "chart",
+              "kpi"
+            ]
           }
         ]
       }

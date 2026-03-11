@@ -13,9 +13,10 @@ A **Data Source** is a live connection from Supaboard to an external database or
 **Settings → Connections** is the administrative home for all your data source connections.
 
 Each connection is shown as a card displaying:
+
 - The connector logo
 - The connection name
-- Table count (e.g. *5 tables*)
+- Table count (e.g. _5 tables_)
 
 Click any card to open its **Connection Detail** panel, which has tabs for Info, Tables, Summary, and Advanced settings.
 
@@ -29,28 +30,30 @@ The **Data Sources** section in the main sidebar is the analyst-facing view — 
 
 ### Filtering connections
 
-| Filter | What it shows |
-|---|---|
-| **All** | Every connection |
-| **Active** | Connected and ready to query |
-| **Pending** | Connected but currently syncing |
-| **Failed** | Previously connected but now unreachable |
+| Filter      | What it shows                            |
+| ----------- | ---------------------------------------- |
+| **All**     | Every connection                         |
+| **Active**  | Connected and ready to query             |
+| **Pending** | Connected but currently syncing          |
+| **Failed**  | Previously connected but now unreachable |
 
 Search across connections by name, connector type, or database.
 
 ### View modes
+
 Toggle between **Card** and **List** views.
 
 ### Item actions
+
 From any data source item's action menu:
 
-| Action | Description |
-|---|---|
-| **Open** | Navigate to the table browser for this connection |
-| **Rename** | Change the display name |
-| **Favourite** | Pin to the top of the list |
+| Action         | Description                                        |
+| -------------- | -------------------------------------------------- |
+| **Open**       | Navigate to the table browser for this connection  |
+| **Rename**     | Change the display name                            |
+| **Favourite**  | Pin to the top of the list                         |
 | **Ask Stella** | Start an AI conversation scoped to this connection |
-| **Delete** | Remove the connection |
+| **Delete**     | Remove the connection                              |
 
 ---
 
@@ -59,9 +62,11 @@ From any data source item's action menu:
 Click **New Connection** from either the Connections page or the Data Source Browser. A searchable grid shows all available connectors — select one to open its configuration form.
 
 ### Direct database connections
+
 For databases (PostgreSQL, Snowflake, etc.), you connect directly by entering your host, credentials, and any advanced options (SSL, SSH tunnel). See [Available Connectors](#available-connectors) for the full list.
 
 ### Non-database connections via Fivetran
+
 For SaaS tools and third-party services (Shopify, Google Analytics, Airtable, Stripe, and others), Supaboard uses **Fivetran** as the ETL layer. Fivetran handles syncing data from those services into a queryable form — you authenticate with the source service through Fivetran's OAuth flow, and Supaboard takes care of the rest. Fivetran-powered connectors are available on the **Business** plan and above.
 
 ### What happens after you save
@@ -71,7 +76,7 @@ For SaaS tools and third-party services (Shopify, Google Analytics, Airtable, St
 3. Schema generation runs in the background — column metadata is extracted for each table.
 4. The connection becomes queryable by agents and widgets once schema generation completes.
 
-> For large databases with many tables, schema generation runs as a background job. You can navigate away and return — the connection will show a *Pending* status until it's ready.
+> For large databases with many tables, schema generation runs as a background job. You can navigate away and return — the connection will show a _Pending_ status until it's ready.
 
 ---
 
@@ -79,24 +84,26 @@ For SaaS tools and third-party services (Shopify, Google Analytics, Airtable, St
 
 ### Direct database connectors — all plans
 
-| Connector | Notes |
-|---|---|
-| **PostgreSQL** | Supports SSH tunnel, SSL, JDBC params |
-| **MySQL** | Supports SSH tunnel, SSL, JDBC params |
-| **Snowflake** | Includes warehouse and schema auto-discovery |
-| **BigQuery** | OAuth or Service Account JSON authentication |
-| **Amazon Redshift** | Supports SSH tunnel, SSL |
-| **MongoDB** | Connection string (URI) based |
-| **ClickHouse** | — |
-| **Databricks** | Personal access token + HTTP path |
-| **Supabase** | SSL on by default |
-| **Microsoft SQL Server** | Supports SSH tunnel, SSL, JDBC params |
+| Connector                                         | Notes                                        |
+| ------------------------------------------------- | -------------------------------------------- |
+| [**PostgreSQL**](/postgres)                       | Supports SSH tunnel, SSL, JDBC params        |
+| [**MySQL**](/mysql)                               | Supports SSH tunnel, SSL, JDBC params        |
+| [**Snowflake**](/snowflake)                       | Includes warehouse and schema auto-discovery |
+| [**BigQuery**](/big-query)                        | OAuth or Service Account JSON authentication |
+| [**Amazon Redshift**](/redshift)                  | Supports SSH tunnel, SSL                     |
+| [**MongoDB**](/mongodb)                           | Connection string (URI) based                |
+| [**ClickHouse**](/clickhouse)                     | —                                            |
+| [**Databricks**](/databricks)                     | Personal access token + HTTP path            |
+| [**Supabase**](/supabase)                         | SSL on by default                            |
+| [**Microsoft SQL Server**](/microsoft-sql-server) | Supports SSH tunnel, SSL, JDBC params        |
 
 ### Fivetran-powered connectors — Business & Enterprise plans
 
 These connectors sync through Fivetran. Available integrations include:
 
 Shopify · Airtable · Stripe · Typeform · Calendly · Linear · Asana · YouTube Analytics · Notion · Auth0 · and more as Fivetran's catalogue grows.
+
+[Learn more about Fivetran-powered connectors here.](/fivetran)
 
 ---
 
@@ -107,7 +114,7 @@ Every connector form has a **Test Connection** button in the footer. Click it be
 - On success: a toast confirms the database is responding.
 - On failure: the error message from the database is shown, helping you diagnose the issue (wrong password, firewall block, incorrect port, etc.).
 
-> Always test before saving. A saved connection that can't connect will show as *Failed* and block agents and widgets that depend on it.
+> Always test before saving. A saved connection that can't connect will show as _Failed_ and block agents and widgets that depend on it.
 
 ---
 
@@ -116,29 +123,35 @@ Every connector form has a **Test Connection** button in the footer. Click it be
 Open any connection card to see the **Info** tab, which shows live diagnostics.
 
 ### Performance metrics
+
 - Response time
 - Query latency
 - Connection pool stats
 
 ### Security status
+
 - SSL/TLS enabled state
 - Encryption status
 - Authentication type
 
-### Connection pool *(database connectors)*
+### Connection pool _(database connectors)_
+
 - Active connections
 - Idle connections
 - Maximum pool size
 
-### Tunnel status *(SSH tunnel connections)*
+### Tunnel status _(SSH tunnel connections)_
+
 - Tunnel connection state
 - Tunnel latency
 
 ### Database info
+
 - Database version, charset, and collation
 - Visible only to users with resource access
 
 ### Warnings & errors
+
 Any active warnings are listed. Errors are shown in a red alert box with details.
 
 ---
@@ -148,21 +161,24 @@ Any active warnings are listed. Errors are shown in a red alert box with details
 The **Tables** tab is where you manage which tables Supaboard knows about and what it knows about them.
 
 ### Table list
+
 Every table discovered in the database is listed here. For each table:
 
-| Action | What it does |
-|---|---|
-| **Hide / Show** | Toggle whether this table appears in the data browser and is accessible to agents and widgets |
-| **Regenerate Schema** | Re-scans this table's columns and rebuilds its metadata |
+| Action                | What it does                                                                                  |
+| --------------------- | --------------------------------------------------------------------------------------------- |
+| **Hide / Show**       | Toggle whether this table appears in the data browser and is accessible to agents and widgets |
+| **Regenerate Schema** | Re-scans this table's columns and rebuilds its metadata                                       |
 
 The footer shows a count of how many tables are currently hidden.
 
 ### Missing schema banner
+
 If any tables are missing schema (column metadata hasn't been generated), a yellow banner appears at the top. Click **Regenerate Schemas** to rebuild all of them at once.
 
 > Schema generation polls in the background every 20 seconds. A loading overlay appears during bulk regeneration.
 
 ### Remapping tables
+
 Click **Remap Tables** to re-scan the database and discover any tables that have been added or removed since the connection was created. New tables are added to the list; removed tables are flagged.
 
 ---
@@ -180,17 +196,21 @@ Write in plain language. This summary is read by agents when deciding whether an
 The **Advanced** tab contains operations that modify or remove the connection.
 
 ### Rename connection
+
 Update the display name that appears across the UI, in agents, and in widget configurations.
 
 ### Regenerate schema
+
 Rebuilds schema metadata for all tables in this connection. Use this if your database structure has changed significantly (new columns added, types changed, tables restructured).
 
 > This operation is permanent and cannot be undone — existing schema metadata is replaced.
 
 ### Delete connection
+
 Permanently removes the connection from Supaboard. A confirmation is required.
 
 **What happens on deletion:**
+
 - The connection and its table metadata are removed.
 - Dashboards with widgets that queried this connection will show errors on those widgets.
 - Agents that included this connection in their scope lose access to it.
@@ -205,15 +225,16 @@ By default, all workspace members can query any data source. You can restrict a 
 
 Open the connection's **Advanced** tab and scroll to **Team Access**. Every non-deleted workspace member is listed with a toggle:
 
-| State | Meaning |
-|---|---|
-| **Toggle on** | This member can query this connection |
-| **Toggle off** | This member cannot query this connection |
+| State                 | Meaning                                         |
+| --------------------- | ----------------------------------------------- |
+| **Toggle on**         | This member can query this connection           |
+| **Toggle off**        | This member cannot query this connection        |
 | **Owner** (locked on) | Owners always have access and cannot be removed |
 
 Changes are saved automatically with a short debounce.
 
 ### How this interacts with agent access
+
 If a team member is blocked from a data source but an agent they use includes that source in its scope, the member will not be able to retrieve data from that source through the agent. The restriction is enforced at the connection level, regardless of agent configuration.
 
 ---
@@ -223,17 +244,18 @@ If a team member is blocked from a data source but an agent they use includes th
 Schema generation is the process of scanning a table's columns, types, and relationships to build the metadata that agents use to write accurate queries.
 
 ### When it runs
+
 - **Automatically** when a new connection is created.
 - **On demand** via the Regenerate button (per-table or bulk).
 - **After remapping** when new tables are discovered.
 
 ### Schema statuses
 
-| Status | Meaning |
-|---|---|
-| **Generated** | Column metadata is complete and up to date |
-| **Missing** | Schema hasn't been generated yet — agent queries against this table may be inaccurate |
-| **Generating** | Schema is currently being built (polls every 20 seconds) |
+| Status         | Meaning                                                                               |
+| -------------- | ------------------------------------------------------------------------------------- |
+| **Generated**  | Column metadata is complete and up to date                                            |
+| **Missing**    | Schema hasn't been generated yet — agent queries against this table may be inaccurate |
+| **Generating** | Schema is currently being built (polls every 20 seconds)                              |
 
 > Tables with missing schema are flagged in the Tables tab and in any Agent that includes them. Always resolve missing schemas before using a connection in production.
 
@@ -241,20 +263,22 @@ Schema generation is the process of scanning a table's columns, types, and relat
 
 ## Database Context (Documentation)
 
-Beyond raw schema, Supaboard lets you document what your data *means* at two levels: the whole database and individual tables. This context is read by agents to improve answer accuracy.
+Beyond raw schema, Supaboard lets you document what your data _means_ at two levels: the whole database and individual tables. This context is read by agents to improve answer accuracy.
 
 ### Database-level summary
+
 Written in the **Summary** tab. A high-level overview of the database's purpose and contents.
 
 ### Table-level context
+
 For each table in the **Tables** tab, you can fill in four fields:
 
-| Field | What to write |
-|---|---|
-| **Summary** | What this table stores and how it relates to other tables |
-| **Granularity** | What each row represents — e.g. *"One row per invoice line item"* |
-| **Gotchas** | Data quality issues, quirks, or caveats agents should be aware of |
-| **Use Cases** | Common questions this table is useful for answering |
+| Field           | What to write                                                     |
+| --------------- | ----------------------------------------------------------------- |
+| **Summary**     | What this table stores and how it relates to other tables         |
+| **Granularity** | What each row represents — e.g. _"One row per invoice line item"_ |
+| **Gotchas**     | Data quality issues, quirks, or caveats agents should be aware of |
+| **Use Cases**   | Common questions this table is useful for answering               |
 
 > Context written here is shared with any Agent that includes this data source. You do not need to re-enter it per agent — it flows through automatically.
 
@@ -262,12 +286,12 @@ For each table in the **Tables** tab, you can fill in four fields:
 
 ## Connection Statuses
 
-| Status | Indicator | Meaning |
-|---|---|---|
-| **Active** | Green dot | Connected and ready to query |
-| **Pending** | Spinner | Connected; schema generation or sync in progress |
-| **Failed** | Red indicator | Was connected but is now unreachable — check credentials or network |
-| **Disconnected** | Grey | No tables have been loaded yet |
+| Status           | Indicator     | Meaning                                                             |
+| ---------------- | ------------- | ------------------------------------------------------------------- |
+| **Active**       | Green dot     | Connected and ready to query                                        |
+| **Pending**      | Spinner       | Connected; schema generation or sync in progress                    |
+| **Failed**       | Red indicator | Was connected but is now unreachable — check credentials or network |
+| **Disconnected** | Grey          | No tables have been loaded yet                                      |
 
 A failed connection will cause widgets and agents that depend on it to return errors. Open the connection's Info tab to see the specific error message.
 
@@ -283,17 +307,17 @@ Navigate to any connector form and look for the **Whitelist IPs** section. The c
 
 ## Permissions
 
-| Action | Minimum role |
-|---|---|
-| View available data sources | Viewer (with resource access) |
-| Browse tables | Viewer (with resource access) |
-| Create a connection | Admin |
-| Edit connection name | Admin |
-| Delete a connection | Admin · Owner |
-| Manage team access | Owner |
-| Regenerate schema | Admin |
-| Remap tables | Admin |
-| Edit database / table context | Admin |
-| Test a connection | Admin |
+| Action                        | Minimum role                  |
+| ----------------------------- | ----------------------------- |
+| View available data sources   | Viewer (with resource access) |
+| Browse tables                 | Viewer (with resource access) |
+| Create a connection           | Admin                         |
+| Edit connection name          | Admin                         |
+| Delete a connection           | Admin · Owner                 |
+| Manage team access            | Owner                         |
+| Regenerate schema             | Admin                         |
+| Remap tables                  | Admin                         |
+| Edit database / table context | Admin                         |
+| Test a connection             | Admin                         |
 
 Resource-level restrictions (set per connection) are enforced on top of workspace roles — a Viewer who has been blocked from a specific data source cannot query it regardless of other permissions.
