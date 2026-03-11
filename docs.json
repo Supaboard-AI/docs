@@ -9,15 +9,6 @@
   },
   "favicon": "https://framerusercontent.com/images/0S3XhBBKzV0qjE4LjhFxGAHazU.png",
   "navigation": {
-    "global": {
-      "anchors": [
-        {
-          "anchor": "Blog",
-          "icon": "/icons/report.svg",
-          "href": "https://supaboard.ai/blogs"
-        }
-      ]
-    },
     "tabs": [
       {
         "tab": "Docs",
@@ -26,7 +17,11 @@
           {
             "group": "Getting started",
             "icon": "/icons/rocket.svg",
-            "pages": ["index", "quickstart", "development"]
+            "pages": [
+              "index",
+              "quickstart",
+              "development"
+            ]
           },
           {
             "group": "Features",
