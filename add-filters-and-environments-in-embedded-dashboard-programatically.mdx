@@ -1,0 +1,234 @@
+---
+title: "Add Filters and Environments in Embedded Dashboard Programatically"
+description: "Supaboard lets you embed any dashboard into your own website or application. Two features give you precise control over what viewers see and which data they query: parameterised filters and environments."
+mode: "wide"
+
+---
+
+## Parameterised Filters
+
+### What Are Parameterised Filters?
+
+Every filter widget on your dashboard (date pickers, dropdowns, search inputs, etc.) can be individually configured per embed. You decide whether a filter is shown to the viewer, hidden but silently applied, or removed entirely.
+
+This lets you do things like:
+
+- Show a "Region" filter so viewers can explore different markets — but lock the "Date" filter to the current quarter so they can't change it.
+- Silently scope an embed to a specific customer's data without exposing that filter in the UI.
+- Remove filters that aren't relevant to a particular audience.
+
+### The Three Filter Modes
+
+| Mode | What the viewer sees | What data is queried |
+|------|----------------------|----------------------|
+| **Visible** | The filter widget, interactive | Whatever the viewer selects (or the preset value if set) |
+| **Hidden with preset** | Nothing — the filter is invisible | The preset value you configured, applied automatically |
+| **Excluded** | Nothing — the filter is invisible | No filter applied; the full unfiltered dataset is used |
+
+### Configuring Filters in the Embed Dialog
+
+When you create an embed, open the **Filters Visibility and Presets** section:
+
+1. Each filter widget in your dashboard is listed by name.
+2. **Check the box** next to a filter to keep it visible. **Uncheck it** to hide or exclude it.
+3. Use the **preset value** picker on the right of each filter to pre-fill it with a value.
+
+**How the checkbox and preset interact:**
+
+- **Checked, no preset** — filter is shown; the viewer can freely change it.
+- **Checked, with preset** — filter is shown pre-filled with your value; the viewer can still change it.
+- **Unchecked, with preset** — filter is hidden; your preset value is applied silently (data is scoped).
+- **Unchecked, no preset** — filter is excluded; no filtering is applied on that field.
+
+### Preset Value Types
+
+The preset input adapts to the type of filter:
+
+| Filter type | How to set the preset |
+|-------------|----------------------|
+| Text / search | Type the value directly |
+| Number | Type a number |
+| Boolean (on/off) | Choose On, Off, or Not set |
+| Dropdown (categorical) | Select one or more values from the list |
+| Single date | Pick a date from the calendar |
+| Date range | Pick a start and end date |
+| Month | Pick a month |
+| Quarter | Pick a quarter |
+| Year | Type a year (e.g. 2024) |
+| Relative date | Choose a named period: **This month**, **Last 7 days**, **Last 30 days**, etc. |
+
+### Filters Across Multiple Pages
+
+If your dashboard group has multiple pages, the filter panel groups them by page. Select a page to configure its filters, then use the back arrow to switch to another page. Filter settings from all pages are saved together in the embed.
+
+---
+
+## Environments
+
+### What Are Environments?
+
+Environments let a single embedded dashboard point at different databases or data sources — for example, showing production data to your customers while using the same dashboard layout to show staging data to your QA team.
+
+When you switch environments, every widget query is automatically re-routed to the data source mapped to that environment. No changes to the dashboard itself are needed.
+
+### Common Use Cases
+
+- **Multi-tenant data isolation** — route each customer's embed to their own database.
+- **Production vs staging** — use the same dashboard for testing with non-production data.
+- **Regional data sources** — point to different regional databases per embed.
+
+### Setting the Environment on an Embed
+
+In the **New Embed** dialog, find the **Environment** dropdown. It lists all environments configured for your dashboard group. Select the one you want this embed to use by default.
+
+If no environment is selected, the dashboard group's default environment is used.
+
+### How Environments Are Set Up
+
+Environments are created inside your dashboard group settings. Each environment has a **resource map** — a list of data-source substitutions. When that environment is active, any widget that queries source A will automatically query source B instead, as defined in the map.
+
+Contact your workspace admin to create or modify environments.
+
+---
+
+## Embed Options at a Glance
+
+When creating an embed, you can configure:
+
+| Option | Description |
+|--------|-------------|
+| **Expiry date** | When the embed link stops working |
+| **Allowed websites** | Restrict which domains can display the embed |
+| **Filters** | Per-filter visibility and preset values (see above) |
+| **Environment** | Which data source the embed queries by default |
+| **Hide title** | Remove the dashboard title from the embedded view |
+| **Allow export** | Let viewers download data from charts, tables, and KPIs |
+| **Theme** | Force light mode, dark mode, or follow the viewer's system setting |
+| **Interactive mode** | Enable the Stella AI assistant inside the embed (Pro) |
+
+---
+
+## Setting Filters Programmatically via URL
+
+You can control filter values at runtime — without recreating the embed — by appending a `filter` query parameter to the iframe `src`. This is useful when the viewer's identity or context is known server-side and you want to scope the dashboard automatically (e.g. show each customer only their own data).
+
+### How It Works
+
+The `filter` parameter is a **base64-encoded JSON object** that maps each filter widget's ID to its configuration. When present, it completely replaces any filter settings saved at embed-creation time.
+
+The JSON shape:
+
+```json
+{
+  "<widget-id>": {
+    "hidden": true,
+    "disabled": false,
+    "presetValue": "<value>"
+  }
+}
+```
+
+- **`hidden`** — `true` hides the filter widget from the viewer; `false` shows it.
+- **`disabled`** — `true` removes the filter entirely (no filtering applied); `false` applies it.
+- **`presetValue`** — the value to pre-fill or silently apply. See [Preset Value Types](#preset-value-types) for formatting by field type.
+
+### Finding a Widget ID
+
+Each filter widget has a unique ID visible in the dashboard editor. Open the filter widget's settings panel — the ID is shown under **Widget ID** (it looks like `wgt_abc123`).
+
+### Encoding the Filter Config
+
+The JSON must be base64-encoded before being placed in the URL.
+
+**In the browser (JavaScript):**
+
+```javascript
+const filterConfig = {
+  "wgt_abc123": {
+    hidden: true,
+    disabled: false,
+    presetValue: "acme-corp"
+  }
+};
+
+const encoded = btoa(JSON.stringify(filterConfig));
+const iframeSrc = `${baseEmbedUrl}?filter=${encoded}`;
+```
+
+**In Node.js (server-side rendering):**
+
+```javascript
+const filterConfig = {
+  "wgt_abc123": {
+    hidden: true,
+    disabled: false,
+    presetValue: "acme-corp"
+  }
+};
+
+const encoded = Buffer.from(JSON.stringify(filterConfig)).toString("base64");
+const iframeSrc = `${baseEmbedUrl}?filter=${encoded}`;
+```
+
+### End-to-End Example
+
+Say your dashboard has a "Company" filter (`wgt_abc123`) and a "Date Range" filter (`wgt_def456`). You want to:
+- Lock "Company" to the current viewer's company (hidden, silently applied).
+- Keep "Date Range" visible but default it to the last 30 days.
+
+```javascript
+const filterConfig = {
+  "wgt_abc123": {
+    hidden: true,
+    disabled: false,
+    presetValue: "acme-corp"         // viewer's company, set server-side
+  },
+  "wgt_def456": {
+    hidden: false,
+    disabled: false,
+    presetValue: "last_30_days"      // relative date token
+  }
+};
+
+const encoded = btoa(JSON.stringify(filterConfig));
+document.getElementById("dashboard-frame").src = `${baseEmbedUrl}?filter=${encoded}`;
+```
+
+### Combining with Other Parameters
+
+You can combine `filter` with `environment` and `theme` in the same URL:
+
+```
+<embed-url>?filter=<encoded>&environment=<env-id>&theme=light
+```
+
+### Important Notes
+
+- The `filter` parameter **fully replaces** the filter configuration saved at embed creation for that page load. It does not merge with it.
+- Widget IDs that are not present in the config will use default filter behaviour (visible, no preset).
+- Setting `disabled: true` on a filter removes it from the query entirely — the data is not filtered on that field.
+- The base embed URL itself does not change; only the query parameters vary per viewer.
+
+---
+
+## Frequently Asked Questions
+
+**Can I change the environment after the embed is created?**
+
+Yes. Append `?environment=<environment-id>` to the embed URL to override the default. The environment ID can be found in your dashboard group's environment settings.
+
+**Can a viewer tell that a preset filter is applied?**
+
+Not if the filter is hidden. The filter widget will not appear in the embedded view, and the data will already be scoped to your preset value.
+
+**What happens if I exclude a filter?**
+
+The filter widget is hidden and the filter is not applied at all. Viewers see the full, unfiltered dataset for that field.
+
+**Can I set a relative date like "last 30 days" as a preset?**
+
+Yes. When configuring a date filter's preset, choose from the relative date options: **Today**, **Yesterday**, **This week**, **Last 7 days**, **This month**, **Last 30 days**, **Last 3 months**, **This year**, and more. These always resolve to the current period when the dashboard loads.
+
+**Can different embeds for the same dashboard use different filters and environments?**
+
+Yes. Each embed is independent. You can create multiple embeds of the same dashboard, each with a different filter configuration and environment.

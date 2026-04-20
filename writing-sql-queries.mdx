@@ -1,5 +1,5 @@
 ---
-title: 'Writing SQL Queries'
+title: "Write SQL Queries"
 description: "These practices help ensure your queries produce **accurate, reliable, and easy-to-interpret results**. Following them prevents common mistakes like incorrect metrics, biased results, or misleading trends."
 mode: "wide"
 ---
@@ -33,13 +33,13 @@ For metrics like **conversion rate, ROI, or engagement rate**, always divide the
 
 ✔ Correct
 
-```
+```text
 conversion_rate = total_conversions / total_sessions
 ```
 
 ❌ Avoid
 
-```
+```text
 average(daily_conversion_rate)
 ```
 
@@ -47,8 +47,7 @@ Averaging ratios often produces misleading results.
 
 ## Keep Valid Zeros in Your Data
 
-Zero values can be meaningful.
-Do **not remove rows simply because a value is zero**.
+Zero values can be meaningful. Do **not remove rows simply because a value is zero**.
 
 Example:
 
@@ -62,21 +61,21 @@ Each metric should use **one clear timeframe and attribution rule**.
 
 Avoid mixing:
 
-* different date ranges
-* different attribution windows
-* multiple time anchors
+- different date ranges
+- different attribution windows
+- multiple time anchors
 
 Example:
 
 ✔ Correct
 
-```
+```text
 Revenue from Jan 1 – Jan 31
 ```
 
 ❌ Incorrect
 
-```
+```text
 Revenue from Jan + conversions from Feb
 ```
 
@@ -86,9 +85,9 @@ Make sure the result returns **one row per entity or grouping level**.
 
 Examples of correct grain:
 
-* One row per **date**
-* One row per **customer**
-* One row per **campaign**
+- One row per **date**
+- One row per **customer**
+- One row per **campaign**
 
 Be careful with joins that **multiply rows** (called fan-out joins).
 
@@ -103,7 +102,7 @@ This prevents joins from **inflating metrics**.
 
 ✔ Preferred pattern
 
-```
+```text
 aggregate → join → final result
 ```
 
@@ -121,9 +120,9 @@ Also protect divisions from errors.
 
 Use safe division methods such as:
 
-* `NULLIF`
-* `SAFE_DIVIDE`
-* similar database-specific functions
+- `NULLIF`
+- `SAFE_DIVIDE`
+- similar database-specific functions
 
 Example:
 
@@ -141,26 +140,26 @@ Example:
 
 ✔ Better result
 
-| campaign_id | campaign_name | revenue |
-| ----------- | ------------- | ------- |
-| 101         | Spring Sale   | 25000   |
+| campaign\_id | campaign\_name | revenue |
+| --- | --- | --- |
+| 101 | Spring Sale | 25000 |
 
 ❌ Hard to read
 
-| campaign_id | revenue |
-| ----------- | ------- |
-| 101         | 25000   |
+| campaign\_id | revenue |
+| --- | --- |
+| 101 | 25000 |
 
 ## Always Make Time and Currency Clear
 
 When working with financial or time-based metrics, always specify:
 
-* date range
-* currency
+- date range
+- currency
 
 Example:
 
-```
+```text
 Revenue between Jan 1–Jan 31 (USD)
 ```
 
@@ -172,18 +171,18 @@ Before finalizing your query, quickly verify:
 
 ### Completeness
 
-* Correct scope
-* Correct date range
-* Correct units and filters
+- Correct scope
+- Correct date range
+- Correct units and filters
 
 ### Bias
 
-* No survivorship bias
-* No mixed time windows
+- No survivorship bias
+- No mixed time windows
 
 ### Safety
 
-* No exposure of **PII or sensitive data**
+- No exposure of **PII or sensitive data**
 
 # ❌ Things to Avoid
 
@@ -195,13 +194,13 @@ Use `HAVING` instead of `WHERE` for aggregated values.
 
 Avoid computing metrics like:
 
-```
+```text
 average(daily_conversion_rate)
 ```
 
 Instead compute:
 
-```
+```text
 total_conversions / total_sessions
 ```
 
@@ -229,9 +228,9 @@ Use safe division methods.
 
 Avoid returning:
 
-* personal data
-* private identifiers
-* confidential information
+- personal data
+- private identifiers
+- confidential information
 
 unless explicitly required and permitted.
 
@@ -241,7 +240,7 @@ Time-based questions should always include a **date range**.
 
 Example:
 
-```
+```text
 sales in the last 30 days
 ```
 
@@ -259,25 +258,25 @@ These rules ensure your query outputs are **trustworthy and safe**.
 
 Confirm the query includes:
 
-* correct scope
-* date range
-* filters
-* measurement units
+- correct scope
+- date range
+- filters
+- measurement units
 
 ### Bias Prevention
 
 Ensure that:
 
-* time windows are consistent
-* attribution rules are consistent
-* valid zero values are preserved
+- time windows are consistent
+- attribution rules are consistent
+- valid zero values are preserved
 
 ### Data Safety
 
 Never expose:
 
-* personally identifiable information
-* sensitive internal data
+- personally identifiable information
+- sensitive internal data
 
 unless explicitly allowed.
 
@@ -291,8 +290,8 @@ Avoid multiple partial queries or fragmented logic.
 
 Following these practices ensures your metrics are:
 
-* **consistent**
-* **comparable**
-* **trustworthy**
+- **consistent**
+- **comparable**
+- **trustworthy**
 
 Well-structured queries lead to **better insights and better decisions**.

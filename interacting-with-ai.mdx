@@ -1,5 +1,5 @@
 ---
-title: "Writing Effective AI Prompts"
+title: "Write Effective AI Prompts"
 mode: "wide"
 ---
 
@@ -13,7 +13,6 @@ This guide explains how to design prompts that clearly communicate:
 - Business intent
 - Required totals
 - Expected grouping
-
 
 # Why Prompts Fail
 
@@ -29,8 +28,8 @@ Common issues include:
 
 ## Example of a Vague Prompt
 
-<Prompt description={`How is performance looking recently?`} icon="user-robot-xmarks" actions={["copy"]}>
-  How is performance looking recently?
+<Prompt description="How is performance looking recently?" icon="user-robot-xmarks" actions={["copy"]}>
+How is performance looking recently?
 </Prompt>
 
 ## Typical AI Result
@@ -39,30 +38,27 @@ Common issues include:
 - No defined metric
 - No measurable output
 
-
 # What Makes a Good Prompt
 
 A strong prompt includes:
 
-| Component    | Purpose                                     |
-| ------------ | ------------------------------------------- |
-| Timeframe    | Defines the analysis period                 |
-| Metric       | Specifies exactly what should be calculated |
-| Totals       | Requests supporting numbers                 |
-| Context      | Explains business intent                    |
-| Segmentation | Defines grouping if needed                  |
+| Component | Purpose |
+| --- | --- |
+| Timeframe | Defines the analysis period |
+| Metric | Specifies exactly what should be calculated |
+| Totals | Requests supporting numbers |
+| Context | Explains business intent |
+| Segmentation | Defines grouping if needed |
 
 ## Recommended Prompt Structure
 
-<Prompt description={`For a defined timeframe, calculate a specific metric and provide the supporting totals required to validate the result.`} icon="user-robot-xmarks" actions={["copy"]}>
-  For a defined timeframe, calculate a specific metric and provide the supporting totals required to validate the result.
+<Prompt description="For a defined timeframe, calculate a specific metric and provide the supporting totals required to validate the result." icon="user-robot-xmarks" actions={["copy"]}>
+For a defined timeframe, calculate a specific metric and provide the supporting totals required to validate the result.
 </Prompt>
-
 
 # Prompt Design Examples
 
 Below are several examples showing how better prompt structure improves AI responses.
-
 
 # Example 1 — Financial Impact Analysis
 
@@ -72,8 +68,8 @@ Understand the financial impact of a specific operational issue.
 
 ## Poor Prompt
 
-<Prompt description={`Show the number of failed transactions this month.`} icon="user-robot-xmarks" actions={["copy"]}>
-  Show the number of failed transactions this month.
+<Prompt description="Show the number of failed transactions this month." icon="user-robot-xmarks" actions={["copy"]}>
+Show the number of failed transactions this month.
 </Prompt>
 
 ## Typical Result
@@ -84,10 +80,9 @@ Understand the financial impact of a specific operational issue.
 
 ## Improved Prompt
 
-<Prompt description={`For a specific month, calculate the total financial value associated with failed transactions.  Include both the number of failed transactions and the total value affected.`} icon="user-robot-xmarks" actions={["copy"]}>
-  For a specific month, calculate the total financial value associated with failed transactions. Include both the number of failed transactions and the total value affected.
+<Prompt description="For a specific month, calculate the total financial value associated with failed transactions.  Include both the number of failed transactions and the total value affected." icon="user-robot-xmarks" actions={["copy"]}>
+For a specific month, calculate the total financial value associated with failed transactions. Include both the number of failed transactions and the total value affected.
 </Prompt>
-
 
 # Example 2 — Month-to-Month Comparison
 
@@ -97,8 +92,8 @@ Compare operational performance between two periods.
 
 ## Poor Prompt
 
-<Prompt description={`How did this month perform compared to last month?`} icon="user-robot-xmarks" actions={["copy"]}>
-  How did this month perform compared to last month?
+<Prompt description="How did this month perform compared to last month?" icon="user-robot-xmarks" actions={["copy"]}>
+How did this month perform compared to last month?
 </Prompt>
 
 ## Typical Result
@@ -109,11 +104,10 @@ Compare operational performance between two periods.
 
 ## Improved Prompt
 
-<Prompt description={`Provide the total revenue and total payments for two specified months.  Compare the values and explain the percentage difference.`} icon="user-robot-xmarks" actions={["copy"]}>
-  Provide the total revenue and total payments for two specified months.  
+<Prompt description="Provide the total revenue and total payments for two specified months.  Compare the values and explain the percentage difference." icon="user-robot-xmarks" actions={["copy"]}>
+Provide the total revenue and total payments for two specified months.  
   Compare the values and explain the percentage difference.
 </Prompt>
-
 
 # Example 3 — Quality Rate Calculation
 
@@ -123,8 +117,8 @@ Measure the quality of first-attempt submissions.
 
 ## Poor Prompt
 
-<Prompt description={`What percentage of submissions failed?`} icon="user-robot-xmarks" actions={["copy"]}>
-  What percentage of submissions failed?
+<Prompt description="What percentage of submissions failed?" icon="user-robot-xmarks" actions={["copy"]}>
+What percentage of submissions failed?
 </Prompt>
 
 ## Typical Result
@@ -135,11 +129,10 @@ Measure the quality of first-attempt submissions.
 
 ## Improved Prompt
 
-<Prompt description={`Out of all submissions within the defined timeframe, calculate the percentage that failed on the first attempt. Provide total submissions and total failed submissions.`} icon="user-robot-xmarks" actions={["copy"]}>
-  Out of all submissions within the defined timeframe, calculate the percentage that failed on the first attempt.  
+<Prompt description="Out of all submissions within the defined timeframe, calculate the percentage that failed on the first attempt. Provide total submissions and total failed submissions." icon="user-robot-xmarks" actions={["copy"]}>
+Out of all submissions within the defined timeframe, calculate the percentage that failed on the first attempt.  
   Provide total submissions and total failed submissions.
 </Prompt>
-
 
 # Example 4 — Resolution Effectiveness
 
@@ -149,8 +142,8 @@ Measure how effectively issues are resolved.
 
 ## Poor Prompt
 
-<Prompt description={`What is the resolution rate over the past few months?`} icon="user-robot-xmarks" actions={["copy"]}>
-  What is the resolution rate over the past few months?
+<Prompt description="What is the resolution rate over the past few months?" icon="user-robot-xmarks" actions={["copy"]}>
+What is the resolution rate over the past few months?
 </Prompt>
 
 ## Typical Result
@@ -160,11 +153,10 @@ Measure how effectively issues are resolved.
 
 ## Improved Prompt
 
-<Prompt description={`For issues recorded during the last six months, calculate the percentage that were resolved successfully.  Use the issue creation date as the reference point and include total issues and total resolved cases.`} icon="user-robot-xmarks" actions={["copy"]}>
-  For issues recorded during the last six months, calculate the percentage that were resolved successfully.  
+<Prompt description="For issues recorded during the last six months, calculate the percentage that were resolved successfully.  Use the issue creation date as the reference point and include total issues and total resolved cases." icon="user-robot-xmarks" actions={["copy"]}>
+For issues recorded during the last six months, calculate the percentage that were resolved successfully.  
   Use the issue creation date as the reference point and include total issues and total resolved cases.
 </Prompt>
-
 
 # Example 5 — Activity to Revenue Conversion
 
@@ -174,8 +166,8 @@ Understand how operational activity translates into revenue.
 
 ## Poor Prompt
 
-<Prompt description={`How well did activity convert into revenue?`} icon="user-robot-xmarks" actions={["copy"]}>
-  How well did activity convert into revenue?
+<Prompt description="How well did activity convert into revenue?" icon="user-robot-xmarks" actions={["copy"]}>
+How well did activity convert into revenue?
 </Prompt>
 
 ## Typical Result
@@ -186,10 +178,9 @@ Understand how operational activity translates into revenue.
 
 ## Improved Prompt
 
-<Prompt description={`For activities completed within a defined month, provide the total number of activities, total revenue generated, and total payments received.`} icon="user-robot-xmarks" actions={["copy"]}>
-  For activities completed within a defined month, provide the total number of activities, total revenue generated, and total payments received.
+<Prompt description="For activities completed within a defined month, provide the total number of activities, total revenue generated, and total payments received." icon="user-robot-xmarks" actions={["copy"]}>
+For activities completed within a defined month, provide the total number of activities, total revenue generated, and total payments received.
 </Prompt>
-
 
 # Example 6 — Risk Exposure Analysis
 
@@ -199,8 +190,8 @@ Identify risk drivers within older balances.
 
 ## Poor Prompt
 
-<Prompt description={`Why is the outstanding balance high?`} icon="user-robot-xmarks" actions={["copy"]}>
-  Why is the outstanding balance high?
+<Prompt description="Why is the outstanding balance high?" icon="user-robot-xmarks" actions={["copy"]}>
+Why is the outstanding balance high?
 </Prompt>
 
 ## Typical Result
@@ -211,10 +202,9 @@ Identify risk drivers within older balances.
 
 ## Improved Prompt
 
-<Prompt description={`Provide the total balance exceeding a defined aging threshold and break it down by category and responsible entity.`} icon="user-robot-xmarks" actions={["copy"]}>
-  Provide the total balance exceeding a defined aging threshold and break it down by category and responsible entity.
+<Prompt description="Provide the total balance exceeding a defined aging threshold and break it down by category and responsible entity." icon="user-robot-xmarks" actions={["copy"]}>
+Provide the total balance exceeding a defined aging threshold and break it down by category and responsible entity.
 </Prompt>
-
 
 # Example 7 — Source Contribution Analysis
 
@@ -224,8 +214,8 @@ Understand the contribution of different revenue sources.
 
 ## Poor Prompt
 
-<Prompt description={`How much revenue came from customers?`} icon="user-robot-xmarks" actions={["copy"]}>
-  How much revenue came from customers?
+<Prompt description="How much revenue came from customers?" icon="user-robot-xmarks" actions={["copy"]}>
+How much revenue came from customers?
 </Prompt>
 
 ## Typical Result
@@ -236,10 +226,9 @@ Understand the contribution of different revenue sources.
 
 ## Improved Prompt
 
-<Prompt description={`For the selected period, calculate the amount collected from customer payments and the percentage of total revenue this represents.`} icon="user-robot-xmarks" actions={["copy"]}>
-  For the selected period, calculate the amount collected from customer payments and the percentage of total revenue this represents.
+<Prompt description="For the selected period, calculate the amount collected from customer payments and the percentage of total revenue this represents." icon="user-robot-xmarks" actions={["copy"]}>
+For the selected period, calculate the amount collected from customer payments and the percentage of total revenue this represents.
 </Prompt>
-
 
 # Best Practices for Writing Prompts
 
@@ -258,14 +247,12 @@ Understand the contribution of different revenue sources.
 - Undefined metrics
 - Subjective wording
 
-
 # Recommended Prompt Template
 
-<Prompt description={`For a defined timeframe, calculate a specific metric.  Provide supporting totals and break down the result by relevant dimensions if required.`} icon="user-robot-xmarks" actions={["copy"]}>
-  For a defined timeframe, calculate a specific metric.  
+<Prompt description="For a defined timeframe, calculate a specific metric.  Provide supporting totals and break down the result by relevant dimensions if required." icon="user-robot-xmarks" actions={["copy"]}>
+For a defined timeframe, calculate a specific metric.  
   Provide supporting totals and break down the result by relevant dimensions if required.
 </Prompt>
-
 
 # Key Takeaway
 

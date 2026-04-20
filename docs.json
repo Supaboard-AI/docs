@@ -73,11 +73,12 @@
             ]
           },
           {
-            "group": "Best Practices",
+            "group": "How To",
             "icon": "/icons/checklist.svg",
             "pages": [
               "interacting-with-ai",
-              "writing-sql-queries"
+              "writing-sql-queries",
+              "add"
             ]
           }
         ]
