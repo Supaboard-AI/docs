@@ -194,13 +194,51 @@ const encoded = btoa(JSON.stringify(filterConfig));
 document.getElementById("dashboard-frame").src = `${baseEmbedUrl}?filter=${encoded}`;
 ```
 
-### Combining with Other Parameters
+### Other Parameters
 
-You can combine `filter` with `environment` and `theme` in the same URL:
 
-```
-<embed-url>?filter=<encoded>&environment=<env-id>&theme=light
-```
+#### default_dashboard_page
+
+Sets which page loads when the embed first opens, overriding the default page configured in the embed token.
+
+Value: The uniquelink (ID) of the dashboard page you want to show.
+
+Example:
+https://your-embed-url.com/embed/dashboard/&gt;token&lt;?default_dashboard_page=sales-overview
+
+Behavior:
+- If the value matches a valid page in the dashboard group, that page loads first.
+- If the value is invalid or the page doesn't exist, the embed falls back to the token's default page silently.
+- Once loaded, users can still navigate between pages normally using the tab bar.
+
+
+#### hide_page_selector
+
+Hides the bottom tab bar that lets users switch between dashboard pages.
+
+Value: true, 1, or just the parameter name with no value. Any of these work:
+
+?hide_page_selector=true
+?hide_page_selector=True
+?hide_page_selector=1
+?hide_page_selector
+
+To explicitly keep it visible (default), omit the parameter or set it to false / 0.
+
+Example:
+https://your-embed-url.com/embed/dashboard/&gt;token&lt;?hide_page_selector=true
+
+Behavior:
+- The tab bar is hidden entirely — the dashboard content takes the full height.
+- Dashboard content is still rendered normally; only the navigation UI is hidden.
+- Combine with default_dashboard_page to pin the embed to a specific page with no navigation UI.
+
+---
+Combined Usage
+
+https://your-embed-url.com/embed/dashboard/&gt;token&lt;?default_dashboard_page=q4-report&hide_page_selector=true
+
+This opens the q4-report page with no tab bar — useful for embedding a single specific page without exposing navigation to other pages.
 
 ### Important Notes
 

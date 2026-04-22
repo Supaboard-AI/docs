@@ -1,0 +1,139 @@
+---
+title: "Expand Rows in Dashboard Tables"
+description: "Expand Row lets you reveal additional context for any row in a Table widget without leaving the dashboard. When a viewer clicks the expand chevron on a row, a related question (another widget — table, chart, or KPI) is rendered inline beneath that row, automatically pre-filtered to match the clicked row's data."
+mode: "wide"
+---
+
+# How it works at a glance
+
+1. A parent Table widget has an Expand Row configuration that points to a related question (any saved widget).
+2. A column mapping tells the system which column in the related question corresponds to which column in the parent table.
+3. When a viewer expands a row, the related question is rendered with a synthetic filter applied — scoping its results to the values from that specific row.
+
+---
+
+# Prerequisites
+
+Before configuring Expand Row, you need:
+
+- A parent Table widget whose rows you want to expand.
+- A related question — a separate widget (Table, Chart, or KPI) that returns data you want to show per row.
+
+## Preparing the related question
+
+This step is critical. The related question must include, in its result set, every column you intend to use for filtering. Specifically:
+
+- If you want to filter the related question by user\_id from the parent table, the related question's underlying query must select and expose user\_id (or the equivalent join column) in its output columns.
+- Columns that appear in the query's SELECT but are not needed in the UI can be hidden later via Schema Settings (see below) — but they must be present in the result for the mapping to work.
+
+▎ Rule of thumb: When writing the SQL or query for the related question, ensure it includes any foreign key or shared identifier columns that link it back to the parent table, even if you do not plan to display those columns to the ▎ viewer.
+
+---
+
+# Setting up Expand Row
+
+## Open Related Questions settings
+
+1. In edit mode, click the options menu on your parent Table widget.
+2. Select Related Questions (or Manage Related Questions).
+
+## Add a related question
+
+1. In the Related Questions panel, use the search or browse to find the widget you want to display when a row is expanded.
+2. Click Add to attach it to the parent table.
+
+## Enable Expand Row
+
+1. Once the related question is added, open its configuration panel.
+2. Toggle Use as Expand Row (or the equivalent Expand Row switch) to on.
+
+## Configure column mapping
+
+This is the most important configuration step. The column map defines how the parent table's row data is used to filter the related question.
+
+For each column in the related question that should be filtered:
+
+1. Open the Row Expand / Column Mapping section.
+2. Each filterable column from the related question is listed. Next to it, use the dropdowns to select:
+
+- Source table — the table in the parent widget's data source that provides the filter value.
+- Source column — the specific column whose value will be injected as a filter.
+
+3. Repeat for all columns that need to be linked.
+
+Example: Your parent table shows orders with an order\_id column. The related question shows order\_line\_items and has an order\_id column. You map: order\_line\_items.order\_id → orders.order\_id. When a viewer expands a row for order #1042, the related question automatically shows only line items where order\_id = 1042.
+
+▎ If the system does not list the column you need in the related question's column mapping panel, it means that column is not present in the related question's result. Go back and update the related question's query to include it.
+
+---
+
+# Hiding columns you don't want to show
+
+After adding join/foreign key columns to the related question for mapping purposes, you may not want those columns visible to end users. Use Schema Settings in the Table Visualisation to hide them.
+
+1. Open the related question widget in edit mode.
+2. Click the Schema or Column Settings option (accessible from the widget header or a column header right-click menu).
+3. Find the column you want to hide (e.g., user\_id, order\_id).
+4. Toggle Visible off (or click Hide).
+
+The column will no longer appear in the rendered table but remains in the query result — which means the column mapping continues to function correctly.
+
+---
+
+# Viewing an expanded row
+
+When Expand Row is configured, a chevron icon appears at the left of each row in the parent table at runtime.
+
+- Click the chevron to expand the row inline. The related question renders in a resizable panel beneath the row. You can drag the bottom edge of the panel to resize it.
+- Click the full-screen icon (if available in the expanded panel header) to open the related question in a larger modal overlay (90% of the viewport).
+- Click the chevron again to collapse the row.
+
+The inline panel height is remembered per session so it stays consistent as you navigate the table.
+
+1. Open the related question widget in edit mode.
+2. Open the related question widget in edit mode.
+3. Click the Schema or Column Settings option (accessible from the widget header or a column header right-click menu).
+4. Open the related question widget in edit mode.
+5. Click the Schema or Column Settings option (accessible from the widget header or a column header right-click menu).
+6. Find the column you want to hide (e.g., user\_id, order\_id).
+7. Toggle Visible off (or click Hide).
+
+The column will no longer appear in the rendered table but remains in the query result — which means the column mapping continues to function correctly.
+
+---
+
+# Viewing an expanded row
+
+When Expand Row is configured, a chevron icon appears at the left of each row in the parent table at runtime.
+
+- Click the chevron to expand the row inline. The related question renders in a resizable panel beneath the row. You can drag the bottom edge of the panel to resize it.
+- Click the full-screen icon (if available in the expanded panel header) to open the related question in a larger modal overlay (90% of the viewport).
+- Click the chevron again to collapse the row.
+
+The inline panel height is remembered per session so it stays consistent as you navigate the table.
+
+---
+
+# Tips and Troubleshooting
+
+| Symptom | Likely cause | Fix |
+| --- | --- | --- |
+| Column mapping dropdown is empty or missing a column | The related question does not include that column in its SELECT | Update the related question's query to select the required column |
+| Related question shows all rows instead of filtered rows | Column mapping is not configured or the source column is wrong | Open Related Questions settings and verify the column map entries |
+| A column meant only for filtering is visible in the UI | Column visibility has not been set | Use Schema Settings on the related question to hide the column |
+| Expand chevron does not appear on the parent table | Expand Row is not enabled | In Related Questions settings, toggle Use as Expand Row on |
+| Related question loads but shows no data | The value from the parent row does not match any rows in the related question | Verify both columns contain the same data type and value format |
+
+---
+
+# Summary
+
+| Step | What to do |
+| --- | --- |
+| 1 | Write the related question query — include all join/key columns needed for filtering |
+| 2 | Attach the related question to the parent Table widget via Related Questions |
+| 3 | Enable Use as Expand Row |
+| 4 | Map each filter column in the related question to its corresponding source column in the parent table |
+| 5 | Hide any utility columns (join keys) in the related question's Schema Settings |
+
+---

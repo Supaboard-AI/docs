@@ -78,7 +78,8 @@
             "pages": [
               "interacting-with-ai",
               "writing-sql-queries",
-              "add-filters-and-environments-in-embedded-dashboard-programatically"
+              "add-filters-and-environments-in-embedded-dashboard-programatically",
+              "expand-rows-in-dashboard-tables"
             ]
           }
         ]
