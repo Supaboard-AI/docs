@@ -1,0 +1,160 @@
+---
+title: "Supaboard Release Notes"
+description: "Apr 24, 2026"
+mode: "wide"
+---
+
+## Reports & Exports — Major Upgrade
+
+### Powerful Filter Controls for Reports
+Configure dashboard filter values directly in the report generation panel before exporting. Your report will reflect exactly the data slice you want—without needing to adjust the live dashboard first.
+
+### Choose Your Report Format & Theme
+- **Export as PDF or PowerPoint**: Select your preferred format when creating a report
+- **Visual Themes**: Pick from Mocha, Kraft, Vortex, Dialogue, Pearl, or Default Dark with live thumbnail previews
+
+### Guide Your AI with Custom Instructions
+Add a prompt or instructions to the deck generation form to tell the AI what to emphasize, the tone to use, or how to structure the narrative. Perfect for tailoring reports to specific audiences.
+
+### Advanced Slide Controls
+Toggle "Advanced" options to:
+- Set a fixed number of slides
+- Provide per-slide descriptions for precise control over deck structure
+
+### Faster Report Creation
+The "Generate Report" form now opens as an overlay, so you keep your place in the decks list while creating—no more context switching.
+
+---
+
+## Dashboards — Refreshed Design & New Capabilities
+
+### Visual Design Refresh
+Dashboard cards, agent cards, query builder cards, and data source cards have all been redesigned with:
+- Consistent card styling and cleaner typography
+- Thumbnail previews for quick scanning
+- Smoother hover interactions
+
+### Enhanced Dashboard Filters
+- **Filters Now Persist in Drill-Down**: When you drill into a widget's records, active dashboard filters are automatically applied—no more blank or misleading data in drill modals
+- **Filter-Aware URL Sharing**: Shared and embedded dashboard URLs can now include pre-configured filters, so recipients open the dashboard with the exact data slice you intended
+
+### Customizable Widget Styling
+- Set custom border styles, colors, and radius for individual widgets
+- Reset widget backgrounds to the dashboard default
+
+### Smart Widget Updates
+KPI widgets now support custom filters with improved edge-case handling for more precise data exploration.
+
+---
+
+## AI-Powered Data Exploration
+
+### Intelligent Drill Records
+When you drill into a chart, the AI now intelligently rewrites the underlying query to surface the most relevant raw records. The system:
+- Supports all major SQL dialects (PostgreSQL, Snowflake, BigQuery, MySQL, Redshift, ClickHouse, Databricks, Azure SQL, MongoDB)
+- Automatically scores fidelity to ensure drilled results match your original intent
+- Detects and applies correct date formatting for time-series drill-downs
+
+### Smart Drill Breakout
+Explore chart segments faster—the AI now automatically derives metrics from selected data points when they aren't explicitly provided, reducing friction during analysis.
+
+### Pivot Tables & Dynamic Views
+Toggle between standard and pivoted views directly from charts. Pivot configurations are preserved per widget, so your preferred view persists across sessions.
+
+### More Accurate Drill Queries
+Chart, KPI, and table drill-down flows now correctly propagate the underlying SQL query, ensuring the records shown in the drill modal are truly relevant to what you clicked.
+
+---
+
+## Automation — New Capabilities
+
+### Send Emails Automatically
+Automated tasks can now include an email action. Configure:
+- Dynamic recipients from your dashboard data
+- Custom subject lines and rich-formatted body content
+- Perfect for alerts, summaries, and stakeholder updates
+
+### Generate Reports Automatically
+Create PDF and PowerPoint reports as part of your automation workflows:
+- High-quality formatting via Gamma integration
+- Pre-optimized text for better output quality
+- Flexible pipelines—generate files without auto-delivery for custom downstream steps
+
+### More Reliable Task Execution
+- **Separate, optimized runners**: Actions and triggers now use dedicated runners for cleaner execution
+- **Async database operations**: Faster, more scalable task processing under load
+- **Audit trails**: All job execution results are now logged for compliance and debugging
+- **Test Before You Deploy**: New dry-run endpoint lets you fully test a task's execution path without committing any changes
+
+### Multi-Step Automation
+Tasks now support input bindings, allowing one task's output to feed directly into another's input. Build complex, multi-step automation pipelines with ease.
+
+### Reduced Load
+Default polling interval for scheduled tasks extended from 30 seconds to 5 minutes, reducing unnecessary infrastructure load without impacting responsiveness.
+
+---
+
+## Search & Conversations
+
+### Faster Conversations
+Start asking immediately—your first message creates a conversation entry in the sidebar instantly (optimistic update) with AI-generated titles based on your message.
+
+### Better Context Awareness
+- The AI Thoughtstream now shows which agent is responding, not just a generic label
+- Follow-up questions are now intelligently generated and surfaced with search results
+- Multi-turn conversations are more reliable with improved context handling
+
+### Smarter Answers
+- RAG (Retrieval-Augmented Generation) pipeline refactored for better accuracy
+- AI answers are now structured to enforce evidence-backed insights and clear narrative flow
+- Results now include helpful performance timing, making it easier to spot slow queries
+
+---
+
+## Database Connectivity & Intelligence
+
+### Better Schema Management
+- **Incremental Updates**: Update your AI's understanding of your database schema incrementally without a full re-sync
+- **Fivetran Integration**: Improved source attribution for tables ingested via Fivetran
+- **Materialized Views**: Dashboards can now query pre-aggregated materialized views for faster analytics
+
+### Enhanced Query Builder
+- Smarter table inference and target table selection
+- Consistent table enumeration across all database types
+- Named query builder lookup for cleaner API usage
+
+### Improved BigQuery Support
+- Fixed row normalization for non-standard BigQuery response formats
+- Updated to the latest ChatGPT model for better SQL generation
+
+---
+
+## Data Quality & Stability Improvements
+
+### Chart Fixes
+- Custom colors now apply correctly even when filters produce null grouping keys
+- Pivot/grouping metadata automatically syncs from API responses, preventing stale configurations
+
+### Table Widget Improvements
+- Schema sync now only triggers on actual query changes, not on background auto-refreshes—no more unexpected column resets
+- Stored schema is now the source of truth, keeping layouts stable across auto-refreshes
+- Row expander configurations automatically clean up when related question widgets are deleted
+
+### KPI Widgets
+- "View Records" option properly hidden in right-click menus (KPIs support drill-down but not arbitrary record browsing)
+
+### Sharing Improvements
+- Copy invite links for individual users directly to your clipboard from the Share Dashboard panel
+- Data source cards now show connector display names alongside logos
+
+### Data Source Page
+- Table counts are now properly capitalized ("1 Table", "3 Tables")
+
+---
+
+## Onboarding
+New guided onboarding flow to help you get up and running faster, with edge-case fixes for accurate account setup.
+
+---
+
+**Thank you for using Supaboard. We're continuously improving the platform to help you explore, understand, and act on your data faster.**
