@@ -14,7 +14,9 @@ No action is needed on your end. The improvements are live for everyone, on ever
 
 ---
 
-## SQL Editor — Major Autocomplete Upgrade
+## SQL Editor:
+
+### Major Autocomplete Upgrade
 
 - Context-aware completions: The SQL editor now suggests keywords, functions,tables, and columns based on where your cursor is in the query
 - Organized suggestion sections: Completions are grouped into labeled sections, ie, Keywords, In query, Databases, Tables, Columns — ranked by relevance
@@ -22,11 +24,19 @@ No action is needed on your end. The improvements are live for everyone, on ever
 - Schema-aware column hints: When building a query, the editor fetches actual column names and types from your connected data sources and surfaces them as suggestions
 - CTE and alias recognition: Aliases and CTEs you define within the query are tracked and offered as completions further down
 
----
-
-## SQL Editor — New Themes
+### New Themes
 
 - Two new syntax themes added: Daylight Pro (light) and Midnight Pro (dark)
+
+---
+
+## Partial Filters
+
+When someone filters a dashboard, those filters normally apply to every table in your widget's query. But sometimes you don't want that. Maybe you're comparing this month's sales to all-time sales, and you need that all-time number to stay put no matter what filters get applied.
+
+Partial Filters solve this. Add a `$` to any table reference, and that reference gets left alone. Everything else filters like normal.
+
+Read more about it [here](/ignore-filtering-for-a-given-table)
 
 ---
 
