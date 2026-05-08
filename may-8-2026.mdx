@@ -1,0 +1,41 @@
+---
+title: "May 8, 2026"
+---
+
+## Performance Buff
+
+We've shipped a major performance overhaul to Supaboard, and we wanted to share what's behind the speed-up you're about to feel.
+
+Over the past few months, our engineering team migrated Supaboard's backend from Python to Go. The result: query and processing speeds are now up to 50x faster across the platform. Dashboards that used to take seconds to load now feel instant, and heavy workloads that previously slowed things down scale far more gracefully.
+
+Alongside the backend rewrite, we made a number of UI optimizations to keep the experience snappy end-to-end — faster initial loads, smoother interactions, and reduced time-to-render on complex views.
+
+No action is needed on your end. The improvements are live for everyone, on every plan.
+
+---
+
+## SQL Editor — Major Autocomplete Upgrade
+
+- Context-aware completions: The SQL editor now suggests keywords, functions,tables, and columns based on where your cursor is in the query
+- Organized suggestion sections: Completions are grouped into labeled sections, ie, Keywords, In query, Databases, Tables, Columns — ranked by relevance
+- Comprehensive SQL vocabulary: Full set of SQL keywords (SELECT, GROUP BY, OVER, PARTITION BY, etc.) and common functions (DATE\_TRUNC, COALESCE, ROW\_NUMBER, etc.) are suggested automatically
+- Schema-aware column hints: When building a query, the editor fetches actual column names and types from your connected data sources and surfaces them as suggestions
+- CTE and alias recognition: Aliases and CTEs you define within the query are tracked and offered as completions further down
+
+---
+
+## SQL Editor — New Themes
+
+- Two new syntax themes added: Daylight Pro (light) and Midnight Pro (dark)
+
+---
+
+## Dashboard — Font Settings Fix
+
+- Switching between preset fonts and custom Google Fonts now works reliably without stale state
+- Custom fonts specified via Google Fonts URL are now wrapped in proper CSS quotes so they apply correctly (e.g. "Inter" instead of bare Inter)
+- Clearing a custom font and returning to a preset no longer requires a page refresh
+
+---
+
+**Thank you for using Supaboard. We're continuously improving the platform to help you explore, understand, and act on your data faster.**

@@ -2,7 +2,6 @@
 title: "Add Filters and Environments in Embedded Dashboard Programatically"
 description: "Supaboard lets you embed any dashboard into your own website or application. Two features give you precise control over what viewers see and which data they query: parameterised filters and environments."
 mode: "wide"
-
 ---
 
 ## Parameterised Filters
@@ -20,7 +19,7 @@ This lets you do things like:
 ### The Three Filter Modes
 
 | Mode | What the viewer sees | What data is queried |
-|------|----------------------|----------------------|
+| --- | --- | --- |
 | **Visible** | The filter widget, interactive | Whatever the viewer selects (or the preset value if set) |
 | **Hidden with preset** | Nothing — the filter is invisible | The preset value you configured, applied automatically |
 | **Excluded** | Nothing — the filter is invisible | No filter applied; the full unfiltered dataset is used |
@@ -45,7 +44,7 @@ When you create an embed, open the **Filters Visibility and Presets** section:
 The preset input adapts to the type of filter:
 
 | Filter type | How to set the preset |
-|-------------|----------------------|
+| --- | --- |
 | Text / search | Type the value directly |
 | Number | Type a number |
 | Boolean (on/off) | Choose On, Off, or Not set |
@@ -96,7 +95,7 @@ Contact your workspace admin to create or modify environments.
 When creating an embed, you can configure:
 
 | Option | Description |
-|--------|-------------|
+| --- | --- |
 | **Expiry date** | When the embed link stops working |
 | **Allowed websites** | Restrict which domains can display the embed |
 | **Filters** | Per-filter visibility and preset values (see above) |
@@ -173,6 +172,7 @@ const iframeSrc = `${baseEmbedUrl}?filter=${encoded}`;
 ### End-to-End Example
 
 Say your dashboard has a "Company" filter (`wgt_abc123`) and a "Date Range" filter (`wgt_def456`). You want to:
+
 - Lock "Company" to the current viewer's company (hidden, silently applied).
 - Keep "Date Range" visible but default it to the last 30 days.
 
@@ -196,47 +196,43 @@ document.getElementById("dashboard-frame").src = `${baseEmbedUrl}?filter=${encod
 
 ### Other Parameters
 
-
-#### default_dashboard_page
+#### default\_dashboard\_page
 
 Sets which page loads when the embed first opens, overriding the default page configured in the embed token.
 
 Value: The uniquelink (ID) of the dashboard page you want to show.
 
-Example:
-https://your-embed-url.com/embed/dashboard/&gt;token&lt;?default_dashboard_page=sales-overview
+Example: [https://your-embed-url.com/embed/dashboard/\>token\<?default\_dashboard\_page=sales-overview](https://your-embed-url.com/embed/dashboard/>token<?default_dashboard_page=sales-overview)
 
 Behavior:
+
 - If the value matches a valid page in the dashboard group, that page loads first.
 - If the value is invalid or the page doesn't exist, the embed falls back to the token's default page silently.
 - Once loaded, users can still navigate between pages normally using the tab bar.
 
-
-#### hide_page_selector
+#### hide\_page\_selector
 
 Hides the bottom tab bar that lets users switch between dashboard pages.
 
 Value: true, 1, or just the parameter name with no value. Any of these work:
 
-?hide_page_selector=true
-?hide_page_selector=True
-?hide_page_selector=1
-?hide_page_selector
+?hide\_page\_selector=true ?hide\_page\_selector=True ?hide\_page\_selector=1 ?hide\_page\_selector
 
 To explicitly keep it visible (default), omit the parameter or set it to false / 0.
 
-Example:
-https://your-embed-url.com/embed/dashboard/&gt;token&lt;?hide_page_selector=true
+Example: [https://your-embed-url.com/embed/dashboard/\>token\<?hide\_page\_selector=true](https://your-embed-url.com/embed/dashboard/>token<?hide_page_selector=true)
 
 Behavior:
+
 - The tab bar is hidden entirely — the dashboard content takes the full height.
 - Dashboard content is still rendered normally; only the navigation UI is hidden.
-- Combine with default_dashboard_page to pin the embed to a specific page with no navigation UI.
+- Combine with default\_dashboard\_page to pin the embed to a specific page with no navigation UI.
 
 ---
+
 Combined Usage
 
-https://your-embed-url.com/embed/dashboard/&gt;token&lt;?default_dashboard_page=q4-report&hide_page_selector=true
+[https://your-embed-url.com/embed/dashboard/\>token\<?default\_dashboard\_page=q4-report&hide\_page\_selector=true](https://your-embed-url.com/embed/dashboard/>token<?default_dashboard_page=q4-report&hide_page_selector=true)
 
 This opens the q4-report page with no tab bar — useful for embedding a single specific page without exposing navigation to other pages.
 

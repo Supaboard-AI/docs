@@ -41,7 +41,8 @@
           {
             "group": "Supaboard Release Notes",
             "pages": [
-              "apr-24-2026"
+              "apr-24-2026",
+              "may-8-2026"
             ]
           }
         ]
@@ -85,7 +86,8 @@
               "interacting-with-ai",
               "writing-sql-queries",
               "add-filters-and-environments-in-embedded-dashboard-programatically",
-              "expand-rows-in-dashboard-tables"
+              "expand-rows-in-dashboard-tables",
+              "ignore-filtering-for-a-given-table"
             ]
           }
         ]
