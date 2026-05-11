@@ -1,5 +1,5 @@
 ---
-title: 'How to Add Filters to Your Dashboard'
+title: "How to Add Filters to Your Dashboard"
 description: "Filters let you and your viewers interactively slice dashboard data without changing the underlying queries. A single filter can control multiple charts and tables at once: for example, a Region filter that updates every widget on the page the moment someone picks a region from the dropdown."
 mode: "wide"
 ---
@@ -29,6 +29,7 @@ The **Insert Filter** panel slides in from the right side of the screen.
 At the top of the panel, type a clear, descriptive label for your filter. This is what viewers will see on the dashboard.
 
 **Good labels:**
+
 - `Region`
 - `Date Range`
 - `Order Status`
@@ -43,13 +44,13 @@ At the top of the panel, type a clear, descriptive label for your filter. This i
 Click the **Filter Type** dropdown and choose the type that matches the kind of data you want to filter.
 
 | Filter Type | Use when the column contains… | What the viewer sees |
-|---|---|---|
+| --- | --- | --- |
 | **Category** | A fixed set of values (status, region, department) | A dropdown or multi-select list |
 | **Date / DateTime** | Dates or timestamps | A date picker, month, quarter, or year selector |
 | **String** | Free-form text (names, IDs, descriptions) | A search box or multi-select |
 | **Integer** | Whole numbers (count, rank, age) | A number input |
 | **Numeric** | Decimal numbers (price, percentage) | A number input |
-| **Boolean** | True/False flags (is_active, has_license) | A toggle or true/false dropdown |
+| **Boolean** | True/False flags (is\_active, has\_license) | A toggle or true/false dropdown |
 
 > ![Placeholder: Filter type dropdown open, showing all six options](images/filter-03-type-selector.png)
 
@@ -87,7 +88,7 @@ Choose a **Selection Mode**:
 Choose a **Date Operator** — this determines what kind of date control the viewer sees:
 
 | Operator | What the viewer sees |
-|---|---|
+| --- | --- |
 | **Date Range** | Two calendar date pickers (start and end date) |
 | **Month** | A month selector |
 | **Quarter** | A quarter selector (Q1 – Q4) |
@@ -113,14 +114,14 @@ If you want the filter to start pre-filled when the dashboard loads, expand the 
 **By filter type:**
 
 - **Category / String (In):** Click the input and select from suggested values.
-- **Date Range:** Use the calendar to pick a start and end date. You can also choose a **relative period** like *This month*, *Last 7 days*, *Last 3 months*, *This year*, etc.
+- **Date Range:** Use the calendar to pick a start and end date. You can also choose a **relative period** like _This month_, _Last 7 days_, _Last 3 months_, _This year_, etc.
 - **Month / Quarter / Year:** Select from the respective picker.
 - **Integer / Numeric:** Type a number.
 - **Boolean:** Choose **True**, **False**, or leave it unset.
 
 > ![Placeholder: Default value section expanded for a date filter, with "This month" selected as a relative period](images/filter-06-default-value.png)
 
-> **Tip:** Relative date defaults like *This month* always resolve to the current calendar period when the dashboard loads, so you don't need to update them each month.
+> **Tip:** Relative date defaults like _This month_ always resolve to the current calendar period when the dashboard loads, so you don't need to update them each month.
 
 ---
 
@@ -177,9 +178,9 @@ Once filters are on the dashboard, anyone with view access can use them:
 
 **Use multi-column filters to keep dashboards DRY.** If 3 widgets all have an `order_status` column, one category filter that targets all three is better than three separate filters.
 
-**Set defaults for time-sensitive dashboards.** A date filter with a default of *This month* means the dashboard always opens showing current-month data — no manual selection needed.
+**Set defaults for time-sensitive dashboards.** A date filter with a default of _This month_ means the dashboard always opens showing current-month data — no manual selection needed.
 
-**Layer filters for complex analysis.** Filters stack — a viewer can select a Region *and* a Date Range at the same time, and both are applied to all widgets simultaneously.
+**Layer filters for complex analysis.** Filters stack — a viewer can select a Region _and_ a Date Range at the same time, and both are applied to all widgets simultaneously.
 
 **Fewer filters is better.** Too many filters overwhelm viewers. Aim for 3–5 filters per dashboard. If you need more, consider splitting the dashboard.
 
@@ -187,17 +188,17 @@ Once filters are on the dashboard, anyone with view access can use them:
 
 ## Frequently Asked Questions
 
-**Q: A column I expect isn't showing up in the column selector.**  
-A: Check that (1) the widget is connected to a live data source and (2) the filter type you selected matches the column's data type. For example, a date column won't appear in a *Category* filter.
+**Q: A column I expect isn't showing up in the column selector.**\
+A: Check that (1) the widget is connected to a live data source and (2) the filter type you selected matches the column's data type. For example, a date column won't appear in a _Category_ filter.
 
-**Q: The filter widget is on the dashboard but doesn't seem to affect any widgets.**  
+**Q: The filter widget is on the dashboard but doesn't seem to affect any widgets.**\
 A: Open the filter for editing and verify that at least one column is selected. If all columns were deselected, the filter has nothing to apply to.
 
-**Q: Can I filter to multiple values at once?**  
+**Q: Can I filter to multiple values at once?**\
 A: Yes — when configuring a Category or String (In) filter, choose **Multiple values** as the selection mode.
 
-**Q: Can I hide a filter from viewers but still have it apply a value?**  
-A: Yes, on **embedded dashboards** you can set a filter to *Hidden with Preset* — the value is applied silently without showing the control to the viewer. See [Embedded Dashboard Filters](./embedded-dashboards-filters-environments.md) for details.
+**Q: Can I hide a filter from viewers but still have it apply a value?**\
+A: Yes, on **embedded dashboards** you can set a filter to _Hidden with Preset_ — the value is applied silently without showing the control to the viewer. See [Embedded Dashboard Filters](./embedded-dashboards-filters-environments.md) for details.
 
-**Q: How do I scope an embedded dashboard to a specific customer or tenant?**  
+**Q: How do I scope an embedded dashboard to a specific customer or tenant?**\
 A: Use the hidden-preset filter mode on embeds, or pass filter values as a URL parameter (`?filter=<base64-json>`). See [Embedded Dashboard Filters](./embedded-dashboards-filters-environments.md).
