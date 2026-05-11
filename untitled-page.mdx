@@ -20,8 +20,6 @@ mode: "wide"
 
 The **Insert Filter** panel slides in from the right side of the screen.
 
-> ![Placeholder: Dashboard in edit mode with the Insert Filter button highlighted in the toolbar](images/filter-01-insert-button.png)
-
 ---
 
 ## Step 2 — Give the Filter a Label
@@ -34,8 +32,6 @@ At the top of the panel, type a clear, descriptive label for your filter. This i
 - `Date Range`
 - `Order Status`
 - `Product Category`
-
-> ![Placeholder: Insert Filter panel open, label field filled with "Region"](images/filter-02-label.png)
 
 ---
 
@@ -52,17 +48,11 @@ Click the **Filter Type** dropdown and choose the type that matches the kind of 
 | **Numeric** | Decimal numbers (price, percentage) | A number input |
 | **Boolean** | True/False flags (is\_active, has\_license) | A toggle or true/false dropdown |
 
-> ![Placeholder: Filter type dropdown open, showing all six options](images/filter-03-type-selector.png)
-
 ---
 
 ## Step 4 — Select the Columns to Filter
 
 After choosing a type, the panel shows all columns in your dashboard queries that match that type. Check the box next to every column you want this filter to control.
-
-**Example:** You're building a "Region" category filter. Your dashboard has two charts — both contain a `region` column. Select both `orders.region` and `customers.region` so the filter updates both charts simultaneously.
-
-> ![Placeholder: Column selector showing two checkboxes — "orders.region" and "customers.region" — both checked](images/filter-04-column-selector.png)
 
 > **Tip:** If a column you expect isn't listed, make sure the widget is connected to a data source and the column type matches the filter type you selected.
 
@@ -79,8 +69,6 @@ Choose a **Selection Mode**:
 - **Single value** — the viewer can pick only one option at a time (good for toggling a status or picking a single region).
 - **Multiple values** — the viewer can select several options at once (good for comparing across regions or categories).
 
-> ![Placeholder: Selection mode toggle showing "Single value" and "Multiple values" options](images/filter-05-selection-mode.png)
-
 ---
 
 ### Date / DateTime filters
@@ -93,8 +81,6 @@ Choose a **Date Operator** — this determines what kind of date control the vie
 | **Month** | A month selector |
 | **Quarter** | A quarter selector (Q1 – Q4) |
 | **Year** | A year dropdown |
-
-> ![Placeholder: Date operator selection showing four options: Date Range, Month, Quarter, Year](images/filter-05-date-operator.png)
 
 ---
 
@@ -119,8 +105,6 @@ If you want the filter to start pre-filled when the dashboard loads, expand the 
 - **Integer / Numeric:** Type a number.
 - **Boolean:** Choose **True**, **False**, or leave it unset.
 
-> ![Placeholder: Default value section expanded for a date filter, with "This month" selected as a relative period](images/filter-06-default-value.png)
-
 > **Tip:** Relative date defaults like _This month_ always resolve to the current calendar period when the dashboard loads, so you don't need to update them each month.
 
 ---
@@ -130,8 +114,6 @@ If you want the filter to start pre-filled when the dashboard loads, expand the 
 Click **Insert Filter** at the bottom of the panel.
 
 The filter widget appears in the **filter bar** at the top of your dashboard, just above the widgets. You can now interact with it or continue adding more filters.
-
-> ![Placeholder: Dashboard with a "Region" filter widget visible in the filter bar at the top](images/filter-07-saved-filter.png)
 
 ---
 
@@ -146,8 +128,6 @@ Once filters are on the dashboard, anyone with view access can use them:
 - **Boolean filters:** Toggle or select True/False from the dropdown.
 - **Clear a filter:** Click the **×** on the filter widget to remove the current value and return to unfiltered data (or the default value if one was configured).
 
-> ![Placeholder: Dashboard with a "Region" filter showing a dropdown open with several regions listed, one selected](images/filter-08-filter-in-use.png)
-
 ---
 
 ## Editing an Existing Filter
@@ -157,8 +137,6 @@ Once filters are on the dashboard, anyone with view access can use them:
 3. Click **Edit Filter**.
 4. The same configuration panel opens with the filter's current settings.
 5. Make your changes and click **Save Changes**.
-
-> ![Placeholder: Filter widget with a three-dot menu open showing "Edit Filter" and "Delete Filter" options](images/filter-09-edit-menu.png)
 
 ---
 
