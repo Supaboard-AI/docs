@@ -1,0 +1,190 @@
+## What's new
+
+### Command Palette (⌘K / Ctrl\+K)
+
+Jump anywhere in Supaboard with a single shortcut. Search dashboards, agents, and actions from one place, see your recent items, filter by type, and navigate entirely with the keyboard. Available across the main app and mini-board.
+
+### AI-powered dashboard generation
+
+Start from an empty dashboard, describe what you want, and watch the plan stream in live. Supaboard drafts a structured plan, generates widgets for you, and lets you follow up with refinements. The empty dashboard now opens with a chat-first experience, and individual widgets can be added through a unified picker that combines Ask Agent and Query Builder in one popup.
+
+You can also generate or edit widgets one at a time using the new loading widget flow, with a method picker, prompt stage, and a back button if you change your mind. Drag and resize performance on dashboards has been significantly improved.
+
+### File preview widgets (PDF and PPTX)
+
+Files returned by search now render inline as preview widgets, both in the dashboard and in the side panel. PDFs and PowerPoint files open in an embedded viewer so you can read them without leaving the conversation.
+
+### Conversation sharing
+
+Share Ask Stella conversations with teammates or via public link. Invite specific users, manage roles, and link directly to a specific message in the thread. Share buttons are available in the Ask Stella topbar and on individual messages.
+
+### Voice input in dashboards
+
+Speak your questions directly into the dashboard interface instead of typing.
+
+### Tab autocomplete in the code editor
+
+Press Tab while writing SQL to get AI-powered, cursor-aware suggestions. Completions are aware of your schema, your SQL dialect (including a Python branch), and the live query, and they stay snappy thanks to caching.
+
+### Multi-select in Ask User questions
+
+When an agent asks you a question with multiple valid answers, you can now select more than one option.
+
+### Dashboard page management
+
+Right-click a dashboard page tab to rename or remove it.
+
+---
+
+## Agents
+
+### Agent tuning assistant
+
+A new AI-powered assistant helps you tune your agents. It can read and update agent configuration, track issues, and roll back any change via snapshots, so every edit is reversible.
+
+### Agent-wide evaluator
+
+Run evaluations across your agent in parallel, with scoring, paginated run history, per-eval logs, and live streaming results. Previously flagged unresolved issues are fed back into the next run, and follow-up "fix the issues" requests no longer trigger a full re-evaluation.
+
+### Long-term agent memory
+
+Agents now retain long-term memory across conversations. Memory is captured automatically in the background and folded into how the agent reasons and evaluates, and you can manage it directly.
+
+### Setup questionnaire
+
+The old "intelligence analysis" onboarding flow has been replaced with a cleaner questionnaire that groups questions by tags.
+
+### Other agent improvements
+
+- Per-agent model selection
+- Auto-promote thumbs-up answers into the agent's verified queries
+- Manage agent knowledge files chunk by chunk
+- Attachment support inside agent knowledge retrieval
+- Confidence score icon on the answer toolbox
+- Reworked agents UI with a properly structured view and fixes to the empty state
+- New default agent automatically created on workspace setup
+
+---
+
+## Search and Ask AI
+
+### Multimodal attachments
+
+Attachments are now shaped for whatever model is currently active, instead of silently switching models behind the scenes. Every supported model handles attachments cleanly across providers.
+
+### PDF and PPTX text extraction
+
+Search can now extract text from PDFs and PowerPoint files, with an image-transcription fallback for models that do not support vision.
+
+### Attachment caching
+
+Extracted text from attachments is persisted and reused across turns, so the same file is never reprocessed. Failed extractions are not cached, so retries still work.
+
+### Conversation attachments persist
+
+Attachments from earlier turns are re-injected on every turn (deduplicated, oldest first), so the agent keeps the full context.
+
+### Platform how-to help
+
+The agent can now answer questions about how to use Supaboard itself, pulling from the docs directly.
+
+### Other search improvements
+
+- End-to-end Mongo and multi-resource Ask AI flow
+- Widget generation stops on the first successful widget, skipping a redundant summary step for faster responses
+
+---
+
+## Query Builder
+
+### Conversational chat-or-fix assistant
+
+The Query Builder's AI validation is now fully conversational. It supports multiple changes per message, anchors to your live query, stops cleanly after each edit, and verifies that the SQL actually runs before showing it to you. Accept and reject decisions are preserved in context.
+
+### Cursor-aware tab autocomplete
+
+As covered above, Tab in the editor now triggers AI completions tuned to your schema and dialect.
+
+### Other Query Builder fixes
+
+- Multiple rounds of UI polish and bug fixes across the builder
+
+---
+
+## Charts and data
+
+### Pivot overhaul
+
+Pivots now use an explicit second column for grouping. High-cardinality breakdowns render as a proper grouped or stacked chart using top-N plus an "Other" bucket, instead of flattening. The cardinality cap is tunable, with safeguards for uncomparable values and ragged rows.
+
+### Column order preserved end to end
+
+Result columns are no longer alphabetized. Rows, schema, and column ordering all follow the order from your SQL or query.
+
+### Smarter column-value suggestions
+
+Suggestions are now generated at the database level for all SQL connectors, with proper search, ordering, and paging. You'll also see the true total distinct count rather than just the current page size.
+
+### Other chart fixes
+
+- Confidence gauge rendering fixed
+- Data zoom now honors its setting instead of always being on
+- Various axis and rendering fixes
+- Improved date-time handling in schema generation
+
+---
+
+## Billing and roles
+
+Supaboard now runs on seat-based billing: you pay per active Editor\+ seat, and Viewers are free. Mid-cycle role changes are prorated, and a new seat-quote preview lets you see exactly what a change will cost before you make it.
+
+Workspace switching is also now blocked while a background runner is active, fixing a silent context-switch bug.
+
+---
+
+## Dashboards and demos
+
+- Dashboard exports no longer ship empty widget data, and the export prompt has been trimmed
+- Each demo template now gets its own demo dashboard group, cloned automatically
+- Demo databases are seeded automatically; empty default dashboards are pruned from cloned groups
+- Sorting now tracks actual opens and corrects previously inaccurate sort behaviors
+- A default dashboard group is auto-created on workspace setup
+- Dashboard header is hidden in view mode when there are no widgets
+- Dashboard stream markdown rendering fixed
+- Dashboard pages deletion fixed
+
+---
+
+## Sidebar
+
+The sidebar has been reworked. Background task progress now lives inside the relevant nav section (Dashboard tasks under Dashboard, Ask Stella tasks under Ask Agents) instead of a separate panel at the bottom. The bottom tasks panel and theme toggle have been removed. The "New Query" flow now opens the chart creation modal cleanly after navigation.
+
+---
+
+## Platform and performance
+
+- HTTP/2 enabled for faster, more responsive requests
+- Faster database connection and schema introspection
+- Onboarding is faster, with cleaner paragraph formatting and properly capitalized suggested questions
+- Logos and icons are prefetched during browser idle time
+- Background task rendering optimizations
+
+---
+
+## Bug fixes
+
+- Fixed broken conversation sharing flow
+- Fixed MCP connector initialization
+- Fixed sidebar icon alignment and conditional centering
+- Filtered Stella and "Untitled Conversation" entries from leaking into the Query Builder popup list
+- "Create using prompt" on loading widgets now transitions immediately, no stutter
+- Transient errors in loading widgets stay inline during generation
+- Fixed text widget close button hit-box and pointer conflicts with grid drag
+- Empty dashboard now centers correctly on the viewport
+- Plan card and empty screen layouts aligned to design specs
+- Plan stream no longer drops its final chunk
+- Ask-user cards now appear above the trace and don't duplicate in thinking steps
+- Fixed Ask Stella invites for existing workspace users
+- Separated member-invited and invite failures in the share dialog so errors surface correctly
+- Fixed miniboard padding and layout
+- Fixed signup and onboarding initialization issues
