@@ -98,7 +98,8 @@
   },
   "logo": {
     "light": "/images/logo-light.png",
-    "dark": "/images/logo-dark.png"
+    "dark": "/images/logo-dark.png",
+    "href": "https://supaboard.ai"
   },
   "navbar": {
     "links": [],
