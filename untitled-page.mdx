@@ -1,0 +1,61 @@
+---
+title: "Filtering Dashboards from Table Data"
+description: "Right-click a table cell or row to filter your dashboard instantly, and fix columns that don't match automatically."
+---
+
+Right-click a cell or row in a table widget to instantly apply it to your dashboard's filters — no need to open the filter panel and search for the value yourself.
+
+## Filter by right-clicking a table
+
+Every table widget on your dashboard can drive the filters that already exist on that dashboard. Right-click any cell, and if a filter targets that column, you'll get a shortcut to apply it — right there, right then.
+
+**Example:** right-click a cell in the `Status` column where the value is `Closed`. If the dashboard already has a filter on `Status`, the context menu shows:
+
+```text
+Filter by Status = Closed
+Filter by this row
+─────────────────────────
+Records
+Drill Through
+```
+
+1. Right-click any cell in a table widget.
+2. If the dashboard already has a filter for that cell's column, **Filter by \[Column\] = \[value\]** appears in the menu.
+3. If other columns in that row also have filters, **Filter by this row** appears too — it sets every matching filter at once, in one click.
+4. Every widget that uses that filter updates immediately, everywhere on the dashboard.
+
+> **Note:** This only works with filters that already exist on the dashboard — right-clicking never creates a new one. If you don't see a **Filter by…** option for a column, add a filter for it first from **\+ Add Filter**.
+
+### How the value gets applied
+
+For a dropdown-style filter (like `Status`), clicking **Filter by…** **replaces** the current selection with the value you clicked — it doesn't add to whatever was already selected. For a date filter, it sets a single day as the range.
+
+## When a column doesn't match automatically
+
+Sometimes the column name shown in a table doesn't match its real name in your data source — for example, if the underlying query renames `status` to `s`. When that happens, right-click filtering can't tell the two are the same column. **Filter Mapping** lets you point it in the right direction, by hand, once.
+
+> **Tip:** You'll only ever need this for renamed columns. Most tables need no setup at all — right-click filtering already works automatically whenever a column's name matches its source.
+
+### Setting up a mapping
+
+1. Open the table widget's **Table Settings** (the pencil icon on the widget), then switch to the **Filter Mapping** tab.
+2. For the column that isn't matching, open its dropdown — real columns from your data source are listed, grouped by table.
+3. Pick the real column it actually comes from. Leave anything already working as `Not mapped` — no need to touch it.
+4. Click **Save Changes**, then save the dashboard. Right-click filtering on that column now works.
+
+| Column shown in table | Maps to |
+| --- | --- |
+| `s` | `customer_address.country` |
+| `order_count` | _Not mapped_ |
+
+> **Note:** Mapping is entirely manual — nothing gets guessed or auto-filled. Some columns are computed from an expression and don't have one single real column behind them; those simply stay `Not mapped`, and right-clicking them just won't offer a filter shortcut. Everything else on the table keeps working normally.
+
+## Quick answers
+
+**Does mapping a column create a new filter?** No. Mapping only helps right-click filtering recognize a column that already has a matching filter elsewhere on the dashboard — it never adds a new filter by itself.
+
+**What if I map a column to the wrong source?** Open its dropdown any time and pick a different one, or choose `Not mapped` to clear it. Nothing is permanent until you click **Save Changes**.
+
+**Do I need to map every column on the table?** No — only the ones that are renamed _and_ that you actually want to use with right-click filtering. Everything else is unaffected.
+
+**Does this affect Drill Through or Related Questions?** No, those are separate features and work exactly as they did before.
