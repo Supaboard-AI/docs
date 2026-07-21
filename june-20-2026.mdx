@@ -1,0 +1,56 @@
+---
+title: "June 20, 2026"
+mode: "wide"
+---
+
+## Reports &amp; Automations — Excel Exports, Smarter Scheduling
+
+### Export to Excel
+
+Alongside PDF and PowerPoint, you can now generate reports as formatted Excel workbooks — both from the manual "Generate Report" flow and as an automation step.
+
+### Filters Now Carry Through to Exports
+
+Dashboard filters are no longer left behind when you generate a report or ask a question about a dashboard. Whatever filters are applied (or explicitly selected) now flow into PDF, PowerPoint, and Excel exports, and into AI-powered dashboard Q&amp;A — so the output matches the data slice you actually meant to share.
+
+### More Control Over Scheduled Reports
+
+Scheduled dashboard reports now let you:
+
+- Choose the output format: PDF, PowerPoint, Excel, or an AI-written summary
+- Set the schedule (daily, weekly, monthly, or yearly) and time of day
+- Specify recipient emails
+- Override the AI prompt used to generate the report
+- Apply dashboard filters to the scheduled export
+
+### Fixed: Weekly/Monthly/Yearly Schedules Not Firing
+
+Scheduled automations set to run weekly, monthly, or yearly could silently never trigger because the time-of-day setting wasn't being collected for anything but daily schedules. These now fire correctly at their configured time.
+
+### Custom HTML Emails
+
+The email step in automations can now send fully custom HTML content, instead of only the standard branded template — useful for tailored alerts and stakeholder updates.
+
+### Clearer Action Names
+
+A few automation actions were renamed for clarity: "Make Pdf" → **PDF from Dashboard**, "Make Ppt" → **PPT from Dashboard**, and "Zapier" → **Webhook**. Existing automations keep working as-is. Each action also now has its own distinct icon instead of a shared placeholder.
+
+---
+
+## Dashboards
+
+### Take a Snapshot
+
+A new **Take a Snapshot** option in the Share menu lets you generate a quick, no-AI PDF export of a dashboard in one click.
+
+---
+
+## Data Sources
+
+### Fixed: Mongo Date Filters Returning No Results
+
+Dashboards backed by MongoDB could silently return zero rows when filtering on a date field, due to a mismatch between how dates are stored and how filters were querying them. Date filters on Mongo-backed dashboards now return the correct matching records.
+
+---
+
+**Thank you for using Supaboard. We're continuously improving the platform to help you explore, understand, and act on your data faster.**

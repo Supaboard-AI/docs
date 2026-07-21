@@ -1,0 +1,37 @@
+---
+title: "June 27, 2026"
+mode: "wide"
+---
+
+## AI Assistant — Reliability Fixes
+
+- **No more stuck questions**: Multi-table questions (especially against MongoDB sources) could occasionally load forever and never return an answer. The assistant now bounds slow schema lookups so it always finishes and responds instead of hanging indefinitely.
+- **Fixed false "no data" answers**: In rare cases, a hiccup in the summarization step could cause the assistant to report "data unavailable" even though it had actually fetched your rows. It now always reports on the real data it found.
+- **Cleaner step-by-step reasoning**: Removed repetitive "reviewing results…" placeholder text from the Deep Dive step feed, so you only see meaningful reasoning as the assistant works through your question.
+- **Smarter answers on large schemas**: For workspaces with hundreds of tables, the AI's understanding of table structure used to trail off after the first few dozen — now every table gets a proper AI-generated description, improving answer accuracy across large databases.
+
+---
+
+## Query Builder
+
+- Fixed a bug where choosing Python as your query language could still cause the AI to generate SQL behind the scenes, leading to an execution error. Your language choice is now always respected.
+
+---
+
+## Automations
+
+- **Clearer action names**: Automation actions have been renamed with plainer, more descriptive titles and descriptions so it's easier to tell what each step does.
+- **Better field editors**: Query fields and email bodies now open in proper code/HTML editors instead of plain text boxes.
+- **New: AI field helper**: Automation steps that need a database query or an HTML email body can now have the AI draft that content for you from a plain-language description.
+- **Redesigned subscription emails**: Scheduled dashboard subscription emails now render from a polished, branded template with an AI-generated summary instead of the old placeholder layout.
+
+---
+
+## Smaller Fixes
+
+- Embeds now support a title field.
+- Signup can now be restricted to work email addresses.
+
+---
+
+**Thank you for using Supaboard. We're continuously improving the platform to help you explore, understand, and act on your data faster.**

@@ -1,0 +1,31 @@
+---
+title: "July 11, 2026"
+mode: "wide"
+---
+
+## Embed &amp; Dashboard Filters
+
+### Expanded Date Presets
+
+- Way more preset options when editing a filter: Lifetime, Today, Yesterday, Previous Week, Previous 7/30 Days, Previous 1/3/12 Months, and Current Period variants — available from the Edit Filter panel, and in the embed and deck (report) filter pickers
+- A new relative date range builder lets you construct custom rolling windows beyond the standard presets
+
+### More Reliable Embeds
+
+- Fixed a bug where a filter that was hidden but had a preset value applied (e.g. via an embed's `?filter=` link) wasn't actually being applied — hidden preset filters now take effect correctly
+- Embeds can now override the title visibility per-link with a `hide_title` parameter, independent of the embed's saved setting
+
+### Cascading Filter &amp; Insight Fixes
+
+- Resolved issues where cascading filters (filters that depend on other filters) and AI-generated insights could get out of sync or return stale results
+
+---
+
+## Faster, Smarter AI Answers
+
+- When a dashboard question can't be answered by an existing widget (e.g. "break this down by company"), the AI assistant can now fall back to running a live query against your connected database instead of giving up — while still preferring your existing widgets whenever they cover the question
+- Under the hood, we fixed a caching issue that made every one of these live-query questions re-scan your entire database's table list — on larger databases this cut typical answer time roughly in half
+
+---
+
+**Thank you for using Supaboard. We're continuously improving the platform to help you explore, understand, and act on your data faster.**
