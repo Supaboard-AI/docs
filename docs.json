@@ -32,7 +32,10 @@
               "agents",
               "data-sources",
               "dashboard",
+              "automations",
+              "datasites",
               "tools",
+              "connect-supaboard-to-claude",
               "white-label",
               "embed",
               "query-builder"
@@ -52,7 +55,10 @@
               "june-27-2026",
               "july-4-2026",
               "july-11-2026",
-              "july-18-2026"
+              "july-18-2026",
+              "july-25-2026",
+              "august-1-2026",
+              "august-8-2026"
             ]
           }
         ]

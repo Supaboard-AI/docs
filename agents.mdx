@@ -3,276 +3,406 @@ title: "Agents"
 mode: "wide"
 ---
 
-An **Agent** is an AI assistant you configure to understand your data. It knows which tables it can query, what the data means, how to interpret business terminology, and what rules to enforce. Once set up, it powers Ask Stella so your team can get accurate answers in plain English.
+An **Agent** is an AI assistant you configure to understand your data. It knows which tables it can query, what the data means, how to interpret your business terminology, and what rules to enforce. Once set up it powers [Ask Analysts](./ask-agents), so your team can get accurate answers in plain English.
+
+A good agent is not a one-off setup. It has a confidence score you can watch, an evaluation suite you can run, memory it accumulates from real conversations, and skills you teach it — all of which you tune over time.
 
 
 # Browsing Agents
 
-Navigate to **Agents** in the sidebar to see all agents in your workspace.
+Navigate to **Agents** in the sidebar to see every agent in your workspace.
 
 ## Display modes
 
-Toggle between two views using the view switcher in the top-right:
+Toggle between two views using the switcher in the top-right:
 
-| View          | What you see                                                          |
-| ------------- | --------------------------------------------------------------------- |
-| **Card grid** | Visual cards with agent name, description, and data source icons      |
-| **Table**     | Name · Description · Data Sources · Created by · Created on · Actions |
+| View | What you see |
+| --- | --- |
+| **Card grid** | Visual cards with agent name, description, and data source icons |
+| **Table** | Name · Description · Resource · Created By · Created On · Actions |
 
 
 # Creating an Agent
 
-Click **New Agent** from the Agents page. A modal collects the minimum required to get started:
+Click **New Agent**. This opens a full creation page — *"Let's create your new agent"* — with a live preview of the agent card beside the form.
 
-| Field            | Required           | Notes                                                   |
-| ---------------- | ------------------ | ------------------------------------------------------- |
-| **Name**         | Yes                | Human-readable label shown across the UI                |
-| **Description**  | Yes                | A short summary of what this agent does                 |
-| **Data Sources** | Yes (at least one) | The database connections this agent is allowed to query |
+| Field | Required | Notes |
+| --- | --- | --- |
+| **Agent Name** | Yes | Human-readable label shown across the UI |
+| **Select Agent Look** | No | Pick an avatar for the agent |
+| **Data sources** | Yes (at least one) | The connections this agent may query. Inactive connections cannot be selected. |
+| **User access** | No | Which workspace members can use this agent |
 
-When selecting data sources, inactive connections are shown greyed out with an _(Inactive)_ label. Each entry shows `{source name} • {database}`.
+> There is no Description field here. The description is filled in for you if you use **Tune with AI**, and you can edit it later from **Who am I**.
 
-Once created, you are taken directly to the agent's setup page to configure everything else.
+Then choose how to continue:
+
+| Button | Where it takes you |
+| --- | --- |
+| **Build Manually** | The agent's home page, where you configure everything yourself |
+| **Tune with AI** | A guided [setup questionnaire](#the-setup-questionnaire) that configures the agent from your answers |
 
 
-# Setup — Information & Data Access
+# Agent Home
 
-The **Setup** tab is the primary configuration page for an agent.
+Opening an agent lands you on its home page — a dashboard of how well the agent is doing and what to fix next.
+
+## Header
+
+| Control | What it does |
+| --- | --- |
+| **Try in Chat** | Opens a conversation with this agent so you can test a change immediately |
+| **Tune with AI** | Opens the [tuning assistant](#the-tuning-assistant) side panel |
+
+## Cards
+
+| Card | What it shows |
+| --- | --- |
+| **Confidence Score** | A gauge of the agent's current accuracy, a trend line over recent evaluations, and a **Re-evaluate** button. Reads *"Not enough evals in the last 7 days yet"* until you've run some. |
+| **Issues** | Problems found by evaluation, each with **Mark as fixed** / **Reopen** |
+| **Quick Actions** | **Self Improve** and **AI Insights** toggles (the same settings as **Enable Self-Improvement** and **Enable Data Access** on Who am I), plus Slack and Teams tiles marked *coming soon* |
+
+> The Slack and Teams tiles are placeholders. Clicking either just shows a "coming soon" message — there is no integration to connect yet.
+
+## Fine Tuning Setup
+
+A grid of seven tiles that doubles as the agent's navigation and its to-do list. Tiles carrying open issues are flagged.
+
+| Tile | Purpose |
+| --- | --- |
+| **Who am I** | Identity, data access, and controls |
+| **Knowledge Base** | Your business tribal knowledge |
+| **Memory** | What the agent has learned from past conversations |
+| **Rules** | Guardrails followed on every query |
+| **Table Configuration** | Context on your data so queries land right |
+| **Verified Queries** | Answers you've signed off on |
+| **Skills** | Reusable procedures the agent loads on demand |
+
+Below that, the latest evaluation run is summarised.
+
+
+# Navigating an Agent
+
+There is no tab bar. Use the **breadcrumb dropdown** in the topbar to move between sections, or the Fine Tuning Setup tiles on the home page.
+
+| Section | What it covers |
+| --- | --- |
+| **Who am I** | Name, description, image, data scope, overview, access controls |
+| **Knowledge Base** | Uploaded reference documents, broken into searchable chunks |
+| **Memory** | Facts the agent has retained from real conversations |
+| **Rules** | Hard rules the agent must follow |
+| **Table Configuration** | Per-table business context |
+| **Verified Queries** | Pre-approved SQL for known questions |
+| **Evaluation** | Test suites and run history |
+| **Skills** | Packaged instructions for particular kinds of task |
+
+> If you used Supaboard before mid-2026: **Setup** is now **Who am I**, **Master Ruleset** is now **Rules**, and **Fine Tuning** is now **Verified Queries**.
+
+## Sharing an agent
+
+A share icon in the topbar opens **Share `{agent}`**, where you invite workspace members to this agent's access list. Collaborators appear as a stack of avatars beside it. There is no public link — agent sharing is workspace-members-only.
+
+
+# Who am I
 
 ## Information
 
-| Field           | Details                                                                                                             |
-| --------------- | ------------------------------------------------------------------------------------------------------------------- |
-| **Name**        | Rename the agent at any time                                                                                        |
-| **Description** | Update the summary shown in the agents list                                                                         |
-| **Image**       | Upload a custom image (PNG/JPG/etc, max 32 MB). Supaboard extracts the dominant colour for theming. _(Pro feature)_ |
+| Field | Details |
+| --- | --- |
+| **Name** | Rename the agent at any time |
+| **Description** | The summary shown in the agents list |
+| **Image** | Upload a custom image (max 32 MB). Supaboard extracts the dominant colour for theming. Requires the custom agent image feature on your plan — see [pricing](https://supaboard.ai/pricing). |
 
 ## Data source access
 
 Controls exactly which data the agent can see.
 
-- **Multi-select dropdown** — add or remove data source connections.
-- **Table-level scope** — expand any connected source to choose specific tables. All tables are included by default.
-- A count badge shows `{X} sources · {Y} tables` at a glance.
+- **Multi-select dropdown** — add or remove data source connections
+- **Table-level scope** — expand any connected source to pick specific tables. All tables are included by default.
+- A count badge shows sources and tables at a glance
 
 ### Handling missing schema
 
-If a table's schema hasn't been generated, a warning appears. For each affected table:
+If a table's schema hasn't been generated, a banner reads *"Some tables have missing schema"* with a **Go to Table Configuration** link. Fix it there with **Regenerate Schema**.
 
-| Action                | What it does                                                 |
-| --------------------- | ------------------------------------------------------------ |
-| **Regenerate schema** | Re-scans the table and rebuilds its metadata                 |
-| **Hide table**        | Removes the table from the agent's scope without deleting it |
-| **Remove table**      | Permanently removes the table from the agent's configuration |
+> A missing schema means the agent doesn't know what the columns in that table mean. Resolve schema warnings before expecting accurate answers.
 
-> A missing schema means the agent doesn't know what the columns in that table mean. Resolve all schema warnings before expecting accurate answers.
+## Overview
 
-
-# Setup — Overview (Instructions)
-
-The **Overview** is the agent's core instruction set — a freeform text block that tells it:
+The agent's core instruction set — a freeform text block that tells it:
 
 - What this data represents
 - The business domain it operates in
 - How to interpret ambiguous questions
 - Any context about data quirks or conventions
 
-## Quick templates
-
-Supaboard offers domain-specific templates you can append to your overview. Templates are loaded based on the data sources you've connected. Click a template to add its suggested language.
+Domain-specific **quick templates** are offered based on the data sources you've connected. Click one to append its suggested language.
 
 > The overview is the single most impactful thing you can write for an agent. A detailed, precise overview produces dramatically better answers than a vague one.
 
+## Access and controls
 
-# Setup — Access & Controls
+### Enable Data Access
 
-## Enable Data Access
+When on, the agent can drill into the actual data behind charts for deeper analysis and follow-up insights. When off, responses stay at the aggregated level. **On by default.** Mirrored on Agent Home as **AI Insights**.
 
-**Toggle** — When on, Stella can drill into the actual data behind charts to provide deeper analysis and follow-up insights. When off, responses are limited to aggregated results.
+### Enable Self-Improvement
 
-## Enable Self-Improvement
+When on, the agent updates table descriptions, creates new metrics and dimensions from conversation patterns, and refines its understanding over time. **On by default.** Mirrored on Agent Home as **Self Improve**.
 
-**Toggle** — When on, Stella can update table descriptions, create new metrics and dimensions based on conversation patterns, and refine its understanding over time. Changes are tracked in changesets so you can review and approve them before they take effect.
-
-## User Access
+### User Access
 
 Controls which workspace members can chat with this agent.
 
-- **All users** (default) — every workspace member with Stella access can use the agent.
-- **Specific users** — only selected users can access the agent. You (the creator) and the workspace Owner are always included and cannot be removed.
+- **All users** (default) — every workspace member with Ask Analysts access
+- **Specific users** — only the selected people. The workspace **Owner** is always included and cannot be removed.
 
-Select users from the dropdown, which shows all workspace members with their roles. Your own entry is marked _(you)_.
+The dropdown lists all workspace members with their roles; your own entry is marked *(you)*.
+
+## Danger Zone
+
+**Remap Data Source** repoints the agent at a different data source. It warns that *"This will delete all the changes done before in the data source"* — table configuration, schema context, and anything else tied to the old source is discarded. Confirmation is required.
 
 
 # Knowledge Base
 
-Navigate to the **Knowledge** tab to manage the agent's document library.
-
-The knowledge base gives the agent context beyond what's in the database — data dictionaries, business definitions, policy documents, or any reference material that helps it answer questions accurately.
+The knowledge base gives the agent context beyond the database — data dictionaries, business definitions, policy documents, or any reference material.
 
 ## Uploading files
 
-Drag files onto the upload zone or click to browse. Supported formats:
+Click **Upload** or drag files onto the page. Supported formats include PDF, CSV, Excel (`.xlsx` / `.xls`), Word, plain text, and images. Multiple files can be selected at once.
 
-| Format                   | Use case                                     |
-| ------------------------ | -------------------------------------------- |
-| **PDF**                  | Reports, data dictionaries, policy documents |
-| **CSV**                  | Reference data, lookup tables                |
-| **Excel (.xlsx / .xls)** | Structured reference data                    |
-| **Images**               | Diagrams, schemas, visual reference          |
+Each file is split into **chunks** — the fragments the agent actually retrieves when answering.
 
-Multiple files can be selected at once.
+## Browsing what's stored
 
-## Uploaded files table
+Files are listed as rows showing `{n} chunks · {TYPE}`. Expand a row to read the chunks inline, or open the file for the full chunk-by-chunk view. Each chunk is labelled so you can see exactly what the agent will retrieve.
 
-| Column           | Description                                               |
-| ---------------- | --------------------------------------------------------- |
-| **File Name**    | The uploaded file's name                                  |
-| **File Type**    | PDF, CSV, Excel, Image                                    |
-| **Chunks Added** | How many knowledge fragments were extracted from the file |
-| **Action**       | Preview or delete the file                                |
+Use **Search knowledge chunks** to search across the *contents* of every chunk, not just file names — useful for checking whether a specific definition actually made it in.
 
-Click a file name to preview its contents. Click the delete icon to remove it — the change is reflected immediately.
+Delete a file from its row menu (**Delete file**); the change takes effect immediately.
 
 
-# Master Ruleset
+# Memory
 
-Navigate to the **Master Ruleset** tab to define hard rules that govern how the agent interprets and answers every query — these are not suggestions.
+Memory is what the agent has retained from real conversations. Unlike the knowledge base, you don't write it — it accumulates on its own, primarily from feedback on answers.
+
+| Column | Description |
+| --- | --- |
+| **Memory Context** | The retained fact |
+| **Entities** | People, metrics, or tables the memory refers to |
+| **Tags** | Categorisation |
+| **Sources** | Where the memory came from |
+| **Created By** | Who triggered it |
+| **Updated At** | Last change |
+| **Action** | Row menu |
+
+Click any row to open **Memory Details**, showing the **Extracted Memory** in full with **Copy** and **Delete**.
+
+> Memory is captured in the background — there is nothing to run or schedule. Review it periodically and delete anything wrong: a bad memory is worse than no memory, because the agent will keep applying it.
+
+
+# Rules
+
+Hard rules that govern how the agent interprets and answers every query. These are not suggestions.
 
 Use rules to:
 
-- Enforce terminology — _"always call this field 'Net Revenue', not 'Revenue'"_
-- Define business logic — _"always filter to the current fiscal year unless the user specifies otherwise"_
-- Set formatting standards — _"always express percentages to 2 decimal places"_
+- Enforce terminology — *"always call this field 'Net Revenue', not 'Revenue'"*
+- Define business logic — *"always filter to the current fiscal year unless the user specifies otherwise"*
+- Set formatting standards — *"always express percentages to 2 decimal places"*
 - Prevent certain response types
 
 ## Managing rules
 
-**Create a rule manually:**
+**Create a rule manually:** click **New Rule**, enter a **Title** (short label) and **Description** (the rule in plain language), and save.
 
-1. Click **New Rule**.
-2. Enter a **Title** (short label) and **Description** (the rule in plain language).
-3. Save.
+**Import rules from a file:** click **Browse File** and upload a document — `.txt`, `.md`, `.doc`, `.docx`, `.pdf`, `.csv`, `.xlsx`, `.xls`, `.json`, or an image. Supaboard extracts rules from it automatically.
 
-**Import rules from a file:**
+**Edit or delete:** use the row's **Edit** and **Delete** actions.
 
-1. Click **Browse File**.
-2. Upload a YAML or JSON file containing rule definitions.
-3. Supaboard extracts rules from the file automatically.
-
-**Edit or delete a rule:** Click the action menu on any rule row to open the editor. Changes can be undone within the editor before saving.
-
-**Search** rules by title or description using the search bar at the top of the table.
+**Search** rules using the search bar above the table.
 
 
 # Table Configuration
 
-Navigate to the **Table Configuration** tab to teach the agent what each table _means_ — context that a SQL schema alone cannot convey.
+Teach the agent what each table *means* — context a SQL schema alone cannot convey.
 
-## Navigating tables
+## Navigating
 
-Use the two dropdowns at the top to select a **data source**, then a **table** within it. A warning icon appears next to sources with missing schema.
+The left sidebar is a tree of your data sources and their tables. Tables outside the agent's scope appear dimmed. Select any table to edit its context.
 
-## Per-table actions
+## Editing
 
-| Action                | What it does                                                        |
-| --------------------- | ------------------------------------------------------------------- |
-| **Hide / Show table** | Toggle whether Stella considers this table when answering questions |
-| **Regenerate schema** | Re-scans the table to refresh column metadata                       |
+Context is written as **Markdown** in a single editor with **Edit** and **Preview** modes. Cover, at minimum:
 
-## Configuration fields
+| Topic | What to write |
+| --- | --- |
+| **Summary** | What this table stores, and its key relationships to other tables |
+| **Granularity** | What one row represents — *"One row per order line item"*, *"One row per daily user session"* |
+| **Gotchas** | Known quirks and caveats — *"The `deleted_at` column is not reliably populated before 2022"* |
+| **Use cases** | Common questions this table helps answer, so the agent knows when to reach for it |
 
-For each table, fill in four knowledge fields:
+**Regenerate Schema** re-scans the selected table and refreshes its column metadata. Use it after a schema change upstream, or to clear a missing-schema warning.
 
-| Field           | What to write                                                                                                          |
-| --------------- | ---------------------------------------------------------------------------------------------------------------------- |
-| **Summary**     | A plain-English description of what this table stores and its key associations with other tables                       |
-| **Granularity** | What each row represents — e.g. _"One row per order line item"_ or _"One row per daily user session"_                  |
-| **Gotchas**     | Known quirks, data quality issues, or caveats — e.g. _`"The deleted_at column is not reliably populated before 2022"`_ |
-| **Use Cases**   | Common questions this table helps answer — helps Stella know when to reach for it                                      |
-
-> Table Configuration is the second most impactful investment after the Overview. Granularity and Gotchas in particular prevent the most common categories of incorrect answers.
+> Table Configuration is the second most impactful investment after the Overview. Granularity and Gotchas in particular prevent the most common categories of wrong answer.
 
 
-# Fine-Tuning (Verified Queries)
+# Verified Queries
 
-Navigate to the **Fine Tuning** tab to manage **Verified Queries** — pre-written, validated SQL that the agent reuses for known questions.
-
-When a user asks something that closely matches a verified query, Stella uses it directly rather than generating a new one. This guarantees:
+Pre-written, validated SQL the agent reuses for known questions. When someone asks something that closely matches a verified query, the agent uses it directly instead of writing a new one. That guarantees:
 
 - Correctness for high-stakes metrics
-- Consistent answers across all users
-- Faster responses (no generation step needed)
+- Consistent answers across everyone who asks
+- Faster responses — no generation step
 
-## Adding a verified query
+## Adding one
 
-Click **New Evaluation** and fill in:
+Click **New Query** (or **Create Query** on the empty state). The editor has a **Title** and a SQL pane; click **Save & Run Query** to validate it against your data and save.
 
-| Field                | Required | Notes                                |
-| -------------------- | -------- | ------------------------------------ |
-| **Title**            | Yes      | A short label for this query         |
-| **Description**      | No       | What question this query answers     |
-| **Database / Table** | Yes      | Selected from the agent's data scope |
-| **SQL Query**        | Yes      | The validated SQL to use             |
+## Managing them
 
-## Managing verified queries
+Select a row to open it in the editor. The row menu offers **Delete**.
 
-- **Search** by title or description.
-- Click **View** on the query column to see the full SQL.
-- Use the action menu to **edit** or **delete** a query.
+## Automatic promotion
+
+When someone gives an answer a thumbs up in Ask Analysts, the query behind it is promoted into this list automatically. Promoted entries link back to the conversation they came from, so you can see the question that produced them.
+
+> Review promoted queries periodically. They're a good source of coverage, but a thumbs up means "this looked right to one person", not "this is the canonical definition".
 
 
-# Integrations
+# Evaluation
 
-The **Integrations** section within Setup connects the agent to external platforms.
+Evaluation is how you find out whether your configuration actually works, and it drives the Confidence Score on Agent Home.
 
-## Slack _(Business)_
+| Tab | Contents |
+| --- | --- |
+| **Evals** | Your test cases. **New Evaluation** adds one. |
+| **Run History** | Past runs. **Run Evaluation** starts a new one; the button reads *Running…* while in progress. |
 
-Connect the agent to a Slack workspace so team members can query it directly from Slack without opening Supaboard. Click **Connect** to start the OAuth flow. The connection is scoped to this specific agent.
+Results stream in live — a banner tracks *Running evaluation* through to *Evaluation complete*. Open any run for a per-change detail panel.
 
-## Microsoft Teams _(Business)_
+## Issues carry forward
 
-Coming soon.
+Issues the last run found and you haven't marked as fixed are **re-verified in the next run**. You don't have to remember what was outstanding — fix something, re-run, and the run tells you whether it's actually resolved.
+
+
+# Skills
+
+Skills are packaged instructions that shape how an agent handles a particular kind of task — a reporting convention, a recurring analysis, a house style for a specific question.
+
+## Creating a skill
+
+**New Skill** offers three routes:
+
+| Route | What happens |
+| --- | --- |
+| **Create with AI** | Describe what you want and refine it through chat |
+| **Write Skill** | Fill in **Name**, **Description**, **Instructions**, and a **Trigger** (Automatic or Manual) |
+| **Upload Skill** | Upload an existing skill file |
+
+### Upload requirements
+
+Accepted extensions are `.md`, `.zip`, and `.skill`.
+
+- A `.md` file must contain the skill name and description formatted in YAML
+- A `.zip` or `.skill` file must include a `SKILL.md`
+
+## Triggers
+
+| Trigger | Behaviour |
+| --- | --- |
+| **Automatic** | The agent decides when the skill is relevant and loads it on its own |
+| **Manual** | The skill is applied only when explicitly invoked |
+
+## Managing skills
+
+| Column | Description |
+| --- | --- |
+| **Skill** | Name and description |
+| **Status** | Active or Disabled |
+| **Source** | AI, Text, or File — how the skill was created |
+| **Trigger** | Automatic or Manual |
+| **Created By** | Who added it |
+| **Updated At** | Last change |
+| **Action** | Row menu |
+
+Row actions: **Try in Chat**, **Edit**, **Edit with AI**, **Delete**. Open a skill to see its full markdown in a detail panel, where a switch enables or disables it.
+
+Search with **Search skills**, narrow with **Filter** (Status, Source, Trigger), and reorder with **Sort** (Last updated or Name).
+
+## Agents managing their own skills
+
+While chatting with an agent you can ask it to list, create, edit, or delete its own skills — *"add a skill that always reports revenue net of refunds"*. Changes are attributed so you can see what the agent changed versus what a person did.
+
+
+# Building With AI
+
+## The setup questionnaire
+
+Choosing **Tune with AI** when creating an agent opens a guided questionnaire. Supaboard analyses your connected data, then walks you through category-grouped questions — *"Question 3 of 8"*, each tagged with the area it improves.
+
+For each question, pick an option, type your own answer, or **Skip**. When you finish, your answers are applied and the agent's description is written for you.
+
+> One option in each question is prefixed with **(Recommended)** in its text. There's no badge or highlight — read the option text.
+
+## The tuning assistant
+
+**Tune with AI** on Agent Home opens a chat panel beside your work. Describe how the agent should behave — *"Tell the agent how it should behave…"* — and it reads and updates the agent's configuration for you, showing its reasoning as it goes. It accepts file attachments, and past tuning sessions are kept under **Recent** in the session picker.
+
+### Undoing a change
+
+Every change the assistant makes is captured beforehand, and it hands you an **undo token** in the chat. To roll back, ask it to — *"undo that last change"*. There is no undo button; the rollback is conversational.
 
 
 # Managing Agents
 
 ## Duplicate
 
-Open the action menu (three-dot icon) on any agent and select **Duplicate**. You'll be prompted for a new name. The duplicate copies all configuration: data scope, overview, knowledge, ruleset, table config, and verified queries.
+Open the action menu (three dots) on any agent and select **Duplicate**. You'll be asked for a new name. The duplicate copies the full configuration: data scope, overview, knowledge, rules, table config, verified queries, and skills.
 
 ## Delete
 
-Open the action menu and select **Delete**. A confirmation is required. Deletion is permanent — existing conversations that used this agent are preserved but can no longer generate new responses from it.
+Action menu → **Delete**, with confirmation. Deletion is permanent. Existing conversations that used the agent are preserved but can no longer produce new responses from it.
 
 ## Unsaved changes
 
-Navigating away with unsaved edits triggers a confirmation prompt. Draft changes are encoded in the URL so you can copy the link and return to continue editing later.
+Draft edits are held in your browser for the current tab and restored if you navigate back within the session. They are **not** shareable by link and do not survive opening the agent in a new tab, so save before you close it. Closing or reloading the browser with unsaved edits prompts you first.
+
+## The default agent
+
+Every workspace gets an agent named **Stella** automatically, created the first time a data source finishes syncing. It's scoped to General and is pre-selected in Ask Analysts until you build your own.
 
 
 # Permissions
 
-| Action                   | Minimum role required      |
-| ------------------------ | -------------------------- |
-| View agents list         | Viewer                     |
-| Open agent details       | Viewer                     |
-| Create agent             | Editor                     |
-| Edit agent configuration | Editor (own) · Admin (any) |
-| Duplicate agent          | Editor                     |
-| Delete agent             | Admin · Owner              |
+| Action | Minimum role |
+| --- | --- |
+| Open the Agents section | Editor |
+| Create an agent | Editor |
+| Edit agent configuration | Editor |
+| Duplicate an agent | Editor |
+| Delete an agent | Editor |
+| Use the tuning assistant | Editor |
 
-Agent-level access is separate from workspace role — even an Admin can be excluded from a specific agent if it has a restricted User Access list (see [Setup — Access & Controls](#5-setup--access--controls)).
+Access to the Agents section is also controlled by the **Agents** feature flag on each user's workspace membership — see [Workspace — Feature Access](./workspace#feature-access).
+
+Agent-level access is separate from workspace role: even an Admin can be excluded from a specific agent if it has a restricted **User Access** list — see [Access and controls](#access-and-controls).
+
+> Deleting an agent is not gated above Editor. Anyone who can reach the Agents section can delete an agent, so scope the **Agents** feature flag accordingly.
 
 
 # Agent Setup Checklist
 
-Use this to get a new agent to production quality:
+To get a new agent to production quality:
 
 - Connect the right data sources and scope down to relevant tables only
-- Write a detailed **Overview** — explain the business domain, data conventions, and any ambiguities
+- Write a detailed **Overview** — business domain, data conventions, known ambiguities
 - Fill in **Table Configuration** for every table, especially Granularity and Gotchas
-- Upload a **Knowledge Base** with data dictionaries and reference documents
-- Define **Master Ruleset** rules for business-critical terminology and logic
+- Upload a **Knowledge Base** of data dictionaries and reference documents
+- Define **Rules** for business-critical terminology and logic
 - Add **Verified Queries** for your 5–10 most frequently asked questions
+- Add **Skills** for recurring tasks that need a consistent approach
 - Set **User Access** to the right people
-- Enable **Self-Improvement** once you are satisfied with baseline answer quality
+- Run an **Evaluation**, fix what it finds, and re-run until the Confidence Score holds
+- Check **Memory** periodically and delete anything the agent got wrong

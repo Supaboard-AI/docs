@@ -1,0 +1,294 @@
+---
+title: "Datasites"
+mode: "wide"
+---
+
+A **Datasite** is a custom analytics site that an AI analyst builds for you out of your own data. You describe what you want in plain English; it writes the queries, designs the pages, and gives you a live site you can publish and embed.
+
+Where a [dashboard](./dashboard) is a grid of widgets you arrange yourself, a datasite is a designed page — your layout, your sections, your narrative — that you shape by talking to it. Under the hood it's a real React application with real saved queries, and you can read and edit both.
+
+> Datasites are in **beta**, and require the **Business** plan. The feature is labelled **Datasites** throughout the product; you'll notice the browser URL still says `/databook`, which is just an older internal name.
+
+
+# Creating a Datasite
+
+Open **Datasites** from the sidebar. The top of the page *is* the creation flow:
+
+> **What do you want to build?**
+
+Type what you want, and press Enter. There's no setup form — the datasite is created, named from your description, and the analyst starts building immediately.
+
+Around the prompt box:
+
+- **Mode pills** — **Build**, **Plan**, or **Ask** (see [Working With the Analyst](#working-with-the-analyst))
+- **+** — attach files or images
+- **Agent selector** — which of your [agents](./agents) provides the data scope and persona. Defaults to your workspace's default agent.
+- **Microphone** — dictate your prompt instead of typing
+- **Suggestion chips** — three starting points generated from the tables your selected agent actually has access to. Clicking one fills the box so you can edit it before sending.
+
+## Other ways in
+
+- **New Datasite** from the sidebar's new-item menu or the command palette — both land you on the same page.
+- **Create as Datasite** from a dashboard's options menu. This seeds the first prompt with every chart, table, and KPI on the dashboard, so the analyst rebuilds them as a designed site rather than starting from nothing. Use **Add Page** in that modal to include more than one dashboard page.
+
+## Writing a good first prompt
+
+The analyst works from what you tell it, and the first message sets the shape of everything that follows. Worth including:
+
+- **Who it's for** — _"for our customer success team"_, _"a public status page for our customers"_
+- **What sections you want** — _"a KPI row, then revenue over time, then a filterable table of accounts"_
+- **How it should be filterable** — _"filter by region and plan tier"_
+- **Anything visual** — _"use our brand blue, dark background"_ (attach a logo and it'll use it)
+
+You can course-correct at any point, so don't over-plan. But a prompt with structure in it saves a round trip.
+
+
+# The Library
+
+Below the prompt box, **Recent datasites** lists everything in your workspace.
+
+- **Search datasites** filters by name
+- Sort by **Last edited**, **Last created**, or **Name**
+- Toggle between card and list view
+- Each datasite shows a status pill: **Live** (published) or **Draft**
+
+Click any datasite to open it. Delete one from the `…` menu on its card, or the delete icon on its row — you'll be asked to confirm.
+
+
+# The Editor
+
+The editor is split: the analyst chat on the left, your datasite on the right. Drag the divider to resize.
+
+A brand-new datasite starts with the chat filling the window and reveals the right-hand pane once the first version has built.
+
+**Toolbar:**
+
+| Control        | What it does                                                             |
+| -------------- | ------------------------------------------------------------------------ |
+| Back arrow     | Returns to the library                                                   |
+| Title + pencil | Rename the datasite in place                                             |
+| **Share**      | Invite workspace members                                                 |
+| **Publish**    | Make the current build live (see [Publishing](#publishing-and-embedding)) |
+
+**Above the right-hand pane:**
+
+| Control                     | What it does                                                    |
+| --------------------------- | --------------------------------------------------------------- |
+| **Preview / Code / Glossary** | Switch between the running site, its source, and its queries   |
+| **Desktop / Tablet / Phone** | Preview at different widths, with a device frame                |
+| Environment picker          | Run the preview against a different data source mapping         |
+| **Select & edit elements**  | Click something in the preview to talk about it                 |
+| **Refresh this view**       | Rebuild the preview, or refetch files and queries               |
+| Panel toggle                | Hide or show the chat                                           |
+
+
+# Working With the Analyst
+
+The chat has three modes. The mode pill sits above the message box, and the tooltip summarises them:
+
+> _"Build writes code + glossary; Plan updates PLAN.md; Ask is read-only Q&A"_
+
+| Mode      | What it does                                                                            | Reach for it when                                                    |
+| --------- | ---------------------------------------------------------------------------------------- | -------------------------------------------------------------------- |
+| **Build** | Writes queries and code, then compiles to check its work. The default.                   | You want something built or changed.                                  |
+| **Plan**  | Explores your data and writes a plan into `PLAN.md`. Touches no application code.        | The datasite is substantial and you want to agree the shape first.    |
+| **Ask**   | Read-only. Answers questions about the datasite and its data.                            | You want to understand what's there without changing anything.        |
+
+## The Plan → Build handoff
+
+When a Plan turn finishes, a **Build this Plan** button appears on the message. Clicking it hands the plan straight to a Build turn. The editor also switches to the Code tab with `PLAN.md` open so you can read — and edit — the plan before committing to it.
+
+`PLAN.md` renders as formatted text with an **Edit as text** link if you'd rather rewrite it by hand.
+
+## While it works
+
+Assistant messages show a **Thought for N steps** toggle that expands into what it actually did — every query it ran, every file it wrote. Worth opening when a result surprises you.
+
+Turns keep running even if you close the tab; the work continues server-side and shows up in the history when it's done.
+
+The send button becomes a **Stop** button while a turn is running. Stopping is safe — anything already finished, like a saved query or a written file, is kept.
+
+
+# The Glossary
+
+The **Glossary** is the datasite's saved-query layer. This is the concept most worth understanding, because it's what keeps a datasite honest.
+
+> Despite the name, it is not a dictionary of business terms. Each glossary item is a **named, saved query** with an ID.
+
+Here's the arrangement: the analyst writes a query, tests it against your database, and saves it under an ID like `revenue-by-region`. The generated page then asks for data *by that ID*. The query itself never reaches the browser — visitors to your published datasite get results, never SQL, and never credentials.
+
+## Working with glossary items
+
+Open the **Glossary** tab. Saved queries are listed on the left; select one to see its title, its SQL, and a **Save & Run** button that executes it and shows the result table.
+
+Every save re-runs the query first. A query that errors won't save, so a broken glossary item can't silently ship.
+
+## Edit with AI
+
+The **Edit with AI** button stages that one query for the chat — a chip appears above the message box showing which item you're editing. Describe the change and send.
+
+Scoping the edit this way matters: it constrains the analyst to that item and the components bound to it. The item keeps its ID, so every reference in the page keeps working, and the rest of your datasite is left alone.
+
+## Filters
+
+Glossary items can declare which columns are filterable, which is what powers the filter controls on the page.
+
+> **A filter only works if its query actually reads the table it's declared against.** If the analyst declares a filter on a column from a table the query never joins, the filter is silently ignored — the page returns unfiltered data and the control looks broken.
+
+If a filter isn't doing anything, that's the first thing to check. Telling the analyst _"the region filter isn't affecting the chart"_ is usually enough for it to rewrite the query to join the table it needs.
+
+
+# Pinning Existing Widgets In
+
+You don't have to rebuild work that already exists. Any chart, table, or KPI can be pinned into a datasite.
+
+From a widget's **Pin widget** popup — or the pin menu in [Ask Stella](./ask-agents) — choose the **Datasites** tab and pick a datasite. You're taken to that datasite with the widgets waiting as chips above the message box.
+
+They ride along with your next message, so you can say where you want them: _"add these to a new section at the bottom, under a heading called Pipeline Health"_. Send an empty message and they're simply added.
+
+> **The pinned query is used exactly as written.** It isn't rewritten, reformatted, or merged with anything — so the numbers on your datasite match the numbers you pinned, to the row. The widget keeps its type too: a line chart stays a line chart. Only the styling is rebuilt so it looks native to the datasite.
+
+If the pinned query errors when it runs, the analyst reports the error rather than "fixing" it — the query is yours to change.
+
+
+# The Code Tab
+
+Everything the analyst writes is readable and editable.
+
+**The file tree** has two sections:
+
+- **Source** — the files you can edit. Components live under `components/`, one per file; configuration and styling under `lib/`. Charts are built with recharts.
+- **Infra · read-only** — four files (`index.html`, `main.jsx`, `sb/client.js`, `sb/params.js`) that wire the site to your data. These are injected at build time and can't be edited.
+
+Select a file to open it in the editor. **Copy** copies its contents; **Save** writes the file and rebuilds the preview.
+
+> Saving rebuilds the **preview**, not the live site. Your published datasite is unaffected until you publish again.
+
+There's no autosave and no diff view of the analyst's changes, so save deliberately — and if you're making a large hand edit, copy the original somewhere first.
+
+
+# Select & Edit Elements
+
+The most direct way to change something you can see.
+
+Click **Select & edit elements** in the preview toolbar. A strip appears — _"Select mode on — click any element to edit it"_ — and the cursor becomes a crosshair. Click anything in the preview.
+
+Select mode switches itself off and a chip appears above the message box naming what you picked. Your next message is scoped to that element: _"make this number bigger and put the change percentage underneath it"_.
+
+Much faster than describing which of five KPI tiles you mean.
+
+
+# When a Build Fails
+
+If the analyst writes code that doesn't compile, the preview is replaced with:
+
+> **Build failed · preview not updated**
+> Fix the errors below — your live embed still serves the last published build.
+
+Each error names its file, line, and the offending code. The **Fix with AI** button hands all of it back to the analyst, which is almost always the right move.
+
+A green build that then crashes at runtime shows a red strip with the error and the same **Fix with AI** button.
+
+> A failed build never takes your published datasite down. Visitors keep seeing the last version you published.
+
+
+# Environments
+
+An **environment** remaps which data source a datasite queries, without touching its code or its queries. The usual case is pointing the same datasite at staging and at production.
+
+Open the environment picker in the preview toolbar and choose **Manage environments**.
+
+| Field                            | Notes                                                                |
+| -------------------------------- | -------------------------------------------------------------------- |
+| **Name**                         | e.g. `Production`                                                     |
+| **Set as default environment**   | Used when no environment is specified                                 |
+| **Resource Mapping**             | Rows of *Original Resource* → *In This Environment*                   |
+
+Resources this datasite actually queries are sorted to the top of the pickers.
+
+**Selecting one:** the preview picker switches the preview, and adding `?environment=<id>` to a datasite URL switches it for a viewer. That URL parameter overrides whatever the link would otherwise use.
+
+Switching environments needs no rebuild — the same site simply queries elsewhere.
+
+Every datasite starts with an environment named `default` that maps nothing, so it queries your original sources until you say otherwise. The default environment can't be deleted, since links that don't specify one fall back to it.
+
+
+# Publishing and Embedding
+
+## Publish
+
+The **Publish** button is disabled until at least one preview build has succeeded — you can't publish a datasite that doesn't compile.
+
+Clicking it opens a popover showing the datasite's address and its visibility. Publish, and the popover switches to showing the live version with a copyable URL. **Update** republishes your current preview build over the live one.
+
+## Public or private
+
+The pill next to the address toggles visibility:
+
+| Setting     | Tooltip                                                              |
+| ----------- | -------------------------------------------------------------------- |
+| **Public**  | _"Anyone with the link can view. Click to make private."_             |
+| **Private** | _"Viewers must sign in with a workspace account. Click to make public."_ |
+
+Datasites are **private** unless you make them public.
+
+## Sharing the link
+
+This is the part worth getting right, because the two visibilities behave differently:
+
+- **Public** — the copied URL includes an access token, and needs it. The link works for anyone, with no sign-in. Copy the URL exactly as given; a trimmed link won't load data.
+- **Private** — the copied URL has no token. Viewers are asked to sign in, and only members of your workspace can get in.
+
+Embed a datasite by putting its URL in an `<iframe>` on your own site. Private datasites work embedded — viewers sign in through the frame.
+
+> **A public datasite URL is a public URL.** Access links don't expire, and there's no way to revoke one from the interface. Treat the link as the credential: if it's shared, assume it stays shared. For anything sensitive, use **Private**.
+
+## Share
+
+The **Share** button next to Publish invites workspace members. It's separate from publishing — it controls who can *edit* the datasite in Supaboard, not who can view the published site.
+
+
+# What You Can Ask For
+
+The analyst has capabilities that aren't obvious from looking at a blank page. All of these are things to simply ask for:
+
+**Filters that live in the URL.** _"Add a region filter at the top."_ Filter selections become part of the address, so a filtered view can be copied and shared, and you can pre-set a filter by adding it to an embed link.
+
+**AI-written insights.** _"Add a short insights paragraph under the revenue chart."_ These aren't written once and frozen — they're generated fresh against live data each time the page loads, so they stay true as the numbers move.
+
+**A chat on the page.** _"Add an Ask AI box in the sidebar."_ Visitors get a chat that answers questions about the data on that datasite, using live queries. It answers as your selected agent, with that agent's persona, rules, and knowledge base — so it behaves like Ask Stella does inside Supaboard.
+
+**Multiple pages, navigation, drilldowns, exports** — describe the behaviour and it builds it.
+
+
+# Attachments
+
+Attach files with the **+** button, by pasting, or by dragging onto the chat.
+
+| Limit  | Value                                                             |
+| ------ | ----------------------------------------------------------------- |
+| Size   | **5 MB** per file                                                  |
+| Types  | PDF, images, CSV, Excel, Word documents, and plain text            |
+
+Images are read directly by the analyst — attach a screenshot of a design you want to match, or a mockup, and ask it to build that.
+
+Every upload also lands in the file tree under `assets/`, so you can refer back to it later: _"use the logo I uploaded"_ works in a much later conversation.
+
+
+# Permissions
+
+Datasites require the **Business** plan and the Datasites feature on your workspace membership.
+
+| Action                                     | Minimum role |
+| ------------------------------------------ | ------------ |
+| View a datasite, its code, and its glossary | Viewer       |
+| Create a datasite                           | Editor       |
+| Chat with the analyst                       | Editor       |
+| Edit files and glossary items               | Editor       |
+| Manage environments                         | Editor       |
+| Publish, update, and change visibility      | Editor       |
+| Delete a datasite                           | Editor       |
+
+Admins and owners have everything an editor has.
+
+Datasites have no per-datasite permissions — access follows workspace roles. Anyone who can edit one datasite can edit all of them.

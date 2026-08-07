@@ -1,0 +1,114 @@
+---
+title: "Connect Supaboard to Claude"
+mode: "wide"
+---
+
+Supaboard is available as a **connector for Claude**. Add it once, and you can ask questions about your dashboards and data from inside a Claude conversation — without opening Supaboard.
+
+Answers come back the way they would in Supaboard: prose, tables, KPIs, and charts rendered as real images in your workspace's theme.
+
+> **Not to be confused with [MCP & Tools](./tools).** That page is about tools Supaboard **calls out to** — your APIs, your services. This page is the opposite direction: Supaboard is the server, and Claude is the client calling it. Same protocol, opposite direction, different audience.
+
+
+# What You Can Do With It
+
+Once connected, you can ask Claude things like:
+
+- *"What dashboards do we have in the analytics workspace?"*
+- *"What's on the Revenue Overview dashboard?"*
+- *"How did signups trend last quarter?"*
+- *"Switch to the EU workspace and ask the same question."*
+
+Claude works out which Supaboard capability it needs and calls it. You don't invoke anything by name.
+
+
+# Connecting
+
+Supaboard uses OAuth, so you never paste a token or an API key.
+
+1. Add Supaboard as a connector in Claude, using your Supaboard host as the MCP server URL.
+2. Claude opens Supaboard's sign-in page. Sign in with your normal Supaboard account.
+3. Choose what the connector should answer from.
+
+## Choosing a workspace and agent
+
+After sign-in you land on a **Choose a workspace** screen:
+
+> Pick the workspace and agent Claude should answer from. You can switch later.
+
+| Section | Behaviour |
+| --- | --- |
+| **Workspace** | Every workspace you're a member of. A workspace with no agents is listed but not selectable, marked **No agents**. |
+| **Agent** | The agents in the selected workspace. Your default agent is pre-selected. |
+
+A workspace with exactly one agent needs no interaction — it is chosen for you.
+
+Agents that are still indexing your data are shown but flagged as not ready. You can select one, but answers will be poor until indexing finishes.
+
+If you have no workspaces at all you'll see: *"You don't have any workspaces yet. Create one in Supaboard first, then connect again."*
+
+
+# What Claude Can and Cannot Do
+
+Seven capabilities are exposed:
+
+| Capability | What it does |
+| --- | --- |
+| **List namespaces** | Lists the workspaces you can access |
+| **List agents** | Lists the agents inside a workspace |
+| **Get active workspace and agent** | Reports which workspace and agent questions currently run against |
+| **Switch workspace or agent** | Changes which workspace and agent subsequent questions use |
+| **List dashboards** | Lists the dashboards in a workspace, grouped |
+| **Describe a dashboard** | Describes one dashboard — its widgets, their types, the questions they answer, and the queries behind them |
+| **Ask SupaBoard AI** | Runs a full question through Supaboard's AI pipeline and returns the answer |
+
+## Read-only, with one exception
+
+The connector is **read-only against your data**. It cannot create, edit, or delete a dashboard, a query, an agent, or anything else in your workspace.
+
+The one thing it can change is **which workspace and agent it is pointed at**. Switching is non-destructive, persists across the conversation, and does not require reconnecting — ask Claude to *"switch to the marketing workspace"* and it will.
+
+## Access follows your Supaboard permissions
+
+The connector acts as **you**. It can only see workspaces you belong to, agents you're allowed to use, and data your [resource access](./workspace#resource-access) permits. Connecting it does not widen anyone's access, including your own.
+
+
+# What Answers Look Like
+
+| Result type | How it arrives in Claude |
+| --- | --- |
+| **Prose** | Markdown |
+| **Tables** | Markdown tables, rendered inline |
+| **KPIs** | Rendered inline as text |
+| **Charts** | Rendered as images by the same chart engine the Supaboard web app uses, so they match what you'd see on your dashboard — including your workspace's theme and accent colour |
+
+If a chart fails to render, the rest of the answer still comes through with a note in place of the image — one broken chart does not lose you the whole answer.
+
+## Describing a dashboard returns structure, not figures
+
+**Describe a dashboard** tells Claude what a dashboard contains — widget names, types, and the queries behind them. The stored widget values it reports can be hours stale.
+
+For current numbers, ask a question instead of asking about the dashboard. Claude generally does this on its own, but if a figure looks off, asking *"what's the actual current value?"* forces a live query.
+
+
+# Timing
+
+**Ask SupaBoard AI** runs Supaboard's full pipeline — retrieval, query generation, execution, and summarisation. It typically takes **40 to 120 seconds**.
+
+That is normal, not a hang. Claude waits for it rather than retrying, so let it finish rather than re-asking the same question.
+
+
+# Other Chat Surfaces
+
+The connector is built on MCP, which the same foundation serves to other clients. **ChatGPT** and **Slack** surfaces are in progress on that foundation — ChatGPT receives an interactive HTML widget rather than images, and Slack receives its own native block format. Ask your account manager about current availability.
+
+
+# Troubleshooting
+
+| Symptom | Likely cause |
+| --- | --- |
+| A workspace appears greyed out with **No agents** | That workspace has no agent yet. Create one in Supaboard first — see [Agents](./agents). |
+| Answers are vague or say the data isn't available | The selected agent may still be indexing, or its data scope may not cover what you asked. Check the agent's [data source access](./agents#data-source-access). |
+| A question takes over a minute | Expected — see [Timing](#timing). |
+| Claude answers from the wrong workspace | Ask it to switch, or check the current one by asking which workspace it's using. |
+| You can't see a dashboard you know exists | The connector inherits your permissions. Confirm you can open that dashboard in Supaboard itself. |

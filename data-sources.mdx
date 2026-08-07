@@ -3,7 +3,7 @@ title: "Data Sources"
 mode: "wide"
 ---
 
-A **Data Source** is a live connection from Supaboard to an external database or service. Every widget on a dashboard, every query run through Ask Stella, and every Agent's knowledge of your data flows through these connections.
+A **Data Source** is a live connection from Supaboard to an external database or service. Every widget on a dashboard, every query run through [Ask Analysts](./ask-agents), and every Agent's knowledge of your data flows through these connections.
 
 
 # The Connections Page
@@ -16,7 +16,7 @@ Each connection is shown as a card displaying:
 - The connection name
 - Table count (e.g. _5 tables_)
 
-Click any card to open its **Connection Detail** panel, which has tabs for Info, Tables, Summary, and Advanced settings.
+Click any card to open its **Connection Detail** panel, which has five tabs: **Info**, **Tables**, **Summary**, **Standard Instructions**, and **Advanced**.
 
 **Search** connections by name or connector type using the search bar.
 
@@ -52,6 +52,8 @@ From any data source item's action menu:
 | **Ask Stella** | Start an AI conversation scoped to this connection |
 | **Delete**     | Remove the connection                              |
 
+> The **Ask Stella** action opens [Ask Analysts](./ask-agents) — the button label hasn't caught up with the feature's name yet.
+
 
 # Adding a Connection
 
@@ -63,7 +65,9 @@ For databases (PostgreSQL, Snowflake, etc.), you connect directly by entering yo
 
 ## Non-database connections via Fivetran
 
-For SaaS tools and third-party services (Shopify, Google Analytics, Airtable, Stripe, and others), Supaboard uses **Fivetran** as the ETL layer. Fivetran handles syncing data from those services into a queryable form — you authenticate with the source service through Fivetran's OAuth flow, and Supaboard takes care of the rest. Fivetran-powered connectors are available on the **Business** plan and above.
+For SaaS tools and third-party services (Shopify, Google Analytics, Airtable, Stripe, and others), Supaboard uses **Fivetran** as the ETL layer. Fivetran handles syncing data from those services into a queryable form — you authenticate with the source service through Fivetran's OAuth flow, and Supaboard takes care of the rest.
+
+Some of these connectors are included on every plan and some require an upgrade — see [Available Connectors](#available-connectors). The connector grid tells you which is which before you commit: a connector that needs an upgrade shows an upgrade prompt when you select it.
 
 ## What happens after you save
 
@@ -76,6 +80,8 @@ For SaaS tools and third-party services (Shopify, Google Analytics, Airtable, St
 
 
 # Available Connectors
+
+The connector grid holds well over a hundred integrations and is searchable by name. The tables below cover the ones with a dedicated setup guide, plus which are included on every plan.
 
 ## Direct database connectors — all plans
 
@@ -91,14 +97,21 @@ For SaaS tools and third-party services (Shopify, Google Analytics, Airtable, St
 | [**Databricks**](/databricks)                     | Personal access token + HTTP path            |
 | [**Supabase**](/supabase)                         | SSL on by default                            |
 | [**Microsoft SQL Server**](/microsoft-sql-server) | Supports SSH tunnel, SSL, JDBC params        |
+| **MotherDuck / DuckDB**                           | Database, schema, and MotherDuck token       |
 
-## Fivetran-powered connectors — Business & Enterprise plans
+## Fivetran-powered connectors
 
-These connectors sync through Fivetran. Available integrations include:
+These sync through Fivetran. The following are **included on every plan**, alongside the direct databases above:
 
-Shopify · Airtable · Stripe · Typeform · Calendly · Linear · Asana · YouTube Analytics · Notion · Auth0 · and more as Fivetran's catalogue grows.
+Google Analytics · Typeform · Calendly · Stripe · Linear · Asana · YouTube Analytics · Notion · Auth0 · Airtable
+
+Everything else in the catalogue — including Shopify — requires an upgrade. Selecting one shows the upgrade prompt with the plan you'd need; see [pricing](https://supaboard.ai/pricing).
 
 [Learn more about Fivetran-powered connectors here.](/fivetran)
+
+## Fivetran sources keep their own identity
+
+A source synced through Fivetran lands in a shared warehouse, but Supaboard attributes it to the **original service**. A Stripe-via-Fivetran connection shows Stripe's name and logo everywhere — the data source card, the connection header, the resource picker — rather than the warehouse it physically lives in.
 
 
 # Testing a Connection
@@ -127,11 +140,13 @@ Open any connection card to see the **Info** tab, which shows live diagnostics.
 - Encryption status
 - Authentication type
 
-## Connection pool _(database connectors)_
+## Connection pool _(direct database connectors only)_
 
 - Active connections
 - Idle connections
 - Maximum pool size
+
+> Pool status is not shown for Fivetran-backed sources. Supaboard does not hold a direct connection to them, so there is no pool to report.
 
 ## Tunnel status _(SSH tunnel connections)_
 
@@ -176,9 +191,21 @@ Click **Remap Tables** to re-scan the database and discover any tables that have
 
 # Connection Detail — Summary Tab
 
-The **Summary** tab holds a free-text description of the entire database — its purpose, what systems write to it, and any high-level context that helps Stella and your team understand what it contains.
+The **Summary** tab holds a free-text description of the entire database — its purpose, what systems write to it, and any high-level context that helps your agents and your team understand what it contains.
 
 Write in plain language. This summary is read by agents when deciding whether and how to query this data source.
+
+
+# Connection Detail — Standard Instructions Tab
+
+**Standard Instructions** are rules that apply to every query written against this connection, regardless of which agent asks. Use them for conventions that belong to the *database* rather than to any one agent:
+
+- Which column to join on when several look plausible
+- A soft-delete convention every query must respect — *"always exclude rows where `is_archived = true`"*
+- A canonical date column when a table has several
+- Dialect quirks specific to this deployment
+
+> The difference between this and an agent's [Rules](./agents#rules): standard instructions travel with the *connection*, so every agent that includes this source inherits them. Agent rules travel with the *agent*, across whatever sources it can see.
 
 
 # Connection Detail — Advanced Tab
@@ -237,6 +264,18 @@ Schema generation is the process of scanning a table's columns, types, and relat
 - **On demand** via the Regenerate button (per-table or bulk).
 - **After remapping** when new tables are discovered.
 
+## Incremental context refresh
+
+Alongside raw schema, Supaboard writes an AI-generated description of each table. Refreshing that context is **incremental**: only tables that don't already have a description are processed.
+
+Adding one table to a 400-table database no longer means regenerating descriptions for the other 399 — which is the difference between a refresh that takes seconds and one that takes many minutes.
+
+## What gets discovered
+
+Beyond ordinary tables, Supaboard discovers **views, materialized views, foreign tables, and partitioned tables**. Materialized views in particular are introspected properly, so a dashboard built on a pre-aggregated matview reports real columns rather than an empty schema.
+
+For PostgreSQL, the default `postgres` database is included in discovery alongside your own databases.
+
 ## Schema statuses
 
 | Status         | Meaning                                                                               |
@@ -265,9 +304,26 @@ For each table in the **Tables** tab, you can fill in four fields:
 | **Summary**     | What this table stores and how it relates to other tables         |
 | **Granularity** | What each row represents — e.g. _"One row per invoice line item"_ |
 | **Gotchas**     | Data quality issues, quirks, or caveats agents should be aware of |
-| **Use Cases**   | Common questions this table is useful for answering               |
+| **Usecases**    | Common questions this table is useful for answering               |
 
 > Context written here is shared with any Agent that includes this data source. You do not need to re-enter it per agent — it flows through automatically.
+
+
+# Column Values and Filter Suggestions
+
+When someone builds a dashboard filter or picks a value in the query builder, Supaboard fetches the distinct values for that column.
+
+| Behaviour | Detail |
+| --- | --- |
+| **Search and paging** | Values are searched and paged at the database level for connectors that support it, so a column with a million distinct values is still usable |
+| **True totals** | You see the real count of matching distinct values, not just how many are on the current page |
+| **Cascading filters** | Suggestions narrow to rows matching the dashboard filters already applied — pick a country and the city list shrinks to that country |
+
+> Cascading suggestions only apply to filters whose table matches the column being searched, and only on connectors that push the search down into SQL. On connectors that fall back to in-memory filtering, cascading filters are **ignored** and you see the unfiltered value list. If a suggestion list looks wider than expected, that fallback is the likely reason.
+
+## Promoting a column to an enum
+
+A low-cardinality column can be marked as an enum so filters render as a picker rather than a free-text box. Supaboard checks the column first and refuses if it has **more than 1000 distinct values** — an enum with more than that is not a usable picker.
 
 
 # Connection Statuses
@@ -280,6 +336,8 @@ For each table in the **Tables** tab, you can fill in four fields:
 | **Disconnected** | Grey          | No tables have been loaded yet                                      |
 
 A failed connection will cause widgets and agents that depend on it to return errors. Open the connection's Info tab to see the specific error message.
+
+> **PostgreSQL read replicas.** Reads against a hot standby are occasionally cancelled by the replica applying WAL — a transient conflict, not a real failure. Supaboard detects these and retries automatically, so replica-backed dashboards don't fail spuriously under replication load. Genuine errors are not retried.
 
 
 # Egress IP Whitelist

@@ -1,0 +1,404 @@
+---
+title: "Automations"
+mode: "wide"
+---
+
+**Automations** run your data work on a schedule or when your data changes — without anyone opening Supaboard. An automation is one **trigger** plus a canvas of **steps** that pass data to each other: query a table, ask an AI analyst about it, branch on the result, build a PDF, and email it to your team.
+
+Where a [dashboard](./dashboard) is something you *look at* and [Query Builder](./query-builder) is something you *ask once*, an automation is something that keeps happening.
+
+> Automations require the **Business** plan. If you don't see **Automations** in the sidebar, it isn't enabled for your workspace.
+
+
+# The Automations Home
+
+Navigate to **Automations** in the sidebar to see every automation in your workspace.
+
+Toggle between **Card** and **Table** view using the control in the topbar.
+
+**Table view columns:**
+
+| Column         | Description                              |
+| -------------- | ---------------------------------------- |
+| **Name**       | Automation title                         |
+| **Trigger**    | The trigger type that starts it          |
+| **Actions**    | How many steps it runs                   |
+| **Created By** | The user who created it                  |
+| **Created On** | Date it was created                      |
+
+Use the **Search** box to filter by name. Search matches against the automations already loaded — scroll to load more if you have a long list.
+
+## Creating an automation
+
+Click **New Automation**. The only field is **Automation Name** — enter a name and click **Create**. You're taken straight into the canvas editor, where you build the flow itself.
+
+
+# Triggers
+
+Every automation has exactly one trigger, and it must be set before you can add any steps. There are two trigger types.
+
+> There is no webhook, event, or cron-expression trigger. Automations start either on a clock or on a query result.
+
+## Timed Start
+
+> _"Run automation on a time-based schedule."_
+
+Pick a **regularity**, and the fields you need appear beneath it.
+
+| Regularity   | Additional fields                            | Behaviour                                    |
+| ------------ | -------------------------------------------- | -------------------------------------------- |
+| **interval** | **interval** (seconds)                       | Runs on a rolling interval                   |
+| **daily**    | **time_of_day**                              | Runs once a day at that time                 |
+| **weekly**   | **day_of_week**, **time_of_day**             | Runs once a week on that day                 |
+| **monthly**  | **day_of_month** (1–31), **time_of_day**     | Runs once a month on that date               |
+| **yearly**   | **month_of_year** (1–12), **time_of_day**    | Runs once a year in that month               |
+
+`time_of_day` is entered as `HH:MM` on a 24-hour clock.
+
+> **All schedules run in UTC.** There is no timezone field on the trigger, so a `09:00` daily automation fires at 09:00 UTC regardless of where you or your recipients are. Convert your local time to UTC before entering it, and remember that your local offset shifts with daylight saving while the automation's does not.
+
+> **Very short intervals are not real.** The scheduler checks triggers roughly every five minutes and enforces a 60-second minimum on any interval, so an automation set to run every 30 seconds will not run every 30 seconds. Treat five minutes as the practical floor.
+
+## Alerts
+
+> _"Run automation when alert query conditions are met."_
+
+Instead of a clock, this trigger runs a query against your data on every scheduler cycle and fires when the query says so.
+
+| Field        | Required | Notes                                                    |
+| ------------ | -------- | -------------------------------------------------------- |
+| **resource** | Yes      | The data source to query                                 |
+| **database** | Yes      | Populated once a resource is selected                    |
+| **table**    | Yes      | Populated once a resource and database are selected      |
+| **query**    | Yes      | The alert condition, written as SQL                      |
+
+> **Your query must return a boolean column named `run_alert`.** The automation fires when the first row's `run_alert` value is true. A query that doesn't produce that exact column will never fire, and nothing in the interface will tell you why.
+
+A working alert query looks like this:
+
+```sql
+SELECT
+  COUNT(*) > 100 AS run_alert,
+  COUNT(*)       AS failed_orders
+FROM orders
+WHERE status = 'failed'
+  AND created_at > NOW() - INTERVAL '1 hour'
+```
+
+`run_alert` decides *whether* to fire. Every other column in that first row is passed to your downstream steps as data, so include the numbers you want to put in the alert email — here, `failed_orders`.
+
+> **Alerts fire on change, not on every check.** The trigger fingerprints your query together with its first row of results. If that row is identical to the last time it fired, it stays quiet. So a persistently broken condition alerts you once, not every five minutes — but it also means a value that returns to the same number after changing will alert again.
+
+If any of the four fields is left blank, the trigger silently never fires. Fill in all four.
+
+
+# Building the Flow
+
+The editor is an infinite canvas. Your trigger sits at the top and steps flow downwards.
+
+1. **Add the trigger.** A blank canvas shows a single dashed node labelled **Add Trigger / First Step**. Click the **+** to open **Set Trigger** and pick one of the two triggers above.
+2. **Add steps.** Once a trigger exists, the node below reads **Add Task**. Clicking it opens the **Add Tasks** panel, with **Actions** and **Flow Control** in the left rail and a search box for finding an action by name.
+3. **Configure each step.** Clicking a node opens its panel on the right, which has two tabs:
+   - **Setup** — the node's **Title** (edit this; it's how the step is labelled on the canvas and in the variable picker) and all of its configuration fields. Required fields are marked with `*`.
+   - **Test** — run this step on its own and inspect what it returns.
+
+   The **Change** link at the top of the Setup tab swaps a node's type in place, keeping its position on the canvas.
+4. **Connect them.** Steps run in the order you wire them. Hovering a node reveals **Delete** and **Change type** buttons.
+
+Your work saves automatically. The topbar shows **Saving…** and **Unsaved changes** as you go.
+
+
+# Actions
+
+## Communication
+
+### Send Email
+
+> _"Send reports, files, or notifications to one or more recipients."_
+
+| Field       | Required | Notes                                                             |
+| ----------- | -------- | ----------------------------------------------------------------- |
+| **to**      | Yes      | One address, a comma-separated list, or a variable (see below)     |
+| **subject** | Yes      | Single line; can contain variables                                |
+| **body**    | Yes      | Rich text, with a **Text** / **Code** toggle                      |
+
+The **to** field is deliberately free text, so you can bind it to data. All of these work:
+
+- `ops@yourcompany.com`
+- `ops@yourcompany.com, finance@yourcompany.com`
+- `{{ query.0.EMAIL }}` — one address from the first row of an upstream query
+- `{{ query.*.EMAIL }}` — every address in that column, one email sent to all of them
+
+Duplicate addresses are removed automatically.
+
+**Body modes:**
+
+| Mode     | Behaviour                                                                                                                                             |
+| -------- | ------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| **Text** | Your text is wrapped in a branded email template carrying your **workspace name and logo**. Line breaks are preserved. This is the default.            |
+| **Code** | Your HTML is sent exactly as written, with no wrapper. Opens a full-screen editor with a live preview beside it. Use inline CSS for mail-client safety. |
+
+## Integration
+
+### Send Webhook
+
+> _"Send workflow data to another app using an HTTP webhook."_
+
+| Field                 | Required | Default | Notes                                        |
+| --------------------- | -------- | ------- | -------------------------------------------- |
+| **webhook_url**       | Yes      | —       | The endpoint to call                         |
+| **payload**           | No       | `{}`    | The JSON body; bind variables into it        |
+| **headers**           | No       | —       | Extra request headers                        |
+| **timeout_seconds**   | No       | `30`    | How long to wait for a response              |
+| **include_timestamp** | No       | On      | Adds a `timestamp` field to the payload      |
+
+Requests are always sent as `POST` with `Content-Type: application/json`. The response status code and body are available to downstream steps, so you can branch on whether the call succeeded.
+
+## Data
+
+### Query Your Data
+
+> _"Run a SQL/database query on a selected resource"_
+
+| Field        | Required | Notes                                          |
+| ------------ | -------- | ---------------------------------------------- |
+| **resource** | Yes      | The data source                                |
+| **database** | Yes      | Populated from the selected resource           |
+| **table**    | Yes      | Populated from the resource and database       |
+| **query**    | Yes      | SQL or Python, written in a full code editor   |
+
+This is the workhorse step — most automations start by pulling a result set here and then act on it. Every column it returns becomes available to later steps through the variable picker.
+
+## Document
+
+Six actions generate a formatted document. Three start from a dashboard, three start from raw data you pass in.
+
+**From a dashboard:**
+
+| Action                             | Output                    |
+| ---------------------------------- | ------------------------- |
+| **Export Dashboard as PDF**        | A formatted PDF report    |
+| **Export Dashboard as PowerPoint** | A slide deck              |
+| **Export Dashboard to Excel**      | An Excel workbook         |
+
+| Field         | Required | Notes                                                          |
+| ------------- | -------- | -------------------------------------------------------------- |
+| **dashboard** | Yes      | Which dashboard to export                                      |
+| **filters**   | No       | Apply dashboard filters before exporting                       |
+| **prompt**    | Yes      | Instructions for how the document should be written            |
+| **title**     | Yes      | The document's title                                           |
+
+**From data:**
+
+| Action                          | Output                             |
+| ------------------------------- | ---------------------------------- |
+| **Generate PDF from Data**      | A PDF built from records you pass  |
+| **Generate PowerPoint from Data** | Slides built from records         |
+| **Generate Excel**              | A workbook built from records      |
+
+These take a **data** field instead of a dashboard — bind it to an upstream step, for example `{{ query.* }}` — plus the same required **prompt** and **title**.
+
+> **The prompt does real work.** These documents are written by AI, and the prompt is how you steer it. _"A one-page executive summary: headline revenue number, top three regions, and any metric that moved more than 10% week over week"_ produces a very different document from _"Summarise this"_. Describe structure, tone, and what matters.
+
+Each of these steps outputs a **url** you can drop into a **Send Email** step.
+
+## AI
+
+| Action                        | What it does                                                                    | Key fields                                 |
+| ----------------------------- | -------------------------------------------------------------------------------- | ------------------------------------------ |
+| **Answer Questions with AI**  | Answers a question against data you supply                                       | **prompt**, **data**                       |
+| **Summarize Insights**        | Writes a concise analytical summary of a result set                              | **data**, **user_query** (optional focus)  |
+| **Ask Dashboard**             | Asks a question of a dashboard's live data                                       | **dashboard**, **filters**, **prompt**     |
+| **Ask Analysts**              | Runs a full [Ask Stella](./ask-agents) turn with one of your [agents](./agents)  | **agent**, **search**, **conversation**    |
+| **Evaluate AI Analyst**       | Scores an agent's answer quality and returns issues and recommendations          | **agent**                                  |
+| **Generate Structured Output**| Returns AI output in a fixed shape so later steps can read specific fields        | **prompt**, **data**, **output_format**    |
+
+**Generate Structured Output** is the one to reach for when a later step needs a *specific value* rather than a paragraph. Its **output_format** field opens a visual builder where you define each field, its type, and its allowed values — and the AI is then required to answer in that shape. Bind a downstream **Condition** to one of those fields to branch on what the AI decided.
+
+**Ask Analysts** has a **fast** toggle, on by default. Turn it off for deeper, slower analysis.
+
+
+# Passing Data Between Steps
+
+Any step can read the output of any step that ran before it. This is what turns a list of actions into a workflow.
+
+## The variable picker
+
+Type `/` in any text field to open **Insert variable**. It lists your upstream steps and their columns. Each step has a **Run node** button — click it to execute that step now and see its real columns and sample values, so you're picking from actual data rather than guessing at names.
+
+Pick a value and it's inserted as a chip. Underneath, that chip is a template.
+
+## The template syntax
+
+| Pattern                     | Resolves to                                                        |
+| --------------------------- | ------------------------------------------------------------------ |
+| `{{ step.0.COLUMN }}`       | One cell — column `COLUMN` from the first row                      |
+| `{{ step.0 }}`              | The entire first row                                               |
+| `{{ step.* }}`              | Every row                                                          |
+| `{{ step.*.COLUMN }}`       | One column, from every row                                         |
+| `{{ a.*.X & b.*.Y }}`       | Two references combined                                            |
+
+The `&` operator is smart about how it combines: when the two sides have **different** columns they merge side by side into wider rows; when they have the **same** columns they stack into a longer list. The two sides can come from different steps.
+
+## Two forms that won't work
+
+Both of these are rejected when you save, with an error explaining the fix:
+
+| Don't write            | Write instead            | Why                                                     |
+| ---------------------- | ------------------------ | ------------------------------------------------------- |
+| `{{ step[0].COLUMN }}` | `{{ step.0.COLUMN }}`    | Paths are dot-separated — a row index is `.0`, not `[0]` |
+| `{{ step.data.COLUMN }}` | `{{ step.COLUMN }}`    | A step's data is implicit; reference its columns directly |
+
+
+# Conditions and Flow Control
+
+## The Condition step
+
+> _"Branch the flow: each output runs only when its condition is met."_
+
+Found under **Flow Control** in the **Add Tasks** panel. A Condition has a **mode** and a set of labelled **outputs**, each with its own rules.
+
+| Mode                | Behaviour                                     |
+| ------------------- | --------------------------------------------- |
+| **All matching**    | Every output whose rules pass fires           |
+| **First matching**  | Only the first output whose rules pass fires  |
+
+Each rule reads left to right: a **value**, a **type**, an **operator**, and a comparison **value**. Both value fields accept a literal or a variable, so a typical rule is `{{ query.0.FAILED_COUNT }}` · number · `gt` · `100`.
+
+**Types:** `string`, `number`, `bool`, `date`.
+
+**Operators**, filtered by the type you choose:
+
+| Group      | Operators                                                     |
+| ---------- | ------------------------------------------------------------- |
+| Comparison | `gt`, `gte`, `lt`, `lte`, `eq`, `neq`                         |
+| Text       | `contains`, `not_contains`, `starts_with`, `ends_with`        |
+| Presence   | `is_empty`, `is_not_empty`                                    |
+| Set        | `in`, `not_in`                                                |
+| Boolean    | `is_true`, `is_false`                                         |
+
+The presence and boolean operators don't need a second value, so the right-hand field disappears when you pick one.
+
+Add more than one rule to an output and a combinator appears: **Match ALL rules** or **Match ANY rule**.
+
+One output can be marked as a **Fallback** — it fires when nothing above it matched, and it carries no rules of its own. You can have at most one.
+
+> **An output with no rules always fires.** If you leave an output's rule list empty, it's treated as passing. Either give it rules or make it the Fallback.
+
+> **Parallel steps are not conditions.** If you hang two emails off a single step, *both* emails send on *every* run — the connections are order, not choice. Whenever you mean "either this or that", put a Condition between them.
+
+## Paths and Merge
+
+Two more Flow Control blocks:
+
+- **Paths** — _"Build different steps for different rules"_. Splits the flow into parallel branches that all run.
+- **Merge** — _"Merge data from multiple streams into one"_. Brings parallel branches back together so a later step can read all of them.
+
+
+# Testing
+
+## Testing one step
+
+Open a node and switch to its **Test** tab, then click **Run**. The step executes on its own and shows you what it returned. Validation problems appear as a numbered list.
+
+This is how you check a query returns what you expect before wiring anything to it.
+
+## Testing the whole automation
+
+The **Test Run** button (play icon) in the toolbar opens the **Test Run** panel. Click **Run** and watch a live timeline as each step executes, with per-step durations and expandable results. **Cancel** stops it; **Run Again** repeats it.
+
+> **A Test Run is a real run.** Emails are actually sent, webhooks actually fire, and documents are actually generated. There is no dry-run mode for the full flow. When you only need to check that a query or an AI step behaves, use the per-step **Run** in the Test tab instead.
+
+> **Test Runs don't appear in Run History.** They're for iterating, not for auditing. Only scheduled runs are recorded.
+
+
+# Publishing
+
+A new automation is a draft and will not run on its own, no matter what its trigger says. Click **Publish** to make it live. The first scheduled run is set for about a minute later.
+
+> **Publishing locks the canvas.** A published automation can't be edited — nodes won't move, and the add and delete affordances disappear. The **Publish** button becomes **Edit**; clicking it unpublishes the automation so you can make changes, which also stops it running until you publish again.
+
+
+# Run History
+
+The **Logs** button (clock icon) opens the **Run History** panel — every scheduled run, newest first, 50 at a time. Expand any entry to see each step's result, the event log, and how long the run took.
+
+| Status                              | Meaning                                                                  |
+| ----------------------------------- | ------------------------------------------------------------------------ |
+| **Completed**                       | Every step succeeded                                                     |
+| **Completed with errors**           | The run finished, but at least one step failed                           |
+| **Failed**                          | The run did not complete                                                 |
+| **Running**                         | Currently executing                                                      |
+| **Skipped due to condition**        | A Condition routed around this step. This is normal, not an error.       |
+| **Skipped due to dependency failure** | A step this one depended on failed, so it never ran                    |
+
+> **There are no automatic retries.** A step that fails stays failed, and every step downstream of it is skipped. If a step calls something that's occasionally flaky, build the retry into the flow yourself — a Condition on the previous step's `success` value can route to a second attempt.
+
+If a trigger itself errors — an alert query against a table that no longer exists, for instance — the automation is marked with an error, which clears on the next successful check.
+
+
+# Building With AI
+
+## The AI Analyst
+
+Click the **AI Analyst** button (sparkle icon) in the toolbar, or **or Create with AI** beneath the first node on an empty canvas.
+
+> **Build automations with AI**
+> Describe what you want to automate — the analyst can create and edit steps, rewire them, test them, and publish for you.
+
+Describe what you want in plain English and it builds it: creating steps, filling in their fields, connecting them, running them to check, and publishing when you're happy.
+
+What makes it practical:
+
+- **It knows your data.** Pick a data agent in the chat input and it resolves table and column names from that agent's scope — you never paste schemas or resource IDs.
+- **It asks before anything destructive.** Deleting a step, publishing, and unpublishing all require you to confirm on a card in the chat first. Running the whole automation is announced with its side effects before it happens.
+- **Changes can be undone.** Ask it to undo and it reverts its last change. Undo history covers the 50 most recent changes and expires after 24 hours.
+- **Conversations are saved per automation** and can be renamed, so you can keep separate threads for separate pieces of work.
+
+## Generating a field's contents
+
+Two fields have a dedicated AI writer.
+
+**Write Code** — the full-screen editor behind any query field. Choose **Python** or **SQL**, describe what you want, and click **Generate with AI**. The suggestion appears as a diff over your existing code — **accept** or **reject** it. **Save & Run Query** executes it against the node's selected resource and shows the results below, so you can confirm it works before closing.
+
+**Edit HTML email body** — the same flow for a **Send Email** body in Code mode, with a live preview beside the editor.
+
+> The HTML writer will never invent variable bindings. Where your data should go, it leaves a placeholder like `[[ total revenue this month ]]` in double square brackets. Replace each one by clicking it and typing `/` to pick the real value.
+
+
+# Scheduling a Dashboard Report
+
+The fastest way to a recurring email report doesn't start in Automations at all. Open a dashboard, go to its share menu, and choose **Email Reports**.
+
+| Field                             | Notes                                                                              |
+| --------------------------------- | ---------------------------------------------------------------------------------- |
+| **Report Name**                   | Required                                                                            |
+| **Delivery Frequency**            | **Hourly**, **Daily**, **Weekly**, or **Monthly**, plus a day/time and **timezone**  |
+| Dashboard filters                 | Applied before the report is generated                                              |
+| **Format**                        | **Text mail**, **PDF**, **PPT**, or **Excel**                                       |
+| **Delivery Destination**          | Email addresses as chips; you can bulk-add the dashboard's members                  |
+| **Custom Instruction for Report** | How you want the report written — structure, colours, what to emphasise             |
+
+Click **Set Schedule** and you're done. This builds a genuine automation, so everything above applies to it — click **Edit in Automation** on the confirmation screen, or find it later in the Automations list, to add steps, change the schedule, or wire in a Condition.
+
+> This is the only place in the product with a timezone picker. It converts your choice to UTC when it saves, so the underlying automation is UTC like any other — and the delivery time will shift by an hour when your local daylight saving changes.
+
+> **On Hourly, the minute you pick isn't used.** An hourly report runs on a rolling one-hour interval rather than at a fixed minute past the hour. If you need a specific minute, choose **Daily** or edit the automation's trigger directly.
+
+
+# Permissions
+
+Automations require the **Business** plan. Within a workspace:
+
+| Action                                    | Minimum role           |
+| ----------------------------------------- | ---------------------- |
+| View automations and their configuration  | Viewer                 |
+| View run history                          | Editor                 |
+| Create an automation                      | Editor                 |
+| Edit steps and connections                | Editor                 |
+| Test run, or run a single step            | Editor                 |
+| Publish and unpublish                     | Editor                 |
+| Use the AI Analyst and **Generate with AI** | Editor               |
+| Delete an automation                      | Editor                 |
+
+Admins and owners have everything an editor has.

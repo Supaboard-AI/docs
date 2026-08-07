@@ -3,14 +3,14 @@ title: "Dashboard Embeds"
 mode: "wide"
 ---
 
-**Dashboard Embeds** let you share any dashboard with an external audience by generating a shareable URL or an iframe snippet. The embedded dashboard is read-only — viewers can interact with charts and apply filters, but cannot edit anything.
+**Dashboard Embeds** let you share any dashboard with an external audience by generating a shareable URL you can drop into an iframe. The embedded dashboard is read-only — viewers can interact with charts and apply filters, but cannot edit anything.
 
-> Embeds are for sharing a *specific dashboard*. If you want to deliver a fully branded, multi-feature analytics experience to your own users under your own domain, see [White Label](./WhiteLabel.mdx) instead.
+> Embeds are for sharing a *specific dashboard*. If you want to deliver a fully branded, multi-feature analytics experience to your own users under your own domain, see [White Label](./white-label) instead.
 
 
 # Opening the Embed Panel
 
-Open a dashboard and click the **Export** button in the top-right toolbar. The export panel slides open on the right side. Select the **Embeds** tab.
+Open a dashboard, click the **…** options button in the top-right toolbar, and select **Embed**.
 
 From here you can create new embed tokens and manage existing ones for this dashboard group.
 
@@ -19,12 +19,19 @@ From here you can create new embed tokens and manage existing ones for this dash
 
 Click **Add New Embedding** to open the creation form. Configure the options below, then click **Create** to generate the embed token and URL.
 
-The embed URL is displayed immediately after creation. Copy it to your clipboard or embed it as an iframe in your product.
+A **live preview** renders inside the form as you configure it, so you can see the result before committing.
+
+The embed URL is displayed immediately after creation. Copy it to your clipboard or drop it into an iframe in your product.
+
+
+# Title
+
+An optional **Title** for the embed itself. This is a label for your own reference in the embed list — distinct from **Hide Title**, which controls whether the *dashboard's* name is shown to viewers.
 
 
 # Expiration
 
-Every embed has an **expiry date** — the date and time after which the embed token becomes invalid and the URL stops working.
+Every embed has an **expiry date** — the date and time after which the token becomes invalid and the URL stops working.
 
 | Detail | Behaviour |
 |---|---|
@@ -32,7 +39,7 @@ Every embed has an **expiry date** — the date and time after which the embed t
 | **Configurable** | Pick any future date and time using the date picker |
 | **Past dates** | Disabled — expiry must be in the future |
 
-Once an embed token expires, anyone with the link will see an error. Create a new embed token to restore access.
+Once an embed token expires, anyone with the link sees an error. Create a new token to restore access.
 
 > Set a longer expiry for permanent, public-facing embeds. Use short expiry windows for temporary previews or client reviews.
 
@@ -48,69 +55,107 @@ Add one or more domains to the **Domains** field (e.g. `yourcompany.com`, `app.y
 | **No domains set** | Embed is publicly accessible to anyone with the URL |
 | **One or more domains set** | Embed only loads when accessed from those domains |
 
-Domains are displayed with their favicon icon in the embed list for easy identification.
+Domains are displayed with their favicon in the embed list for easy identification.
+
+
+# Display Options
+
+Four controls sit together in the creation form:
+
+| Control | Description |
+|---|---|
+| **Hide Title** | *"Hide the dashboard title in the embedded view."* Useful when your own product already provides the context. |
+| **Allow Export** | *"Allow data from chart, tables and kpis to be exported."* Off by default — turn it on only if viewers should be able to download your data. |
+| **Theme** | **Auto** / **Light** / **Dark**. *"Force light or dark mode in the embedded view."* On Auto the embed follows the viewer's system preference. |
+| **Interactive Dashboard** | See [Interactive Dashboard](#interactive-dashboard) below. |
 
 
 # Filter Configuration
 
-If your dashboard has [Filter widgets](./Dashboards.mdx#filter), you can control how each one behaves in the embed — whether viewers see it, whether it affects the data, and what value it starts with.
+If your dashboard has [Filter widgets](./dashboard#filters), you can control how each one behaves in the embed.
 
-## Per-filter options
+Each filter is a **checkbox** plus an optional **preset value**, and the combination of the two produces three behaviours:
 
-For each filter widget on the dashboard, three settings are available:
+| Checkbox | Preset value | Result |
+|---|---|---|
+| **Checked** | — | Filter is **visible** and viewers can change it |
+| **Checked** | Set | Filter is **visible**, pre-populated with your value, and viewers can change it |
+| **Unchecked** | Set | Filter is **hidden but still filtering** — viewers see pre-filtered results without knowing a filter is active |
+| **Unchecked** | — | Filter is **excluded** — it does not filter the data at all |
 
-### Visibility
-| State | What happens |
-|---|---|
-| **Visible** (default) | The filter is shown to viewers and they can change it |
-| **Hidden** | The filter is not shown in the UI, but it **still filters the data** — viewers see pre-filtered results without knowing a filter is active |
+The panel moves between these for you. Setting a preset on an unchecked filter switches it from *excluded* to *hidden with preset*; clearing that preset switches it back to *excluded*.
 
-### Enabled / Disabled
-| State | What happens |
-|---|---|
-| **Enabled** (default) | The filter actively affects the query results |
-| **Disabled** | The filter is completely inactive — it does not filter the data at all, regardless of any preset value |
-
-### Preset value
-Set a default value that the filter starts with when the embed loads. Viewers can change it (if the filter is visible and enabled). Preset values are type-aware:
+## Preset value types
 
 | Filter type | Preset input |
 |---|---|
-| **Categorical** | Multi-select dropdown or text |
-| **Date** | Date picker (supports single date, range, month, quarter, year) |
-| **Text** | Text input |
+| **Category** | Multi-select dropdown or text |
+| **Date Time** | Date preset picker plus a calendar (see below) |
+| **String** | Text input |
 | **Numeric / Integer** | Number input |
 | **Boolean** | Toggle |
+
+### Date presets
+
+Date filters offer 13 presets in four groups, plus a calendar for an explicit range:
+
+| Group | Presets |
+|---|---|
+| **Lifetime** | Lifetime |
+| **Recent** | Today · Yesterday · Previous week · Previous 7 days · Previous 30 days |
+| **Months** | Previous month · Previous 3 months · Previous 12 months |
+| **Current** | Current week · Current month · Current quarter · Current year |
+
+> Presets are relative, so an embed set to *Previous 30 days* keeps showing the last 30 days indefinitely rather than freezing on the range that was current when you created it.
 
 ## Common filter patterns
 
 **Lock viewers to a specific customer's data:**
-Set the relevant filter to *Hidden* + *Enabled* + a preset value equal to that customer's ID. Viewers see only their data and cannot change or see the filter.
+Leave the filter **unchecked** and set a preset equal to that customer's ID. Viewers see only their data and cannot see or change the filter.
 
 **Show a filter but pre-populate it:**
-Set the filter to *Visible* + *Enabled* + a preset value. Viewers start with a useful default but can adjust it.
+**Check** the filter and set a preset. Viewers start with a useful default but can adjust it.
 
 **Turn off a filter entirely for this embed:**
-Set the filter to *Disabled*. The filter has no effect — useful when an embed is scoped to data where the filter is irrelevant.
+Leave it **unchecked** with no preset. The filter has no effect — useful when an embed is scoped to data where the filter is irrelevant.
 
 
-# Hide Dashboard Title
+# Interactive Dashboard
 
-Toggle **Hide Title** to remove the dashboard name from the top of the embedded view. Useful when you are embedding the dashboard inside your own product that already provides the context.
+> **Feature-gated.** Interactive Dashboard requires the interactive mode feature on your plan. An upgrade prompt is shown otherwise — see [pricing](https://supaboard.ai/pricing).
+
+*"Ship your embedded dashboard with Stella that allows your users to interact with your dashboard."*
+
+When enabled, an AI chat interface is available to viewers inside the embedded dashboard, so they can ask natural language questions about the data they're looking at.
+
+Turning it on reveals a **Select Agent** dropdown listing your workspace's agents. Choose which agent answers. The agent is locked for the embed — viewers cannot switch it.
 
 
-# Interactive Mode (Ask Stella in Embeds)
+# URL Parameters
 
-> **Pro feature.** Interactive Mode requires a plan that includes the `interactive_mode` capability. An upgrade prompt is shown if it is not available on your current plan.
+Every setting saved on an embed can be overridden per-link with a query parameter. This lets one embed token serve several contexts without creating a token for each.
 
-When enabled, a Stella AI chat interface is available to viewers inside the embedded dashboard — allowing them to ask natural language questions about the data they're viewing.
-
-| Field | Description |
+| Parameter | Effect |
 |---|---|
-| **Enable Interactive Mode** | Toggle on to add Stella to the embed |
-| **Agent** | Select which agent powers the Stella interface. Choose from the agents configured in your workspace. |
+| `filter` | Applies a filter configuration, **overriding** the embed's saved filter settings |
+| `environment` | Overrides which [environment](./dashboard#environments) the dashboard queries |
+| `theme` | Forces `light` or `dark`, overriding the saved Theme setting |
+| `default_dashboard_page` | Opens a specific page of the dashboard group |
+| `hide_page_selector` | Hides the page switcher |
+| `hide_title` | Overrides the saved **Hide Title** setting |
 
-If no agent is selected, the default workspace agent is used.
+## Truthiness
+
+For the boolean parameters (`hide_page_selector`, `hide_title`):
+
+| Value | Result |
+|---|---|
+| `true`, `1`, or the parameter present with no value | On |
+| `false`, `0`, or the parameter absent | Off |
+
+`hide_title` is genuinely an override, not a default: if the parameter is present it wins, regardless of what the embed was saved with. Omit it to fall back to the saved setting.
+
+> For the `filter` and `environment` parameters — how to build the token, and what the filter payload looks like — see [Adding filters and environments to an embedded dashboard programmatically](./add-filters-and-environments-in-embedded-dashboard-programatically).
 
 
 # Managing Existing Embeds
@@ -119,27 +164,28 @@ All existing embed tokens for the current dashboard group are listed in the Embe
 
 Each embed shows:
 - **Domain icons** — the sites the embed is restricted to, or "All Domains" if unrestricted
-- **Expiry date** — formatted as "Expires on {date}"
+- **Expiry date** — formatted as "Expires on `{date}`"
 - **Embed URL** — truncated display of the full URL
 - **Copy button** — copy the embed URL to the clipboard
 - **Delete button** — permanently revoke the embed token
 
 ## Revoking an embed
 
-Click **Delete** on any embed to revoke it immediately. The token becomes invalid and the URL stops working for anyone who has it. This cannot be undone — create a new embed token if access needs to be restored.
+Click **Delete** on any embed to revoke it immediately. The token becomes invalid and the URL stops working for everyone who has it. This cannot be undone — create a new token if access needs to be restored.
 
 
 # What Viewers See
 
 Embedded dashboards open in a clean, read-only view:
 
-- All widgets (charts, KPIs, tables, text, images, memos, embeds) are fully rendered
-- Viewers can hover on charts for tooltips and click data points to [drill through](./Dashboards.mdx#data-drilling)
-- Filter widgets (if visible and enabled) are interactive — viewers can change filter values
-- The dashboard title is shown or hidden based on your **Hide Title** setting
-- If Interactive Mode is on, a Stella chat interface is available alongside the dashboard
+- All widgets (charts, KPIs, tables, text, images, embeds) are fully rendered
+- Viewers can hover charts for tooltips and click data points to [drill through](./dashboard#drilling-into-data)
+- Visible filter widgets are interactive
+- The dashboard title is shown or hidden per the **Hide Title** setting and any `hide_title` parameter
+- Export controls appear only if **Allow Export** is on
+- If Interactive Dashboard is on, an AI chat interface is available alongside the dashboard
 - No edit controls, widget menus, or toolbar options are shown
-- Viewers do not need a Supaboard account to access an unrestricted embed
+- Viewers do not need a Supaboard account to open an unrestricted embed
 
 
 # Permissions
@@ -150,4 +196,4 @@ Embedded dashboards open in a clean, read-only view:
 | Create an embed token | Editor |
 | Copy an embed URL | Editor |
 | Delete / revoke an embed token | Editor · Admin · Owner |
-| Enable Interactive Mode | Editor (requires Pro plan feature) |
+| Enable Interactive Dashboard | Editor (requires the interactive mode feature) |

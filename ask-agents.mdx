@@ -1,165 +1,234 @@
 ---
-title: "Ask Agents"
+title: "Ask Analysts"
 mode: "wide"
 ---
 
-**Ask Agents** is Supaboard's conversational interface. Type a question in plain English and Agents queries your data, then returns charts, tables, KPIs, and written explanations — no SQL required.
+**Ask Analysts** is Supaboard's conversational interface. Type a question in plain English and your agent queries your data, then returns charts, tables, KPIs, and written explanations — no SQL required.
 
-Ask Agents is powered by your workspace's [Agents](./Agents.mdx). Each agent defines what data agents can access and how it interprets your questions.
+Ask Analysts is powered by your workspace's [Agents](./agents). Each agent defines what data it can reach and how it interprets your questions.
+
+> Some older screens still call this **Ask Stella**, and the URL is `/ask-stella`. It's the same feature.
 
 
-# Opening Ask Agents
+# Opening Ask Analysts
 
-Click **Ask Agents** in the sidebar. If you have an existing conversation, it opens where you left off. To start fresh, click **New Conversation**.
+Click **Ask Analysts** in the sidebar. If you have an existing conversation, it opens where you left off.
+
+## The empty state
+
+A new conversation offers shortcuts that configure the input for you:
+
+| Card / pill | What it does |
+| --- | --- |
+| **Upload Files** | Opens the file picker so you can add context before asking |
+| **Go Deeper-Deep Dive** | Switches the mode selector to Deep Dive |
+| **Try Voice Mode** | Starts voice input |
+| **Connect MCP Tools** | Opens the tool picker |
+
+Suggested questions are shown below, tailored to your connected data.
+
 
 # Conversations
 
-## Conversation list
+## The conversation list
 
-The left panel shows all your conversations, grouped by recency:
+Open the conversations panel from the **topbar**, beside the page title.
 
-- Today
-- This Week
-- Last Month
-- Older
+Conversations are grouped by the **date they were created** — headings read like *"7th August, 2026"* — newest first. **Search** filters by conversation name. Conversations load 15 at a time; scroll to load more.
 
-**Search** to filter by conversation name. Conversations load 15 at a time — scroll to load more.
+Hover any conversation for a three-dot menu with **Rename**, **Control Access**, and **Delete**.
 
 ## Starting a new conversation
 
-Click **New Conversation**. When you send your first message, you select which agent should answer it. Each conversation stays tied to that agent for its lifetime.
+Click the **New Conversation** button in the topbar.
+
+## Choosing an agent
+
+The agent selector sits in the input row and is pre-filled with your workspace's default agent. You can change it on any turn, not just the first — so you can start with one agent and switch mid-conversation if another has the right data scope.
 
 ## Conversation limit
 
-Each conversation supports up to **20 exchanges**. When the limit is reached, the input is disabled. Start a new conversation to continue.
+Each conversation supports up to **20 exchanges**. At the limit, the input is replaced by a card titled *"To continue, please start a new conversation"* with a **Continue in New Chat** button. Context from the current conversation carries over into the new one, so you don't lose your place.
 
 
 # Asking a Question
 
-Type your question in the input bar at the bottom: _"Ask anything about your data..."_ and press Enter.
+Type in the input bar at the bottom — *"Ask anything about your data..."* — and press Enter.
 
 ## Query modes
 
-Use the **mode selector** in the input bar to control how Agents processes your question:
+Two pills in the input bar control how your question is processed:
 
 ### Concise
 
-Quick follow-ups and simple lookups where speed matters more than depth. Answers the "what" questions.
+*Precise to the point answer.* Quick follow-ups and simple lookups where speed matters more than depth. Best for summarised insights, KPIs, and "what" questions.
 
 ### Deep Dive
 
-Queries that need thoughtful analysis — charts, tables, KPIs, with exploratory insights that go deep into understanding what is going on with your data. Answers the "how" and "why" questions.
+*Deep analytical thinking.* Questions that need real analysis — charts, tables, KPIs, with exploratory insight. Best for "why" and "how" questions.
 
-## Additional input options
+## Voice input
 
-| Option          | What it does                                                                               |
-| --------------- | ------------------------------------------------------------------------------------------ |
-| **Attach file** | Upload a PDF, CSV, Excel, or image to give Agents extra context for this specific question |
-| **Web search**  | Toggle on to let Agents supplement its answer with live web results                        |
-| **Tools**       | Select MCP tools (external integrations) for Agents to call when composing its answer      |
+Click the microphone beside Send to dictate your question. While listening, the input shows a live transcript and a waveform. Click again to stop.
+
+## Attachments and tools
+
+Both live behind the **+** button (*"Add File(s) or Tool(s)"*).
+
+### Add File(s)
+
+Attach a file to give the agent extra context.
+
+| Detail | Value |
+| --- | --- |
+| **Size limit** | 5 MB per file |
+| **Accepted types** | PDF, images, Word (`.doc` / `.docx`), plain text, CSV, Excel (`.xls` / `.xlsx`) |
+
+Files can also be pasted or dragged onto the input.
+
+> Attachments **persist across the conversation**. A file you upload on your first message is still in context ten turns later, and its extracted text is cached so it is never re-processed.
+
+### Add Tool(s)
+
+Pick from your connected MCP tools — see [MCP & Tools](./tools) — so the agent can call them while composing its answer. The picker is searchable and shows a check against each selected tool.
+
 
 # Understanding Responses
 
-Every response appears as a message bubble with multiple tabs you can switch between.
+A response renders as a single flowing message, not a set of tabs:
 
-## Answer tab
+1. **Your prompt**, in a bubble
+2. **The agent header**, with an expandable **"Thought for `{duration}`"** disclosure — click it to see the reasoning steps the agent took
+3. **The answer** — text, and any widgets
+4. **The toolbox**
 
-The primary response. Depending on your question, this may contain:
+## What an answer can contain
 
-| Response type | What it looks like                                               |
-| ------------- | ---------------------------------------------------------------- |
-| **Text**      | A written, markdown-formatted explanation                        |
-| **KPI**       | A headline metric card with an optional trend indicator          |
-| **Table**     | A paginated, scrollable data table                               |
-| **Chart**     | An interactive visualisation — bar, line, pie, scatter, and more |
+| Response type | What it looks like |
+| --- | --- |
+| **Text** | A written, markdown-formatted explanation |
+| **KPI** | A headline metric card with an optional trend indicator |
+| **Table** | A paginated, scrollable data table |
+| **Chart** | An interactive visualisation — bar, line, pie, scatter, and more |
+| **File** | An inline preview card for a PDF, CSV, or image the answer produced or referenced |
 
-A single response can contain multiple widgets alongside explanatory text.
+A single response can contain several widgets alongside explanatory text.
 
-## Source tab
+## Clarifying questions
 
-Shows exactly which data sources and tables were queried to produce the answer. Use this to verify where the numbers came from.
+The agent can pause mid-answer to ask you something — an ambiguous date range, which of two similarly-named tables you meant. Answer it, or **Skip**. The input is hidden while a question is pending.
 
-## Definitions tab
+## The message toolbox
 
-Key terms or metrics extracted and defined by Agents for added clarity.
+| Action | What it does |
+| --- | --- |
+| **Copy** | Copy the message content to the clipboard |
+| **Share** | Opens the [Share Message](#sharing-a-conversation-or-an-answer) dialog |
+| **Confidence** | A colour-coded icon — hover for the overall confidence percentage and a per-widget breakdown |
 
-## Steps tab
+The confidence icon only appears when the agent produced a confidence score for that answer.
 
-The reasoning steps Agents took to arrive at its answer — useful when you want to understand _how_ a result was calculated, not just _what_ it is.
+Your own messages have their own hover toolbox with **Edit** and **Copy** — edit a prompt to re-ask it without retyping.
 
-## Message actions
+## Rating an answer
 
-Every message has a small toolbox:
+Thumbs up and down are **per widget**, not per message. Select a widget in the side panel and the **Like** / **Dislike** controls appear.
 
-| Action       | What it does                                                           |
-| ------------ | ---------------------------------------------------------------------- |
-| **Share**    | Copy a link to this specific message                                   |
-| **Copy**     | Copy the message content to the clipboard                              |
-| **Feedback** | Thumbs up or thumbs down — helps improve the agent's answers over time |
+> These do real work. A thumbs up promotes the query behind that widget into the agent's [Verified Queries](./agents#verified-queries). A thumbs down feeds the agent's [Memory](./agents#memory).
+
+## Platform help
+
+You can also ask how to use Supaboard itself — *"how do I schedule a dashboard report?"* The agent reads the live product documentation and answers in text. No widget is produced for these.
 
 
-# Pinning Widgets to a Dashboard
+# Pinning Widgets
 
-Charts, tables, and KPIs generated by Agents can be saved directly to any dashboard — and they stay live, re-querying your data on every dashboard load.
+Charts, tables, and KPIs generated by the agent can be saved elsewhere — and they stay live, re-querying your data whenever they're loaded.
 
-## How to pin
+1. After the agent responds, widgets appear in the **right-side panel**.
+2. Check the ones you want to keep.
+3. Click **Pin** (*"Pin widgets to dashboard"*).
+4. Choose a destination:
+   - **Dashboard** — an existing one, or create one inline
+   - **Datasite** — send the widgets to a [datasite](./datasites), where the pinned query is used verbatim and only the presentation is rebuilt
+5. Confirm.
 
-1. After Agents responds, widgets appear in the **right-side panel**.
-2. Check the widgets you want to keep.
-3. Click **Pin to Dashboard**.
-4. In the modal that opens, either:
-   - **Select an existing dashboard** from the list, or
-   - **Create a new dashboard** inline.
-5. Confirm — the widgets are added to the dashboard immediately.
+
+# Sharing a Conversation or an Answer
+
+Two entry points, one dialog:
+
+- **The whole conversation** — the share button in the topbar
+- **A single answer** — **Share** on any message
+
+| Option | Behaviour |
+| --- | --- |
+| **Invite by email** | Adds the person to the conversation and grants them Ask Analysts access if they don't already have it |
+| **Member list** | Everyone who currently has access |
+| **Public link** | Expand the row and click **Copy Link** for a URL anyone can open |
+
+A link shared from a specific message opens the conversation scrolled to that message. Public views are read-only — no pinning, no replying.
+
+> The dialog reports "Invite sent", but **no invitation email is currently delivered**. Send the person the link yourself.
 
 
 # Managing Conversations
 
-All conversation management is in the **topbar** — the three-dot menu next to the conversation name.
+Every action is in the three-dot menu on the conversation's row in the list.
 
 ## Rename
 
-Opens a modal with a text input. The default name is _"Untitled Conversation"_ until renamed. Type a new name and save.
+Opens a modal with a text input. The default name is *"Untitled Conversation"* until renamed.
 
 ## Delete
 
-Opens a confirmation modal. Deleting a conversation permanently removes it and all its messages. **This cannot be undone.**
+Opens a confirmation. Deleting a conversation permanently removes it and all its messages. **This cannot be undone.**
 
-## Control access
+## Control Access
 
-Conversations are private by default — only you can see them. Use **Control Access** to share a conversation's history with teammates.
+> **Conversations are visible to your whole workspace by default.** A conversation with no access list can be opened by any workspace member. **Control Access restricts a conversation — it does not share one.**
 
-- All workspace members are listed with checkboxes.
-- Your entry and the workspace Owner are always included and cannot be removed.
-- Toggle any other user to grant or revoke access.
+Open **Control Access** and select people to limit the conversation to that list. Your own entry and the workspace Owner cannot be removed.
+
+If you're discussing something sensitive, set Control Access at the start rather than after the fact.
 
 
 # Permissions
 
-## Who can open Ask Agents
+## Who can open Ask Analysts
 
-Access is controlled by the **Agents feature flag** on each user's workspace membership. Users without this flag cannot open Ask Agents (see [Workspaces — Feature Access](./Workspaces.mdx#6-feature-access)).
+Access is controlled by the **Ask Analysts** feature flag on each user's workspace membership — see [Workspace — Feature Access](./workspace#feature-access).
+
+## Reading versus asking
+
+| Action | Minimum role |
+| --- | --- |
+| Open Ask Analysts and read conversations | Viewer (with feature access) |
+| Send a message | Editor |
+| Pin widgets to a dashboard or datasite | Editor |
+| Rename, delete, or restrict a conversation | Editor |
+
+A Viewer with the Ask Analysts flag can read every unrestricted conversation but cannot ask anything.
 
 ## Who can use a specific agent
 
-Each agent has its own User Access list. If an agent is restricted, only users on that list can select it when starting a conversation. Unrestricted agents are available to everyone with Agents access.
-
-## Conversation access
-
-Conversations are private by default. Share them explicitly via [Control Access](#6-managing-conversations).
+Each agent has its own **User Access** list. If an agent is restricted, only people on that list can select it. Unrestricted agents are available to everyone with Ask Analysts access.
 
 
 # Quick Reference
 
-| I want to…                           | How                                               |
-| ------------------------------------ | ------------------------------------------------- |
-| Ask a question                       | Type in the input bar and press Enter             |
-| Get a more thorough answer           | Switch to **Agents** mode                         |
-| Get a faster answer                  | Switch to **Fast Agents** mode                    |
-| Add a document for extra context     | Click the attachment icon before sending          |
-| Search the web as part of the answer | Toggle **Web search** on                          |
-| Save a chart to a dashboard          | Check it in the side panel → **Pin to Dashboard** |
-| Share a specific answer              | Click **Share** on the message                    |
-| Return to a past conversation        | Search for it in the left panel                   |
-| Start fresh                          | Click **New Conversation**                        |
-| Share a conversation with a teammate | Three-dot menu → **Control Access**               |
+| I want to… | How |
+| --- | --- |
+| Ask a question | Type in the input bar and press Enter |
+| Get a more thorough answer | Switch to **Deep Dive** |
+| Get a faster answer | Switch to **Concise** |
+| Dictate instead of typing | Click the microphone |
+| Add a document for extra context | **+** → **Add File(s)** |
+| Let the agent call an external tool | **+** → **Add Tool(s)** |
+| See how an answer was reached | Expand **Thought for …** |
+| Check how confident the agent is | Hover the confidence icon in the toolbox |
+| Save a chart to a dashboard | Check it in the side panel → **Pin** |
+| Share a specific answer | **Share** on the message |
+| Restrict a conversation to certain people | Three-dot menu → **Control Access** |
+| Return to a past conversation | Search for it in the conversations panel |
+| Start fresh | **New Conversation** in the topbar |

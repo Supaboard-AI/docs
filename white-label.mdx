@@ -3,23 +3,29 @@ title: "White Label"
 mode: "wide"
 ---
 
-> **Enterprise plan only.** White Label is available exclusively on the Enterprise plan. Contact your account manager to enable it for your workspace.
+> **Available on negotiated plans.** White Label appears under Settings only for workspaces on a custom contract. If you don't see it, talk to your account manager — see [pricing](https://supaboard.ai/pricing).
 
-**White Label** lets you deliver a fully branded analytics and AI experience to your own users — under your name, your logo, and your domain. Your customers interact with dashboards and Ask Stella without ever seeing the Supaboard brand. It runs as a separate, lightweight application that you embed in your product or share as a standalone URL.
+**White Label** lets you deliver a fully branded analytics and AI experience to your own users — under your name, your logo, and optionally your domain. Your customers work with dashboards and agents without ever seeing the Supaboard brand. It runs as a separate, lightweight application that you share as a URL or embed in your product.
+
+> **A note on naming.** This feature is called **White Label** in the settings sidebar, but parts of the product still call it **MiniBoard** — the settings URL is `/settings/mini-board`, and you'll see "Setup Miniboard" and "Adds users directly to this MiniBoard" on the screen itself. They are the same thing.
 
 
 # How It Works
 
-When you configure White Label, Supaboard generates a unique **embed URL** for your workspace. Anyone who visits that URL — or has it embedded inside your product — gets a stripped-down, branded version of Supaboard that shows only the features you choose to expose.
+When you configure White Label, Supaboard generates a unique **link** for your workspace. Anyone who visits it — or has it embedded inside your product — gets a stripped-down, branded version of Supaboard that shows only the features you choose to expose.
 
-The embedded app is completely independent from the main Supaboard interface. Your users log in separately, see only your branding, and have no way to navigate to Supaboard's own UI.
+The branded app is a separate application from the main Supaboard interface. Your users sign in to it directly, see only your branding, and have no path to Supaboard's own administrative UI.
 
 ```
 Your product
 └── Embedded iframe (or standalone URL)
     └── Your branded analytics app
-        ├── Dashboards (if enabled)
-        └── Ask Stella / AI chat (if enabled)
+        ├── Dashboards        (if enabled)
+        ├── Ask Analysts      (if enabled)
+        ├── Agents            (if enabled)
+        ├── Data Source       (if enabled)
+        ├── Query Builder     (if enabled)
+        └── MCP & Tools       (if enabled)
 ```
 
 
@@ -27,117 +33,180 @@ Your product
 
 Navigate to **Settings → White Label** in the sidebar.
 
-The index page shows your current embed URL and a button to copy it to the clipboard. Click the **Edit** icon to open the configuration form.
+The page has two states:
+
+| State | What you see |
+|---|---|
+| **Not yet configured** | *"You haven't setup your miniboard yet."* alongside a **Setup Miniboard** button |
+| **Configured** | Your link in read-only form, a **copy** button, and an **edit** button that opens the configuration screen |
+
+> The edit button's tooltip currently reads "Open in new tab", but it opens the configuration form. This is a known label bug, not a different action.
+
+Everything else on this page — the configuration form and the user management card — lives on that configuration screen.
 
 
-# Your Embed URL
+# Your Link
 
-Your embed URL is automatically generated from your workspace namespace. It is displayed on the White Label settings index page in read-only format.
+Your link is generated automatically from your workspace namespace and is displayed read-only. Click the **copy** button to put it on the clipboard.
 
-Click **Copy** to copy it to the clipboard. Share this URL with your users, embed it in an iframe in your product, or map a [custom domain](#custom-domain) to it.
-
-The URL encodes your workspace namespace so that the embedded app knows which configuration, dashboards, and agents to load.
+Share it with your users, embed it in an iframe in your product, or point a [custom domain](#custom-domain) at it. The URL encodes your workspace namespace so the branded app knows which configuration, dashboards, and agents to load.
 
 
-# Branding
+# The Configuration Form
 
-All branding fields are optional — any field left blank falls back to your workspace's default settings.
+The form is four sections. The submit button is **Update**, and it stays disabled until at least one feature is selected.
+
+## Domain
+
+A single **Custom Domain** field. See [Custom Domain](#custom-domain) below.
+
+## Branding
+
+Every branding field is optional — anything left blank falls back to your workspace defaults.
 
 | Field | Description |
 |---|---|
-| **Name** | Your company or product name. Displayed in the embedded app's header and sidebar in place of "Supaboard". |
-| **Description** | A short subtitle shown alongside the name. |
-| **Logo** | Upload an image file. Displayed at 42×42px in the header. Replaces the Supaboard logo entirely. |
-| **Theme** | The colour scheme of the embedded app. |
+| **Name** | Your company or product name. Shown in the branded app's header and sidebar in place of "Supaboard". |
+| **Description** | A short subtitle displayed alongside the name. |
+| **Theme** | `light`, `dark`, or `auto`. |
+| **Upload Logo** | Upload an image file. Rendered at 42×42px, rounded. Replaces the Supaboard logo entirely. Once uploaded, the button becomes **Replace Logo**, and hovering the preview reveals a cross to remove it. |
 
-## Theme options
+### Theme options
 
 | Option | Behaviour |
 |---|---|
-| **Light** | Always renders in light mode |
-| **Dark** | Always renders in dark mode |
-| **Auto** | Follows the user's operating system preference |
+| **light** | Always renders in light mode |
+| **dark** | Always renders in dark mode |
+| **auto** | Follows the user's operating system preference |
+
+## Access & Control
+
+Contains the sidebar toggle, the **Feature Access** grid, and the **AI Disclaimer** field — all covered below.
 
 
-# Feature Toggles
+# Feature Access
 
-Control which sections of Supaboard are available to your embedded users. At least one feature must be enabled.
+Choose which parts of Supaboard your branded users can reach. Eight options are offered, all enabled by default for a new configuration. **At least one must stay selected** — the Update button is disabled otherwise.
 
-| Feature | What it exposes |
-|---|---|
-| **Dashboard** | The full dashboard viewer — all dashboard groups and their pages, with all widget types (charts, KPIs, tables, filters, etc.) |
-| **Ask Agents** | The Ask Stella conversational AI interface — your users can chat with your configured agents in natural language |
+| Feature | What it exposes | Available in the branded app |
+|---|---|---|
+| **Ask Analysts** | The conversational AI interface — your users chat with your configured agents in plain English | Yes |
+| **Dashboard** | The dashboard viewer — dashboard groups and pages, with all widget types | Yes |
+| **Data Source** | Browse connected databases, tables, and records | Yes |
+| **Agents** | View and configure agents | Yes |
+| **Query Builder** | Write and run queries directly | Yes |
+| **MCP & Tools** | Connected MCP tools | Yes |
+| **Automations** | — | **Not yet** |
+| **Datasites** | — | **Not yet** |
 
-Features that are disabled do not appear in the embedded app's navigation at all — they are not hidden, they simply do not exist for the end user.
+> **Automations and Datasites are selectable but have nothing behind them.** The branded app has no screens for either, so enabling them has no effect today. Leave them off until they ship.
 
-> Restricting to **Dashboard only** is the right choice for read-only public-facing portals where AI chat is not appropriate. Enabling **Ask Agents only** works well for internal support tools or data assistants where a fixed dashboard isn't needed.
+Disabled features do not appear in the branded app's navigation at all — they are not hidden behind a permission error, they simply do not exist for that user.
+
+> Restricting to **Dashboard** only suits read-only, customer-facing portals where AI chat isn't appropriate. **Ask Analysts** only works well for internal support tools or data assistants where a fixed dashboard isn't the point.
 
 
 # Sidebar Visibility
 
-**Show Sidebar** — toggle on or off.
+**Show sidebar** — a toggle, on by default.
 
 | State | Behaviour |
 |---|---|
-| **On** (default) | The left navigation sidebar is visible. Users can browse between dashboards and features. |
-| **Off** | The sidebar is hidden. The embed fills the full width. Use this when you are controlling navigation yourself (e.g. embedding a single dashboard in a specific page of your product and driving navigation from your own UI). |
+| **On** | The left navigation sidebar is visible. Users browse between dashboards and features themselves. |
+| **Off** | The sidebar is hidden and the app fills the full width. **You then have to manage navigation manually** — there is no built-in way for users to move between features. |
 
 
 # AI Disclaimer
 
-An optional text block displayed to users inside the Ask Agents interface — typically used to communicate limitations, data freshness, or legal notices.
-
-Write any plain-text message in the **AI Disclaimer** field. It is shown as a notice within the chat interface so users see it before or during their conversations with agents.
+An optional plain-text block shown to users inside the AI chat interface — typically used for limitations, data freshness, or legal notices.
 
 Example uses:
+
 - *"This assistant provides estimates based on available data. Always verify critical figures with your finance team."*
 - *"Data is refreshed every 24 hours. Figures may not reflect same-day activity."*
 
 
+# Adding Users in Bulk
+
+Below the configuration form is a **Users** card:
+
+> Adds users directly to this MiniBoard. They are auto-verified — no welcome email is sent.
+
+Click **Add Users** to open the modal. Each row collects:
+
+| Field | Notes |
+|---|---|
+| **Email** | The user's login address |
+| **First name** / **Last name** | Display name |
+| **Feature Access** | The same eight-feature grid as the workspace configuration, set per user |
+| **Role** | Admin, Editor, or Viewer |
+
+Click **Add row** to provision several people at once, then **Add Users** to submit.
+
+## The credentials screen — read this before you click Add Users
+
+On success the modal replaces itself with a **User Credentials** screen listing each email alongside a generated password, above a warning:
+
+> **Save these passwords now — they will not be visible again after this dialog is closed.**
+
+The passwords are generated by Supaboard and are **not recoverable**. Once you close this dialog they are gone, and there is no way to look them up again. Click **Copy credentials** to copy every email/password pair to your clipboard as JSON before clicking **Done**.
+
+> Have somewhere to paste them ready before you submit the form. Closing the dialog early means resetting those users' passwords by hand.
+
+
 # Custom Domain
 
-Enter a domain in the **Custom Domain** field to serve the embedded app from your own URL (e.g. `analytics.yourcompany.com`) instead of the default Supaboard-hosted URL.
+Enter a domain in the **Custom Domain** field to serve the branded app from your own URL (e.g. `analytics.yourcompany.com`) instead of the default Supaboard-hosted one.
 
-Custom domain setup requires a DNS CNAME record pointing to Supaboard's servers. Contact your account manager for the target CNAME value and setup instructions.
+> This field is a plain text input — there is no verification step, no status indicator, and no way to test it from the settings screen. The DNS side is arranged out of band: contact your account manager for the target CNAME value and setup instructions, and expect the field and the DNS record to be configured separately.
 
 
-# Authentication in the Embedded App
+# Signing In to the Branded App
 
-Your embedded users authenticate separately from the main Supaboard app. Three methods are supported:
+Your users authenticate separately from the main Supaboard app, on a login page that carries your branding.
 
-| Method | Description |
+**Email and password is the only method.** The branded login page does not offer Google or Microsoft sign-in, even though the main Supaboard app does.
+
+| Step | Behaviour |
 |---|---|
-| **Email & password** | Users log in with their Supaboard workspace credentials via a branded login page |
-| **Google OAuth** | Users sign in with a Google account |
-| **Microsoft OAuth** | Users sign in with a Microsoft / Azure AD account |
+| **Workspace check** | The email is checked against your workspace before the password is verified. Someone who isn't a member gets *"You don't have access to this workspace."* |
+| **Work email** | Personal-domain addresses (Gmail, Hotmail, and similar) are rejected at sign-in. |
+| **MFA** | If multi-factor authentication is enabled for your workspace, users are prompted for an OTP code after the password step. |
+| **Session** | Sessions are stored in the user's browser. Users are not asked to sign in again on subsequent visits until the session expires. |
 
-The login page carries your branding (logo, name, theme) so it appears as a seamless part of your product.
+## Password requirements
 
-**MFA** — If multi-factor authentication is enabled for your workspace, users are prompted for an OTP code after the primary login step.
+These apply when a user sets a password:
 
-**Session handling** — Once authenticated, sessions are stored locally in the user's browser. Users are not asked to log in again on subsequent visits until their session expires.
+- At least 8 characters
+- One uppercase letter
+- One lowercase letter
+- One number
+- One symbol from `@$!%*#?&`
+- **No other special characters** — anything outside letters, numbers, and that symbol set is rejected
+
+Passwords issued through [bulk add](#adding-users-in-bulk) already satisfy these rules.
 
 
 # What Your Users See
 
-Once configured, your users experience a fully branded application:
-
-- **Header and sidebar** show your logo and company name — no Supaboard branding
-- **Theme** (light/dark/auto) is applied globally across all pages
-- **Navigation** shows only the features you have enabled
+- **Header and sidebar** carry your logo and company name — no Supaboard branding
+- **Theme** (light/dark/auto) is applied across every page
+- **Navigation** shows only the features you enabled
 - **Login page** carries your branding
-- **Dashboards** render in view mode — users can interact with filters, hover on charts, drill through data, and export widgets, but cannot enter edit mode
-- **Ask Agents** provides the full conversational interface — conversations, message history, file attachments, and widget generation — within your branded shell
+- **Dashboards** render in view mode — users can use filters, hover charts, drill through data, and export widgets, but cannot enter edit mode
+- **Ask Analysts** provides the full conversational experience — conversations, history, file attachments, and widget generation — inside your shell
 
-Your users have no path to the main Supaboard interface, the workspace settings, or any administrative features.
+Your users can reach their own **profile settings** (name, avatar, password) but have no path to workspace administration, billing, team management, or the main Supaboard interface.
 
 
 # Permissions
 
 | Action | Minimum role |
 |---|---|
-| View White Label settings & embed URL | Admin · Owner |
+| Open Settings → White Label | Admin · Owner |
 | Configure branding, features, sidebar, disclaimer | Admin · Owner |
-| Set custom domain | Owner |
+| Bulk add users | Admin · Owner |
+| Set a custom domain | Admin · Owner (coordinate with your DNS administrator) |
 
-White Label configuration is workspace-level. Any Admin can edit the settings, but custom domain changes should be coordinated with the workspace Owner and your DNS administrator.
+White Label configuration is workspace-wide — there is one configuration per workspace, and it applies to every user of the branded app. Per-user differences are set through the **Feature Access** grid when you [add users](#adding-users-in-bulk), or afterwards from **Settings → Team Members**.

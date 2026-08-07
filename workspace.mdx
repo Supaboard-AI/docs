@@ -3,7 +3,7 @@ title: "Workspaces"
 mode: "wide"
 ---
 
-A **Workspace** is your organisation's private environment inside Supaboard. Every resource you create — dashboards, data sources, agents, team members — belongs to a single workspace. You can be a member of multiple workspaces and switch between them at any time.
+A **Workspace** is your organisation's private environment inside Supaboard. Every resource you create — dashboards, data sources, agents, automations, datasites, team members — belongs to a single workspace. You can be a member of multiple workspaces and switch between them at any time.
 
 # Creating a Workspace
 
@@ -11,264 +11,337 @@ You can create as many workspaces as you need — for example, one per product, 
 
 ## How to create one
 
-1. Open **Settings → Workspace** in the sidebar.
-2. Click **Add New Workspace**.
-3. Fill in the required fields:
+1. Click your workspace name at the top of the sidebar to open the workspace menu.
+2. Choose **Switch Workspace**, then **New Workspace**.
+3. Enter a **Workspace Name** in the **Create New Workspace** dialog and confirm.
 
-| Field      | Details                                                            |
-| ---------- | ------------------------------------------------------------------ |
-| **Name**   | Human-readable label for the workspace                             |
-| **Region** | Where your data is stored. Choose the region closest to your team. |
+That is the whole form — name only. You become the **Owner** of any workspace you create.
 
-## Available regions
+## Regions
 
-| Region ID      | Location                |
-| -------------- | ----------------------- |
-| `ap-south-1`   | Asia Pacific (India)    |
-| `eu-central-1` | Europe (Frankfurt)      |
-| `us-central-1` | United States (Central) |
+New workspaces are provisioned in **North America** (`us-central-1`). The region is shown, read-only, on the workspace settings page. Supaboard also operates **Asia** (`ap-south-1`) and **Europe** (`eu-central-1`) regions; if you need one of those, talk to your account manager before creating the workspace.
 
-> **Important:** Region cannot be changed after the workspace is created. Choose carefully.
-
-Your email domain is automatically used to pre-fill the workspace domain. You become the **Owner** of any workspace you create.
+> **Region cannot be changed after a workspace is created.**
 
 
 # Configuring Your Workspace
 
-Navigate to **Settings → Workspace** to edit your workspace profile. Changes are saved explicitly — click **Save Changes** when done.
+Navigate to **Settings → Workspace**.
+
+| Field | Notes |
+| --- | --- |
+| **Workspace name** | Human-readable label, shown in the sidebar and switcher |
+| **Region** | Read-only — see above |
+| **Industry** | Used to tailor onboarding and AI defaults |
+| **Team Size** | Used to tailor onboarding and AI defaults |
+| **Require two-factor authentication** | See below |
+
+Your workspace image is uploaded from a separate section on the same page.
+
+## Requiring two-factor authentication
+
+**Require two-factor authentication** — *"Require members to enable MFA to access this workspace."*
+
+Turning this on is itself protected: you are asked for a 6-digit code from your authenticator app to confirm the change. Once on, every member must set up MFA before they can access the workspace.
+
+Members below Admin see the setting as a read-only line: *"Mfa has been enabled by your system admin/owner"*.
 
 ## Permissions required
 
-Only users with **Admin** or **Owner** role can edit workspace settings.
+Only **Admin** or **Owner** can edit workspace settings.
 
 
 # Inviting Team Members
 
-Navigate to **Settings → Team Members** and click **Invite Members**.
+Navigate to **Settings → Team Members** and click **Invite Members**. You can invite several people in one batch.
 
-## What you can configure per invite
-
-You can invite multiple people in a single batch. For each invitee, set:
+## What you configure per invite
 
 ### Role
 
-Controls what actions they can take across the workspace (see [Roles & Permissions](#5-roles--permissions)).
+Controls what actions they can take across the workspace — see [Roles and permissions](#roles-and-permissions). Options are **Viewer**, **Editor**, and **Admin**.
 
-- Viewer
-- Editor
-- Admin
+> Editors and Admins consume a **billable seat**; Viewers are free. The invite form shows the cost per row before you send — see [Seats and billing](#seats-and-billing).
 
-### Feature access
+### Which features they can use
 
-Restrict which Supaboard features they can use:
+Restrict which parts of Supaboard they can use. Leave it on **All features** for unrestricted access within their role. See [Feature Access](#feature-access) for how this interacts with roles.
 
-| Feature key     | What it unlocks           |
-| --------------- | ------------------------- |
-| `dashboard`     | Build and view dashboards |
-| `stella`        | Use Ask Stella (AI chat)  |
-| `query_builder` | Use the query builder     |
-| `data_view`     | Access data sources       |
+| Feature | What it unlocks |
+| --- | --- |
+| **Ask Analysts** | The conversational AI interface |
+| **Dashboard** | Build and view dashboards |
+| **Query Builder** | Write and run queries |
+| **Data Sources** | Browse and manage data source connections |
+| **Agents** | View and configure agents |
+| **MCP and Tools** | Connected MCP tools |
+| **Automations** | Build and run automations |
+| **Datasites** | Build and publish datasites |
 
-Leave set to **All features** to give unrestricted feature access within their role.
+The picker shows **All features** when nothing is restricted, or **N features** when it is.
 
 ### Resource access
 
-Optionally limit which data source connections the user can query. Set to **All resources** (default) or select specific ones.
+Optionally limit which data source connections the user can query. **All resources** (default), or pick specific ones.
 
 ## Validation rules
 
-- Work email addresses only — personal domains (Gmail, Hotmail, Yahoo, etc.) are blocked.
-- Duplicate emails in a batch are flagged before sending.
-- Users who are already workspace members are detected and skipped.
+- **Work email addresses only.** Personal domains (Gmail, Hotmail, and similar) are rejected with *"Use a work email."*
+- Duplicate emails within a batch are flagged before sending.
+- People who are already members are detected and skipped.
 
-Once sent, each invitee receives a link. You can **copy the invite link** or **resend it** from the team member table while their status is _Invited_.
+Once sent, each invitee receives a link. While their status is *Invited* you can **copy the invite link** or **resend it** from the team member table.
 
 
 # Managing Team Members
 
-The team members table (**Settings → Team Members**) lists everyone in the workspace with the following columns:
+The team members table (**Settings → Team Members**) lists everyone in the workspace.
 
-| Column              | Description                               |
-| ------------------- | ----------------------------------------- |
-| **Name / Email**    | Avatar, display name, and email address   |
-| **Role**            | Current workspace role                    |
+| Column | Description |
+| --- | --- |
+| **Name / Email** | Avatar, display name, and email address |
+| **Role** | Current workspace role |
 | **Resource Access** | Number of data sources the user can query |
-| **Feature Access**  | Number of features enabled                |
-| **Joined**          | Date they joined the workspace            |
-| **Actions**         | Context menu of available actions         |
+| **Feature Access** | Number of features enabled |
+| **Joined** | Date they joined the workspace |
+| **Actions** | Context menu of available actions |
 
-## Filtering & sorting
+## Filtering and sorting
 
-- Search by name or email.
-- Sort by username or role (ascending / descending).
-- Members are grouped by status: Active, Invited, Deactivated.
+- Search by name or email
+- Sort by username or role, ascending or descending
+- Members are grouped by status: Active, Invited, Deactivated
 
 ## Available actions per member
 
-| Action                 | Who can perform it | Notes                                       |
-| ---------------------- | ------------------ | ------------------------------------------- |
-| **Copy invite link**   | Owner / Admin      | Available while status is _Invited_         |
-| **Resend invite**      | Owner / Admin      | Sends a fresh email to the invitee          |
-| **Transfer ownership** | Owner only         | Target must hold the Admin role             |
-| **Remove member**      | Owner only         | Cannot remove yourself or the current owner |
+| Action | Who can perform it | Notes |
+| --- | --- | --- |
+| **Copy invite link** | Owner · Admin | Available while status is *Invited* |
+| **Resend invite** | Owner · Admin | Sends a fresh email to the invitee |
+| **Transfer ownership** | Owner only | Target must hold the Admin role |
+| **Remove member** | Owner only | Cannot remove yourself or the current owner |
+
+## Changing a role
+
+Only the **Owner** can change roles, and you cannot change your own or the Owner's.
+
+Promoting a **Viewer** to **Editor** or **Admin** makes them billable. Before the change is applied you see a confirmation:
+
+> You are about to upgrade *`{name}`* from viewer to editor. *`{name}`* becomes billable and you will be charged for the same.
+
+Confirming charges your saved payment method for the prorated remainder of the current cycle, with a **Processing payment** step while it completes. Demoting someone back to Viewer does not charge.
 
 ## Transferring ownership
 
-Ownership can be handed to any current **Admin**. A confirmation is required. After transfer, the previous owner is downgraded to Admin.
+Ownership can be handed to any current **Admin**. A confirmation is required. After the transfer, the previous owner becomes an Admin.
 
 ## Removing a member
 
-Removed members lose all access immediately. Their contributions (dashboards, queries) remain. You cannot remove the workspace owner or yourself.
+Removed members lose all access immediately. Their contributions — dashboards, queries, automations — remain. You cannot remove the workspace owner or yourself.
 
 
-# Roles & Permissions
+# Roles and Permissions
 
-Supaboard uses a four-tier role hierarchy. Higher roles include all permissions of lower roles.
+Supaboard uses an ordinal role hierarchy — each role includes everything below it — plus an **Unassigned** state that grants nothing.
 
-| Role       | Read | Create / Edit | Delete | Manage members | Workspace settings     |
-| ---------- | :--: | :-----------: | :----: | :------------: | :--------------------: |
-| **Viewer** | ✓    | —             | —      | —              | —                      |
-| **Editor** | ✓    | ✓             | —      | —              | —                      |
-| **Admin**  | ✓    | ✓             | ✓      | ✓              | ✓                      |
-| **Owner**  | ✓    | ✓             | ✓      | ✓              | ✓ + billing & deletion |
+| Role | Read | Create / Edit | Delete | Manage members | Workspace settings |
+| --- | :--: | :--: | :--: | :--: | :--: |
+| **Unassigned** | — | — | — | — | — |
+| **Viewer** | ✓ | — | — | — | — |
+| **Editor** | ✓ | ✓ | — | — | — |
+| **Admin** | ✓ | ✓ | ✓ | ✓ | ✓ |
+| **Owner** | ✓ | ✓ | ✓ | ✓ | ✓ + billing and deletion |
 
 ## Role assignment rules
 
-- Only the **Owner** can change member roles.
-- You cannot change your own role.
-- You cannot change the Owner's role.
+- Only the **Owner** can change member roles
+- You cannot change your own role
+- You cannot change the Owner's role
 
 
 # Feature Access
 
-Feature access is a per-user toggle that sits _on top of_ the role system. Even an Editor can be blocked from specific features.
-
-| Feature           | What it controls                              |
-| ----------------- | --------------------------------------------- |
-| **Dashboard**     | Creating and viewing dashboards               |
-| **Stella**        | AI chat and natural-language queries          |
-| **Query Builder** | Building and running custom queries           |
-| **Data View**     | Browsing and managing data source connections |
+Feature access is a per-user toggle that sits *on top of* the role system. Even an Editor can be blocked from specific features. The eight flags are listed under [Which features they can use](#which-features-they-can-use) above, and they can be changed afterwards from the Team Members table.
 
 > Only the **Owner** can modify a user's feature access.
 
-Set to **All features** (default) to grant full feature access. Restrict individual features when, for example, you want a user to view dashboards but not chat with Stella or browse raw data.
+Restrict individual features when, for example, you want someone to view dashboards but not chat with an agent or browse raw data.
+
+Feature access and role combine: a Viewer with the **Ask Analysts** flag can read conversations, but sending a message needs Editor.
 
 
 # Resource Access
 
 Resource access limits which **data source connections** a user is allowed to query. This is independent of their role.
 
-- **All resources** (default) — the user can query any connected data source in the workspace.
-- **Specific resources** — the user can only query the data sources explicitly listed.
+- **All resources** (default) — the user can query any connected data source
+- **Specific resources** — only the sources explicitly listed
 
-This is useful when you have sensitive databases (e.g. production financials) that should only be accessible to a subset of the team, even if those users hold an Admin role.
+Useful when you have sensitive databases (production financials, say) that should reach only part of the team, even among Admins.
 
 > Only the **Owner** can modify a user's resource access.
 
 
 # Workspace Invites
 
-When another workspace owner invites you, the invitation appears under **Settings → Workspace Invites**.
+When another workspace owner invites you, the invitation appears in the settings sidebar under **Profile Settings**, below your profile entry.
 
-## What you'll see
+- The name of the workspace you've been invited to
+- An **Accept** button to join
 
-- The name of the workspace you've been invited to.
-- An **Accept** button to join.
-
-Accepting the invite activates your membership and switches your active workspace to the one you just joined.
+Accepting activates your membership and switches your active workspace to the one you just joined.
 
 
 # Usage Analytics
 
-**Settings → Usage** gives workspace admins a live view of how the team is using Supaboard.
+**Settings → Usage** gives a live view of how the team is using Supaboard.
 
 ## Top-level KPIs
 
-| Metric                    | What it counts                            |
-| ------------------------- | ----------------------------------------- |
-| **Dashboards created**    | Total dashboards created in the workspace |
-| **Prompts used**          | Total AI (Stella) queries sent            |
-| **Queries executed**      | Total data queries run                    |
-| **Data sources accessed** | Distinct data sources queried             |
+| Metric | What it counts |
+| --- | --- |
+| **Dashboards** | Total dashboards created in the workspace |
+| **Prompts** | Total AI queries sent |
+| **Queries** | Total data queries run |
+| **Data Sources** | Distinct data sources queried |
 
 ## Filters
 
-- **Date range** — presets: 1 day, 7 days, 30 days, monthly, 1 year; or pick a custom range.
-- **User** — view usage for all members or drill into a specific person.
+- **Date range** — presets of 1 day, 7 days, 30 days, monthly, 1 year; or a custom range
+- **User** — all members, or drill into one person
 
 ## Charts
 
-- **Prompt usage over time** — line chart showing daily Stella query volume.
-- **Prompt usage heatmap** — a heat map broken down by day of week and hour of day, showing when your team queries most.
+- **Prompt usage over time** — daily AI query volume
+- **Prompt usage heatmap** — by day of week and hour of day, showing when your team queries most
 
 ## Leaderboard
 
 A ranked table of members by prompt activity:
 
-| Column       | Description             |
-| ------------ | ----------------------- |
-| Rank         | Ordered by prompt count |
-| User         | Avatar and name         |
-| Prompts      | Total AI queries sent   |
-| Dashboards   | Dashboards created      |
-| Data Sources | Data sources accessed   |
+| Column | Description |
+| --- | --- |
+| Rank | Ordered by prompt count |
+| User | Avatar and name |
+| Prompts | Total AI queries sent |
+| Dashboards | Dashboards created |
+| Data Sources | Data sources accessed |
 
-Expand any row to view that user's full prompt history. You can also **export prompt history as CSV** for deeper analysis.
+Expand any row for that user's full prompt history, or **export prompt history as CSV**.
 
 
-# Plans & Billing
+# Seats and Billing
 
-**Settings → Plan & Billing** manages your workspace subscription.
+**Settings → Plans and Billings** manages your workspace subscription.
 
-Your current plan card shows: plan name, price, days remaining, a progress bar, and next renewal date. To know more about plans: [Click here](https://supaboard.ai/pricing)
+## Seat-based pricing
+
+You pay per **billable seat**. A seat is billable when a member is active and holds **Editor**, **Admin**, or **Owner**. **Viewers are free** and never count against your seat total.
+
+Your current plan card shows the arithmetic directly:
+
+> **$X**/seat × **N seats** = **$Y/month**
+>
+> Next renewal: *`{date}`*
+
+While a change is settling you'll see a **Plan change in progress…** or **Adding seat…** chip on the same card.
+
+## What a role change costs
+
+Promotions are prorated mid-cycle, and you always see the number before you commit:
+
+| Where | What it shows |
+| --- | --- |
+| **Invite form, per row** | `≈ $X when they join, then $Y/cycle` |
+| **Invite form, footer** | `No charge now · ≈ $X total as members join` |
+| **Role change confirm** | The prorated charge for the remainder of the cycle, with days left |
+
+Nothing is charged when you send an invite — each person is charged, and re-prorated, at the moment they accept. Promotions are **not** billable while you are on a trial or on a negotiated plan.
+
+## Trials
+
+New workspaces start on a **14-day free trial**. The current plan card counts down the days remaining.
 
 ## Billing management
 
-From the **Plan & Billing** page you can:
+From **Plans and Billings** you can:
 
-- **View billing email and legal organisation name** — the details used on invoices.
-- **See next payment amount and date.**
-- **Update payment method** — change the card on file (last 4 digits shown).
-- **Manage billing address** — update the legal address used on invoices.
-- **View and download invoices** — full invoice history with PDF download per invoice.
-- **Cancel subscription** — triggers a confirmation modal with cancellation date shown. Access continues until the end of the billing period.
-- **Upgrade** — jump directly to plan selection and generate a payment link.
+- **View billing email and legal organisation name** — the details used on invoices
+- **See the next payment amount and date**
+- **Update payment method** — change the card on file (last 4 digits shown)
+- **Manage billing address** — the legal address used on invoices
+- **View and download invoices** — full history with a PDF per invoice
+- **Cancel subscription** — a confirmation shows the cancellation date; access continues to the end of the billing period
+- **Upgrade** — jump to plan selection and generate a payment link
 
-> Billing is managed at the workspace level, not the user level. Only the **Owner** can access billing settings.
+For plan tiers and prices, see [pricing](https://supaboard.ai/pricing).
+
+> Billing is managed at the workspace level, not per user. Only the **Owner** can access billing settings.
 
 
 # Switching Workspaces
 
-If you belong to multiple workspaces, switch between them directly from the sidebar. Click your current workspace name to open the workspace switcher, then select any workspace you're a member of.
+If you belong to multiple workspaces, click your workspace name in the sidebar → **Switch Workspace**, then pick one.
 
-The switch is instant — all data, dashboards, agents, and settings shown in the UI update to reflect the selected workspace.
+Switching is **not** an in-place update. Supaboard clears its local caches and reloads the application on the new workspace, landing you on Ask Analysts.
+
+> If you have background tasks running — a generating dashboard, a running automation — you are warned first: *"You have tasks running in the background. Changing Workspace will terminate them. Do you want to continue?"* Let long-running work finish before you switch.
+
+
+# Programmatic API Keys
+
+Supaboard issues API keys for authenticating programmatic access.
+
+| Detail | Behaviour |
+| --- | --- |
+| **Format** | Prefixed `sb_` |
+| **Storage** | Hashed — Supaboard never stores the raw key |
+| **Visibility** | Returned in full **exactly once**, at creation. Afterwards only a masked form is shown. |
+| **Who can manage them** | Admin · Owner |
+
+> **There is no Settings screen for API keys yet.** They are created and revoked through the Supaboard API. Save the key when it is issued — it cannot be retrieved again.
+
+
+# The Command Palette
+
+Press **⌘K** (macOS) or **Ctrl+K** (Windows/Linux) anywhere in Supaboard to open the command palette. The sidebar also has a **Search** entry showing the same shortcut.
+
+- Type to search across dashboards, conversations, queries, data sources, and agents
+- Filter with the chip: **All** · **Recents** · **Create New** · **Settings**
+- Results are grouped into Recents, New, Settings, and Results
+- Navigate with the arrow keys, open with Enter, dismiss with Escape
+
+Recently opened items are remembered per workspace. The palette only surfaces entity types you have [feature access](#feature-access) to.
 
 
 # Quick reference: Settings navigation
 
-| Path                             | What you manage                                             |
-| -------------------------------- | ----------------------------------------------------------- |
-| **Settings → Workspace**         | Workspace profile, name, logo, colour, region               |
-| **Settings → Team Members**      | Invite, manage, and remove members; assign roles and access |
-| **Settings → Workspace Invites** | Accept pending invitations from other workspaces            |
-| **Settings → Usage**             | Monitor AI and query usage across the team                  |
-| **Settings → Plan & Billing**    | Subscription, invoices, payment method, billing address     |
-| **Settings → Connections**       | Data source connections (see Data Sources docs)             |
-| **Settings → Mini-Board**        | Embedded board configuration (see Mini-Board docs)          |
+| Path | What you manage |
+| --- | --- |
+| **Settings → Workspace** | Workspace name, industry, team size, image, MFA requirement |
+| **Settings → Team Members** | Invite, manage, and remove members; assign roles and access |
+| **Settings → Usage** | Monitor AI and query usage across the team |
+| **Settings → Connections** | Data source connections (see [Data Sources](./data-sources)) |
+| **Settings → Plans and Billings** | Subscription, seats, invoices, payment method, billing address |
+| **Settings → White Label** | Branded standalone app (see [White Label](./white-label)) — negotiated plans only |
+| **Settings → Profile** | Your own name, avatar, and password |
+
+Pending invitations from other workspaces appear under the **Profile Settings** heading, not under Workspace Settings.
 
 
 # Permissions at a glance
 
-| Action                  | Viewer | Editor | Admin | Owner |
-| ----------------------- | :----: | :----: | :---: | :---: |
-| View workspace settings | ✓      | ✓      | ✓     | ✓     |
-| Edit workspace settings | —      | —      | ✓     | ✓     |
-| Invite team members     | —      | —      | ✓     | ✓     |
-| Change member roles     | —      | —      | —     | ✓     |
-| Change feature access   | —      | —      | —     | ✓     |
-| Change resource access  | —      | —      | —     | ✓     |
-| Remove members          | —      | —      | —     | ✓     |
-| Transfer ownership      | —      | —      | —     | ✓     |
-| Manage billing          | —      | —      | —     | ✓     |
-| View usage analytics    | —      | —      | ✓     | ✓     |
+| Action | Viewer | Editor | Admin | Owner |
+| --- | :--: | :--: | :--: | :--: |
+| View workspace settings | ✓ | ✓ | ✓ | ✓ |
+| Edit workspace settings | — | — | ✓ | ✓ |
+| Require two-factor authentication | — | — | ✓ | ✓ |
+| Invite team members | — | — | ✓ | ✓ |
+| Change member roles | — | — | — | ✓ |
+| Change feature access | — | — | — | ✓ |
+| Change resource access | — | — | — | ✓ |
+| Remove members | — | — | — | ✓ |
+| Transfer ownership | — | — | — | ✓ |
+| Manage billing and seats | — | — | — | ✓ |
+| Manage API keys | — | — | ✓ | ✓ |
+| View usage analytics | — | — | ✓ | ✓ |
