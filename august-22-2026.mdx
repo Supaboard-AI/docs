@@ -1,0 +1,102 @@
+---
+title: "August 22, 2026"
+mode: "wide"
+---
+
+## Talk to Supaboard
+
+You can now speak to any AI chatbox in Supaboard instead of typing.
+
+- Mic button on every AI composer: Ask AI on dashboards, the Databook analyst, the Query Builder assistant, and the automation copilot all accept voice
+- Hold `Tab` to talk: hold the key, say what you want, release — your words land in the chatbox, transcribed
+- Tap `Tab` to select what's already in the box, hold after a tap to replace it, or double-tap to send
+- Everything is transcribed server-side, so quality no longer depends on your browser
+
+---
+
+## Oracle Database
+
+Oracle is now available as a data source. Connect an Oracle instance from the data sources screen the same way you connect Postgres or Snowflake — schema browsing, the Query Builder, and AI-generated queries all work against it out of the box.
+
+Oracle is included in the free connector set, so it's available on every plan.
+
+Read more about connecting data sources [here](/data-sources)
+
+---
+
+## Automations: Branches, Paths, and Loops
+
+Automations can now do more than run a straight line of steps.
+
+- Branch and Path nodes: split a run into multiple conditional paths and give each one its own sequence of steps
+- Collapse paths you're not working on to keep large flows readable, with automatic re-layout as the flow grows
+- Loop nodes were reworked alongside branching, and the automation copilot now understands loops — you can ask it to build one for you in plain language
+- Clearer per-run status and step ordering, so it's obvious which path a run actually took
+
+### Scheduled Triggers Respect Your Timezone
+
+Timed triggers are now timezone-aware. A run scheduled for 9:00 AM fires at 9:00 AM in the timezone you picked, including across daylight-saving shifts. The timezone picker now shows standard IANA names, so there's no ambiguity about which zone you selected.
+
+Read more about automations [here](/automations)
+
+---
+
+## Credits and Usage
+
+We reworked how Supaboard tells you about AI credits, and what happens when you run out.
+
+- **Add Credits dialog**: top up your balance directly from the app, starting at $5
+- **Auto-reload**: optionally refill automatically when your balance runs low, so long-running work doesn't stall
+- **Inline banners instead of pop-ups**: when you're out of credits, the AI composer you're actually using tells you so — dashboard Ask AI, Databook, automations copilot, Query Builder assistant, insights, reports, email, records, drill-downs, and the Generate with AI popover
+- **Your prompt is never lost**: a message blocked for credits is restored into the composer, attachments included, so you can top up and send it as-is
+- **No more toast spam**: repeated limit warnings collapse into a single persistent notice with a "buy credits" action
+- Actions that would fail for lack of credits, such as Create Report, are now disabled up front rather than failing halfway
+
+---
+
+## Ask AI Reliability
+
+A production audit of the last 30 days of AI conversations turned up several ways a question could quietly go nowhere. All of them are fixed:
+
+- Answers that used to come back as an empty bubble (roughly 1 in 8 turns) now always return a response
+- Data source permission errors no longer surface as a misleading "question too large" message — you get the real reason
+- When the AI hits the same environmental error repeatedly, such as a revoked grant or a dead credential, it now stops retrying and reports the problem instead of burning through steps
+- Internal AI-provider messages no longer leak into your conversation
+- Long, complex questions no longer time out on the way to the model
+
+Widget generation is also faster: when you ask for a specific chart, we skip the extra summarization step and go straight to building it.
+
+---
+
+## Filtering and Sorting in Data Explorer
+
+- New filter popover in the table toolbar: stack multiple conditions across columns, with operators and value inputs that adapt to each column's type
+- Multi-select values on a single condition for enum-style columns
+- Improved column sorting from the header dropdown
+
+---
+
+## Databook
+
+- Reworked share dialog with member search, so sharing a Databook with the right people is quicker in larger workspaces
+
+---
+
+## Data Connection Instructions
+
+Standard instructions for a data connection are now managed as individual named rules. Add, edit, reorder, or delete a rule on its own instead of maintaining one long block of text — useful when you want the AI to follow specific conventions for a given database.
+
+---
+
+## Dashboard and Charts
+
+- Chart legends render more reliably, including for widgets with many series
+- Goal lines, grid lines, legends, and zoom/pan settings moved to consistent toggle-style accordions in the chart editor
+- Fixes across the export, embed, and email report panels
+- Embedded dashboard filter settings behave correctly when created from the embed panel
+- String field formatting options were simplified and expanded in widget settings
+- Various UI fixes across the Query Builder schema panel, tools pages, the agent selector, and onboarding
+
+---
+
+**Thank you for using Supaboard. We're continuously improving the platform to help you explore, understand, and act on your data faster.**
