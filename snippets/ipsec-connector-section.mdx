@@ -1,0 +1,17 @@
+# IPsec Site-to-Site VPN
+
+If your database lives on a private network, you can peer your VPN gateway with Supaboard over IKEv2 IPsec instead of exposing the database or running a bastion host. Enable the **Use IPsec site-to-site VPN** toggle in the connector form.
+
+| Field | Required | Description |
+|---|---|---|
+| **VPN Gateway Address** | Yes | Public IP of your VPN gateway |
+| **Pre-Shared Key** | Yes | The PSK configured on your gateway for the Supaboard tunnels |
+| **Remote Subnet** | No | CIDR the tunnel should route. Defaults to your database host `/32` |
+
+**Checklist:**
+- [ ] Your VPN gateway has one IKEv2 + pre-shared-key tunnel per Supaboard IP (the IPs shown under **Whitelist IPs**)
+- [ ] The gateway allows UDP 500, UDP 4500, and ESP (IP protocol 50) from those IPs
+- [ ] The **Host** field is the database's **private IP address** — private DNS names don't resolve from Supaboard
+- [ ] Enter the database name manually — auto-discovery doesn't run through the VPN before the connection is saved
+
+Gateway settings, supported ciphers, a strongSwan example, and troubleshooting: [IPsec Site-to-Site VPN guide](/ipsec-vpn).

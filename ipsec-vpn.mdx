@@ -1,0 +1,118 @@
+---
+title: "IPsec Site-to-Site VPN"
+mode: "wide"
+---
+
+Connect Supaboard to databases that live entirely inside a private network by peering your VPN gateway with Supaboard over an IKEv2 IPsec site-to-site tunnel. Once the tunnel is up, Supaboard reaches your database at its private IP address — nothing in your network needs a public IP, a bastion host, or an inbound firewall exception for database traffic.
+
+**Available on:** Postgres, MySQL, Microsoft SQL Server, Oracle, MongoDB, ClickHouse, and Redshift.
+
+**Not available on** Snowflake, BigQuery, and Databricks — those are vendor-hosted services with public endpoints, so there is no private network to tunnel into.
+
+
+# How it works
+
+- Supaboard runs its own IPsec gateways and **initiates the tunnel on demand** — the first time a connection is tested or used, and automatically after any outage. Your gateway can be configured as a responder only.
+- Supaboard connects from multiple regions, so your gateway needs **one tunnel definition per Supaboard IP** (the same public IPs shown under **Whitelist IPs** in the connector form).
+- Traffic selectors are narrow by default: `<Supaboard IP>/32 ↔ <your database host>/32`. Only database traffic crosses the tunnel.
+- Dead-peer detection runs every 30 seconds and the tunnel re-establishes itself after network interruptions or rekeys.
+- Multiple Supaboard connections that share the same gateway and pre-shared key share a single tunnel.
+
+
+# Requirements
+
+- [ ] A VPN gateway that supports **IKEv2 with pre-shared key** authentication (strongSwan, pfSense/OPNsense, FortiGate, Cisco ASA/FTD, Palo Alto, AWS Virtual Private Gateway, Azure VPN Gateway, and similar all qualify)
+- [ ] Your database reachable from the gateway at a **private IP address** — enter that IP as the **Host** in the connector form. Private DNS names do not resolve from Supaboard.
+- [ ] Gateway firewall allows **UDP 500 (IKE)**, **UDP 4500 (NAT-T)**, and **ESP (IP protocol 50)** from each Supaboard IP
+
+
+# Configure your gateway
+
+Create one IKEv2 tunnel per Supaboard IP with these settings:
+
+| Setting | Value |
+|---|---|
+| IKE version | IKEv2 |
+| Authentication | Pre-shared key |
+| Peer / remote address | The Supaboard public IP (one tunnel per IP) |
+| Local ID | Your gateway's public IP (or a custom ID — see below) |
+| IKE proposal | AES-256 / SHA-256 / DH group 14 (modp2048), **or** AES-128-GCM / SHA-256 PRF / DH group 19 (ecp256) |
+| ESP proposal | AES-256 / SHA-256, **or** AES-128-GCM |
+| Local traffic selector | Your database host `/32` (or the subnet you enter as **Remote Subnet**) |
+| Remote traffic selector | The Supaboard IP `/32` |
+| NAT traversal | Leave enabled |
+| Start behavior | Responder / on-demand is fine — Supaboard initiates |
+
+If your gateway uses a custom IKE identity instead of its public IP, contact support to have it set on the Supaboard side — by default Supaboard expects the peer ID to equal the gateway address.
+
+## Example: strongSwan responder
+
+```text
+connections {
+  supaboard {
+    version = 2
+    proposals = aes256-sha256-modp2048,aes128gcm16-prfsha256-ecp256
+    local {
+      auth = psk
+      id = <your-gateway-public-ip>
+    }
+    remote {
+      auth = psk
+    }
+    children {
+      supaboard {
+        local_ts = <database-subnet>       # e.g. 10.20.0.0/24 or 10.20.0.5/32
+        remote_ts = 0.0.0.0/0              # narrowed per-tunnel by Supaboard
+        esp_proposals = aes256-sha256,aes128gcm16
+      }
+    }
+  }
+}
+secrets {
+  ike-supaboard {
+    secret = "<your-pre-shared-key>"
+  }
+}
+```
+
+
+# Configure the Supaboard connector
+
+In the connector form, enable **Use IPsec site-to-site VPN**:
+
+| Field | Required | Description |
+|---|---|---|
+| **VPN Gateway Address** | Yes | Public IP of your VPN gateway |
+| **Pre-Shared Key** | Yes | The PSK you configured for the Supaboard tunnels |
+| **Remote Subnet** | No | CIDR the tunnel should route (e.g. `10.20.0.0/24`). Defaults to your database host `/32` |
+
+Then set the **Host** field to the database's **private IP address** and use **Test Connection**. Tunnel negotiation happens during the test — an IKE failure (wrong PSK, blocked port) is reported directly in the test result.
+
+<Note>
+Database auto-discovery (the database/schema dropdowns) does not run through the VPN before the connection is saved — enter the database name manually and rely on **Test Connection**.
+</Note>
+
+Once connected, the connection details page shows the live tunnel state (`tunnel_type: ipsec`, `tunnel_active`), which distinguishes a tunnel outage from a database outage.
+
+
+# IPsec or SSH tunnel?
+
+| | SSH Tunnel | IPsec Site-to-Site VPN |
+|---|---|---|
+| You need | A bastion host with SSH reachable from Supaboard | An IKEv2-capable VPN gateway |
+| Exposure | Bastion's SSH port open to Supaboard IPs | Only IKE/ESP open to Supaboard IPs |
+| Reach | One forwarded host/port per connection | Any database the tunnel's subnet covers |
+| Best for | One-off databases, existing jump-host setups | Network-level policies, multiple databases, no-SSH environments |
+
+
+# Troubleshooting
+
+| Symptom | Likely cause | Fix |
+|---|---|---|
+| Test fails with `ipsec: initiate: AUTHENTICATION_FAILED` | PSK or IKE identity mismatch | Verify the PSK and that your gateway's local ID is its public IP (or ask support to register a custom ID) |
+| Test fails with `ipsec: initiate` timeout | IKE traffic not reaching your gateway | Allow UDP 500/4500 and ESP from every Supaboard IP; confirm the gateway address |
+| `database host … must be an IP address when using IPsec` | Host field contains a DNS name | Use the database's private IP, or set **Remote Subnet** explicitly |
+| Test succeeds intermittently across retries | Only some Supaboard IPs have tunnels configured | Create one tunnel per listed Supaboard IP — connections may originate from any of them |
+| Connection info shows `tunnel_active: false` and queries fail | Tunnel down (gateway reboot, rekey failure) | Check gateway logs; Supaboard re-initiates automatically on the next use |
+| Connection works but a second Supaboard connection to the same private IP errors with "already routed to a different VPN gateway" | The same private address is claimed via two different gateways | Use the same gateway for both, or distinct addresses/subnets — contact support if you believe this is in error |
+| No traffic flows although the tunnel is up | Traffic selector mismatch | Ensure your local selector covers the database host and the remote selector covers the Supaboard IP (`/32`) |

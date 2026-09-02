@@ -1,0 +1,130 @@
+---
+title: "Oracle"
+mode: "wide"
+---
+
+import IpsecConnectorSection from '/snippets/ipsec-connector-section.mdx';
+
+Connect Supaboard to an Oracle database for direct querying, schema discovery, and AI-powered analysis.
+
+
+# Before you connect
+
+**Network access** — Supaboard connects from a fixed set of egress IPs. Add them to your database firewall allow-list before attempting a connection. The current IP list is shown inside the connector form under **Whitelist IPs**.
+
+**Database user permissions** — The user you provide needs at minimum:
+- `CREATE SESSION` to connect
+- `SELECT` on the tables and views you want to expose
+
+See [Recommended database user permissions](#recommended-database-user-permissions) for the exact SQL.
+
+**Service name vs. SID** — The form connects by **service name**. If your database is only reachable by SID, leave **Service Name** empty and put `sid=YOURSID` in **Additional JDBC Parameters**.
+
+
+# Connection fields
+
+| Field | Default | Required | Description |
+|---|---|---|---|
+| **Display Name** | — | Yes | Label shown in the Supaboard UI |
+| **Host** | — | Yes | Hostname or IP of your Oracle server |
+| **Port** | `1521` | Yes | Oracle listener port (Autonomous Database typically uses `1522`) |
+| **Service Name** | — | Yes | The database service name, e.g. `FREEPDB1` (use `sid=` in Additional JDBC Parameters instead for SID-only setups) |
+| **Username** | — | Yes | Database user |
+| **Password** | — | Yes | Password for the database user |
+| **Schema** | uppercase of username | No | Schema whose tables are exposed; defaults to the user's own schema |
+| **Additional JDBC Parameters** | — | No | Extra `key=value` pairs passed to the driver, e.g. `sid=XE` or `wallet=/path` |
+
+
+# SSH Tunnel fields
+
+Shown when the **SSH Tunnel** toggle is enabled.
+
+| Field | Default | Required | Description |
+|---|---|---|---|
+| **SSH Host** | — | Yes | Hostname or IP of the SSH bastion server |
+| **SSH Port** | `22` | Yes | SSH port on the bastion server |
+| **SSH Username** | — | Yes | SSH login username |
+| **SSH Connection Type** | `Private Key` | Yes | `Private Key` or `Password` |
+| **SSH Private Key** | — | If Private Key | PEM-encoded private key |
+| **SSH Passphrase** | — | No | Passphrase for an encrypted private key |
+| **SSH Password** | — | If Password | Password for SSH password authentication |
+
+
+# Finding your connection details
+
+## Oracle Autonomous Database (OCI)
+
+1. In the [OCI Console](https://cloud.oracle.com/), open your Autonomous Database and click **Database connection**.
+2. Pick a TNS name (e.g. `yourdb_low`) and read the host, port, and service name from its connection string — the host looks like `adb.<region>.oraclecloud.com`, the port is usually `1522`.
+3. Enable the **SSL** toggle in Supaboard — Autonomous Database requires TLS.
+4. Under **Network → Access control list**, allow each Supaboard egress IP (or set the database to allow secure access from anywhere).
+
+**Documentation:** [Connect to Autonomous Database](https://docs.oracle.com/en-us/iaas/autonomous-database-serverless/doc/connect-intro.html) · [TLS connections without a wallet](https://docs.oracle.com/en-us/iaas/autonomous-database-serverless/doc/connecting-nodejs-tls.html)
+
+## Amazon RDS for Oracle
+
+1. Open the [RDS Console](https://console.aws.amazon.com/rds/) and select your instance.
+2. Under **Connectivity & security**, copy the **Endpoint** — this is your **Host**. The default **Port** is `1521`.
+3. The **Service Name** is the **DB name** from the **Configuration** tab (RDS creates the database with a service of the same name).
+4. Allow inbound TCP on port 1521 from Supaboard's egress IPs in the instance's security group, or use an SSH tunnel.
+
+**Documentation:** [Connecting to an RDS for Oracle instance](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_ConnectToOracleInstance.html)
+
+## Self-hosted Oracle
+
+1. **Host/Port** — the machine running the listener; check with `lsnrctl status` on the server.
+2. **Service Name** — listed in the `Services Summary` of `lsnrctl status` (for Oracle Database Free the default PDB service is `FREEPDB1`; for XE it's `XEPDB1`).
+3. If only a SID is registered, use `sid=<SID>` in **Additional JDBC Parameters**.
+
+
+# SSL
+
+Enable the **SSL** toggle when your database requires TLS (always on for OCI Autonomous Database). This uses the driver's native TLS — no wallet file is needed for Autonomous Database when TLS access is enabled on the OCI side.
+
+
+# SSH Tunnel
+
+An SSH tunnel routes the database connection through a bastion host, keeping your database off the public internet entirely.
+
+**When to use it:**
+- Your database has no public IP
+- You want to avoid adding Supaboard IPs to your database firewall
+- Your security policy requires all external connections to go through a jump server
+
+**Checklist:**
+- [ ] The bastion server can reach the database host on port 1521
+- [ ] Supaboard's egress IPs are allowed on the bastion server's SSH port (default 22)
+- [ ] The SSH user has permission to forward connections (no `no-port-forwarding` in `authorized_keys`)
+- [ ] If using a private key, it is in PEM format (OpenSSH format may need conversion with `ssh-keygen -p -m PEM`)
+
+
+<IpsecConnectorSection />
+
+
+# Recommended database user permissions
+
+```sql
+-- Create a dedicated read-only user
+CREATE USER supaboard IDENTIFIED BY "strong_password_here";
+
+-- Allow connection
+GRANT CREATE SESSION TO supaboard;
+
+-- Allow reading the tables you want to expose (repeat per table)
+GRANT SELECT ON app_schema.orders TO supaboard;
+GRANT SELECT ON app_schema.customers TO supaboard;
+```
+
+To expose another schema's tables, set the **Schema** field to that schema's name (e.g. `APP_SCHEMA`) — by default Supaboard reads the connecting user's own schema. Avoid `GRANT SELECT ANY TABLE` unless your security policy allows it; per-table grants keep the blast radius small.
+
+
+# Troubleshooting
+
+| Error | Likely cause | Fix |
+|---|---|---|
+| `ORA-01017: invalid username/password` | Wrong credentials, or a case-sensitive quoted username | Verify credentials; unquoted Oracle usernames are stored uppercase |
+| `ORA-12514: listener does not currently know of service` | Wrong service name | Check `lsnrctl status` on the server; for SID-only databases use `sid=<SID>` in Additional JDBC Parameters |
+| `ORA-12541: no listener` | Wrong host/port, or listener down | Verify host and port; confirm the listener is running |
+| `ORA-12170: connect timeout` | Firewall blocking the connection | Add Supaboard's egress IPs to the firewall, or use an SSH tunnel / IPsec VPN |
+| TLS/handshake errors on Autonomous Database | SSL toggle off, or ACL blocking | Enable the **SSL** toggle and allow Supaboard IPs in the OCI access control list |
+| `ORA-00942: table or view does not exist` | Missing `SELECT` grant, or wrong schema | Grant `SELECT` on the table; set the **Schema** field to the owning schema |

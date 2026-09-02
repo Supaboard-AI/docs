@@ -3,6 +3,8 @@ title: "MySQL"
 mode: "wide"
 ---
 
+import IpsecConnectorSection from '/snippets/ipsec-connector-section.mdx';
+
 Connect Supaboard to a MySQL database for direct querying, schema discovery, and AI-powered analysis.
 
 
@@ -107,6 +109,9 @@ An SSH tunnel routes the database connection through a bastion host, keeping you
 - [ ] Supaboard's egress IPs are allowed on the bastion server's SSH port (default 22)
 - [ ] The SSH user has permission to forward connections (no `no-port-forwarding` in `authorized_keys`)
 - [ ] If using a private key, it is in PEM format (OpenSSH format may need conversion with `ssh-keygen -p -m PEM`)
+
+
+<IpsecConnectorSection />
 
 
 # Recommended database user permissions
