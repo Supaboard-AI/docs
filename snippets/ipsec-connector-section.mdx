@@ -4,7 +4,7 @@ If your database lives on a private network, you can peer your VPN gateway with 
 
 | Field | Required | Description |
 |---|---|---|
-| **VPN Gateway Address** | Yes | Public IP of your VPN gateway |
+| **VPN Gateway Address** | Yes | Public IP of your VPN gateway — or a per-server mapping for providers with one tunnel endpoint per peer (OCI/AWS managed VPN), e.g. `<supaboard-ip>=<tunnel-ip>,…` |
 | **Pre-Shared Key** | Yes | The PSK configured on your gateway for the Supaboard tunnels |
 | **Remote Subnet** | No | CIDR the tunnel should route. Defaults to your database host `/32` |
 

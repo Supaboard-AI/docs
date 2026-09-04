@@ -67,6 +67,8 @@ For databases (PostgreSQL, Snowflake, etc.), you connect directly by entering yo
 
 For SaaS tools and third-party services (Shopify, Google Analytics, Airtable, Stripe, and others), Supaboard uses **Fivetran** as the ETL layer. Fivetran handles syncing data from those services into a queryable form — you authenticate with the source service through Fivetran's OAuth flow, and Supaboard takes care of the rest.
 
+The two kinds behave differently at question time. A direct database is queried live, so an answer reflects the data as it is now. A Fivetran source is batch: the first sync lands within a day, and after that it refreshes on a schedule, hourly to daily, so an answer reflects the last completed sync. See [Fivetran](/fivetran).
+
 Some of these connectors are included on every plan and some require an upgrade — see [Available Connectors](#available-connectors). The connector grid tells you which is which before you commit: a connector that needs an upgrade shows an upgrade prompt when you select it.
 
 ## What happens after you save
@@ -98,6 +100,7 @@ The connector grid holds well over a hundred integrations and is searchable by n
 | [**Supabase**](/supabase)                         | SSL on by default                            |
 | [**Microsoft SQL Server**](/microsoft-sql-server) | Supports SSH tunnel, SSL, JDBC params        |
 | **MotherDuck / DuckDB**                           | Database, schema, and MotherDuck token       |
+| [**Oracle**](/oracle)                             | Supports IPsec VPN                           |
 
 ## Fivetran-powered connectors
 

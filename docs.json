@@ -36,6 +36,7 @@
               "datasites",
               "tools",
               "connect-supaboard-to-claude",
+              "connect-supaboard-to-slack",
               "white-label",
               "embed",
               "query-builder"
@@ -44,6 +45,7 @@
           {
             "group": "Supaboard Release Notes",
             "pages": [
+              "changelog",
               "apr-24-2026",
               "may-8-2026",
               "may-22-2026",
@@ -59,7 +61,8 @@
               "july-25-2026",
               "august-1-2026",
               "august-8-2026",
-              "august-22-2026"
+              "august-22-2026",
+              "september-4-2026"
             ]
           }
         ]
@@ -108,7 +111,9 @@
               "expand-rows-in-dashboard-tables",
               "ignore-filtering-for-a-given-table",
               "how-to-add-filters-to-your-dashboard",
-              "untitled-page"
+              "filter-dashboards-from-table-data",
+              "datasite-custom-domains",
+              "datasite-variables"
             ]
           }
         ]
@@ -142,9 +147,9 @@
   },
   "footer": {
     "socials": {
-      "x": "https://x.com/mintlify",
-      "github": "https://github.com/mintlify",
-      "linkedin": "https://linkedin.com/company/mintlify"
+      "x": "https://x.com/supaboardai",
+      "linkedin": "https://www.linkedin.com/company/supaboardai/",
+      "slack": "https://join.slack.com/t/supaboardcommunity/shared_invite/zt-35puu9st3-pHWfHKAHBy7m_rOD1g3bFw"
     }
   },
   "styling": {

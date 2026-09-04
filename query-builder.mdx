@@ -59,7 +59,7 @@ The editor is a split-pane workspace with a right rail:
 
 - **Top pane** — the code editor
 - **Bottom pane** — results as a table, chart, or KPI
-- **Right rail** — **Schema** and **Assistant** tabs
+- **Right rail** — **Schema**, **Assistant**, and **History** tabs
 
 Drag the divider to resize the panes. Before your first run the editor takes almost the whole height; after a successful run the results pane sizes itself to the number of rows returned, between 15% and 50% of the height.
 
@@ -159,7 +159,7 @@ A paginated, scrollable grid.
 
 An interactive visualisation.
 
-- 28 chart types: bar, column, 100% bar, 100% column, line, area, pie, donut, scatter, grouped scatter, bubble, stacked bar, stacked column, grouped bar, heatmap, treemap, funnel, grouped funnel, gauge, radar, waterfall, sankey, sunburst, map, combo, and more
+- 28 chart types, from bar and line through sankey, sunburst and map — the full list is on [Chart Widget](/chart-widget)
 - Click **Edit** to change chart type, colours, axes, and legend
 - Theme-aware colours (adjusts for light/dark automatically)
 - Pin to a dashboard as a Chart widget
@@ -217,6 +217,40 @@ Assistant conversations are **saved**. The header of the assistant panel is a se
 - **Recent** lists your previous threads for this query — unnamed ones show as *"Untitled session"*
 
 Each turn carries the recent history forward, so follow-ups like *"now do the same for last quarter"* work as expected. Sessions persist across page reloads and across visits.
+
+
+# History and Undo
+
+The **History** tab in the right rail records versions of your query as you work, so you can compare and roll back.
+
+## Versions
+
+A version is recorded at each of these moments, and the list shows where each one came from:
+
+| Tag | Recorded when |
+| --- | --- |
+| `load` | The query as it was when you opened it — your permanent way back to the starting point |
+| `run` | You pressed **Run Query** |
+| `save` | You pressed **Save** |
+| `ai` | You accepted an assistant diff |
+
+Each row shows a relative timestamp and a `+N −N` count of lines changed; the version matching the editor is labelled **Current**.
+
+- **Hover** a version to preview it as a diff overlaid on the editor — nothing changes until you click
+- **Click** a version to apply it
+
+Up to 50 versions are kept per query. History lives in your browser session, so it survives a page reload but doesn't follow you to another device.
+
+## Undo and redo
+
+The header of the History panel has **Undo** and **Redo** buttons, and the standard shortcuts work anywhere on the page:
+
+| Action | Mac | Windows / Linux |
+| --- | --- | --- |
+| Undo | `⌘Z` | `Ctrl+Z` |
+| Redo | `⇧⌘Z` | `Ctrl+Shift+Z` or `Ctrl+Y` |
+
+Undo covers edits to the code itself — including applied AI diffs and history versions — not schema selections or panel state. The undo stack is also preserved across reloads, so `⌘Z` still works after you come back.
 
 
 # Schema Browser

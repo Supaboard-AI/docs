@@ -7,7 +7,7 @@ A **Datasite** is a custom analytics site that an AI analyst builds for you out 
 
 Where a [dashboard](./dashboard) is a grid of widgets you arrange yourself, a datasite is a designed page — your layout, your sections, your narrative — that you shape by talking to it. Under the hood it's a real React application with real saved queries, and you can read and edit both.
 
-> Datasites are in **beta**, and require the **Business** plan. The feature is labelled **Datasites** throughout the product; you'll notice the browser URL still says `/databook`, which is just an older internal name.
+> Datasites are in **beta**. The Individual plan includes one datasite; Business and Enterprise are unlimited. The feature is labelled **Datasites** throughout the product; you'll notice the browser URL still says `/databook`, which is just an older internal name.
 
 
 # Creating a Datasite
@@ -77,12 +77,24 @@ A brand-new datasite starts with the chat filling the window and reveals the rig
 | **Preview / Code / Glossary** | Switch between the running site, its source, and its queries   |
 | **Desktop / Tablet / Phone** | Preview at different widths, with a device frame                |
 | Environment picker          | Run the preview against a different data source mapping         |
+| **Variables** (key icon)    | API keys and config values for the site — see [Datasite Variables](/datasite-variables) |
 | **Select & edit elements**  | Click something in the preview to talk about it                 |
 | **Refresh this view**       | Rebuild the preview, or refetch files and queries               |
 | Panel toggle                | Hide or show the chat                                           |
 
 
 # Working With the Analyst
+
+## Conversations
+
+The analyst keeps separate conversation threads. The panel header shows the current thread's name — click it to switch threads or start a **New conversation**, and use the pencil and trash icons to rename or delete one.
+
+- A new thread isn't created until you actually send something, and it names itself from your first message
+- Opening the editor lands you in your most recently active thread
+- Leaving a thread mid-turn is safe — the work continues server-side and the thread re-attaches to it when you come back
+- Chats from before threads existed live on in a single adopted thread
+
+## Modes
 
 The chat has three modes. The mode pill sits above the message box, and the tooltip summarises them:
 
@@ -221,6 +233,8 @@ The **Publish** button is disabled until at least one preview build has succeede
 
 Clicking it opens a popover showing the datasite's address and its visibility. Publish, and the popover switches to showing the live version with a copyable URL. **Update** republishes your current preview build over the live one.
 
+First publish also mints the datasite's own address — a subdomain named after the datasite, like `revenue-overview-x7k2p.<your datasite domain>` — which is what embed links use. You can put a domain you own in front of it from the same popover. Both are covered in [Datasite Custom Domains](/datasite-custom-domains).
+
 ## Public or private
 
 The pill next to the address toggles visibility:
@@ -237,7 +251,7 @@ Datasites are **private** unless you make them public.
 This is the part worth getting right, because the two visibilities behave differently:
 
 - **Public** — the copied URL includes an access token, and needs it. The link works for anyone, with no sign-in. Copy the URL exactly as given; a trimmed link won't load data.
-- **Private** — the copied URL has no token. Viewers are asked to sign in, and only members of your workspace can get in.
+- **Private** — the copied URL has no token. Viewers are asked to sign in — with email and password, or via **Continue with Google** / **Continue with Microsoft** — and only members of your workspace can get in. The OAuth buttons don't create accounts; an email your workspace doesn't know is turned away.
 
 Embed a datasite by putting its URL in an `<iframe>` on your own site. Private datasites work embedded — viewers sign in through the frame.
 
@@ -258,6 +272,8 @@ The analyst has capabilities that aren't obvious from looking at a blank page. A
 
 **A chat on the page.** _"Add an Ask AI box in the sidebar."_ Visitors get a chat that answers questions about the data on that datasite, using live queries. It answers as your selected agent, with that agent's persona, rules, and knowledge base — so it behaves like Ask Stella does inside Supaboard.
 
+**Pages that know who's viewing.** On a private datasite, _"greet the viewer by name"_ works — the page can read the signed-in viewer's name, email, and role, and shows a neutral fallback on public links and embeds.
+
 **Multiple pages, navigation, drilldowns, exports** — describe the behaviour and it builds it.
 
 
@@ -277,7 +293,7 @@ Every upload also lands in the file tree under `assets/`, so you can refer back 
 
 # Permissions
 
-Datasites require the **Business** plan and the Datasites feature on your workspace membership.
+Individual includes one datasite; Business and Enterprise are unlimited. Creating or editing one also needs the Datasites feature on your workspace membership.
 
 | Action                                     | Minimum role |
 | ------------------------------------------ | ------------ |

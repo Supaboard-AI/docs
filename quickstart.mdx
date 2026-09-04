@@ -1,40 +1,40 @@
 ---
 mode: "wide"
 title: "Quickstart"
-description: "This quickstart walks you through the core features and offerings of Supaboard. By the end, you'll understand how to derive insights by asking questions, manage agents and create your dashboard with AI."
+description: "Walk through the core of Supaboard: ask your first questions, create an agent, and build your first dashboard."
 ---
 
 <Card icon="https://framerusercontent.com/images/0S3XhBBKzV0qjE4LjhFxGAHazU.png?scale-down-to=512&width=15&height=15" horizontal href="https://auth.supaboard.ai/onboard/register" title="Before you begin">
   Signup with Supaboard
 </Card>
 
-# Ask with Agent
+# Ask your first question
 
-After setting up your workspace and adding a data source, you will arrive at Ask Agent. By default we create our default agent called Stella. Stella can give you answers to questions pertaining to your database, provide metrics and more.
+After setting up your workspace and adding a data source, you land in Ask Agent with a default agent named **Stella**. Stella answers questions about your database — metrics, trends, or simply what's in there. A good first message:
 
 <Prompt description={`Tell me about this data`} icon="user-robot-xmarks" actions={["copy"]}>
   Tell me about this data
 </Prompt>
 
-Stella will query your database, read relevant data points, flag potential anomalies, and give you a holisitic understanding of what is there inside your data. This is one of the easiest way to understand both the capabilities of our agents and a starting point to make Supaboard truly yours.
+Stella queries your database, reads the relevant tables, flags anything that looks unusual, and gives you an overview of what your data contains. It's the quickest way to see what the agents can do before you start shaping one of your own.
 
-Once you have create your own agents, you can switch between them from the selector in the chat interface.
+Once you've created your own agents, switch between them from the selector in the chat interface.
 
-# Create your first Agent
+# Create your first agent
 
-Click on the **Agents** tab on the sidebar to open the agent explorer page. From here you can create an customise your own agents. From here you can:
+Click **Agents** in the sidebar to open the agent explorer. From here you can create and customise your own agents:
 
-- Configure key aspects of your agent, such as name, what they do (description), whether they should improve themselves as you ask questions to them, etc.
-- Add or remove data sources, scope out what data sources and tables should your agent will have access to.
-- Provide a Master Rulesets that are followed in your business.
-- Add knowledge in form of raw csv, pdfs or docs that provide additional documentation about your business.
-- Granularly control what each of the tables contain.
+- Set the basics: a name, a description of what the agent does, and whether it should improve itself as you ask it questions
+- Scope its data — which data sources and tables it can see
+- Give it a master ruleset: the conventions your business follows
+- Add knowledge as CSV, PDF, or doc files that explain your business
+- Control what each table contains, column by column
 
 <Note>
   The "Table Configuration" setting is designed for data analysts to further finetune the agent. If you are unsure, leave them untouched.
 </Note>
 
-Once your agent is setup, you can use it to ask questions and setup your first dashboard, ask questions and so much more.
+With an agent set up, put it to work:
 
 <Columns cols={2}>
   <Column>

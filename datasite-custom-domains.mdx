@@ -1,0 +1,88 @@
+---
+title: "Datasite Custom Domains"
+description: "Every published datasite gets its own URL. Here's how that works, and how to serve one from a domain you own."
+mode: "wide"
+---
+
+A published [datasite](/datasites) is served from its own hostname. You get one automatically, and you can add your own on top — `dashboards.yourcompany.com` pointing at your datasite, with the TLS certificate handled for you.
+
+Everything here lives in the **Publish** popover in the datasite editor.
+
+
+# The address you get for free
+
+The first time you publish a datasite, it's assigned a subdomain built from its name plus a short random tail:
+
+```
+revenue-overview-x7k2p.<your datasite domain>
+```
+
+A few things worth knowing about this address:
+
+- It's minted **once**, at first publish. Renaming the datasite later doesn't change it — links people already have keep working.
+- Embed links use it too. The URL you copy from the publish popover is this origin.
+- In the domain list it appears with an **Auto** tag and no remove button. It's the datasite's canonical home and can't be deleted.
+
+Datasites published before this feature existed pick up their address the next time you hit **Publish** or **Update**.
+
+
+# Adding your own domain
+
+In the publish popover, under **Add a custom domain to this datasite**:
+
+1. Type the hostname you want — the placeholder suggests the shape: `dashboards.yourcompany.com` — and press Enter or click **Add**.
+2. The popover shows the DNS record to create, with **Type / Name / Value / Proxy** columns. Every cell is click-to-copy, since each one gets retyped into a DNS provider.
+3. Create that record with your DNS provider.
+4. Watch the status dot next to the hostname. When it turns green, the domain is live.
+
+The record is a single CNAME pointing at the datasite's assigned subdomain:
+
+| | Subdomain (`dashboards.acme.com`) | Root domain (`acme.com`) |
+|---|---|---|
+| Type | `CNAME` | `ALIAS` / `ANAME` |
+| Name | `dashboards` | `@` |
+| Value | the datasite's assigned subdomain | the datasite's assigned subdomain |
+| Proxy | Off | Off |
+
+A root domain can't hold a CNAME — that's a DNS rule, not ours — so at the apex you need a provider that supports ALIAS or ANAME records (or use a subdomain, which is simpler).
+
+There's no TXT record and no ownership-verification step. Registering a hostname is inert until the domain's real owner points DNS at it, so there's nothing to verify.
+
+## The certificate
+
+You don't request one. When the first HTTPS request arrives on your hostname, a certificate is issued for it automatically. That usually happens within a minute of DNS propagating.
+
+> **The record must be plain DNS — no CDN proxying.** If your provider has an orange-cloud/proxy toggle (Cloudflare and friends), turn it **off** for this record. A proxied record terminates TLS at the CDN, which means the certificate for your hostname can never be issued, and the domain will sit at "TLS handshake failed" forever.
+
+
+# Reading the status dot
+
+Each custom domain row has a status dot, checked every time you open the popover:
+
+| Dot | Meaning |
+|---|---|
+| Grey, pulsing | Checking the hostname now |
+| **Green** | Live — the domain is serving this datasite. On a private datasite the message notes that visitors get the sign-in page first, which is correct behavior. |
+| **Red** | Something's wrong, and the message under the row says what |
+| Flat grey | The check itself couldn't run — try again |
+
+The red states are specific, and each one tells you the fix:
+
+- *"That hostname does not resolve yet"* — the DNS record is missing or still propagating. Give it a few minutes.
+- *"The TLS handshake failed, so no certificate has been issued"* — almost always a proxied record. Switch it to DNS-only.
+- *"Something answered on that hostname but it is not this datasite"* — the record points somewhere else, or a CDN is answering in front of us.
+- *"That hostname is serving a different datasite"* — the record's Value is another datasite's subdomain.
+- *"No answer within 12s"* — DNS may still be propagating, or the certificate is mid-issuance. Try again shortly.
+
+
+# Rules and limits
+
+- Hostnames must be fully qualified (`dashboards.acme.com`, not `dashboards`) and can't be IP addresses.
+- A hostname can be registered to **one** datasite across the whole platform. Registering it elsewhere returns "already registered".
+- Hostnames under the platform's own datasite domain are assigned automatically and can't be registered by hand.
+- Adding and removing domains needs the **Editor** role or above, same as publishing.
+- Removing a domain takes effect immediately: the hostname stops serving the datasite and its certificate stops renewing. The DNS record at your provider is yours to clean up.
+
+## Private datasites on custom domains
+
+Visibility follows the datasite, not the domain. A private datasite stays private on your custom domain — visitors get the sign-in page, including the **Continue with Google** and **Continue with Microsoft** options, and only workspace members get in. See [Publishing and Embedding](/datasites#publishing-and-embedding).

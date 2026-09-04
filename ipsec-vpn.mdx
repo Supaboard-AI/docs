@@ -23,7 +23,7 @@ Connect Supaboard to databases that live entirely inside a private network by pe
 
 - [ ] A VPN gateway that supports **IKEv2 with pre-shared key** authentication (strongSwan, pfSense/OPNsense, FortiGate, Cisco ASA/FTD, Palo Alto, AWS Virtual Private Gateway, Azure VPN Gateway, and similar all qualify)
 - [ ] Your database reachable from the gateway at a **private IP address** — enter that IP as the **Host** in the connector form. Private DNS names do not resolve from Supaboard.
-- [ ] Gateway firewall allows **UDP 500 (IKE)**, **UDP 4500 (NAT-T)**, and **ESP (IP protocol 50)** from each Supaboard IP
+- [ ] Gateway firewall allows **UDP 500 (IKE)** and **UDP 4500** from each Supaboard IP — Supaboard always UDP-encapsulates ESP (NAT-T framing), so raw ESP/protocol 50 is never required
 
 
 # Configure your gateway
@@ -36,14 +36,29 @@ Create one IKEv2 tunnel per Supaboard IP with these settings:
 | Authentication | Pre-shared key |
 | Peer / remote address | The Supaboard public IP (one tunnel per IP) |
 | Local ID | Your gateway's public IP (or a custom ID — see below) |
-| IKE proposal | AES-256 / SHA-256 / DH group 14 (modp2048), **or** AES-128-GCM / SHA-256 PRF / DH group 19 (ecp256) |
-| ESP proposal | AES-256 / SHA-256, **or** AES-128-GCM |
+| IKE proposal | AES-256 / SHA-256 / DH group 14 (modp2048), AES-128-GCM / SHA-256 PRF / DH group 19 (ecp256), **or** AES-256 / SHA-384 / DH group 20 (ecp384) |
+| ESP proposal | AES-256 / SHA-256, AES-128-GCM, **or** AES-256 / HMAC-SHA1 (PFS group 20) |
 | Local traffic selector | Your database host `/32` (or the subnet you enter as **Remote Subnet**) |
 | Remote traffic selector | The Supaboard IP `/32` |
-| NAT traversal | Leave enabled |
+| NAT traversal | Must be enabled — Supaboard always uses UDP 4500 encapsulation |
 | Start behavior | Responder / on-demand is fine — Supaboard initiates |
 
 If your gateway uses a custom IKE identity instead of its public IP, contact support to have it set on the Supaboard side — by default Supaboard expects the peer ID to equal the gateway address.
+
+## OCI managed Site-to-Site VPN
+
+Oracle Cloud's managed VPN terminates a **separate connection per peer**: you create one CPE (customer-premises equipment) object per Supaboard IP, and each resulting IPSec connection gets its **own Oracle tunnel-endpoint IP**. Supaboard supports this natively — the **VPN Gateway Address** field accepts a per-server mapping:
+
+1. In OCI, create one **CPE** per Supaboard IP (CPE IP = the Supaboard IP).
+2. Create one **IPSec connection** per CPE on your DRG, static routing, with the route to the on-premises network set to that Supaboard IP `/32`.
+3. On each connection, open **Tunnel 1**, set a **shared secret** — use the **same PSK on every tunnel** — and note the **Oracle VPN IP address** (the tunnel endpoint). OCI's usual custom-algorithm choices (phase 1 AES-256-CBC / SHA2_384 / GROUP20, phase 2 AES-256-CBC / HMAC_SHA1_128 / GROUP20) are supported as-is — no need to change them.
+4. In the Supaboard connector's **VPN Gateway Address** field, enter one `supaboard-ip=oracle-tunnel-ip` pair per connection, comma-separated:
+
+```text
+139.59.30.169=129.146.1.10,157.230.31.178=129.146.2.20,64.23.156.30=129.146.3.30
+```
+
+Each Supaboard server automatically uses its own entry. The same mapping form works for any provider that assigns a distinct tunnel endpoint per peer (AWS Site-to-Site VPN behaves the same way). Tunnel 2 of each OCI connection is unused — Supaboard initiates a single tunnel per server.
 
 ## Example: strongSwan responder
 
