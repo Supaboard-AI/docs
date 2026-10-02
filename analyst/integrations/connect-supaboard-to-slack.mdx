@@ -1,0 +1,59 @@
+---
+sidebarTitle: "Ask from Slack"
+title: "Connect Supaboard to Slack"
+---
+
+Ask your Supaboard agents from Slack. Mention **@Supaboard** in a channel, or message it directly, and the answer — chart, table or number — lands back in the same thread.
+
+Slack is one of three chat surfaces on the same read-only tool layer, alongside [Claude](/analyst/integrations/connect-supaboard-to-claude) and ChatGPT. Nothing asked from a chat can change your data.
+
+
+## Two steps, two different grants
+
+Connecting Slack involves two separate permissions, and it helps to know which is which.
+
+| Step | Who does it | What it grants |
+| --- | --- | --- |
+| **Install** the Supaboard app to your Slack workspace | A Slack workspace admin, once | Permission for the bot to read mentions and post replies. It carries **no** access to anyone's Supaboard data. |
+| **Link** your Supaboard account | Each person who wants to ask | Your own Supaboard workspace and agent, used for questions you ask. |
+
+An installed workspace where nobody has linked yet answers every question with an invitation to link. That is expected.
+
+### 1. Install the app
+
+Install Supaboard to your Slack workspace from the install link your Supaboard account manager sends you. It opens Slack's own authorisation screen; approve it as a workspace admin.
+
+### 2. Link your account
+
+The first time you mention **@Supaboard**, or if you run `/supaboard link`, the bot replies with a link button. It opens a Supaboard sign-in page where you pick the workspace and the agent that should answer you. You only do this once; the choice is remembered.
+
+
+## Asking questions
+
+- In a channel: `@Supaboard what was net revenue last week by region?`
+- In a direct message: just type the question.
+
+Slack requires an acknowledgement within three seconds, and an analysis takes longer than that, so the bot posts a placeholder immediately and edits the real answer into the thread when it is ready — usually within a minute or two. Charts arrive as images, tables and KPIs as native Slack blocks.
+
+
+## Slash commands
+
+Everything after `/supaboard` is a command. Without one, it shows help.
+
+| Command | What it does |
+| --- | --- |
+| `/supaboard status` | Which Supaboard workspace and agent you are linked to |
+| `/supaboard link` | Start, or restart, the account link |
+| `/supaboard logout` | Remove your link |
+| `/supaboard workspaces` | List the Supaboard workspaces you can reach |
+| `/supaboard use-workspace <name>` | Switch the workspace that answers you |
+| `/supaboard agents` | List agents in the current workspace |
+| `/supaboard use-agent <name>` | Switch the agent that answers you |
+| `/supaboard dashboards` | List dashboards in the current workspace |
+
+
+## Limits
+
+- Read-only. The Slack surface can list workspaces, agents and dashboards and ask questions; it cannot create dashboards, edit agents or write to any source.
+- One linked account per Slack user. Switching workspace or agent is a command, not a re-link.
+- Answers use the same credits as a question asked in the app.

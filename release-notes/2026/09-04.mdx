@@ -1,0 +1,48 @@
+---
+title: "Publish Datasites on your own domain"
+sidebarTitle: "Sep 4"
+description: "Use your own web address, manage site variables, and schedule automations in the right timezone."
+---
+
+**September 4, 2026** · Covers August 23–September 4, 2026.
+
+{/* Preserve links to headings from the previous release-note format. */}
+<span id="datasites-your-own-url-and-custom-domains" />
+<span id="datasite-variables" />
+<span id="sign-in-to-private-datasites-with-google-or-microsoft" />
+<span id="conversation-threads-in-the-datasite-analyst" />
+<span id="query-builder-history-and-undo" />
+<span id="ipsec-vpn-for-all-self-hosted-databases" />
+<span id="partial-filters-the-marker-is-now-$$" />
+<span id="connect-supaboard-to-slack" />
+<span id="fixes-and-improvements" />
+
+<Warning>
+**For teams with custom dashboard queries:** the marker for excluding a table from dashboard filters changed from `$` to `$$`. Ask the person who maintains those queries to update any uses of the old marker. [Update a query’s filter exclusions](/dashboards/filters/ignore-filtering-for-a-given-table).
+</Warning>
+
+## New
+
+- **Give a Datasite your own address.** Connect a custom domain and use the setup screen to find the DNS records your domain administrator needs. [Set up a custom domain](/datasites/datasite-custom-domains).
+
+- **Manage Datasite variables.** Keep reusable settings in one place and distinguish public values from secrets used by the site’s protected requests. [Use Datasite variables](/datasites/datasite-variables).
+
+- **Sign in to private Datasites with Google or Microsoft.** Visitors can use these sign-in options when accessing a private site.
+
+- **Connect databases over a private network.** IPsec VPN setup supports secure connections to self-hosted data sources. Your network administrator can use the [IPsec guide](/data-sources/security/ipsec-vpn).
+
+## Improved
+
+- **Return to a Datasite conversation.** Separate chat threads help visitors continue an earlier discussion.
+
+- **Schedule in your timezone.** Automation triggers use the chosen timezone. Dashboards can also reload their data automatically at a chosen interval.
+
+- **Review and undo query edits.** Query history makes it easier to return to an earlier version. [Query Bench](/query-bench/overview).
+
+## Fixed
+
+- A message blocked by an exhausted allowance keeps its draft and attachments so you can send it later.
+
+- Affected dashboard widgets use the correct database instead of showing an incorrect zero result.
+
+[Browse all updates](/release-notes/overview)

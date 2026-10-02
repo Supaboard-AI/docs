@@ -1,0 +1,112 @@
+---
+sidebarTitle: "Variables"
+title: "Datasite Variables"
+description: "Give a datasite API keys and configuration values — public ones ship with the page, secret ones never leave the server."
+---
+
+A [datasite](/datasites/overview) sometimes needs a credential: an analytics key, a maps token, an API key for a service you want the page to call. Variables are where those live. You store the value once; the page references it by name; the AI can write code against it without ever seeing it.
+
+Open the manager from the **key icon** in the datasite editor toolbar, next to the environment picker. The modal is titled **Datasite Variables**.
+
+
+## Before you begin
+
+You need editing access to the Datasite and the configuration value supplied by the service you want to use. Decide whether the value is safe for visitors to see. Keep confidential credentials in **Secret** variables.
+
+## Public or secret
+
+Every variable is one or the other, and the choice is about where the value is allowed to go:
+
+| | Public | Secret |
+|---|---|---|
+| Where the value lives | Injected into the served page | On the server, sealed |
+| Who can see it | Anyone who opens the site | Not returned to the browser or variable editor |
+| How code uses it | `sbEnv("NAME")` | `sbApi("NAME", ...)` |
+| Good for | Publishable keys — analytics, maps, publishable payment keys | Anything that must stay confidential |
+
+The form's own description of Secret is the whole model in one line: *"Never sent to the browser. The backend makes the call for you, and only to the host below."*
+
+The manager's footer states the one caveat that matters, and it's worth quoting because people miss it:
+
+> The AI sees these names, never the values. Public values ship inside the page; secret values stay on the server, but anyone who can open this site can trigger calls that use them.
+
+That last clause is the real security boundary. A visitor to your datasite can never *read* a secret, but they can cause the page to make the API calls the page is built to make. If those calls cost money or mutate data, publishing the datasite publicly means anyone with the link can trigger them.
+
+
+## Creating a variable
+
+**New Variable** in the manager opens the form:
+
+- **Name** — `UPPER_SNAKE_CASE`, up to 64 characters. The field uppercases as you type. Names are how code refers to the variable, so they're **immutable after creation** — to rename one, delete it and recreate it.
+- **Type** — Secret (the default) or Public.
+- **API host** — secret variables only, required. A bare hostname like `api.example.com`: no `https://`, no path. This is the *only* place the value will ever be sent, and it's pinned at save time — the page can't redirect a secret elsewhere later. Private and loopback addresses are rejected.
+- **Value** — pasted once. See below.
+- **Description** — optional, but useful: it's shown to the AI so it knows what the key is for. The value never is.
+
+### Values are write-only
+
+This is the property everything else hangs off:
+
+- Once saved, a value is never returned again — not to the edit form, not to the AI, not to any API. The list shows a last-4 preview (`••••a1b2`) so you can tell keys apart.
+- Editing a variable and leaving the value blank keeps the stored value. Pasting a new one replaces it.
+- Switching a variable between public and secret requires re-entering the value, because the two are stored differently.
+- Deleting is immediate and confirmed with: *"Delete this variable? Any code that uses it will stop working."* It means it.
+
+Public values take effect on the **next page load** — rotate an analytics key and every visitor picks it up without a republish.
+
+
+## Using variables in the page
+
+The datasite SDK exposes both kinds. You usually won't write this yourself — you ask the analyst and it does — but this is what the code looks like.
+
+**Public** values are synchronous reads:
+
+```js
+const key = sbEnv("ANALYTICS_KEY");   // "" if unset
+```
+
+**Secret** values never appear in code at all. Instead the code makes a proxied request and writes `{{NAME}}` where the credential belongs:
+
+```js
+const res = await sbApi("WEATHER_KEY", {
+  path: "/v1/forecast?city=Berlin&apikey={{WEATHER_KEY}}",
+  method: "GET",
+});
+const data = await res.json();
+```
+
+The server substitutes the real value into the placeholder and sends the request to the variable's pinned host. The browser sees the response, never the key.
+
+A few properties of the proxy worth knowing:
+
+- The destination is always the pinned host. The page can choose the path, method, headers, and body, but not where the request goes.
+- Placeholders are substituted in headers and the query string only, and only for that variable.
+- Redirects are not followed, request bodies are capped at 1 MB, and requests time out at 120 seconds. Streaming responses (SSE) pass through, so AI-provider endpoints work.
+- If the upstream call fails, the page gets a generic `the upstream request to <host> failed` — the real error is withheld because it could echo the substituted URL back.
+
+
+## The AI and your variables
+
+The analyst is told each variable's **name, type, host, and description** on every build turn. Values are excluded outright — there is no way to phrase a prompt that makes it print one, because it was never given one.
+
+It works the other direction too: if you ask for something that needs a credential ("add a live weather panel"), the analyst can **request a variable**. That creates an empty, named slot — no value, and the build doesn't pause for it. You'll see:
+
+- a **Needs a value** pill on the variable in the manager, and
+- the toolbar key icon turns purple with a dot badge, tooltip *"N variables need a value"*.
+
+The generated code is written against the empty slot, so it starts working the moment you paste the value in. Until then, calls through it fail with *"variable X has no value yet"*.
+
+
+## Signed-in viewers
+
+Related, and often used together with variables: on a **private** datasite the SDK exposes who's viewing.
+
+```js
+const { first_name, email, role } = sbUser() ?? {};
+```
+
+`sbUser()` (and the `useSbUser()` hook) returns the signed-in viewer's name, email, and role on private datasites — and `null` on public datasites and embed links, so anything personalised needs a fallback. Ask the analyst for _"greet the viewer by name"_ and it handles both cases.
+
+## Expected result
+
+The variable appears by name in the manager. Ask the Analyst to use that name, then review the preview before [publishing changes](/datasites/publish-and-share).

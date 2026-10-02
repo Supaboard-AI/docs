@@ -1,0 +1,79 @@
+---
+sidebarTitle: "Group and expand rows"
+title: "Group and expand table rows"
+description: "Organize a table into expandable groups so readers can move from a summary to its detail."
+---
+
+Group a table by a meaningful field, such as product category or month, and let readers expand a group to inspect its rows. Use this when one long table is difficult to scan.
+
+<span id="how-it-works-at-a-glance" />
+<span id="prerequisites" />
+
+## Before you begin
+
+You need a table widget with the fields you want to group by and permission to edit the dashboard. The **Group** tab is available when grouping is supported for that table's data source.
+
+<span id="setting-up-expand-row" />
+<span id="enable-expand-row" />
+<span id="configure-column-mapping" />
+
+## Set up row groups
+
+1. Open the dashboard and choose **More options → Edit manually**.
+2. Open the table's **Table Settings** control.
+3. Choose the **Group** tab.
+4. Under **Group by Field**, select **+ Add Subgroup**, then choose the field.
+5. For a date field, choose the time bucket that matches the review, such as a month.
+6. Add another subgroup when readers need a second level, such as category followed by month.
+
+With multiple fields, **Nested** shows a hierarchy and **Inline** shows the grouping values together. Choose the layout that makes the relationship easiest to read.
+
+## Add a summary
+
+Use **Column Summarize** to choose the values to summarize and the available aggregation. For example, group by category and summarize revenue with a sum.
+
+Check the meaning of the total. Summing monthly rates does not produce an overall rate; use an appropriate calculation when the metric is a ratio or percentage.
+
+<span id="viewing-an-expanded-row" />
+<span id="viewing-an-expanded-row-2" />
+
+## Save and explore
+
+1. Choose whether to **Expand groups by default**.
+2. Select **Save Changes**, then save the dashboard edits.
+3. Return to view mode and use a group's expand control to open its details.
+4. Collapse the group to return to the summary.
+
+<span id="hiding-columns-you-don’t-want-to-show" />
+
+## Keep the table readable
+
+Use the **Schema** tab to hide columns readers do not need to see or adjust their presentation. Hiding a column changes its display; it does not remove it from the underlying data.
+
+<span id="open-related-questions-settings" />
+<span id="add-a-related-question" />
+<span id="preparing-the-related-question" />
+
+## Show a different follow-up question
+
+For a separate chart or question, use the widget's **Related Questions** action. Add a related question from an existing result, configure it, and save it. Readers open available related questions from the widget's data context menu.
+
+Row grouping and related questions solve different tasks: grouping organizes the current table, while a related question opens another view of the data.
+
+<span id="tips-and-troubleshooting" />
+
+## If you cannot expand the table
+
+- Check that a group field has been selected and the dashboard has been saved.
+- If the **Group** tab is unavailable, use [Drill Through or Records](/dashboards/how-to/explore-dashboard-data) for supported widgets.
+- If a summary looks wrong, review the aggregation and the granularity of the original query.
+
+<span id="summary" />
+
+## Expected result
+
+Readers can scan a summary and expand the groups that need attention, without leaving the dashboard.
+
+## Next steps
+
+[Format the table](/dashboards/widgets/table-widget) or [use a table value to filter the dashboard](/dashboards/filters/filter-dashboards-from-table-data).

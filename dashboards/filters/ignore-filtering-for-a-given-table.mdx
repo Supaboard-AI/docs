@@ -1,0 +1,115 @@
+---
+sidebarTitle: "Keep data outside a filter"
+title: "Partial Filters"
+description: "Keep parts of your query unaffected by dashboard filters — just add `$$`."
+---
+
+## What are Partial Filters?
+
+When someone filters a dashboard, those filters normally apply to every table in your widget's query. But sometimes you don't want that. Maybe you're comparing this month's sales to all-time sales, and you need that all-time number to stay put no matter what filters get applied.
+
+Partial Filters solve this. Put `$$` in front of a table reference, and that reference gets left alone. Everything else filters like normal.
+
+> **Changed in September 2026:** the marker used to be a single `$`, and it could go anywhere in the name. It's now `$$`, and it only works as a prefix. A single `$` is treated as a normal reference and gets filtered like everything else — so if you have `$ORDERS` or `ORDERS$` in existing queries, change them to `$$ORDERS`.
+
+## The basics
+
+Put `$$` directly before the table name you want to protect from filters:
+
+```sql
+SELECT COUNT(*) FROM $$ORDERS
+```
+
+That's it. The `$$` is a signal to the filtering layer — it's consumed before your query reaches the database, which only ever sees `ORDERS`.
+
+| You write    | What happens                          |
+|--------------|---------------------------------------|
+| `ORDERS`     | Filtered (the default)                |
+| `$$ORDERS`   | Not filtered                          |
+| `$ORDERS`    | Filtered — a single `$` is not a marker |
+| `ORDERS$$`   | Not a marker — prefix only            |
+
+Matching is case-insensitive (`$$orders` works) and binds to the whole name — `$$ORDERS_ARCHIVE` marks `ORDERS_ARCHIVE`, not `ORDERS`.
+
+## Where to add the `$$`
+
+Two places:
+
+1. **Query Bench** when you're writing or editing the SQL
+2. **Dashboard Edit** when you're tweaking a widget in place
+
+Changes apply the next time the widget runs.
+
+## Examples
+
+### "What % of all-time orders happened this period?"
+
+You want the numerator to follow the dashboard's date filter, but the denominator should always be the all-time total.
+
+```sql
+WITH current_period AS (
+  SELECT COUNT(*) AS orders_in_period
+  FROM ORDERS              -- filtered: reflects the selected period
+),
+all_time AS (
+  SELECT COUNT(*) AS total_orders
+  FROM $$ORDERS            -- not filtered: always all-time
+)
+SELECT
+  ROUND(
+    (SELECT orders_in_period FROM current_period) * 100.0 /
+    NULLIF((SELECT total_orders FROM all_time), 0),
+    2
+  ) AS percentage_of_total;
+```
+
+### "Show filtered revenue next to a company-wide benchmark"
+
+```sql
+SELECT
+  (SELECT SUM(amount) FROM SALES)   AS filtered_revenue,   -- moves with filters
+  (SELECT AVG(amount) FROM $$SALES) AS company_average;    -- stays constant
+```
+
+### Mixing filtered and unfiltered references in one query
+
+```sql
+SELECT
+  u.region,
+  COUNT(o.id)      AS filtered_orders,
+  ref.total_users
+FROM ORDERS o                       -- filtered
+JOIN USERS u ON u.id = o.user_id    -- filtered
+LEFT JOIN (
+  SELECT region, COUNT(*) AS total_users
+  FROM $$USERS                      -- not filtered: full population per region
+  GROUP BY region
+) ref ON ref.region = u.region
+GROUP BY u.region, ref.total_users;
+```
+
+The same table (`USERS`) appears twice and behaves differently in each spot — that's the whole point of putting the `$$` on individual *references* rather than the table itself.
+
+## Tips
+
+**Use it sparingly.** The default — filtering everything — is almost always what you want. Only reach for `$$` when you have a specific reason to keep a reference static.
+
+**It's per-reference, not per-table.** If `ORDERS` shows up three times and you want two of them unfiltered, mark those two and leave the third alone.
+
+**Leave a comment.** Future you (or a teammate) will appreciate a quick note like `-- baseline, intentionally unfiltered` next to any `$$`-marked reference.
+
+**Schema-qualified names work too.** Put the `$$` on the table part: `analytics.$$ORDERS`.
+
+## FAQ
+
+**Does this work for tables, charts, and KPIs?**
+Yes — same behavior across all widget types.
+
+**What if I forget one `$` and write `$ORDERS`?**
+Nothing breaks. A single `$` is dropped and the reference gets filtered like any other, so your results will move with the dashboard filters. If that reference was supposed to stay static, that's your cue to add the second `$`.
+
+**Will the `$$` show up in query errors or results?**
+No. It's consumed before the query reaches the database, so your column names, joins, and aliases all work exactly as written.
+
+**I was using `$` before this change — do my widgets still work?**
+They run, but those references are now filtered. Under the old behavior a stray `$` silently disabled filtering; that's exactly what changed. Switch any intentional opt-outs to `$$`.

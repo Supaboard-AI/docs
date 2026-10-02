@@ -1,0 +1,3284 @@
+{
+  "reviewed_on": "2026-10-02",
+  "timezone": "Asia/Kolkata",
+  "method": "Roundups of user-visible changes introduced through first-parent merges into production. Remote production heads were checked with git ls-remote. Dates are roundup cutoffs, not deployment confirmations. Frontend and backend readiness were considered together. Internal refactors, CI, secrets/configuration changes, and unverified performance claims are omitted.",
+  "coverage": "April 1 through September 30, 2026. Frontend history covers the full interval; the supplied backend repository begins April 25 and its first staging-to-production PR is May 8. Earlier backend claims cannot be established from this repository.",
+  "editorial_references": [
+    "https://www.mintlify.com/blog/five-changelog-principles-from-best-developer-brands",
+    "https://www.mintlify.com/library/how-to-write-release-notes"
+  ],
+  "repositories": {
+    "frontend": {
+      "url": "https://github.com/Supaboard-AI/supaboard-frontend",
+      "production_head": "a9eb0185c59fb015b1221e28f35d136674746681"
+    },
+    "backend": {
+      "url": "https://github.com/Supaboard-AI/go-supaboard-backend",
+      "production_head": "9bb850faf826f5149dc767f206de65b90e73f4bc"
+    }
+  },
+  "roundups": [
+    {
+      "page": "release-notes/2026/04-24",
+      "from": "2026-04-01",
+      "through": "2026-04-24",
+      "production_merges": [
+        {
+          "repository": "frontend",
+          "sha": "86c0e79d8958890da149a5241ac05bf59109cee5",
+          "merged_at": "2026-04-01T21:15:35+05:30",
+          "url": "https://github.com/Supaboard-AI/supaboard-frontend/pull/371"
+        },
+        {
+          "repository": "frontend",
+          "sha": "a7473618809b9c8c0aed8c8230eb985c257f18ee",
+          "merged_at": "2026-04-02T23:59:30+05:30",
+          "url": "https://github.com/Supaboard-AI/supaboard-frontend/pull/375"
+        },
+        {
+          "repository": "frontend",
+          "sha": "e2fb8ef2cb7ac4cf85f00613ed2f0e8f2840e48b",
+          "merged_at": "2026-04-03T01:15:59+05:30",
+          "url": "https://github.com/Supaboard-AI/supaboard-frontend/pull/377"
+        },
+        {
+          "repository": "frontend",
+          "sha": "1a405b0b83566c163315caa238eb746490561a90",
+          "merged_at": "2026-04-04T16:27:12+05:30",
+          "url": "https://github.com/Supaboard-AI/supaboard-frontend/pull/380"
+        },
+        {
+          "repository": "frontend",
+          "sha": "7e77374ed4834cbe258d124ace550f9b88a22c26",
+          "merged_at": "2026-04-06T11:33:50+05:30",
+          "url": "https://github.com/Supaboard-AI/supaboard-frontend/pull/381"
+        },
+        {
+          "repository": "frontend",
+          "sha": "7c384775e6f6e2752fc4b4156a310633e26dd94c",
+          "merged_at": "2026-04-06T12:10:04+05:30",
+          "url": "https://github.com/Supaboard-AI/supaboard-frontend/pull/382"
+        },
+        {
+          "repository": "frontend",
+          "sha": "840dcd62757765f2d73de9b9fd1eeedcfa291f02",
+          "merged_at": "2026-04-06T13:28:15+05:30",
+          "url": "https://github.com/Supaboard-AI/supaboard-frontend/pull/384"
+        },
+        {
+          "repository": "frontend",
+          "sha": "6668a1e5fb28decbf83bb48b905043d498320fa4",
+          "merged_at": "2026-04-08T01:12:26+05:30",
+          "url": "https://github.com/Supaboard-AI/supaboard-frontend/pull/391"
+        },
+        {
+          "repository": "frontend",
+          "sha": "a878e5b86c6cb7d78d8d374c46a7c14f7fd82758",
+          "merged_at": "2026-04-08T17:35:02+05:30",
+          "url": "https://github.com/Supaboard-AI/supaboard-frontend/pull/393"
+        },
+        {
+          "repository": "frontend",
+          "sha": "8663337a6b76f5aef2a2175733154e81b3a558a4",
+          "merged_at": "2026-04-08T19:26:20+05:30",
+          "url": "https://github.com/Supaboard-AI/supaboard-frontend/pull/395"
+        },
+        {
+          "repository": "frontend",
+          "sha": "5e590ea924faccfce666b785f23753b76cc9f7a3",
+          "merged_at": "2026-04-09T20:38:28+05:30",
+          "url": "https://github.com/Supaboard-AI/supaboard-frontend/pull/398"
+        },
+        {
+          "repository": "frontend",
+          "sha": "bd34355506204f3d0d31fcfc276dd9630be54745",
+          "merged_at": "2026-04-12T19:42:04+05:30",
+          "url": "https://github.com/Supaboard-AI/supaboard-frontend/pull/404"
+        },
+        {
+          "repository": "frontend",
+          "sha": "74a27e4316c3a5ed6c61dc80255e9a6f3f8392a7",
+          "merged_at": "2026-04-12T20:14:47+05:30",
+          "url": "https://github.com/Supaboard-AI/supaboard-frontend/pull/406"
+        },
+        {
+          "repository": "frontend",
+          "sha": "b370f6055f838e7204a2bbf537f6d464f2112be6",
+          "merged_at": "2026-04-12T21:48:51+05:30",
+          "url": "https://github.com/Supaboard-AI/supaboard-frontend/pull/408"
+        },
+        {
+          "repository": "frontend",
+          "sha": "4631f2626cb31f277d6fa90e3dad5197c242a0a0",
+          "merged_at": "2026-04-13T19:19:06+05:30",
+          "url": "https://github.com/Supaboard-AI/supaboard-frontend/pull/410"
+        },
+        {
+          "repository": "frontend",
+          "sha": "05d322f70e4d523c194ab92b0086c3034ae1637f",
+          "merged_at": "2026-04-14T15:17:04+05:30",
+          "url": "https://github.com/Supaboard-AI/supaboard-frontend/pull/411"
+        },
+        {
+          "repository": "frontend",
+          "sha": "33e1d70a7e434d40318748a550da8a0fca518169",
+          "merged_at": "2026-04-14T20:44:42+05:30",
+          "url": "https://github.com/Supaboard-AI/supaboard-frontend/pull/415"
+        },
+        {
+          "repository": "frontend",
+          "sha": "266b0c1163df79a646a8a64ec96ab533440eb11d",
+          "merged_at": "2026-04-15T08:00:18+05:30",
+          "url": "https://github.com/Supaboard-AI/supaboard-frontend/pull/417"
+        },
+        {
+          "repository": "frontend",
+          "sha": "7ccd3bf33e366c09d80f9c8a71849e61b9bdb0e5",
+          "merged_at": "2026-04-15T14:39:19+05:30",
+          "url": "https://github.com/Supaboard-AI/supaboard-frontend/pull/419"
+        },
+        {
+          "repository": "frontend",
+          "sha": "2dd43a510d20b15dcbc7b31787dd3d7753b9b96c",
+          "merged_at": "2026-04-16T16:53:23+05:30",
+          "url": "https://github.com/Supaboard-AI/supaboard-frontend/pull/422"
+        },
+        {
+          "repository": "frontend",
+          "sha": "47b6c9e181bcc3410ad01e996741481b01cd88b9",
+          "merged_at": "2026-04-16T18:55:06+05:30",
+          "url": "https://github.com/Supaboard-AI/supaboard-frontend/pull/425"
+        },
+        {
+          "repository": "frontend",
+          "sha": "c5d989120183ba527564b37a76e06a98eeb4f7fe",
+          "merged_at": "2026-04-17T20:07:37+05:30",
+          "url": "https://github.com/Supaboard-AI/supaboard-frontend/pull/432"
+        },
+        {
+          "repository": "frontend",
+          "sha": "a882acb52ed1168473826563c2b5b0bf077fc505",
+          "merged_at": "2026-04-17T20:30:59+05:30",
+          "url": "https://github.com/Supaboard-AI/supaboard-frontend/pull/434"
+        },
+        {
+          "repository": "frontend",
+          "sha": "5cca77178d01cfe3ae72f06e1ea79aea5bf788e7",
+          "merged_at": "2026-04-20T17:23:49+05:30",
+          "url": "https://github.com/Supaboard-AI/supaboard-frontend/pull/439"
+        },
+        {
+          "repository": "frontend",
+          "sha": "ea0ee91e9de7a96bdb6dd8d490e73921fb79fee1",
+          "merged_at": "2026-04-21T12:36:08+05:30",
+          "url": "https://github.com/Supaboard-AI/supaboard-frontend/pull/441"
+        },
+        {
+          "repository": "frontend",
+          "sha": "29cace6549044bd082bc28508d2c6af8ff173bd5",
+          "merged_at": "2026-04-22T19:25:48+05:30",
+          "url": "https://github.com/Supaboard-AI/supaboard-frontend/pull/447"
+        },
+        {
+          "repository": "frontend",
+          "sha": "dc8d1a8e3c7863b9c32f750f0f0dcd690ed1c1ab",
+          "merged_at": "2026-04-22T23:42:45+05:30",
+          "url": "https://github.com/Supaboard-AI/supaboard-frontend/pull/448"
+        },
+        {
+          "repository": "frontend",
+          "sha": "f53e4d1d7ab85bdc083a8fdfb928cc09465427df",
+          "merged_at": "2026-04-23T05:19:48+05:30",
+          "url": "https://github.com/Supaboard-AI/supaboard-frontend/pull/449"
+        },
+        {
+          "repository": "frontend",
+          "sha": "c17404abfcb7932a6de294e8adc01a4754c61356",
+          "merged_at": "2026-04-24T04:49:27+05:30",
+          "url": "https://github.com/Supaboard-AI/supaboard-frontend/pull/452"
+        },
+        {
+          "repository": "frontend",
+          "sha": "e7352582e0c0e4b9df251884dbf42e6326af857d",
+          "merged_at": "2026-04-24T14:17:26+05:30",
+          "url": "https://github.com/Supaboard-AI/supaboard-frontend/pull/454"
+        }
+      ],
+      "changes": [
+        {
+          "category": "Improved",
+          "text": "**Tailor a dashboard report.** Choose filters and add instructions when creating a report, so it focuses on the audience and data you need. [Export dashboard reports](/dashboards/how-to/export-dashboard-reports).",
+          "sources": [
+            {
+              "repository": "frontend",
+              "commit": "e3ba65ffa07839ebb550db9ff47da32faf4043f6",
+              "introduced_by": "c17404abfcb7932a6de294e8adc01a4754c61356"
+            }
+          ]
+        },
+        {
+          "category": "Improved",
+          "text": "**Take your results with you.** Export a chart as a PNG image or a table as a CSV file for use outside Supaboard.",
+          "sources": [
+            {
+              "repository": "frontend",
+              "commit": "4c9617039447b67729545c158e08c6f102899ece",
+              "introduced_by": "2dd43a510d20b15dcbc7b31787dd3d7753b9b96c"
+            },
+            {
+              "repository": "frontend",
+              "commit": "e550975202137a1ba0548238844b2ff3e779fe13",
+              "introduced_by": "2dd43a510d20b15dcbc7b31787dd3d7753b9b96c"
+            }
+          ]
+        },
+        {
+          "category": "Improved",
+          "text": "**Explore the data behind a result.** Dashboard filters now carry into drill-down views, and source labels help you see where the records came from. [Explore dashboard data](/dashboards/how-to/explore-dashboard-data).",
+          "sources": [
+            {
+              "repository": "frontend",
+              "commit": "411677c305ac45c6e9a990f3bc4ac4a93c9dc2a6",
+              "introduced_by": "c17404abfcb7932a6de294e8adc01a4754c61356"
+            },
+            {
+              "repository": "frontend",
+              "commit": "f1f9267e5420ff84eeb275046422a5f262c5b892",
+              "introduced_by": "5cca77178d01cfe3ae72f06e1ea79aea5bf788e7"
+            }
+          ]
+        },
+        {
+          "category": "Improved",
+          "text": "**Choose where an embedded dashboard opens.** Set its starting page and hide the page selector when viewers only need that view. [Embed a dashboard](/dashboards/embedding/overview).",
+          "sources": [
+            {
+              "repository": "frontend",
+              "commit": "aea81dec83872bdc5bad048bc2efa70d1c953a6d",
+              "introduced_by": "ea0ee91e9de7a96bdb6dd8d490e73921fb79fee1"
+            }
+          ]
+        },
+        {
+          "category": "Fixed",
+          "text": "Chart axis edits now appear in the widget, and undoing or canceling dashboard edits restores the expected state.",
+          "sources": [
+            {
+              "repository": "frontend",
+              "commit": "a8121c7c49a083594cb373d0dfc6552bc1d0345b",
+              "introduced_by": "266b0c1163df79a646a8a64ec96ab533440eb11d"
+            },
+            {
+              "repository": "frontend",
+              "commit": "c924186858cb334606bd3d2d34b7a1b31cff36ca",
+              "introduced_by": "c5d989120183ba527564b37a76e06a98eeb4f7fe"
+            }
+          ]
+        },
+        {
+          "category": "Fixed",
+          "text": "A new conversation appears in your chat list after its first message.",
+          "sources": [
+            {
+              "repository": "frontend",
+              "commit": "d1430f6a339d2401654e72db89bfbfb6b98dd507",
+              "introduced_by": "c17404abfcb7932a6de294e8adc01a4754c61356"
+            }
+          ]
+        }
+      ],
+      "legacy_fragments": [
+        "reports-and-exports",
+        "dashboards",
+        "drill-downs-and-data-exploration",
+        "automations",
+        "search-and-conversations",
+        "database-connectivity",
+        "fixes",
+        "onboarding"
+      ]
+    },
+    {
+      "page": "release-notes/2026/05-08",
+      "from": "2026-04-25",
+      "through": "2026-05-08",
+      "production_merges": [
+        {
+          "repository": "frontend",
+          "sha": "3acf6d1a6f06eb6225bb25fe6654162d68f83c74",
+          "merged_at": "2026-04-25T02:23:58+05:30",
+          "url": "https://github.com/Supaboard-AI/supaboard-frontend/pull/457"
+        },
+        {
+          "repository": "frontend",
+          "sha": "92bb7a8b55c8d1b2c2d2b20cf939879c97dc7433",
+          "merged_at": "2026-04-27T14:20:28+05:30",
+          "url": "https://github.com/Supaboard-AI/supaboard-frontend/pull/460"
+        },
+        {
+          "repository": "frontend",
+          "sha": "50a83070653df0cf6f61c43ac5a114c07e6cf3c0",
+          "merged_at": "2026-04-27T18:32:22+05:30",
+          "url": "https://github.com/Supaboard-AI/supaboard-frontend/pull/462"
+        },
+        {
+          "repository": "frontend",
+          "sha": "de3735a00e85bcd840561304e363c46f90b4920b",
+          "merged_at": "2026-04-27T19:00:42+05:30",
+          "url": "https://github.com/Supaboard-AI/supaboard-frontend/pull/464"
+        },
+        {
+          "repository": "frontend",
+          "sha": "14b706895efbb358d3b4b9b917df87be2d10f994",
+          "merged_at": "2026-04-27T19:46:11+05:30",
+          "url": "https://github.com/Supaboard-AI/supaboard-frontend/pull/466"
+        },
+        {
+          "repository": "frontend",
+          "sha": "f092a22e5724b329232ea007002248598e9008f8",
+          "merged_at": "2026-04-27T21:34:30+05:30",
+          "url": "https://github.com/Supaboard-AI/supaboard-frontend/pull/468"
+        },
+        {
+          "repository": "frontend",
+          "sha": "ce793ebd608ac580ea1bfe8199801e0954d6969a",
+          "merged_at": "2026-04-28T17:04:11+05:30",
+          "url": "https://github.com/Supaboard-AI/supaboard-frontend/pull/470"
+        },
+        {
+          "repository": "frontend",
+          "sha": "96c053a5297f2517c1fbf1dcaba57e678cd9da2c",
+          "merged_at": "2026-04-28T20:36:59+05:30",
+          "url": "https://github.com/Supaboard-AI/supaboard-frontend/pull/472"
+        },
+        {
+          "repository": "frontend",
+          "sha": "1b8291601c9aad016d7976fe9d6dce715a828c15",
+          "merged_at": "2026-04-30T23:41:23+05:30",
+          "url": "https://github.com/Supaboard-AI/supaboard-frontend/pull/477"
+        },
+        {
+          "repository": "frontend",
+          "sha": "fa4bcd591e17c730df840afce03493a612b9c150",
+          "merged_at": "2026-05-02T22:08:03+05:30",
+          "url": "https://github.com/Supaboard-AI/supaboard-frontend/pull/482"
+        },
+        {
+          "repository": "frontend",
+          "sha": "e1b4200c7fb872841d5c18fce78108397bb21e42",
+          "merged_at": "2026-05-04T21:02:49+05:30",
+          "url": "https://github.com/Supaboard-AI/supaboard-frontend/pull/486"
+        },
+        {
+          "repository": "frontend",
+          "sha": "a3a2a44281462bbfd66409d2b78ddf76bdcd6bf4",
+          "merged_at": "2026-05-08T08:39:10+05:30",
+          "url": "https://github.com/Supaboard-AI/supaboard-frontend/pull/494"
+        },
+        {
+          "repository": "frontend",
+          "sha": "afa741281d2eede73f43961371466a0492e1daf4",
+          "merged_at": "2026-05-08T12:50:26+05:30",
+          "url": "https://github.com/Supaboard-AI/supaboard-frontend/pull/496"
+        },
+        {
+          "repository": "frontend",
+          "sha": "e96d7c7fef16c77b063b97f82f6c57b0dafb00ac",
+          "merged_at": "2026-05-08T17:13:29+05:30",
+          "url": "https://github.com/Supaboard-AI/supaboard-frontend/pull/498"
+        },
+        {
+          "repository": "frontend",
+          "sha": "237ec7f57a973218d1f9013570580151e9d53e3e",
+          "merged_at": "2026-05-08T20:15:55+05:30",
+          "url": "https://github.com/Supaboard-AI/supaboard-frontend/pull/501"
+        },
+        {
+          "repository": "backend",
+          "sha": "91b7683bbf6b478a9c66f73b3d7ece6af30798c6",
+          "merged_at": "2026-05-08T20:16:37+05:30",
+          "url": "https://github.com/Supaboard-AI/go-supaboard-backend/pull/56"
+        }
+      ],
+      "changes": [
+        {
+          "category": "Improved",
+          "text": "**Review a seat charge before changing access.** A charge preview helps you understand the cost before promoting a workspace member. Invoices appear newest first. [Manage workspace access](/workspace/invite-and-manage-access).",
+          "sources": [
+            {
+              "repository": "frontend",
+              "commit": "baacc453dbe8be25a07ae327156d6c819af8a459",
+              "introduced_by": "a3a2a44281462bbfd66409d2b78ddf76bdcd6bf4"
+            },
+            {
+              "repository": "frontend",
+              "commit": "9172d57fcb8269c048a0cbad088c411b1a57ff2e",
+              "introduced_by": "a3a2a44281462bbfd66409d2b78ddf76bdcd6bf4"
+            }
+          ]
+        },
+        {
+          "category": "Improved",
+          "text": "**Paste an attachment into a question.** Add supporting material directly to your message without starting from the upload picker.",
+          "sources": [
+            {
+              "repository": "frontend",
+              "commit": "295db023c99a04cb9fb4777938b772f8d86d51bb",
+              "introduced_by": "ce793ebd608ac580ea1bfe8199801e0954d6969a"
+            }
+          ]
+        },
+        {
+          "category": "Fixed",
+          "text": "Database connection forms handle passwords containing special characters more reliably, including PostgreSQL, MySQL, and Snowflake connections. [Connect a data source](/data-sources/connect-a-data-source).",
+          "sources": [
+            {
+              "repository": "frontend",
+              "commit": "cec892f58dabd8d824bbd6ddefb6b062adda27b2",
+              "introduced_by": "1b8291601c9aad016d7976fe9d6dce715a828c15"
+            },
+            {
+              "repository": "frontend",
+              "commit": "a27640a7f08c1703acc8402204867060f1d681f4",
+              "introduced_by": "1b8291601c9aad016d7976fe9d6dce715a828c15"
+            },
+            {
+              "repository": "frontend",
+              "commit": "07bc060889569a7950cd0047cc1eaf40cf1f9b95",
+              "introduced_by": "1b8291601c9aad016d7976fe9d6dce715a828c15"
+            }
+          ]
+        },
+        {
+          "category": "Fixed",
+          "text": "Filters carry through more reliably when opening underlying records from tables and KPI widgets.",
+          "sources": [
+            {
+              "repository": "backend",
+              "commit": "de341051077165e57df26077b81bdda857b46e18",
+              "introduced_by": "91b7683bbf6b478a9c66f73b3d7ece6af30798c6"
+            },
+            {
+              "repository": "backend",
+              "commit": "2531f6044205723d60d4dd094206f1d030d377a7",
+              "introduced_by": "91b7683bbf6b478a9c66f73b3d7ece6af30798c6"
+            }
+          ]
+        },
+        {
+          "category": "Fixed",
+          "text": "Invoices that previously failed to open can now be viewed.",
+          "sources": [
+            {
+              "repository": "frontend",
+              "commit": "f650fe044d8f84c7aef31456b0c977719bf74cc6",
+              "introduced_by": "afa741281d2eede73f43961371466a0492e1daf4"
+            }
+          ]
+        }
+      ],
+      "legacy_fragments": [
+        "performance-buff",
+        "sql-editor",
+        "major-autocomplete-upgrade",
+        "new-themes",
+        "partial-filters",
+        "dashboard"
+      ]
+    },
+    {
+      "page": "release-notes/2026/05-22",
+      "from": "2026-05-09",
+      "through": "2026-05-22",
+      "production_merges": [
+        {
+          "repository": "frontend",
+          "sha": "7f703e313917748fc1445b99fc9739db01cc3b9b",
+          "merged_at": "2026-05-12T12:05:28+05:30",
+          "url": "https://github.com/Supaboard-AI/supaboard-frontend/pull/502"
+        },
+        {
+          "repository": "frontend",
+          "sha": "6f4d9a3065c7c9933b754ecca856d09f1a857575",
+          "merged_at": "2026-05-12T15:51:14+05:30",
+          "url": "https://github.com/Supaboard-AI/supaboard-frontend/pull/507"
+        },
+        {
+          "repository": "frontend",
+          "sha": "558a5f271c878932d550cb84d5f8999b92ee2b69",
+          "merged_at": "2026-05-13T14:40:15+05:30",
+          "url": "https://github.com/Supaboard-AI/supaboard-frontend/pull/511"
+        },
+        {
+          "repository": "frontend",
+          "sha": "fdf4d59efa428c1fe8c3865af8f4b3dcc248e043",
+          "merged_at": "2026-05-14T13:18:14+05:30",
+          "url": "https://github.com/Supaboard-AI/supaboard-frontend/pull/514"
+        },
+        {
+          "repository": "frontend",
+          "sha": "9371ed6d783afe437bd4039cdd7291dd89e8ceb8",
+          "merged_at": "2026-05-14T14:14:19+05:30",
+          "url": "https://github.com/Supaboard-AI/supaboard-frontend/pull/515"
+        },
+        {
+          "repository": "frontend",
+          "sha": "497c8d12f26d9fbe735572841f47b525442bc048",
+          "merged_at": "2026-05-14T14:21:27+05:30",
+          "url": "https://github.com/Supaboard-AI/supaboard-frontend/pull/516"
+        },
+        {
+          "repository": "frontend",
+          "sha": "3c862f6213a62609cd610d6be105d1b81a66a151",
+          "merged_at": "2026-05-14T15:41:17+05:30",
+          "url": "https://github.com/Supaboard-AI/supaboard-frontend/pull/517"
+        },
+        {
+          "repository": "frontend",
+          "sha": "4b4703f74223ee37672cf1cfba2b13a530a57731",
+          "merged_at": "2026-05-22T19:31:10+05:30",
+          "url": "https://github.com/Supaboard-AI/supaboard-frontend/pull/552"
+        },
+        {
+          "repository": "frontend",
+          "sha": "a147f5a8473cf6c407493677318b9b1e5272612b",
+          "merged_at": "2026-05-22T20:21:35+05:30",
+          "url": "https://github.com/Supaboard-AI/supaboard-frontend/pull/555"
+        },
+        {
+          "repository": "frontend",
+          "sha": "5e723131e5f81caeaea2227d8a02f6b83c8093c5",
+          "merged_at": "2026-05-22T23:19:59+05:30",
+          "url": "https://github.com/Supaboard-AI/supaboard-frontend/pull/557"
+        },
+        {
+          "repository": "backend",
+          "sha": "1b66e717c1b190803e9b1840027b217fddfb3f7c",
+          "merged_at": "2026-05-12T12:06:25+05:30",
+          "url": "https://github.com/Supaboard-AI/go-supaboard-backend/pull/61"
+        },
+        {
+          "repository": "backend",
+          "sha": "99949542cbdabfd6fd0d6590bde4c1ccec829f3d",
+          "merged_at": "2026-05-12T13:39:59+05:30",
+          "url": "https://github.com/Supaboard-AI/go-supaboard-backend/pull/69"
+        },
+        {
+          "repository": "backend",
+          "sha": "973195acfa550b7b749bd398f042bb225fdf4290",
+          "merged_at": "2026-05-12T14:16:39+05:30",
+          "url": "https://github.com/Supaboard-AI/go-supaboard-backend/commit/973195acfa550b7b749bd398f042bb225fdf4290"
+        },
+        {
+          "repository": "backend",
+          "sha": "236425c24fbecdaa9398d375ca681ac8572ab00c",
+          "merged_at": "2026-05-13T13:40:22+05:30",
+          "url": "https://github.com/Supaboard-AI/go-supaboard-backend/pull/72"
+        },
+        {
+          "repository": "backend",
+          "sha": "a24e92a509e2aea988256b8350795f20b93ba5ab",
+          "merged_at": "2026-05-14T18:22:00+05:30",
+          "url": "https://github.com/Supaboard-AI/go-supaboard-backend/commit/a24e92a509e2aea988256b8350795f20b93ba5ab"
+        },
+        {
+          "repository": "backend",
+          "sha": "87096cfaa77176a3e9733a7924f54723a7ece416",
+          "merged_at": "2026-05-20T15:14:38+05:30",
+          "url": "https://github.com/Supaboard-AI/go-supaboard-backend/pull/86"
+        },
+        {
+          "repository": "backend",
+          "sha": "2164bbef1280a50906f29b2b06ef34bdbcbb6f4d",
+          "merged_at": "2026-05-22T19:21:06+05:30",
+          "url": "https://github.com/Supaboard-AI/go-supaboard-backend/commit/2164bbef1280a50906f29b2b06ef34bdbcbb6f4d"
+        },
+        {
+          "repository": "backend",
+          "sha": "57e29a1d3eb805872d8ccc95f28c66eca40dcd4b",
+          "merged_at": "2026-05-22T23:51:11+05:30",
+          "url": "https://github.com/Supaboard-AI/go-supaboard-backend/pull/116"
+        }
+      ],
+      "changes": [
+        {
+          "category": "New",
+          "text": "**Build a dashboard from a request.** Describe what you want to see and review the proposed plan before the dashboard is generated. The plan carries its title and summary into the dashboard. [Create a dashboard](/dashboards/how-to/create-a-dashboard).",
+          "sources": [
+            {
+              "repository": "frontend",
+              "commit": "a5359e8518b1d35fcfad791595d11c23af26b887",
+              "introduced_by": "4b4703f74223ee37672cf1cfba2b13a530a57731"
+            },
+            {
+              "repository": "frontend",
+              "commit": "41531c7787a6de450513e5d46a514ce1c628e17d",
+              "introduced_by": "4b4703f74223ee37672cf1cfba2b13a530a57731"
+            },
+            {
+              "repository": "frontend",
+              "commit": "f9ba94c3d771ce5f0e1ed3ee139ed5a5e5580551",
+              "introduced_by": "4b4703f74223ee37672cf1cfba2b13a530a57731"
+            }
+          ]
+        },
+        {
+          "category": "New",
+          "text": "**Find actions with a keyboard shortcut.** Open the command palette with **⌘K** on Mac or **Ctrl+K** on Windows to find pages and common actions.",
+          "sources": [
+            {
+              "repository": "frontend",
+              "commit": "73ae2a2af49d8efc08abf992b91547c3d89281e9",
+              "introduced_by": "4b4703f74223ee37672cf1cfba2b13a530a57731"
+            },
+            {
+              "repository": "frontend",
+              "commit": "3a93e13b78433e683fa050d1c60cac013ae7219e",
+              "introduced_by": "4b4703f74223ee37672cf1cfba2b13a530a57731"
+            }
+          ]
+        },
+        {
+          "category": "New",
+          "text": "**Share a conversation or a specific answer.** Sharing controls give teammates a link to the chat, with message links opening at the relevant answer.",
+          "sources": [
+            {
+              "repository": "frontend",
+              "commit": "96be724fe69e264715bccc401e41dbf979d3c951",
+              "introduced_by": "4b4703f74223ee37672cf1cfba2b13a530a57731"
+            },
+            {
+              "repository": "frontend",
+              "commit": "d586576aec38c5ab313a49d304191a615a98fec4",
+              "introduced_by": "4b4703f74223ee37672cf1cfba2b13a530a57731"
+            }
+          ]
+        },
+        {
+          "category": "Improved",
+          "text": "**Work with PDFs and presentations in context.** Preview these files inside Supaboard. AI chat can read their text and retain previously attached files for follow-up questions.",
+          "sources": [
+            {
+              "repository": "frontend",
+              "commit": "6399dee0e3eb80d7a85183dc7aeb2230c539909e",
+              "introduced_by": "4b4703f74223ee37672cf1cfba2b13a530a57731"
+            },
+            {
+              "repository": "frontend",
+              "commit": "9fb531ff60c8b9258eaf032d2828e2ea3d66964d",
+              "introduced_by": "4b4703f74223ee37672cf1cfba2b13a530a57731"
+            },
+            {
+              "repository": "backend",
+              "commit": "ce531800e8d7c749c1c4ac0de2b63109468bf64b",
+              "introduced_by": "2164bbef1280a50906f29b2b06ef34bdbcbb6f4d"
+            },
+            {
+              "repository": "backend",
+              "commit": "191f80f72c190b264bd6bb6c27c1d14524de285f",
+              "introduced_by": "2164bbef1280a50906f29b2b06ef34bdbcbb6f4d"
+            },
+            {
+              "repository": "backend",
+              "commit": "13617a1e8b435e64b4f86408979398bb4431b7fd",
+              "introduced_by": "2164bbef1280a50906f29b2b06ef34bdbcbb6f4d"
+            }
+          ]
+        },
+        {
+          "category": "Improved",
+          "text": "**Keep large pivot tables readable.** Group by a second field and show the top results with the remainder collected into “Other.” [Table settings](/dashboards/widgets/table-widget).",
+          "sources": [
+            {
+              "repository": "backend",
+              "commit": "bc26c327df45878d750bdceeda4391349bf001e8",
+              "introduced_by": "2164bbef1280a50906f29b2b06ef34bdbcbb6f4d"
+            }
+          ]
+        },
+        {
+          "category": "Improved",
+          "text": "**Ask how to use Supaboard.** AI chat can consult the documentation to help with product questions.",
+          "sources": [
+            {
+              "repository": "backend",
+              "commit": "c8e55452b6135393ae7f0ddec783946ceac32f0d",
+              "introduced_by": "2164bbef1280a50906f29b2b06ef34bdbcbb6f4d"
+            }
+          ]
+        },
+        {
+          "category": "Fixed",
+          "text": "Inviting someone who already has a Supaboard account no longer fails in the existing-user invitation flow.",
+          "sources": [
+            {
+              "repository": "frontend",
+              "commit": "05e40ac8a8d06ac18e6dfb37220bdd07a8f87329",
+              "introduced_by": "4b4703f74223ee37672cf1cfba2b13a530a57731"
+            }
+          ]
+        }
+      ],
+      "legacy_fragments": [
+        "what’s-new",
+        "command-palette-⌘k-/-ctrl+k",
+        "ai-powered-dashboard-generation",
+        "file-preview-widgets-pdf-and-pptx",
+        "conversation-sharing",
+        "voice-input-in-dashboards",
+        "tab-autocomplete-in-the-code-editor",
+        "multi-select-in-ask-user-questions",
+        "dashboard-page-management",
+        "agents",
+        "agent-tuning-assistant",
+        "agent-wide-evaluator",
+        "long-term-agent-memory",
+        "setup-questionnaire",
+        "other-agent-improvements",
+        "search-and-ask-ai",
+        "multimodal-attachments",
+        "pdf-and-pptx-text-extraction",
+        "attachment-caching",
+        "conversation-attachments-persist",
+        "platform-how-to-help",
+        "other-search-improvements",
+        "query-builder",
+        "conversational-chat-or-fix-assistant",
+        "cursor-aware-tab-autocomplete",
+        "other-query-builder-fixes",
+        "charts-and-data",
+        "pivot-overhaul",
+        "column-order-preserved-end-to-end",
+        "smarter-column-value-suggestions",
+        "other-chart-fixes",
+        "billing-and-roles",
+        "dashboards-and-demos",
+        "sidebar",
+        "platform-and-performance",
+        "bug-fixes"
+      ]
+    },
+    {
+      "page": "release-notes/2026/05-23",
+      "from": "2026-05-23",
+      "through": "2026-05-23",
+      "production_merges": [
+        {
+          "repository": "backend",
+          "sha": "51c94848eaaddc4d11870fb1620e7c47ce4dcd10",
+          "merged_at": "2026-05-23T01:41:55+05:30",
+          "url": "https://github.com/Supaboard-AI/go-supaboard-backend/pull/118"
+        },
+        {
+          "repository": "backend",
+          "sha": "c0b34abf573702103d348da869a8377db130903f",
+          "merged_at": "2026-05-23T02:29:58+05:30",
+          "url": "https://github.com/Supaboard-AI/go-supaboard-backend/pull/121"
+        }
+      ],
+      "changes": [
+        {
+          "category": "Fixed",
+          "text": "**Start a new query without an empty-state error.** The query editor initializes correctly before you begin editing. [Create a query](/query-bench/create-and-save-a-query).",
+          "sources": [
+            {
+              "repository": "backend",
+              "commit": "abc53d6a3503fd77bfd53d163438d66de9ff4320",
+              "introduced_by": "51c94848eaaddc4d11870fb1620e7c47ce4dcd10"
+            }
+          ]
+        },
+        {
+          "category": "Fixed",
+          "text": "**Run older saved analyses against the right connection.** Analyses using an earlier saved-query format can resolve their data source correctly.",
+          "sources": [
+            {
+              "repository": "backend",
+              "commit": "907c8803862c5814b4ec1066f7093df1f1573ee2",
+              "introduced_by": "c0b34abf573702103d348da869a8377db130903f"
+            }
+          ]
+        }
+      ],
+      "legacy_fragments": [
+        "knowledge-base-interactive-graph-view",
+        "ask-ai-more-accurate-answers-faster-exports",
+        "automations",
+        "billing-&-onboarding",
+        "other-fixes"
+      ]
+    },
+    {
+      "page": "release-notes/2026/05-30",
+      "from": "2026-05-24",
+      "through": "2026-05-30",
+      "production_merges": [
+        {
+          "repository": "frontend",
+          "sha": "f6088720d702d6058a82c6b2f42d0a451ddb7b6f",
+          "merged_at": "2026-05-24T17:16:51+05:30",
+          "url": "https://github.com/Supaboard-AI/supaboard-frontend/pull/559"
+        },
+        {
+          "repository": "frontend",
+          "sha": "a3e77b23ce436ea759848523c65e4bdaee4cbbfb",
+          "merged_at": "2026-05-25T12:29:16+05:30",
+          "url": "https://github.com/Supaboard-AI/supaboard-frontend/pull/562"
+        },
+        {
+          "repository": "frontend",
+          "sha": "134d77a78d55aaf30891d52039d69d9e691018ec",
+          "merged_at": "2026-05-25T16:12:52+05:30",
+          "url": "https://github.com/Supaboard-AI/supaboard-frontend/pull/564"
+        },
+        {
+          "repository": "frontend",
+          "sha": "ed2f8cf7ff5fecd82db35b2415bffcc61250a01d",
+          "merged_at": "2026-05-26T18:50:00+05:30",
+          "url": "https://github.com/Supaboard-AI/supaboard-frontend/pull/567"
+        },
+        {
+          "repository": "frontend",
+          "sha": "4bd2dde6cc8462c76aef7fe4c8f6131b60d8c608",
+          "merged_at": "2026-05-27T15:00:33+05:30",
+          "url": "https://github.com/Supaboard-AI/supaboard-frontend/pull/568"
+        },
+        {
+          "repository": "backend",
+          "sha": "e63e901f77c40a5955f93be238b3d26079a59bb2",
+          "merged_at": "2026-05-25T02:13:24+05:30",
+          "url": "https://github.com/Supaboard-AI/go-supaboard-backend/pull/126"
+        },
+        {
+          "repository": "backend",
+          "sha": "e1aa968855fc5c56bf19d7b487adc8fce4c75008",
+          "merged_at": "2026-05-25T14:59:42+05:30",
+          "url": "https://github.com/Supaboard-AI/go-supaboard-backend/pull/129"
+        },
+        {
+          "repository": "backend",
+          "sha": "2bce6811a873d8b08712ed8a7c0b8ed1036296eb",
+          "merged_at": "2026-05-25T21:04:40+05:30",
+          "url": "https://github.com/Supaboard-AI/go-supaboard-backend/pull/134"
+        },
+        {
+          "repository": "backend",
+          "sha": "2cd6166a248bfdd3953d89872f4758c9e6522ebf",
+          "merged_at": "2026-05-26T18:50:25+05:30",
+          "url": "https://github.com/Supaboard-AI/go-supaboard-backend/pull/137"
+        },
+        {
+          "repository": "backend",
+          "sha": "d053f544e091c2f9813f892afe72f9c34ad8774f",
+          "merged_at": "2026-05-29T15:50:54+05:30",
+          "url": "https://github.com/Supaboard-AI/go-supaboard-backend/pull/140"
+        }
+      ],
+      "changes": [
+        {
+          "category": "New",
+          "text": "**Explore an agent’s knowledge visually.** An interactive graph shows how items in its knowledge base relate to each other. [Configure an agent](/agents/overview).",
+          "sources": [
+            {
+              "repository": "frontend",
+              "commit": "da4d855ff0b4a4066824ec8c4769060b2b4a0d6c",
+              "introduced_by": "f6088720d702d6058a82c6b2f42d0a451ddb7b6f"
+            }
+          ]
+        },
+        {
+          "category": "Improved",
+          "text": "**Read clearer AI summaries.** Answers use cleaner prose, and the assistant can recover from more situations where a clarification previously led to a dead end.",
+          "sources": [
+            {
+              "repository": "backend",
+              "commit": "797215c090b74d480e5e3ddfcefac38402faa3c9",
+              "introduced_by": "e1aa968855fc5c56bf19d7b487adc8fce4c75008"
+            },
+            {
+              "repository": "backend",
+              "commit": "3a376821684bf1258ed88a0cc9197f56e598caa0",
+              "introduced_by": "2bce6811a873d8b08712ed8a7c0b8ed1036296eb"
+            }
+          ]
+        },
+        {
+          "category": "Fixed",
+          "text": "AI-generated queries identify database tables by their actual names, reducing failures caused by an incorrect table reference.",
+          "sources": [
+            {
+              "repository": "backend",
+              "commit": "4132a3adf5c66eb9d41713142dd0b29645a9e1fe",
+              "introduced_by": "e63e901f77c40a5955f93be238b3d26079a59bb2"
+            }
+          ]
+        },
+        {
+          "category": "Fixed",
+          "text": "Fivetran setup no longer creates duplicate data sources in the affected connection flow. [Connect with Fivetran](/data-sources/connectors/fivetran).",
+          "sources": [
+            {
+              "repository": "backend",
+              "commit": "9b97ed71a01ffc02b3f77a3bea6c6db0580e08a0",
+              "introduced_by": "e1aa968855fc5c56bf19d7b487adc8fce4c75008"
+            }
+          ]
+        },
+        {
+          "category": "Fixed",
+          "text": "Connection setup accepts display names containing spaces, and upgrade prompts no longer appear repeatedly in the connector flow.",
+          "sources": [
+            {
+              "repository": "frontend",
+              "commit": "f4b5cf4d605d9041e72e42e9532504d9f523bbae",
+              "introduced_by": "a3e77b23ce436ea759848523c65e4bdaee4cbbfb"
+            },
+            {
+              "repository": "frontend",
+              "commit": "e9a8f283db7e62224e9c751aea1ca13e8f3d4223",
+              "introduced_by": "ed2f8cf7ff5fecd82db35b2415bffcc61250a01d"
+            }
+          ]
+        }
+      ],
+      "legacy_fragments": [
+        "automation-—-new-capabilities-&-reliability",
+        "ask-questions-over-a-dashboard",
+        "more-flexible-data-passing-between-steps",
+        "smarter-email-step",
+        "more-reliable-test-runs",
+        "bug-fixes",
+        "mini-board",
+        "search-&-ai-answers",
+        "dashboards",
+        "billing"
+      ]
+    },
+    {
+      "page": "release-notes/2026/06-06",
+      "from": "2026-05-31",
+      "through": "2026-06-06",
+      "production_merges": [
+        {
+          "repository": "frontend",
+          "sha": "4895e7386ffec6576c3bc9d18c44dc0cafeab932",
+          "merged_at": "2026-05-31T17:57:38+05:30",
+          "url": "https://github.com/Supaboard-AI/supaboard-frontend/pull/570"
+        },
+        {
+          "repository": "frontend",
+          "sha": "fbbfe1a8c7f7df34c73dc6fe7521e2428284652e",
+          "merged_at": "2026-06-03T20:07:28+05:30",
+          "url": "https://github.com/Supaboard-AI/supaboard-frontend/pull/574"
+        },
+        {
+          "repository": "backend",
+          "sha": "1e26d8f4dc30c4e24a097b69b89c74fce8e21d3f",
+          "merged_at": "2026-06-01T00:36:06+05:30",
+          "url": "https://github.com/Supaboard-AI/go-supaboard-backend/pull/143"
+        },
+        {
+          "repository": "backend",
+          "sha": "f4be0053c248300e2a3ad9a93e412d9bc24c834e",
+          "merged_at": "2026-06-01T00:44:12+05:30",
+          "url": "https://github.com/Supaboard-AI/go-supaboard-backend/pull/144"
+        }
+      ],
+      "changes": [
+        {
+          "category": "Improved",
+          "text": "**Keep required filters in an analysis.** Additional checks help the assistant retain the filters from a verified query when building on it.",
+          "sources": [
+            {
+              "repository": "backend",
+              "commit": "bab016fc997f1aaa2ac45371e32f92a315589ca2",
+              "introduced_by": "1e26d8f4dc30c4e24a097b69b89c74fce8e21d3f"
+            },
+            {
+              "repository": "backend",
+              "commit": "01d0d963c3790434430cfad16aee62ecf5b5dd07",
+              "introduced_by": "f4be0053c248300e2a3ad9a93e412d9bc24c834e"
+            }
+          ]
+        },
+        {
+          "category": "Fixed",
+          "text": "**Edit table columns with missing values.** Column settings no longer fail when the available value list is missing or empty. [Table settings](/dashboards/widgets/table-widget).",
+          "sources": [
+            {
+              "repository": "frontend",
+              "commit": "56ae267dfc23ade91a3e633dc1acc07a4bdcef29",
+              "introduced_by": "4895e7386ffec6576c3bc9d18c44dc0cafeab932"
+            }
+          ]
+        }
+      ],
+      "legacy_fragments": [
+        "build-automations-by-chatting-with-ai",
+        "conditional-branching-for-automations",
+        "smarter-more-reliable-ask-ai",
+        "dashboard-&-chart-fixes",
+        "database-&-query-builder",
+        "automation-reliability-improvements"
+      ]
+    },
+    {
+      "page": "release-notes/2026/06-13",
+      "from": "2026-06-07",
+      "through": "2026-06-13",
+      "production_merges": [
+        {
+          "repository": "frontend",
+          "sha": "d391de38ece02c338ceba1a554586c701a3c7ad0",
+          "merged_at": "2026-06-08T04:43:32+05:30",
+          "url": "https://github.com/Supaboard-AI/supaboard-frontend/pull/582"
+        },
+        {
+          "repository": "frontend",
+          "sha": "71a73718ed6a7ec2782edfd792c8c076b22a1a17",
+          "merged_at": "2026-06-08T13:53:55+05:30",
+          "url": "https://github.com/Supaboard-AI/supaboard-frontend/pull/584"
+        },
+        {
+          "repository": "frontend",
+          "sha": "0b32e9f874a5aba19f10f055c74757080b256f40",
+          "merged_at": "2026-06-08T15:29:38+05:30",
+          "url": "https://github.com/Supaboard-AI/supaboard-frontend/pull/586"
+        },
+        {
+          "repository": "frontend",
+          "sha": "c4b0a4fd3148d853bfebbb85b5530067567a9634",
+          "merged_at": "2026-06-08T16:52:00+05:30",
+          "url": "https://github.com/Supaboard-AI/supaboard-frontend/pull/588"
+        },
+        {
+          "repository": "frontend",
+          "sha": "018ae54d50b59c4fcd7e7e047c8f3a04635fdbbd",
+          "merged_at": "2026-06-08T19:18:18+05:30",
+          "url": "https://github.com/Supaboard-AI/supaboard-frontend/pull/590"
+        },
+        {
+          "repository": "frontend",
+          "sha": "8e9405b5fe9bc314e16e533d9dce52c259184fb1",
+          "merged_at": "2026-06-09T15:02:07+05:30",
+          "url": "https://github.com/Supaboard-AI/supaboard-frontend/pull/592"
+        },
+        {
+          "repository": "frontend",
+          "sha": "8fc85a8994d46bc31b916b4c98a5066761e7406c",
+          "merged_at": "2026-06-10T16:36:55+05:30",
+          "url": "https://github.com/Supaboard-AI/supaboard-frontend/pull/594"
+        },
+        {
+          "repository": "frontend",
+          "sha": "9545f293ccce2002222155c96e21193d35699e1e",
+          "merged_at": "2026-06-10T20:33:12+05:30",
+          "url": "https://github.com/Supaboard-AI/supaboard-frontend/pull/596"
+        },
+        {
+          "repository": "frontend",
+          "sha": "62545e0b8f92fd891797415efdeedef4d24bf656",
+          "merged_at": "2026-06-10T21:16:00+05:30",
+          "url": "https://github.com/Supaboard-AI/supaboard-frontend/pull/598"
+        },
+        {
+          "repository": "frontend",
+          "sha": "053b2c8cf69d0ba5131f3c0634b0541342e9d6c9",
+          "merged_at": "2026-06-10T21:42:57+05:30",
+          "url": "https://github.com/Supaboard-AI/supaboard-frontend/pull/600"
+        },
+        {
+          "repository": "frontend",
+          "sha": "aa02d2dc3b2aa3c9aa3a2102900ec58e3fe8c09f",
+          "merged_at": "2026-06-10T23:25:33+05:30",
+          "url": "https://github.com/Supaboard-AI/supaboard-frontend/pull/602"
+        },
+        {
+          "repository": "frontend",
+          "sha": "4d9d2c40bfa6a399cde63b9096b3e478761405fb",
+          "merged_at": "2026-06-11T01:40:57+05:30",
+          "url": "https://github.com/Supaboard-AI/supaboard-frontend/pull/604"
+        },
+        {
+          "repository": "frontend",
+          "sha": "dd2a002c1b4add64260a42770137095d68b7110a",
+          "merged_at": "2026-06-11T19:15:30+05:30",
+          "url": "https://github.com/Supaboard-AI/supaboard-frontend/pull/606"
+        },
+        {
+          "repository": "frontend",
+          "sha": "4955c91a59396819339e4de516928f2542ff6681",
+          "merged_at": "2026-06-12T08:34:08-04:00",
+          "url": "https://github.com/Supaboard-AI/supaboard-frontend/pull/614"
+        },
+        {
+          "repository": "frontend",
+          "sha": "7bb46fd8b2a9bb2ac8a2bd7ec118d8d3a9017a0f",
+          "merged_at": "2026-06-12T08:49:10-04:00",
+          "url": "https://github.com/Supaboard-AI/supaboard-frontend/pull/616"
+        },
+        {
+          "repository": "frontend",
+          "sha": "9eb76d409b501981eaa12f661a0aefa23bd2da19",
+          "merged_at": "2026-06-12T13:13:13+05:30",
+          "url": "https://github.com/Supaboard-AI/supaboard-frontend/pull/608"
+        },
+        {
+          "repository": "frontend",
+          "sha": "6396354f8fa223ff456335afb5d014e0724b75a8",
+          "merged_at": "2026-06-12T16:01:38+05:30",
+          "url": "https://github.com/Supaboard-AI/supaboard-frontend/pull/610"
+        },
+        {
+          "repository": "frontend",
+          "sha": "31b51cc575d555a5a3e59d243ec336e40b3d012b",
+          "merged_at": "2026-06-12T16:51:33+05:30",
+          "url": "https://github.com/Supaboard-AI/supaboard-frontend/pull/612"
+        },
+        {
+          "repository": "backend",
+          "sha": "bc783a1bf02d4e4e232f221b9b9a754945001373",
+          "merged_at": "2026-06-08T04:47:05+05:30",
+          "url": "https://github.com/Supaboard-AI/go-supaboard-backend/pull/155"
+        },
+        {
+          "repository": "backend",
+          "sha": "05a5afde3500f56d9dbcc95cf0f64e0e72c5b6cd",
+          "merged_at": "2026-06-10T20:16:35+05:30",
+          "url": "https://github.com/Supaboard-AI/go-supaboard-backend/pull/162"
+        },
+        {
+          "repository": "backend",
+          "sha": "047c1cc13ea65a2acf01055078968f2ccc06254d",
+          "merged_at": "2026-06-12T00:27:53+05:30",
+          "url": "https://github.com/Supaboard-AI/go-supaboard-backend/pull/167"
+        },
+        {
+          "repository": "backend",
+          "sha": "482b1798a8ac8f296529560f7b4e4fdc280ff8a9",
+          "merged_at": "2026-06-12T15:48:37+05:30",
+          "url": "https://github.com/Supaboard-AI/go-supaboard-backend/pull/170"
+        },
+        {
+          "repository": "backend",
+          "sha": "7bcaa2aed9af6a4ea314d339739db00427dbe491",
+          "merged_at": "2026-06-12T17:29:11+05:30",
+          "url": "https://github.com/Supaboard-AI/go-supaboard-backend/pull/173"
+        }
+      ],
+      "changes": [
+        {
+          "category": "New",
+          "text": "**Let an automation ask about a dashboard.** Add a step that uses the dashboard to answer a question. [Create an automation](/automations/create-an-automation).",
+          "sources": [
+            {
+              "repository": "backend",
+              "commit": "08e6ab107318a9d2d018bcccadf4866c33e13ed3",
+              "introduced_by": "bc783a1bf02d4e4e232f221b9b9a754945001373"
+            }
+          ]
+        },
+        {
+          "category": "New",
+          "text": "**Choose a path based on a result.** Conditional branches let an automation take different next steps when its conditions are met.",
+          "sources": [
+            {
+              "repository": "backend",
+              "commit": "1bdf2439b799fb3fec1d9a58540e0846c18c1915",
+              "introduced_by": "047c1cc13ea65a2acf01055078968f2ccc06254d"
+            }
+          ]
+        },
+        {
+          "category": "Improved",
+          "text": "**Edit with fewer interruptions.** Automation changes save automatically, and you can insert a new step between existing steps.",
+          "sources": [
+            {
+              "repository": "frontend",
+              "commit": "a87d49c7c96717683f465e9c406c512623d31602",
+              "introduced_by": "d391de38ece02c338ceba1a554586c701a3c7ad0"
+            }
+          ]
+        },
+        {
+          "category": "Improved",
+          "text": "**Pass more than one value between steps.** Use a whole column or multiple rows from an earlier result. Choose workspace members more easily when setting up an email step.",
+          "sources": [
+            {
+              "repository": "backend",
+              "commit": "b3454461374c4750f47a9ed1cfdb4ab50b03a099",
+              "introduced_by": "bc783a1bf02d4e4e232f221b9b9a754945001373"
+            },
+            {
+              "repository": "backend",
+              "commit": "9ad1d30969b6e9656fd84dc91ec769c187fb76ad",
+              "introduced_by": "bc783a1bf02d4e4e232f221b9b9a754945001373"
+            }
+          ]
+        },
+        {
+          "category": "Improved",
+          "text": "**Test a step with the inputs it needs.** Required earlier steps run before the selected test step.",
+          "sources": [
+            {
+              "repository": "backend",
+              "commit": "007b69020f1b4759e581fae047e3704b78defabe",
+              "introduced_by": "bc783a1bf02d4e4e232f221b9b9a754945001373"
+            }
+          ]
+        },
+        {
+          "category": "Improved",
+          "text": "**Explore more PostgreSQL data.** Materialized views are available alongside your other database tables and views.",
+          "sources": [
+            {
+              "repository": "backend",
+              "commit": "2b87256a17327f292bc10a33d731720052554a0e",
+              "introduced_by": "7bcaa2aed9af6a4ea314d339739db00427dbe491"
+            }
+          ]
+        },
+        {
+          "category": "Fixed",
+          "text": "Scheduled automations avoid duplicate runs in the affected scheduling flow, and deleting an automation also removes its leftover steps.",
+          "sources": [
+            {
+              "repository": "backend",
+              "commit": "bc72a28097ad42ab454dadd63651a960b7190190",
+              "introduced_by": "bc783a1bf02d4e4e232f221b9b9a754945001373"
+            },
+            {
+              "repository": "backend",
+              "commit": "68c004c92a44cdd0de54b26220ec572d33f1d9e6",
+              "introduced_by": "bc783a1bf02d4e4e232f221b9b9a754945001373"
+            }
+          ]
+        },
+        {
+          "category": "Fixed",
+          "text": "Drilling into grouped results respects combined filter conditions more accurately.",
+          "sources": [
+            {
+              "repository": "backend",
+              "commit": "05a5afde3500f56d9dbcc95cf0f64e0e72c5b6cd",
+              "introduced_by": "05a5afde3500f56d9dbcc95cf0f64e0e72c5b6cd"
+            }
+          ]
+        }
+      ],
+      "legacy_fragments": [
+        "reports-pdf-export",
+        "automation-emails-redesigned",
+        "query-builder-improvements",
+        "bug-fixes"
+      ]
+    },
+    {
+      "page": "release-notes/2026/06-20",
+      "from": "2026-06-14",
+      "through": "2026-06-20",
+      "production_merges": [
+        {
+          "repository": "frontend",
+          "sha": "d8ca9ee71ea32fb419a16004eb9bdfc1af1da548",
+          "merged_at": "2026-06-15T21:25:59+05:30",
+          "url": "https://github.com/Supaboard-AI/supaboard-frontend/pull/618"
+        },
+        {
+          "repository": "frontend",
+          "sha": "c3f4c87841389459cadd791da2c451cd070e6f16",
+          "merged_at": "2026-06-16T21:13:47+05:30",
+          "url": "https://github.com/Supaboard-AI/supaboard-frontend/pull/620"
+        },
+        {
+          "repository": "frontend",
+          "sha": "60ddac38fed04d99cf6484e04459995b1f861aee",
+          "merged_at": "2026-06-16T21:20:00+05:30",
+          "url": "https://github.com/Supaboard-AI/supaboard-frontend/pull/622"
+        },
+        {
+          "repository": "frontend",
+          "sha": "ed2e41585cbee73ef0cc4c330d5777326220e71b",
+          "merged_at": "2026-06-16T22:51:25+05:30",
+          "url": "https://github.com/Supaboard-AI/supaboard-frontend/pull/624"
+        },
+        {
+          "repository": "frontend",
+          "sha": "d731b27e69dc33c67208d28b8a03011e2e0b0208",
+          "merged_at": "2026-06-17T15:39:30+05:30",
+          "url": "https://github.com/Supaboard-AI/supaboard-frontend/pull/626"
+        },
+        {
+          "repository": "frontend",
+          "sha": "d7eb9760b3bbcf5f6ec301985e52971828e8bd1b",
+          "merged_at": "2026-06-17T16:58:03+05:30",
+          "url": "https://github.com/Supaboard-AI/supaboard-frontend/pull/628"
+        },
+        {
+          "repository": "frontend",
+          "sha": "97415c9b42f23c5d4421fe151ef7d93b3c2c22ab",
+          "merged_at": "2026-06-17T17:18:39+05:30",
+          "url": "https://github.com/Supaboard-AI/supaboard-frontend/pull/630"
+        },
+        {
+          "repository": "frontend",
+          "sha": "339233340f87e1b74a0ad89c353b8cff2aa0b2ed",
+          "merged_at": "2026-06-17T18:27:51+05:30",
+          "url": "https://github.com/Supaboard-AI/supaboard-frontend/pull/632"
+        },
+        {
+          "repository": "frontend",
+          "sha": "eaa3168ea7b665d7d0633534605c419b73694676",
+          "merged_at": "2026-06-17T20:12:51+05:30",
+          "url": "https://github.com/Supaboard-AI/supaboard-frontend/pull/634"
+        },
+        {
+          "repository": "frontend",
+          "sha": "1d19391a8d206b270a496dfe7693488cf2d7b5cb",
+          "merged_at": "2026-06-17T21:15:33+05:30",
+          "url": "https://github.com/Supaboard-AI/supaboard-frontend/pull/636"
+        },
+        {
+          "repository": "frontend",
+          "sha": "3fe6e110d2d45841a7b7d0529d339cbcc038b1e1",
+          "merged_at": "2026-06-17T22:08:38+05:30",
+          "url": "https://github.com/Supaboard-AI/supaboard-frontend/pull/638"
+        },
+        {
+          "repository": "frontend",
+          "sha": "a8ca16f0c38d3eca47012167adb7fd197f858417",
+          "merged_at": "2026-06-18T10:47:54+05:30",
+          "url": "https://github.com/Supaboard-AI/supaboard-frontend/pull/640"
+        },
+        {
+          "repository": "frontend",
+          "sha": "b2f68d0a9596524f4038770e00ca11e515419468",
+          "merged_at": "2026-06-18T19:07:45+05:30",
+          "url": "https://github.com/Supaboard-AI/supaboard-frontend/pull/642"
+        },
+        {
+          "repository": "backend",
+          "sha": "955d77948b72f74491ad09c37078f0779b9bf5fd",
+          "merged_at": "2026-06-17T00:32:46+05:30",
+          "url": "https://github.com/Supaboard-AI/go-supaboard-backend/pull/178"
+        },
+        {
+          "repository": "backend",
+          "sha": "f5c2694422291d3fc9ae4f657f0bc2af8b48e9bf",
+          "merged_at": "2026-06-17T16:52:43+05:30",
+          "url": "https://github.com/Supaboard-AI/go-supaboard-backend/pull/181"
+        },
+        {
+          "repository": "backend",
+          "sha": "6929b7765edc31cce4b2d0d1c0d90abb519e902a",
+          "merged_at": "2026-06-18T01:46:12+05:30",
+          "url": "https://github.com/Supaboard-AI/go-supaboard-backend/pull/186"
+        }
+      ],
+      "changes": [
+        {
+          "category": "New",
+          "text": "**Wrap long column headings.** Turn on **Wrap header titles** in table settings to show the full name without making every column wider. [Table settings](/dashboards/widgets/table-widget).",
+          "sources": [
+            {
+              "repository": "frontend",
+              "commit": "1211bc134af435ceae3d494f28ce20c191235d9c",
+              "introduced_by": "d731b27e69dc33c67208d28b8a03011e2e0b0208"
+            }
+          ]
+        },
+        {
+          "category": "Improved",
+          "text": "**Explore grouped tables with less clicking.** Expand all groups and move through pages of grouped results.",
+          "sources": [
+            {
+              "repository": "frontend",
+              "commit": "fbb1ffa69d2364e9ab40e2af6fc173c5367c00e4",
+              "introduced_by": "b2f68d0a9596524f4038770e00ca11e515419468"
+            },
+            {
+              "repository": "frontend",
+              "commit": "c9907b42dc9cb295a414ddb055810b1e2b274bad",
+              "introduced_by": "d731b27e69dc33c67208d28b8a03011e2e0b0208"
+            }
+          ]
+        },
+        {
+          "category": "Improved",
+          "text": "**Export the current table view.** CSV exports respect active filters, visible columns, and the column order you chose.",
+          "sources": [
+            {
+              "repository": "frontend",
+              "commit": "b0dab58b1997051f5e215b50808cdc7ed359c379",
+              "introduced_by": "eaa3168ea7b665d7d0633534605c419b73694676"
+            }
+          ]
+        },
+        {
+          "category": "Fixed",
+          "text": "Timestamp labels display correctly in the affected charts.",
+          "sources": [
+            {
+              "repository": "frontend",
+              "commit": "6f7618f1a5ab77750dc0fa04ba7528947a8b5890",
+              "introduced_by": "d7eb9760b3bbcf5f6ec301985e52971828e8bd1b"
+            }
+          ]
+        },
+        {
+          "category": "Fixed",
+          "text": "Refreshing a data source makes its updated table structure available immediately, and browsing later pages of records no longer skips the wrong number of rows.",
+          "sources": [
+            {
+              "repository": "backend",
+              "commit": "04536a559604285a6ef93dec246c1422132a5786",
+              "introduced_by": "f5c2694422291d3fc9ae4f657f0bc2af8b48e9bf"
+            },
+            {
+              "repository": "backend",
+              "commit": "49433f811fcd0a53f3ea088ee3c5a17b303fd60b",
+              "introduced_by": "6929b7765edc31cce4b2d0d1c0d90abb519e902a"
+            }
+          ]
+        }
+      ],
+      "legacy_fragments": [
+        "reports-&-automations-—-excel-exports-smarter-scheduling",
+        "export-to-excel",
+        "filters-now-carry-through-to-exports",
+        "more-control-over-scheduled-reports",
+        "fixed-weekly/monthly/yearly-schedules-not-firing",
+        "custom-html-emails",
+        "clearer-action-names",
+        "dashboards",
+        "take-a-snapshot",
+        "data-sources",
+        "fixed-mongo-date-filters-returning-no-results"
+      ]
+    },
+    {
+      "page": "release-notes/2026/06-27",
+      "from": "2026-06-21",
+      "through": "2026-06-27",
+      "production_merges": [
+        {
+          "repository": "frontend",
+          "sha": "59d8fd1400b931b0409b8180461009516174af3d",
+          "merged_at": "2026-06-22T02:37:25+05:30",
+          "url": "https://github.com/Supaboard-AI/supaboard-frontend/pull/644"
+        },
+        {
+          "repository": "backend",
+          "sha": "8b60142d25d623cc8c59f262fd4825cdfb7e87fe",
+          "merged_at": "2026-06-22T02:03:10+05:30",
+          "url": "https://github.com/Supaboard-AI/go-supaboard-backend/pull/193"
+        }
+      ],
+      "changes": [
+        {
+          "category": "Improved",
+          "text": "**Create reports that work across several pages.** PDF generation plans the document page by page and reviews it across pages for consistency. [Reports and presentations](/artifacts/reports-and-presentations).",
+          "sources": [
+            {
+              "repository": "backend",
+              "commit": "a57bdf0c9a24e5b7525a0c0189931712303991b2",
+              "introduced_by": "8b60142d25d623cc8c59f262fd4825cdfb7e87fe"
+            },
+            {
+              "repository": "backend",
+              "commit": "28199007614e0b0bfc46945c38e1e971641a65d6",
+              "introduced_by": "8b60142d25d623cc8c59f262fd4825cdfb7e87fe"
+            },
+            {
+              "repository": "backend",
+              "commit": "d0cd0074a7c06692f5fd2ea4654a86662aecbd3b",
+              "introduced_by": "8b60142d25d623cc8c59f262fd4825cdfb7e87fe"
+            }
+          ]
+        },
+        {
+          "category": "Improved",
+          "text": "**Use analysis results in presentations.** Presentation generation receives structured data for its charts and tables, helping the document stay aligned with the analysis.",
+          "sources": [
+            {
+              "repository": "backend",
+              "commit": "6fa0ca24e439f95372446c4de9be945bb8c57223",
+              "introduced_by": "8b60142d25d623cc8c59f262fd4825cdfb7e87fe"
+            }
+          ]
+        }
+      ],
+      "legacy_fragments": [
+        "ai-assistant-—-reliability-fixes",
+        "query-builder",
+        "automations",
+        "smaller-fixes"
+      ]
+    },
+    {
+      "page": "release-notes/2026/07-04",
+      "from": "2026-06-28",
+      "through": "2026-07-04",
+      "production_merges": [
+        {
+          "repository": "frontend",
+          "sha": "a57fd475334b4847318ec2176b6274404673f471",
+          "merged_at": "2026-07-01T00:05:25+05:30",
+          "url": "https://github.com/Supaboard-AI/supaboard-frontend/pull/647"
+        },
+        {
+          "repository": "frontend",
+          "sha": "dbf38e3865774063c14425a2d218a110a1a49672",
+          "merged_at": "2026-07-02T15:18:36+05:30",
+          "url": "https://github.com/Supaboard-AI/supaboard-frontend/pull/652"
+        },
+        {
+          "repository": "frontend",
+          "sha": "ae1fd92178581a1400a1feffefad6d6ea1ba65dd",
+          "merged_at": "2026-07-02T15:59:35+05:30",
+          "url": "https://github.com/Supaboard-AI/supaboard-frontend/pull/653"
+        },
+        {
+          "repository": "frontend",
+          "sha": "ffefd1994e7acb98f3c25f22d8060e576f972089",
+          "merged_at": "2026-07-02T19:54:39+05:30",
+          "url": "https://github.com/Supaboard-AI/supaboard-frontend/pull/654"
+        },
+        {
+          "repository": "frontend",
+          "sha": "3a62e152413006dc5c8ecdfe765c75a6d05ba570",
+          "merged_at": "2026-07-03T19:46:05+05:30",
+          "url": "https://github.com/Supaboard-AI/supaboard-frontend/pull/657"
+        },
+        {
+          "repository": "backend",
+          "sha": "067d1df5fcb147aa541214039e067e7bd29b0554",
+          "merged_at": "2026-07-01T00:07:04+05:30",
+          "url": "https://github.com/Supaboard-AI/go-supaboard-backend/pull/214"
+        },
+        {
+          "repository": "backend",
+          "sha": "f86ee333f06d268e7fe57dcddcdd5c5d93a101e5",
+          "merged_at": "2026-07-02T19:58:09+05:30",
+          "url": "https://github.com/Supaboard-AI/go-supaboard-backend/pull/218"
+        }
+      ],
+      "changes": [
+        {
+          "category": "New",
+          "text": "**Build an automation by chatting.** Describe the workflow you need and work with the AI assistant to build its steps. [Create an automation](/automations/create-an-automation).",
+          "sources": [
+            {
+              "repository": "frontend",
+              "commit": "2ade72d67dc8766dac19cda0a42abac5d6995ab4",
+              "introduced_by": "a57fd475334b4847318ec2176b6274404673f471"
+            },
+            {
+              "repository": "backend",
+              "commit": "b4fcbf34d17c4d36928f356aa181ca95213f88c2",
+              "introduced_by": "067d1df5fcb147aa541214039e067e7bd29b0554"
+            }
+          ]
+        },
+        {
+          "category": "New",
+          "text": "**Schedule dashboard reports.** Choose the recipients, timing, filters, and report format, including Excel. You can also send a summary without a report attachment. [Schedule dashboard reports](/automations/schedule-dashboard-reports).",
+          "sources": [
+            {
+              "repository": "backend",
+              "commit": "4fa776a1b4fbf89269b0e8aeb41a0e4627a4e993",
+              "introduced_by": "067d1df5fcb147aa541214039e067e7bd29b0554"
+            },
+            {
+              "repository": "backend",
+              "commit": "5ab72fac123cf92a6a249840c54049be3905c252",
+              "introduced_by": "067d1df5fcb147aa541214039e067e7bd29b0554"
+            },
+            {
+              "repository": "backend",
+              "commit": "1451d0006de82181172bd6a0fbab10e2e18cb32b",
+              "introduced_by": "067d1df5fcb147aa541214039e067e7bd29b0554"
+            },
+            {
+              "repository": "backend",
+              "commit": "6df185ca308dcd4f060350e422d27b19bd2c16fc",
+              "introduced_by": "067d1df5fcb147aa541214039e067e7bd29b0554"
+            }
+          ]
+        },
+        {
+          "category": "New",
+          "text": "**Take a dashboard snapshot.** Export the dashboard as a PDF with the data and filters in the current view. [Export dashboard reports](/dashboards/how-to/export-dashboard-reports).",
+          "sources": [
+            {
+              "repository": "frontend",
+              "commit": "3cbb34c1f2e31783f1a095cd4744f889a525a9ee",
+              "introduced_by": "a57fd475334b4847318ec2176b6274404673f471"
+            },
+            {
+              "repository": "backend",
+              "commit": "54f8177a1b616a8ad03dc332c07506d6092db79d",
+              "introduced_by": "067d1df5fcb147aa541214039e067e7bd29b0554"
+            },
+            {
+              "repository": "backend",
+              "commit": "b01c8a7177a3fc719cea97a446582864b5079e7a",
+              "introduced_by": "067d1df5fcb147aa541214039e067e7bd29b0554"
+            }
+          ]
+        },
+        {
+          "category": "Improved",
+          "text": "**Keep filters when building with AI.** Automation steps created from a dashboard use its actual filters.",
+          "sources": [
+            {
+              "repository": "backend",
+              "commit": "d305c01a09841f13aa82f71ccf6027871f05276a",
+              "introduced_by": "067d1df5fcb147aa541214039e067e7bd29b0554"
+            }
+          ]
+        },
+        {
+          "category": "Fixed",
+          "text": "Weekly and monthly schedules use the selected timing more reliably.",
+          "sources": [
+            {
+              "repository": "backend",
+              "commit": "84675f57deb72b10da146fa355e5f5988f41b2f8",
+              "introduced_by": "067d1df5fcb147aa541214039e067e7bd29b0554"
+            }
+          ]
+        },
+        {
+          "category": "Fixed",
+          "text": "A failed AI summary no longer makes successfully fetched data appear to be empty.",
+          "sources": [
+            {
+              "repository": "backend",
+              "commit": "a7a2721b19f1dff74c49673ff10353d1df2951ee",
+              "introduced_by": "067d1df5fcb147aa541214039e067e7bd29b0554"
+            }
+          ]
+        }
+      ],
+      "legacy_fragments": [
+        "table-widgets-column-grouping-&-aggregate-footers",
+        "conditional-formatting",
+        "sql-editor"
+      ]
+    },
+    {
+      "page": "release-notes/2026/07-11",
+      "from": "2026-07-05",
+      "through": "2026-07-11",
+      "production_merges": [
+        {
+          "repository": "frontend",
+          "sha": "696bd60cc0f5c9c80cf540c03071b7810651d904",
+          "merged_at": "2026-07-06T16:41:14+05:30",
+          "url": "https://github.com/Supaboard-AI/supaboard-frontend/pull/659"
+        },
+        {
+          "repository": "frontend",
+          "sha": "acbd4152910bf919a5bcced1dc83ef9cd6778d27",
+          "merged_at": "2026-07-07T18:49:17+05:30",
+          "url": "https://github.com/Supaboard-AI/supaboard-frontend/pull/661"
+        },
+        {
+          "repository": "frontend",
+          "sha": "c642081a5b59a3fd90448d00d226d83973eb87a7",
+          "merged_at": "2026-07-07T19:56:29+05:30",
+          "url": "https://github.com/Supaboard-AI/supaboard-frontend/pull/663"
+        },
+        {
+          "repository": "frontend",
+          "sha": "5b2c8bda9a1d3637e339270f3a26f8555442a18e",
+          "merged_at": "2026-07-09T20:10:36+05:30",
+          "url": "https://github.com/Supaboard-AI/supaboard-frontend/pull/665"
+        },
+        {
+          "repository": "frontend",
+          "sha": "64721a2e22fd5cb3a03def1d4efc7de337afd20f",
+          "merged_at": "2026-07-10T15:38:53+05:30",
+          "url": "https://github.com/Supaboard-AI/supaboard-frontend/pull/667"
+        },
+        {
+          "repository": "frontend",
+          "sha": "787269a7d4c0accc5433c7d8ae9d2b6b4ea7504d",
+          "merged_at": "2026-07-11T13:33:12+05:30",
+          "url": "https://github.com/Supaboard-AI/supaboard-frontend/pull/669"
+        },
+        {
+          "repository": "backend",
+          "sha": "9b07a1ee0c209a0431c454230fe362c5e0a3c22a",
+          "merged_at": "2026-07-08T01:06:47+05:30",
+          "url": "https://github.com/Supaboard-AI/go-supaboard-backend/pull/223"
+        },
+        {
+          "repository": "backend",
+          "sha": "76e34260fccafcdd75bf1972a438778d863006e4",
+          "merged_at": "2026-07-10T15:37:18+05:30",
+          "url": "https://github.com/Supaboard-AI/go-supaboard-backend/pull/228"
+        }
+      ],
+      "changes": [
+        {
+          "category": "New",
+          "text": "**Group related columns under one heading.** Column groups and an aggregate footer help readers understand a wide table and its totals. [Table settings](/dashboards/widgets/table-widget).",
+          "sources": [
+            {
+              "repository": "frontend",
+              "commit": "560846276ae5c0cbf425a920faa4ceee201b2566",
+              "introduced_by": "696bd60cc0f5c9c80cf540c03071b7810651d904"
+            }
+          ]
+        },
+        {
+          "category": "Improved",
+          "text": "**Set up the view your readers need.** Open row groups by default, choose group-header colors, and use conditional text colors to highlight values.",
+          "sources": [
+            {
+              "repository": "frontend",
+              "commit": "5e8db824649687a221821fdbe727fb044bf33c77",
+              "introduced_by": "5b2c8bda9a1d3637e339270f3a26f8555442a18e"
+            }
+          ]
+        },
+        {
+          "category": "Fixed",
+          "text": "Accepting an SQL autocomplete suggestion no longer duplicates or joins characters incorrectly in the affected editor flow. [Query Bench](/query-bench/overview).",
+          "sources": [
+            {
+              "repository": "backend",
+              "commit": "b9e4f5a1b6525a158f2725e108adb0d0e36b9f7f",
+              "introduced_by": "9b07a1ee0c209a0431c454230fe362c5e0a3c22a"
+            }
+          ]
+        },
+        {
+          "category": "Fixed",
+          "text": "Building and testing automation branches handles branch state more reliably.",
+          "sources": [
+            {
+              "repository": "backend",
+              "commit": "d10b7e3a93f917b5d6df13a6aedd5540e485727b",
+              "introduced_by": "76e34260fccafcdd75bf1972a438778d863006e4"
+            }
+          ]
+        }
+      ],
+      "legacy_fragments": [
+        "embed-&-dashboard-filters",
+        "expanded-date-presets",
+        "more-reliable-embeds",
+        "cascading-filter-&-insight-fixes",
+        "faster-smarter-ai-answers"
+      ]
+    },
+    {
+      "page": "release-notes/2026/07-18",
+      "from": "2026-07-12",
+      "through": "2026-07-18",
+      "production_merges": [
+        {
+          "repository": "frontend",
+          "sha": "49094e123d46e93f96e972ff1955b283bea40dab",
+          "merged_at": "2026-07-12T13:31:26+05:30",
+          "url": "https://github.com/Supaboard-AI/supaboard-frontend/pull/671"
+        },
+        {
+          "repository": "frontend",
+          "sha": "6aacbe681c42f25e07f097e56a42c77861defa88",
+          "merged_at": "2026-07-15T14:58:18+05:30",
+          "url": "https://github.com/Supaboard-AI/supaboard-frontend/pull/673"
+        },
+        {
+          "repository": "frontend",
+          "sha": "e82718de59303633d8d3f87dea2bbe347179e0f3",
+          "merged_at": "2026-07-15T17:31:49+05:30",
+          "url": "https://github.com/Supaboard-AI/supaboard-frontend/pull/675"
+        },
+        {
+          "repository": "frontend",
+          "sha": "b61ab4cc0f3f0752bd922a6e16784bb0398f1d1d",
+          "merged_at": "2026-07-15T23:07:12+05:30",
+          "url": "https://github.com/Supaboard-AI/supaboard-frontend/pull/677"
+        },
+        {
+          "repository": "frontend",
+          "sha": "5462cea474a8383605d27093d57c4857c91544ec",
+          "merged_at": "2026-07-16T12:52:35+05:30",
+          "url": "https://github.com/Supaboard-AI/supaboard-frontend/pull/679"
+        },
+        {
+          "repository": "frontend",
+          "sha": "a916decd5fe763cdbf90726ec59b78ad3c7ef2ca",
+          "merged_at": "2026-07-16T20:17:48+05:30",
+          "url": "https://github.com/Supaboard-AI/supaboard-frontend/pull/681"
+        },
+        {
+          "repository": "frontend",
+          "sha": "87c34e1139d47ec3b17f01cc10253b574d50edfe",
+          "merged_at": "2026-07-16T20:36:48+05:30",
+          "url": "https://github.com/Supaboard-AI/supaboard-frontend/pull/683"
+        },
+        {
+          "repository": "frontend",
+          "sha": "45117f49967cc3b0f24419ad7cd2da0ca360bc3c",
+          "merged_at": "2026-07-16T23:24:04+05:30",
+          "url": "https://github.com/Supaboard-AI/supaboard-frontend/pull/685"
+        },
+        {
+          "repository": "backend",
+          "sha": "2b341e7186789875139f9610741482c106b528bc",
+          "merged_at": "2026-07-12T13:29:59+05:30",
+          "url": "https://github.com/Supaboard-AI/go-supaboard-backend/pull/231"
+        },
+        {
+          "repository": "backend",
+          "sha": "e1130b97dc478e00203415cb2750bde6a014bbe3",
+          "merged_at": "2026-07-15T16:48:48+05:30",
+          "url": "https://github.com/Supaboard-AI/go-supaboard-backend/pull/234"
+        },
+        {
+          "repository": "backend",
+          "sha": "ad35ba02704bdbfc883f08a844308e760fd77904",
+          "merged_at": "2026-07-16T15:18:19+05:30",
+          "url": "https://github.com/Supaboard-AI/go-supaboard-backend/pull/237"
+        }
+      ],
+      "changes": [
+        {
+          "category": "Improved",
+          "text": "**Ask questions using the dashboard’s existing results.** The assistant makes better use of dashboard widgets before querying the underlying connection for additional information. [Dashboard insights](/dashboards/insights-in-dashboard).",
+          "sources": [
+            {
+              "repository": "backend",
+              "commit": "31e6ffdabe5478c16f16b9227b6a9a03cf89f988",
+              "introduced_by": "ad35ba02704bdbfc883f08a844308e760fd77904"
+            }
+          ]
+        },
+        {
+          "category": "Fixed",
+          "text": "**Keep related filters in sync.** Filters whose available choices depend on another selection now update more reliably, including in embedded dashboards. [Dashboard filters](/dashboards/filters/how-to-add-filters-to-your-dashboard).",
+          "sources": [
+            {
+              "repository": "frontend",
+              "commit": "65dc081611b8e99bfd8d6e1be77e51030c5aa7f7",
+              "introduced_by": "49094e123d46e93f96e972ff1955b283bea40dab"
+            },
+            {
+              "repository": "frontend",
+              "commit": "6d103cfbf0186bf6e6a425e2aec5829af3795540",
+              "introduced_by": "49094e123d46e93f96e972ff1955b283bea40dab"
+            },
+            {
+              "repository": "backend",
+              "commit": "4937b81c7f0934ffe7f287175d9d6ef5751cbb8c",
+              "introduced_by": "2b341e7186789875139f9610741482c106b528bc"
+            }
+          ]
+        },
+        {
+          "category": "Fixed",
+          "text": "HTML results show a loading state while their content is being prepared.",
+          "sources": [
+            {
+              "repository": "frontend",
+              "commit": "3daded1a47142b97452d021ad2b10353f98b1ac3",
+              "introduced_by": "a916decd5fe763cdbf90726ec59b78ad3c7ef2ca"
+            }
+          ]
+        }
+      ],
+      "legacy_fragments": [
+        "filter-dashboards-by-clicking-a-table-value",
+        "column-source-mapping"
+      ]
+    },
+    {
+      "page": "release-notes/2026/07-25",
+      "from": "2026-07-19",
+      "through": "2026-07-25",
+      "production_merges": [
+        {
+          "repository": "frontend",
+          "sha": "168a31446c0f91fbf1684a1dda1f467ac5c5ded5",
+          "merged_at": "2026-07-21T20:38:55+05:30",
+          "url": "https://github.com/Supaboard-AI/supaboard-frontend/pull/689"
+        },
+        {
+          "repository": "frontend",
+          "sha": "5567f36b39e218beb50ce08bada6d68978a98ae5",
+          "merged_at": "2026-07-22T00:38:54+05:30",
+          "url": "https://github.com/Supaboard-AI/supaboard-frontend/pull/691"
+        },
+        {
+          "repository": "frontend",
+          "sha": "763a0a7ed43df99c4fa21f214de9686d32e932fa",
+          "merged_at": "2026-07-22T02:41:10+05:30",
+          "url": "https://github.com/Supaboard-AI/supaboard-frontend/pull/693"
+        },
+        {
+          "repository": "frontend",
+          "sha": "598350f0d11dde811f700b6c8fef3d4de59a064a",
+          "merged_at": "2026-07-23T05:16:41+05:30",
+          "url": "https://github.com/Supaboard-AI/supaboard-frontend/pull/695"
+        },
+        {
+          "repository": "frontend",
+          "sha": "bd9c6e3b5b54b56918e21be094ed10a51fce42a3",
+          "merged_at": "2026-07-23T20:31:53+05:30",
+          "url": "https://github.com/Supaboard-AI/supaboard-frontend/pull/697"
+        },
+        {
+          "repository": "frontend",
+          "sha": "f26b92b656f3d203ef25b92d1c4a0f6df4134361",
+          "merged_at": "2026-07-24T00:40:13+05:30",
+          "url": "https://github.com/Supaboard-AI/supaboard-frontend/pull/699"
+        },
+        {
+          "repository": "backend",
+          "sha": "74a64965aaad75009dc6b9376d4b7a73fd58d715",
+          "merged_at": "2026-07-22T20:16:00+05:30",
+          "url": "https://github.com/Supaboard-AI/go-supaboard-backend/pull/242"
+        }
+      ],
+      "changes": [
+        {
+          "category": "New",
+          "text": "**Click a value to filter the dashboard.** A table can become the starting point for exploring related charts. Set up the column mapping so the selection applies to the correct data. [Filter dashboards from a table](/dashboards/filters/filter-dashboards-from-table-data).",
+          "sources": [
+            {
+              "repository": "frontend",
+              "commit": "dedc03a1445be15ed364c31d0709e594779a1bee",
+              "introduced_by": "168a31446c0f91fbf1684a1dda1f467ac5c5ded5"
+            },
+            {
+              "repository": "frontend",
+              "commit": "0bf3dc5b1495f128f7ec69d975ee4e5046f2d992",
+              "introduced_by": "168a31446c0f91fbf1684a1dda1f467ac5c5ded5"
+            },
+            {
+              "repository": "frontend",
+              "commit": "cd36f83e337fcd7807c84fb28f504730fa9b25bf",
+              "introduced_by": "168a31446c0f91fbf1684a1dda1f467ac5c5ded5"
+            }
+          ]
+        },
+        {
+          "category": "New",
+          "text": "**Choose how a table opens.** Set its initial page and rows per page, or hide the pagination footer. [Table settings](/dashboards/widgets/table-widget).",
+          "sources": [
+            {
+              "repository": "frontend",
+              "commit": "fca58fdd5dd1f53afa94762b44e02ac026e6fee1",
+              "introduced_by": "598350f0d11dde811f700b6c8fef3d4de59a064a"
+            }
+          ]
+        },
+        {
+          "category": "Improved",
+          "text": "**Choose automation email recipients from earlier results.** An email step can use recipient values produced by another step.",
+          "sources": [
+            {
+              "repository": "backend",
+              "commit": "4a56afa80b3d57ceeaa24ed07bef460208c7c3a2",
+              "introduced_by": "74a64965aaad75009dc6b9376d4b7a73fd58d715"
+            }
+          ]
+        },
+        {
+          "category": "Fixed",
+          "text": "Clicking a table column without a filter mapping no longer applies an unintended dashboard filter.",
+          "sources": [
+            {
+              "repository": "frontend",
+              "commit": "b16510677f9e6113c0b70ee84324577d2f97170f",
+              "introduced_by": "5567f36b39e218beb50ce08bada6d68978a98ae5"
+            }
+          ]
+        },
+        {
+          "category": "Fixed",
+          "text": "Password-reset failures show a useful error message.",
+          "sources": [
+            {
+              "repository": "frontend",
+              "commit": "84cf62a84aa549e3022fa23081feffc404345ed8",
+              "introduced_by": "f26b92b656f3d203ef25b92d1c4a0f6df4134361"
+            }
+          ]
+        }
+      ],
+      "legacy_fragments": [
+        "introducing-databook",
+        "table-widget-pagination-settings",
+        "fixes"
+      ]
+    },
+    {
+      "page": "release-notes/2026/08-01",
+      "from": "2026-07-26",
+      "through": "2026-08-01",
+      "production_merges": [
+        {
+          "repository": "frontend",
+          "sha": "2df1e22d422dd807331dfe31e4752def39a4e4c1",
+          "merged_at": "2026-07-28T20:15:48+05:30",
+          "url": "https://github.com/Supaboard-AI/supaboard-frontend/pull/701"
+        },
+        {
+          "repository": "frontend",
+          "sha": "a86e4bbedbdea63c288997985d1336ef8309affb",
+          "merged_at": "2026-07-29T04:06:13+05:30",
+          "url": "https://github.com/Supaboard-AI/supaboard-frontend/pull/704"
+        },
+        {
+          "repository": "frontend",
+          "sha": "a30829ea4ab3bf79f751a8a8265e0a99e343e4b7",
+          "merged_at": "2026-07-29T14:55:58+05:30",
+          "url": "https://github.com/Supaboard-AI/supaboard-frontend/pull/707"
+        },
+        {
+          "repository": "frontend",
+          "sha": "87442a666a6b41eb2d2fbed55fdc0c56f492f590",
+          "merged_at": "2026-07-30T17:38:25+05:30",
+          "url": "https://github.com/Supaboard-AI/supaboard-frontend/pull/709"
+        },
+        {
+          "repository": "backend",
+          "sha": "0e1b322a9fae4ad923ece330e16682eb60e7f735",
+          "merged_at": "2026-07-28T00:49:34+05:30",
+          "url": "https://github.com/Supaboard-AI/go-supaboard-backend/pull/248"
+        },
+        {
+          "repository": "backend",
+          "sha": "55feb60558e0e11c6f5f89b0e70d7aef92c424c7",
+          "merged_at": "2026-07-28T19:58:52+05:30",
+          "url": "https://github.com/Supaboard-AI/go-supaboard-backend/pull/250"
+        },
+        {
+          "repository": "backend",
+          "sha": "54b11c13cdb7533ddd73fd5751c4b4756393b36c",
+          "merged_at": "2026-07-29T03:57:19+05:30",
+          "url": "https://github.com/Supaboard-AI/go-supaboard-backend/pull/253"
+        },
+        {
+          "repository": "backend",
+          "sha": "269d6a988c428046d0f34b7fa233fb19a87bcde2",
+          "merged_at": "2026-07-29T14:18:53+05:30",
+          "url": "https://github.com/Supaboard-AI/go-supaboard-backend/pull/256"
+        },
+        {
+          "repository": "backend",
+          "sha": "20fd3e7afaabd21d99f2e959686f332c675de073",
+          "merged_at": "2026-07-30T03:33:42+05:30",
+          "url": "https://github.com/Supaboard-AI/go-supaboard-backend/pull/261"
+        }
+      ],
+      "changes": [
+        {
+          "category": "New",
+          "text": "**Create a Datasite.** Describe the experience you want, preview it as it is built, and publish or embed it for your audience. Datasites bring interactive pages and connected data together. [Create a Datasite](/datasites/create-a-datasite).",
+          "sources": [
+            {
+              "repository": "frontend",
+              "commit": "4c19fb1443152c98f725b512c6c4f79f73386707",
+              "introduced_by": "a86e4bbedbdea63c288997985d1336ef8309affb"
+            },
+            {
+              "repository": "frontend",
+              "commit": "066743b57929e2cfbee9934accfe7218206d9eb3",
+              "introduced_by": "a86e4bbedbdea63c288997985d1336ef8309affb"
+            },
+            {
+              "repository": "backend",
+              "commit": "9a4ec92331953225b21d98e9d0348fee9b2a99e2",
+              "introduced_by": "54b11c13cdb7533ddd73fd5751c4b4756393b36c"
+            }
+          ]
+        },
+        {
+          "category": "Improved",
+          "text": "**Stay in control while a Datasite is being built.** Stop a build when you need to change direction.",
+          "sources": [
+            {
+              "repository": "frontend",
+              "commit": "14a1133b66ffe888a5e06cd52ebe7aa3ce984451",
+              "introduced_by": "a30829ea4ab3bf79f751a8a8265e0a99e343e4b7"
+            }
+          ]
+        },
+        {
+          "category": "Improved",
+          "text": "**Refine a presentation through follow-ups.** Ask for changes to an existing deck and use an uploaded reference to guide its style. Chart data and large tables are handled more reliably. [Reports and presentations](/artifacts/reports-and-presentations).",
+          "sources": [
+            {
+              "repository": "backend",
+              "commit": "b9f0b9ff967a6718a7b273774535edad114d54fe",
+              "introduced_by": "0e1b322a9fae4ad923ece330e16682eb60e7f735"
+            },
+            {
+              "repository": "backend",
+              "commit": "be193a6aae98b0c9af06336e993ecf09206b7d14",
+              "introduced_by": "0e1b322a9fae4ad923ece330e16682eb60e7f735"
+            },
+            {
+              "repository": "backend",
+              "commit": "4215cf716222bf2fa2cfd2c2bf0c6b5522421092",
+              "introduced_by": "0e1b322a9fae4ad923ece330e16682eb60e7f735"
+            },
+            {
+              "repository": "backend",
+              "commit": "d93f78c9ee24367307eb8e163e9a3e60dc033de1",
+              "introduced_by": "0e1b322a9fae4ad923ece330e16682eb60e7f735"
+            }
+          ]
+        },
+        {
+          "category": "Improved",
+          "text": "**Get help setting up an agent.** Suggested answers make the setup questionnaire easier to complete. [Set up an agent](/agents/set-up-an-agent).",
+          "sources": [
+            {
+              "repository": "backend",
+              "commit": "be01b1d9a378cbfdcff103d0d859231c5db81d39",
+              "introduced_by": "20fd3e7afaabd21d99f2e959686f332c675de073"
+            }
+          ]
+        },
+        {
+          "category": "Fixed",
+          "text": "PostgreSQL connections include a database named `postgres` when discovering available databases.",
+          "sources": [
+            {
+              "repository": "backend",
+              "commit": "e1ab5d2e8ddb30959001ad570904d2ebbd91275c",
+              "introduced_by": "55feb60558e0e11c6f5f89b0e70d7aef92c424c7"
+            }
+          ]
+        }
+      ],
+      "legacy_fragments": [
+        "agent-skills",
+        "databook-improvements",
+        "ai-presentations",
+        "other-improvements-&-fixes"
+      ]
+    },
+    {
+      "page": "release-notes/2026/08-08",
+      "from": "2026-08-02",
+      "through": "2026-08-08",
+      "production_merges": [
+        {
+          "repository": "frontend",
+          "sha": "a56c99194c5f44f5a6c466985c593a61e94133ea",
+          "merged_at": "2026-08-03T15:07:54+05:30",
+          "url": "https://github.com/Supaboard-AI/supaboard-frontend/pull/712"
+        },
+        {
+          "repository": "frontend",
+          "sha": "40aef40cee412b8e330aa4324e021897bf204f27",
+          "merged_at": "2026-08-05T18:35:26+05:30",
+          "url": "https://github.com/Supaboard-AI/supaboard-frontend/pull/713"
+        },
+        {
+          "repository": "frontend",
+          "sha": "93cf8a606daa74dabe890182ab129cf4233f9e69",
+          "merged_at": "2026-08-07T02:14:07+05:30",
+          "url": "https://github.com/Supaboard-AI/supaboard-frontend/pull/717"
+        },
+        {
+          "repository": "frontend",
+          "sha": "b4f29d8b31e0db66762c2f2cc8014ef3dcebbe7a",
+          "merged_at": "2026-08-07T14:28:54+05:30",
+          "url": "https://github.com/Supaboard-AI/supaboard-frontend/pull/719"
+        },
+        {
+          "repository": "frontend",
+          "sha": "def646b3d95e6e0caadb77df30a6a92ed991c8f4",
+          "merged_at": "2026-08-07T21:46:08+05:30",
+          "url": "https://github.com/Supaboard-AI/supaboard-frontend/pull/721"
+        },
+        {
+          "repository": "frontend",
+          "sha": "013534c92ba4c0e4c0ff3db9d7c43c7228a6a9ca",
+          "merged_at": "2026-08-08T04:19:37+05:30",
+          "url": "https://github.com/Supaboard-AI/supaboard-frontend/commit/013534c92ba4c0e4c0ff3db9d7c43c7228a6a9ca"
+        },
+        {
+          "repository": "backend",
+          "sha": "534f87015377afc1ebca3a631f3ac3feb6182b55",
+          "merged_at": "2026-08-03T14:53:39+05:30",
+          "url": "https://github.com/Supaboard-AI/go-supaboard-backend/pull/264"
+        },
+        {
+          "repository": "backend",
+          "sha": "cf12f53dbd11cd04e41e96ce4c5ad55b884e126b",
+          "merged_at": "2026-08-03T21:03:00+05:30",
+          "url": "https://github.com/Supaboard-AI/go-supaboard-backend/pull/267"
+        },
+        {
+          "repository": "backend",
+          "sha": "62c46d0399bd5980d0462d7feebdaa9d7d1e2f31",
+          "merged_at": "2026-08-05T13:04:35+05:30",
+          "url": "https://github.com/Supaboard-AI/go-supaboard-backend/pull/269"
+        },
+        {
+          "repository": "backend",
+          "sha": "1a9d1c48492821c63da7409ce4a9ed8d7e081e4b",
+          "merged_at": "2026-08-05T18:36:12+05:30",
+          "url": "https://github.com/Supaboard-AI/go-supaboard-backend/pull/271"
+        },
+        {
+          "repository": "backend",
+          "sha": "5fa9e7373b3cb545551f84df10233af7d7ceedb9",
+          "merged_at": "2026-08-06T04:03:24+05:30",
+          "url": "https://github.com/Supaboard-AI/go-supaboard-backend/pull/274"
+        },
+        {
+          "repository": "backend",
+          "sha": "9284fc6d704c39b97d863e4a7269a82026ed85c3",
+          "merged_at": "2026-08-07T02:05:15+05:30",
+          "url": "https://github.com/Supaboard-AI/go-supaboard-backend/pull/278"
+        },
+        {
+          "repository": "backend",
+          "sha": "a067bbdaa51d2b6c41ed6fa26694f6f55c086804",
+          "merged_at": "2026-08-07T03:03:16+05:30",
+          "url": "https://github.com/Supaboard-AI/go-supaboard-backend/pull/280"
+        },
+        {
+          "repository": "backend",
+          "sha": "8cd6e4fe082a6d8432f3128a589f7d78176e1fe0",
+          "merged_at": "2026-08-07T15:19:39+05:30",
+          "url": "https://github.com/Supaboard-AI/go-supaboard-backend/pull/282"
+        },
+        {
+          "repository": "backend",
+          "sha": "2ca360af29186ffa60f367243f34557d61ac9923",
+          "merged_at": "2026-08-07T16:50:07+05:30",
+          "url": "https://github.com/Supaboard-AI/go-supaboard-backend/pull/284"
+        },
+        {
+          "repository": "backend",
+          "sha": "d0bde57210093d49d368867d94854716c41dda9c",
+          "merged_at": "2026-08-07T21:45:35+05:30",
+          "url": "https://github.com/Supaboard-AI/go-supaboard-backend/pull/287"
+        }
+      ],
+      "changes": [
+        {
+          "category": "New",
+          "text": "**Add skills to an agent.** Write or upload reusable instructions, ask AI to help draft or revise them, and preview or disable a skill when needed. [Configure agents](/agents/overview).",
+          "sources": [
+            {
+              "repository": "frontend",
+              "commit": "3ab089d44492433b01da766dd3be4eb19c8a7904",
+              "introduced_by": "93cf8a606daa74dabe890182ab129cf4233f9e69"
+            },
+            {
+              "repository": "frontend",
+              "commit": "e80795752504fed12edf8d9a60351b913544467d",
+              "introduced_by": "93cf8a606daa74dabe890182ab129cf4233f9e69"
+            },
+            {
+              "repository": "frontend",
+              "commit": "5f5c8a929fbc2b23c45e2658509faf124b501b66",
+              "introduced_by": "93cf8a606daa74dabe890182ab129cf4233f9e69"
+            },
+            {
+              "repository": "backend",
+              "commit": "a878558e6e3a081188dc29d813037ca72ce55a03",
+              "introduced_by": "534f87015377afc1ebca3a631f3ac3feb6182b55"
+            }
+          ]
+        },
+        {
+          "category": "Improved",
+          "text": "**Keep presentations closer to your brief.** Generation follows the requested content and structure more consistently.",
+          "sources": [
+            {
+              "repository": "backend",
+              "commit": "567df6b50492abe45b230d95181934b1bcc2dff6",
+              "introduced_by": "9284fc6d704c39b97d863e4a7269a82026ed85c3"
+            }
+          ]
+        },
+        {
+          "category": "Fixed",
+          "text": "Public Datasites and sign-in from an embedded Datasite handle access more reliably. [Publish and share a Datasite](/datasites/publish-and-share).",
+          "sources": [
+            {
+              "repository": "frontend",
+              "commit": "941485e7aeee6084c34eaec00a10b54f89b3b510",
+              "introduced_by": "40aef40cee412b8e330aa4324e021897bf204f27"
+            },
+            {
+              "repository": "backend",
+              "commit": "f5fed5e0c87d79742682ac7353ae04b76b9f4759",
+              "introduced_by": "62c46d0399bd5980d0462d7feebdaa9d7d1e2f31"
+            },
+            {
+              "repository": "backend",
+              "commit": "eae608603df7605b847166e890d28a98571d9937",
+              "introduced_by": "1a9d1c48492821c63da7409ce4a9ed8d7e081e4b"
+            }
+          ]
+        },
+        {
+          "category": "Fixed",
+          "text": "Dashboard filters work with saved queries that contain comments.",
+          "sources": [
+            {
+              "repository": "backend",
+              "commit": "306ff0c91cc269c6dddef0ed49e911d32341affd",
+              "introduced_by": "a067bbdaa51d2b6c41ed6fa26694f6f55c086804"
+            }
+          ]
+        },
+        {
+          "category": "Fixed",
+          "text": "Workspace invitations can be resent when someone needs another invitation email.",
+          "sources": [
+            {
+              "repository": "backend",
+              "commit": "0449bea7b621a1b333a540b6ece1874b52fce096",
+              "introduced_by": "d0bde57210093d49d368867d94854716c41dda9c"
+            }
+          ]
+        }
+      ],
+      "legacy_fragments": [
+        "connect-supaboard-to-claude",
+        "datasite-access-&-login-fixes",
+        "ask-ai-improvements",
+        "query-builder",
+        "other-fixes"
+      ]
+    },
+    {
+      "page": "release-notes/2026/08-22",
+      "from": "2026-08-09",
+      "through": "2026-08-22",
+      "production_merges": [
+        {
+          "repository": "frontend",
+          "sha": "deaee0ff32d0866fc185a831946631440d899ec5",
+          "merged_at": "2026-08-10T14:29:35+05:30",
+          "url": "https://github.com/Supaboard-AI/supaboard-frontend/pull/723"
+        },
+        {
+          "repository": "frontend",
+          "sha": "80dcd92ca1e5d9dd48d8e2cdf83cc7d82c4bf2c4",
+          "merged_at": "2026-08-17T20:04:28+05:30",
+          "url": "https://github.com/Supaboard-AI/supaboard-frontend/commit/80dcd92ca1e5d9dd48d8e2cdf83cc7d82c4bf2c4"
+        },
+        {
+          "repository": "frontend",
+          "sha": "62fc66d3099b12e14a45aa067269313afe363a74",
+          "merged_at": "2026-08-18T02:40:54+05:30",
+          "url": "https://github.com/Supaboard-AI/supaboard-frontend/pull/731"
+        },
+        {
+          "repository": "backend",
+          "sha": "d8906343f6a525248e70f3e124adc62ec9632afa",
+          "merged_at": "2026-08-12T17:40:21+05:30",
+          "url": "https://github.com/Supaboard-AI/go-supaboard-backend/pull/290"
+        },
+        {
+          "repository": "backend",
+          "sha": "3ab4d2f64edd7e41d7c693b3738e87ca4523e844",
+          "merged_at": "2026-08-12T17:43:04+05:30",
+          "url": "https://github.com/Supaboard-AI/go-supaboard-backend/pull/292"
+        },
+        {
+          "repository": "backend",
+          "sha": "1418fabe1b8c45f8dd36560ffa29a012d5e4738b",
+          "merged_at": "2026-08-17T19:48:54+05:30",
+          "url": "https://github.com/Supaboard-AI/go-supaboard-backend/commit/1418fabe1b8c45f8dd36560ffa29a012d5e4738b"
+        },
+        {
+          "repository": "backend",
+          "sha": "a3eb618be5bcf0beb23c1472e98069331e8e92f1",
+          "merged_at": "2026-08-18T01:25:01+05:30",
+          "url": "https://github.com/Supaboard-AI/go-supaboard-backend/pull/300"
+        }
+      ],
+      "changes": [
+        {
+          "category": "New",
+          "text": "**Repeat steps for each item.** Add a loop to an automation and preview individual iterations when testing it. [Automations](/automations/overview).",
+          "sources": [
+            {
+              "repository": "frontend",
+              "commit": "f186888ea2a3bfa42407d8ebca5222b5ab21bd69",
+              "introduced_by": "80dcd92ca1e5d9dd48d8e2cdf83cc7d82c4bf2c4"
+            },
+            {
+              "repository": "frontend",
+              "commit": "12c41a5ca8e450cda2557d547bee9d58d7d011c5",
+              "introduced_by": "80dcd92ca1e5d9dd48d8e2cdf83cc7d82c4bf2c4"
+            },
+            {
+              "repository": "backend",
+              "commit": "91ce0493d7973031309bf6e72dc42188fb063667",
+              "introduced_by": "1418fabe1b8c45f8dd36560ffa29a012d5e4738b"
+            },
+            {
+              "repository": "backend",
+              "commit": "09e60140b4407207d9df5a62714c8eff2cf66a7d",
+              "introduced_by": "1418fabe1b8c45f8dd36560ffa29a012d5e4738b"
+            }
+          ]
+        },
+        {
+          "category": "New",
+          "text": "**Manage an agent’s connected tools.** Supported MCP connections can use a sign-in flow. Review their connection status, enable or disable individual tools, and disconnect an app when it is no longer needed. [Connect tools](/agents/tools).",
+          "sources": [
+            {
+              "repository": "frontend",
+              "commit": "9b24adc69bf18dd358da2219fc605ad8c57ace85",
+              "introduced_by": "80dcd92ca1e5d9dd48d8e2cdf83cc7d82c4bf2c4"
+            },
+            {
+              "repository": "backend",
+              "commit": "d760911abf39c68db30a0cbb82daaa7247df7a32",
+              "introduced_by": "3ab4d2f64edd7e41d7c693b3738e87ca4523e844"
+            }
+          ]
+        },
+        {
+          "category": "Improved",
+          "text": "**See workspace usage and set limits.** Workspace controls make it easier to review usage and manage limits for members. [Usage and billing](/workspace/usage-and-billing).",
+          "sources": [
+            {
+              "repository": "frontend",
+              "commit": "86a62d30740d1ed6f46b57219dd5c8af3420e4ef",
+              "introduced_by": "80dcd92ca1e5d9dd48d8e2cdf83cc7d82c4bf2c4"
+            },
+            {
+              "repository": "frontend",
+              "commit": "ee831ea3c1ba4197e73482e9b757143718149431",
+              "introduced_by": "80dcd92ca1e5d9dd48d8e2cdf83cc7d82c4bf2c4"
+            },
+            {
+              "repository": "backend",
+              "commit": "5a753f8b17ef71b7fe43a8577697ed609cdf6767",
+              "introduced_by": "1418fabe1b8c45f8dd36560ffa29a012d5e4738b"
+            },
+            {
+              "repository": "backend",
+              "commit": "be8d530358d66dc53da9b1e220f108d2f5313da9",
+              "introduced_by": "1418fabe1b8c45f8dd36560ffa29a012d5e4738b"
+            }
+          ]
+        },
+        {
+          "category": "Improved",
+          "text": "**Export a dashboard with a shortcut.** Use **⌘P** on Mac or **Ctrl+P** on Windows to open the dashboard snapshot action.",
+          "sources": [
+            {
+              "repository": "frontend",
+              "commit": "e09b3eb880a5ed6f5b8ca619ab9a18390c98f20a",
+              "introduced_by": "deaee0ff32d0866fc185a831946631440d899ec5"
+            }
+          ]
+        },
+        {
+          "category": "Fixed",
+          "text": "Canceling an AI response keeps the results that were already completed.",
+          "sources": [
+            {
+              "repository": "backend",
+              "commit": "3b4c342bb5f418aa67094547feb24ab658df3721",
+              "introduced_by": "3ab4d2f64edd7e41d7c693b3738e87ca4523e844"
+            }
+          ]
+        },
+        {
+          "category": "Fixed",
+          "text": "Date filters on MongoDB data return the expected records in the affected filtering flow.",
+          "sources": [
+            {
+              "repository": "backend",
+              "commit": "f73aae78402dbad704745ba8967d35791686c97e",
+              "introduced_by": "a3eb618be5bcf0beb23c1472e98069331e8e92f1"
+            }
+          ]
+        }
+      ],
+      "legacy_fragments": [
+        "talk-to-supaboard",
+        "oracle-database",
+        "automations-branches-paths-and-loops",
+        "scheduled-triggers-respect-your-timezone",
+        "credits-and-usage",
+        "ask-ai-reliability",
+        "filtering-and-sorting-in-data-explorer",
+        "databook",
+        "data-connection-instructions",
+        "dashboard-and-charts"
+      ]
+    },
+    {
+      "page": "release-notes/2026/09-04",
+      "from": "2026-08-23",
+      "through": "2026-09-04",
+      "production_merges": [
+        {
+          "repository": "frontend",
+          "sha": "72e9756db8599d0f41cc9e847248b1e21af88baa",
+          "merged_at": "2026-08-23T10:11:40+05:30",
+          "url": "https://github.com/Supaboard-AI/supaboard-frontend/pull/740"
+        },
+        {
+          "repository": "frontend",
+          "sha": "2fa3d845617efd818539c7ee290606ad1b3bb2f2",
+          "merged_at": "2026-08-31T09:15:55+05:30",
+          "url": "https://github.com/Supaboard-AI/supaboard-frontend/pull/744"
+        },
+        {
+          "repository": "frontend",
+          "sha": "b2b54ab39203658e2eed1bdd0306267b76272f4a",
+          "merged_at": "2026-09-01T11:10:50+05:30",
+          "url": "https://github.com/Supaboard-AI/supaboard-frontend/pull/747"
+        },
+        {
+          "repository": "frontend",
+          "sha": "ebfa502b63a5cb51a7d90a0f20d6cf3c461d6f04",
+          "merged_at": "2026-09-01T18:02:49+05:30",
+          "url": "https://github.com/Supaboard-AI/supaboard-frontend/pull/750"
+        },
+        {
+          "repository": "frontend",
+          "sha": "62bd47307230eaab1ac3f6ee9ff8ec94c1916cf5",
+          "merged_at": "2026-09-04T01:42:23+05:30",
+          "url": "https://github.com/Supaboard-AI/supaboard-frontend/pull/755"
+        },
+        {
+          "repository": "backend",
+          "sha": "7df291c7e87e0f876b888da8384c4bfe8df427d6",
+          "merged_at": "2026-08-23T09:38:40+05:30",
+          "url": "https://github.com/Supaboard-AI/go-supaboard-backend/pull/309"
+        },
+        {
+          "repository": "backend",
+          "sha": "76eb0375b2b0b966a438bdcba2caf317a9979444",
+          "merged_at": "2026-08-31T08:58:48+05:30",
+          "url": "https://github.com/Supaboard-AI/go-supaboard-backend/pull/317"
+        },
+        {
+          "repository": "backend",
+          "sha": "df3e94d1faa581ad1117722f4c36506bb8493f71",
+          "merged_at": "2026-09-01T10:13:51+05:30",
+          "url": "https://github.com/Supaboard-AI/go-supaboard-backend/pull/323"
+        },
+        {
+          "repository": "backend",
+          "sha": "eda4d40c8111b7d1132496c69056b63a41e380f1",
+          "merged_at": "2026-09-04T01:24:01+05:30",
+          "url": "https://github.com/Supaboard-AI/go-supaboard-backend/pull/334"
+        },
+        {
+          "repository": "backend",
+          "sha": "77dd3136ce03b90682b7476a65cc6c553d9ff068",
+          "merged_at": "2026-09-04T13:02:52+05:30",
+          "url": "https://github.com/Supaboard-AI/go-supaboard-backend/pull/337"
+        },
+        {
+          "repository": "backend",
+          "sha": "c89a6617fd9fa42a8f161a36154c937c1ed3ec4d",
+          "merged_at": "2026-09-04T14:47:08+05:30",
+          "url": "https://github.com/Supaboard-AI/go-supaboard-backend/pull/340"
+        }
+      ],
+      "changes": [
+        {
+          "category": "New",
+          "text": "**Give a Datasite your own address.** Connect a custom domain and use the setup screen to find the DNS records your domain administrator needs. [Set up a custom domain](/datasites/datasite-custom-domains).",
+          "sources": [
+            {
+              "repository": "frontend",
+              "commit": "d459f098ba8994728cb63ec784709eac2ef53a90",
+              "introduced_by": "62bd47307230eaab1ac3f6ee9ff8ec94c1916cf5"
+            },
+            {
+              "repository": "frontend",
+              "commit": "59ed592937c5dff818d6abb0f512da8f419c7806",
+              "introduced_by": "62bd47307230eaab1ac3f6ee9ff8ec94c1916cf5"
+            },
+            {
+              "repository": "backend",
+              "commit": "fd0b0b389384a13efb4cd98f41d10f592da2f06e",
+              "introduced_by": "eda4d40c8111b7d1132496c69056b63a41e380f1"
+            },
+            {
+              "repository": "backend",
+              "commit": "cb15bd2b60d101c409411a17bd88d4410fd3d157",
+              "introduced_by": "eda4d40c8111b7d1132496c69056b63a41e380f1"
+            }
+          ]
+        },
+        {
+          "category": "New",
+          "text": "**Manage Datasite variables.** Keep reusable settings in one place and distinguish public values from secrets used by the site’s protected requests. [Use Datasite variables](/datasites/datasite-variables).",
+          "sources": [
+            {
+              "repository": "frontend",
+              "commit": "f4ca2091c377dd17b8d547cb94a1b062b5f0cd57",
+              "introduced_by": "b2b54ab39203658e2eed1bdd0306267b76272f4a"
+            },
+            {
+              "repository": "backend",
+              "commit": "96ddeee53f880be736c827e553871c5fa3f33414",
+              "introduced_by": "df3e94d1faa581ad1117722f4c36506bb8493f71"
+            },
+            {
+              "repository": "backend",
+              "commit": "ad2459b52f5661380a20a5eaf1cc98ef30c03c34",
+              "introduced_by": "df3e94d1faa581ad1117722f4c36506bb8493f71"
+            }
+          ]
+        },
+        {
+          "category": "New",
+          "text": "**Sign in to private Datasites with Google or Microsoft.** Visitors can use these sign-in options when accessing a private site.",
+          "sources": [
+            {
+              "repository": "frontend",
+              "commit": "ae362cb9dac80e85ab0471443924501495bf30f4",
+              "introduced_by": "62bd47307230eaab1ac3f6ee9ff8ec94c1916cf5"
+            },
+            {
+              "repository": "backend",
+              "commit": "2d53a187bf73dcbfd347c47baf19f68515201ff6",
+              "introduced_by": "eda4d40c8111b7d1132496c69056b63a41e380f1"
+            }
+          ]
+        },
+        {
+          "category": "Improved",
+          "text": "**Return to a Datasite conversation.** Separate chat threads help visitors continue an earlier discussion.",
+          "sources": [
+            {
+              "repository": "frontend",
+              "commit": "8623455808c9fd55f1e2cb4e14409f5f3d4a2c3c",
+              "introduced_by": "62bd47307230eaab1ac3f6ee9ff8ec94c1916cf5"
+            },
+            {
+              "repository": "backend",
+              "commit": "ffbf9b366cb95aed8ac4666a89c202d2bc020b5f",
+              "introduced_by": "eda4d40c8111b7d1132496c69056b63a41e380f1"
+            }
+          ]
+        },
+        {
+          "category": "Improved",
+          "text": "**Schedule in your timezone.** Automation triggers use the chosen timezone. Dashboards can also reload their data automatically at a chosen interval.",
+          "sources": [
+            {
+              "repository": "frontend",
+              "commit": "4a0643d30709ac8c3e2f4d51073637843ad80b08",
+              "introduced_by": "72e9756db8599d0f41cc9e847248b1e21af88baa"
+            },
+            {
+              "repository": "backend",
+              "commit": "fe6c66c8f3435612725fc0f1b58da9764b7d8792",
+              "introduced_by": "7df291c7e87e0f876b888da8384c4bfe8df427d6"
+            },
+            {
+              "repository": "frontend",
+              "commit": "eab5c5f57454797ac69d9588014215237eecc2ef",
+              "introduced_by": "72e9756db8599d0f41cc9e847248b1e21af88baa"
+            },
+            {
+              "repository": "backend",
+              "commit": "546a8e8c036db4a0d9af2d999d6d570eb8d312f5",
+              "introduced_by": "7df291c7e87e0f876b888da8384c4bfe8df427d6"
+            }
+          ]
+        },
+        {
+          "category": "Improved",
+          "text": "**Review and undo query edits.** Query history makes it easier to return to an earlier version. [Query Bench](/query-bench/overview).",
+          "sources": [
+            {
+              "repository": "frontend",
+              "commit": "f008b0ae9499a29b0b4bd335c5bc39c5ff0a3453",
+              "introduced_by": "62bd47307230eaab1ac3f6ee9ff8ec94c1916cf5"
+            }
+          ]
+        },
+        {
+          "category": "New",
+          "text": "**Connect databases over a private network.** IPsec VPN setup supports secure connections to self-hosted data sources. Your network administrator can use the [IPsec guide](/data-sources/security/ipsec-vpn).",
+          "sources": [
+            {
+              "repository": "frontend",
+              "commit": "e861291643e9f329c5d52272d73cf67f84d54669",
+              "introduced_by": "62bd47307230eaab1ac3f6ee9ff8ec94c1916cf5"
+            },
+            {
+              "repository": "backend",
+              "commit": "fc2d593fc4fd907747c14523624e5b70ac4b0f1e",
+              "introduced_by": "eda4d40c8111b7d1132496c69056b63a41e380f1"
+            }
+          ]
+        },
+        {
+          "category": "Fixed",
+          "text": "A message blocked by an exhausted allowance keeps its draft and attachments so you can send it later.",
+          "sources": [
+            {
+              "repository": "frontend",
+              "commit": "645f7270ca9f90ef8190693850e86e257095643c",
+              "introduced_by": "72e9756db8599d0f41cc9e847248b1e21af88baa"
+            },
+            {
+              "repository": "frontend",
+              "commit": "92fb29c29cf71ccee054a02ec4a9f56c49264b11",
+              "introduced_by": "72e9756db8599d0f41cc9e847248b1e21af88baa"
+            }
+          ]
+        },
+        {
+          "category": "Fixed",
+          "text": "Affected dashboard widgets use the correct database instead of showing an incorrect zero result.",
+          "sources": [
+            {
+              "repository": "frontend",
+              "commit": "d536ca2e9f6a1cf27159f97d424bded30b2c1ed6",
+              "introduced_by": "62bd47307230eaab1ac3f6ee9ff8ec94c1916cf5"
+            },
+            {
+              "repository": "backend",
+              "commit": "cbb113ebedb5c1435d8aa1bb0325d5ae447a43a9",
+              "introduced_by": "eda4d40c8111b7d1132496c69056b63a41e380f1"
+            }
+          ]
+        },
+        {
+          "category": "Action required",
+          "text": "**For teams with custom dashboard queries:** the marker for excluding a table from dashboard filters changed from `$` to `$$`. Ask the person who maintains those queries to update any uses of the old marker. [Update a query’s filter exclusions](/dashboards/filters/ignore-filtering-for-a-given-table).",
+          "sources": [
+            {
+              "repository": "backend",
+              "commit": "c9aa637e262409f7abc4cad042120eaa5524f1d3",
+              "introduced_by": "eda4d40c8111b7d1132496c69056b63a41e380f1"
+            }
+          ]
+        }
+      ],
+      "legacy_fragments": [
+        "datasites-your-own-url-and-custom-domains",
+        "datasite-variables",
+        "sign-in-to-private-datasites-with-google-or-microsoft",
+        "conversation-threads-in-the-datasite-analyst",
+        "query-builder-history-and-undo",
+        "ipsec-vpn-for-all-self-hosted-databases",
+        "partial-filters-the-marker-is-now-$$",
+        "connect-supaboard-to-slack",
+        "fixes-and-improvements"
+      ]
+    },
+    {
+      "page": "release-notes/2026/09-25",
+      "from": "2026-09-05",
+      "through": "2026-09-25",
+      "production_merges": [
+        {
+          "repository": "frontend",
+          "sha": "5d085743be8c84dd6d8422c161914fc4301a2b73",
+          "merged_at": "2026-09-08T01:16:05+05:30",
+          "url": "https://github.com/Supaboard-AI/supaboard-frontend/pull/760"
+        },
+        {
+          "repository": "frontend",
+          "sha": "34d442ed57aa0cbebae8330efa56e0c2452ad6fa",
+          "merged_at": "2026-09-08T11:09:38+05:30",
+          "url": "https://github.com/Supaboard-AI/supaboard-frontend/pull/762"
+        },
+        {
+          "repository": "frontend",
+          "sha": "2776d6c22655c3721b690cfc6d64309b437388f0",
+          "merged_at": "2026-09-14T16:16:08+05:30",
+          "url": "https://github.com/Supaboard-AI/supaboard-frontend/pull/771"
+        },
+        {
+          "repository": "frontend",
+          "sha": "3cc55678d31e69d077e635941bdbd87719b0b4fc",
+          "merged_at": "2026-09-17T11:30:11+05:30",
+          "url": "https://github.com/Supaboard-AI/supaboard-frontend/pull/773"
+        },
+        {
+          "repository": "frontend",
+          "sha": "aea8c3173b637744e3cdb516db0728f714fa0479",
+          "merged_at": "2026-09-22T04:29:58+05:30",
+          "url": "https://github.com/Supaboard-AI/supaboard-frontend/pull/782"
+        },
+        {
+          "repository": "frontend",
+          "sha": "e53aa9af83c8246cac2ba227b206a60b3ccfb3b7",
+          "merged_at": "2026-09-25T04:42:56+05:30",
+          "url": "https://github.com/Supaboard-AI/supaboard-frontend/pull/799"
+        },
+        {
+          "repository": "backend",
+          "sha": "19bd359b1187a2a9fed3b0cbb5176f044d108c99",
+          "merged_at": "2026-09-08T00:38:15+05:30",
+          "url": "https://github.com/Supaboard-AI/go-supaboard-backend/pull/343"
+        },
+        {
+          "repository": "backend",
+          "sha": "9bde7d164063ad0f182aa873d19dd2630df7a559",
+          "merged_at": "2026-09-08T09:43:07+05:30",
+          "url": "https://github.com/Supaboard-AI/go-supaboard-backend/pull/345"
+        },
+        {
+          "repository": "backend",
+          "sha": "d8f66eb78da4d189a46bc2430c987c19ec6a625b",
+          "merged_at": "2026-09-08T10:16:35+05:30",
+          "url": "https://github.com/Supaboard-AI/go-supaboard-backend/pull/347"
+        },
+        {
+          "repository": "backend",
+          "sha": "5405dd2e36e588a60773b680679b4ba778189d8a",
+          "merged_at": "2026-09-10T16:02:16+05:30",
+          "url": "https://github.com/Supaboard-AI/go-supaboard-backend/pull/356"
+        },
+        {
+          "repository": "backend",
+          "sha": "b7275b17a278745dec6e99a97bbb2df4864da039",
+          "merged_at": "2026-09-10T20:04:39+05:30",
+          "url": "https://github.com/Supaboard-AI/go-supaboard-backend/pull/360"
+        },
+        {
+          "repository": "backend",
+          "sha": "8ead13b41c26bb54efd057aa2ee917257b0e4d09",
+          "merged_at": "2026-09-22T04:11:39+05:30",
+          "url": "https://github.com/Supaboard-AI/go-supaboard-backend/pull/370"
+        },
+        {
+          "repository": "backend",
+          "sha": "23eb3055a3f37d07e24590168238c0e30274bd8c",
+          "merged_at": "2026-09-25T04:29:50+05:30",
+          "url": "https://github.com/Supaboard-AI/go-supaboard-backend/pull/390"
+        }
+      ],
+      "changes": [
+        {
+          "category": "New",
+          "text": "**Start with the Analyst on Home.** Ask a question or describe something to build from one place. Choose **Flash**, **Pro**, or **Max**, attach files, and add existing work as context. [Ask the Analyst](/analyst/overview).",
+          "sources": [
+            {
+              "repository": "frontend",
+              "commit": "070c4557ef1a2998de18801ebd385cf6d10e3410",
+              "introduced_by": "e53aa9af83c8246cac2ba227b206a60b3ccfb3b7"
+            },
+            {
+              "repository": "frontend",
+              "commit": "d827732ce3fdcd32fa2d82bf684d0393238cb903",
+              "introduced_by": "e53aa9af83c8246cac2ba227b206a60b3ccfb3b7"
+            },
+            {
+              "repository": "frontend",
+              "commit": "bf8cf1e2b400acb14bd284db2a7c57ba4d2bf111",
+              "introduced_by": "e53aa9af83c8246cac2ba227b206a60b3ccfb3b7"
+            },
+            {
+              "repository": "frontend",
+              "commit": "af46c996c884f7537e575f96ca157426be293db8",
+              "introduced_by": "e53aa9af83c8246cac2ba227b206a60b3ccfb3b7"
+            },
+            {
+              "repository": "backend",
+              "commit": "52dd3f7e135ac04f7b75f2351e6f81bb11c49fc8",
+              "introduced_by": "23eb3055a3f37d07e24590168238c0e30274bd8c"
+            }
+          ]
+        },
+        {
+          "category": "New",
+          "text": "**Keep related work in a Project.** Bring chats, artifacts, and context files together around a task or team. [Organize a Project](/projects/overview).",
+          "sources": [
+            {
+              "repository": "frontend",
+              "commit": "2e7f4a9f4e1f7306c9dee5c6431a81fc09f4a1d3",
+              "introduced_by": "e53aa9af83c8246cac2ba227b206a60b3ccfb3b7"
+            },
+            {
+              "repository": "frontend",
+              "commit": "651b64f39474c1c16032ab98596a41a39e3b2165",
+              "introduced_by": "e53aa9af83c8246cac2ba227b206a60b3ccfb3b7"
+            },
+            {
+              "repository": "backend",
+              "commit": "44d64ccfb06437ebcc0d8bb0ff7187a8341b2de1",
+              "introduced_by": "23eb3055a3f37d07e24590168238c0e30274bd8c"
+            }
+          ]
+        },
+        {
+          "category": "New",
+          "text": "**Find what you have created in Artifacts.** Open saved work from a shared library and continue editing it in chat. [Find and manage artifacts](/artifacts/overview).",
+          "sources": [
+            {
+              "repository": "frontend",
+              "commit": "c529b68e9a87c1d9233a7171ae1a99545f7582a8",
+              "introduced_by": "e53aa9af83c8246cac2ba227b206a60b3ccfb3b7"
+            },
+            {
+              "repository": "frontend",
+              "commit": "651b64f39474c1c16032ab98596a41a39e3b2165",
+              "introduced_by": "e53aa9af83c8246cac2ba227b206a60b3ccfb3b7"
+            }
+          ]
+        },
+        {
+          "category": "Improved",
+          "text": "**Work directly with results.** Open, edit, or pin charts, tables, and KPIs from an answer. Feedback controls let you mark a result as helpful or explain what went wrong. [Understand answers](/analyst/insights-in-ask-agents).",
+          "sources": [
+            {
+              "repository": "frontend",
+              "commit": "d6c389f242092f820aac52c3423f011becb7ca2c",
+              "introduced_by": "e53aa9af83c8246cac2ba227b206a60b3ccfb3b7"
+            },
+            {
+              "repository": "frontend",
+              "commit": "4ff507e2fd8f36f5d3d8ba56b707eea94668f487",
+              "introduced_by": "e53aa9af83c8246cac2ba227b206a60b3ccfb3b7"
+            },
+            {
+              "repository": "backend",
+              "commit": "40e1e04a42317bb1eae169344e03396e8319c33f",
+              "introduced_by": "23eb3055a3f37d07e24590168238c0e30274bd8c"
+            }
+          ]
+        },
+        {
+          "category": "Improved",
+          "text": "**Find an earlier conversation.** Chat search looks through conversation titles, your questions, and the answers. [Manage chats](/analyst/managing-chats).",
+          "sources": [
+            {
+              "repository": "frontend",
+              "commit": "1d599a07ae25c700453f93aba8fcee90ce669f9b",
+              "introduced_by": "e53aa9af83c8246cac2ba227b206a60b3ccfb3b7"
+            },
+            {
+              "repository": "backend",
+              "commit": "ede19d4a465c144c60caed94ac2e5573fea608cc",
+              "introduced_by": "23eb3055a3f37d07e24590168238c0e30274bd8c"
+            }
+          ]
+        },
+        {
+          "category": "Improved",
+          "text": "**Create a Datasite using existing dashboard work.** The builder can reuse a dashboard as a starting point for the site.",
+          "sources": [
+            {
+              "repository": "frontend",
+              "commit": "c79e48807e24e16add2a36c434a399041d4f7d8a",
+              "introduced_by": "5d085743be8c84dd6d8422c161914fc4301a2b73"
+            },
+            {
+              "repository": "backend",
+              "commit": "33bc0a184a1e470982815bcda0fe2b5bb943e5d6",
+              "introduced_by": "19bd359b1187a2a9fed3b0cbb5176f044d108c99"
+            }
+          ]
+        },
+        {
+          "category": "Improved",
+          "text": "**Explore data with updated maps and funnels.** Both visualizations have been rebuilt for the new analysis experience.",
+          "sources": [
+            {
+              "repository": "frontend",
+              "commit": "67c467c19aa091417b58f0d500fb145197c710fa",
+              "introduced_by": "e53aa9af83c8246cac2ba227b206a60b3ccfb3b7"
+            },
+            {
+              "repository": "frontend",
+              "commit": "8130a30c7ae5e42484b9a5a9d60ee464f13f5328",
+              "introduced_by": "e53aa9af83c8246cac2ba227b206a60b3ccfb3b7"
+            }
+          ]
+        },
+        {
+          "category": "Improved",
+          "text": "**Change settings without leaving your work.** Settings opens over the current page, making it easier to return to what you were doing.",
+          "sources": [
+            {
+              "repository": "frontend",
+              "commit": "acde623fb56998f7556f5371b2c73c9be9c6536d",
+              "introduced_by": "e53aa9af83c8246cac2ba227b206a60b3ccfb3b7"
+            }
+          ]
+        },
+        {
+          "category": "Fixed",
+          "text": "Interrupted chats recover more reliably, and a lost connection after approval no longer leaves the request stuck in the affected flow.",
+          "sources": [
+            {
+              "repository": "frontend",
+              "commit": "89de91996739bbf8cc10c9ab26f52c1041ceaf06",
+              "introduced_by": "e53aa9af83c8246cac2ba227b206a60b3ccfb3b7"
+            },
+            {
+              "repository": "backend",
+              "commit": "baf6212852ca166a8583443414170a80e737a6cf",
+              "introduced_by": "23eb3055a3f37d07e24590168238c0e30274bd8c"
+            },
+            {
+              "repository": "backend",
+              "commit": "12b91c8649e7a5ad23e4e8995b1b0c7b63a0a1e8",
+              "introduced_by": "23eb3055a3f37d07e24590168238c0e30274bd8c"
+            }
+          ]
+        },
+        {
+          "category": "Fixed",
+          "text": "KPI results preserve the intended number format and decimal precision.",
+          "sources": [
+            {
+              "repository": "frontend",
+              "commit": "c514bc7298eaede678fa6adff87ddb4c39780cbd",
+              "introduced_by": "e53aa9af83c8246cac2ba227b206a60b3ccfb3b7"
+            },
+            {
+              "repository": "backend",
+              "commit": "27b510a686fdf729f3ef40dfe1d004e4ccde4694",
+              "introduced_by": "23eb3055a3f37d07e24590168238c0e30274bd8c"
+            }
+          ]
+        },
+        {
+          "category": "Fixed",
+          "text": "The exhausted-allowance banner no longer appears incorrectly when usable purchased balance remains.",
+          "sources": [
+            {
+              "repository": "frontend",
+              "commit": "8ba8e83f1b6e29c331c2501f52ce6ba1fed3e686",
+              "introduced_by": "e53aa9af83c8246cac2ba227b206a60b3ccfb3b7"
+            }
+          ]
+        }
+      ],
+      "legacy_fragments": [
+        "meet-the-analyst-a-new-home-for-asking-questions",
+        "flash-pro-and-max",
+        "attachments-and-context",
+        "working-with-answers",
+        "search-and-sharing",
+        "like-and-dislike-teach-the-agent",
+        "fewer-approval-prompts",
+        "build-artifacts-from-chat",
+        "projects-and-artifacts",
+        "a-redesigned-app",
+        "charts-and-maps",
+        "datasite-editor",
+        "credits-and-plans",
+        "onboarding",
+        "faster-more-accurate-answers",
+        "fixes"
+      ]
+    },
+    {
+      "page": "release-notes/2026/09-30",
+      "from": "2026-09-26",
+      "through": "2026-09-30",
+      "production_merges": [
+        {
+          "repository": "frontend",
+          "sha": "59610fdabff18fd1273aa594ab423cb3401b50c5",
+          "merged_at": "2026-09-29T22:42:18+05:30",
+          "url": "https://github.com/Supaboard-AI/supaboard-frontend/pull/817"
+        },
+        {
+          "repository": "frontend",
+          "sha": "4a5017f2528fea8f953daadf78d8e9b246a1b508",
+          "merged_at": "2026-09-30T00:58:26+05:30",
+          "url": "https://github.com/Supaboard-AI/supaboard-frontend/pull/821"
+        },
+        {
+          "repository": "frontend",
+          "sha": "a9eb0185c59fb015b1221e28f35d136674746681",
+          "merged_at": "2026-09-30T20:29:19+05:30",
+          "url": "https://github.com/Supaboard-AI/supaboard-frontend/pull/825"
+        },
+        {
+          "repository": "backend",
+          "sha": "f1e458012b872703b7268a2e23ed2378cc24682d",
+          "merged_at": "2026-09-29T21:57:04+05:30",
+          "url": "https://github.com/Supaboard-AI/go-supaboard-backend/pull/404"
+        },
+        {
+          "repository": "backend",
+          "sha": "336d4fd26e00f31441cd57accf8e97cfda404408",
+          "merged_at": "2026-09-30T00:57:17+05:30",
+          "url": "https://github.com/Supaboard-AI/go-supaboard-backend/pull/408"
+        },
+        {
+          "repository": "backend",
+          "sha": "9bb850faf826f5149dc767f206de65b90e73f4bc",
+          "merged_at": "2026-09-30T20:28:22+05:30",
+          "url": "https://github.com/Supaboard-AI/go-supaboard-backend/pull/411"
+        }
+      ],
+      "changes": [
+        {
+          "category": "Improved",
+          "text": "**Choose how you browse your work.** Library pages offer a grid or a sortable table, so you can scan previews or compare items in a list. [Find artifacts](/artifacts/overview).",
+          "sources": [
+            {
+              "repository": "frontend",
+              "commit": "42cbe6b8e8ca9ec1b6eacce80c112536e468945c",
+              "introduced_by": "59610fdabff18fd1273aa594ab423cb3401b50c5"
+            }
+          ]
+        },
+        {
+          "category": "Improved",
+          "text": "**Share with clearer access controls.** Sharing follows a more consistent pattern across chats and artifacts. Choose who can access an item and the permissions available for that type of work.",
+          "sources": [
+            {
+              "repository": "frontend",
+              "commit": "2fcd4711770e8e58936fc7b767897adbfb381afc",
+              "introduced_by": "59610fdabff18fd1273aa594ab423cb3401b50c5"
+            },
+            {
+              "repository": "frontend",
+              "commit": "5cc86c22f0d217e938758f9499c728b7c06bfc8f",
+              "introduced_by": "59610fdabff18fd1273aa594ab423cb3401b50c5"
+            },
+            {
+              "repository": "backend",
+              "commit": "75cba1af913a3dbef962aed0c84d5b2cc6bd4e5c",
+              "introduced_by": "f1e458012b872703b7268a2e23ed2378cc24682d"
+            },
+            {
+              "repository": "backend",
+              "commit": "fca5ece6d30a4f51f6a74baee871c8d1e0885730",
+              "introduced_by": "f1e458012b872703b7268a2e23ed2378cc24682d"
+            }
+          ]
+        },
+        {
+          "category": "Improved",
+          "text": "**Choose an agent and a mode together.** The chat composer brings agent selection and **Flash / Pro / Max** into one menu. [Ask the Analyst](/analyst/overview).",
+          "sources": [
+            {
+              "repository": "frontend",
+              "commit": "5ad25ac0e401a54804ce3e30ddc21c66b68ce051",
+              "introduced_by": "59610fdabff18fd1273aa594ab423cb3401b50c5"
+            }
+          ]
+        },
+        {
+          "category": "Improved",
+          "text": "**Review actions before allowing them.** Approval cards make **Deny**, **Allow once**, and **Always allow** easier to distinguish when an action requests permission.",
+          "sources": [
+            {
+              "repository": "frontend",
+              "commit": "4466137c0a5af9048206b46fbc7476bdf7f12c6e",
+              "introduced_by": "59610fdabff18fd1273aa594ab423cb3401b50c5"
+            },
+            {
+              "repository": "frontend",
+              "commit": "58fa48a702401a004b62a97f327afd5cd3e59c2d",
+              "introduced_by": "59610fdabff18fd1273aa594ab423cb3401b50c5"
+            }
+          ]
+        },
+        {
+          "category": "Improved",
+          "text": "**Configure and try an agent in one place.** Agent settings organize knowledge, tables, examples, memory, and evaluations into tabs. Use **Try in chat** to test your changes. [Configure agents](/agents/overview).",
+          "sources": [
+            {
+              "repository": "frontend",
+              "commit": "3bf04c34879fd0e1063765877409cc40ca62bc0b",
+              "introduced_by": "59610fdabff18fd1273aa594ab423cb3401b50c5"
+            },
+            {
+              "repository": "frontend",
+              "commit": "bc40d718b03c01ef21396c640aa0d5f38a7000b7",
+              "introduced_by": "59610fdabff18fd1273aa594ab423cb3401b50c5"
+            },
+            {
+              "repository": "frontend",
+              "commit": "873cf3ab3837d862a26999a562542f2354048007",
+              "introduced_by": "59610fdabff18fd1273aa594ab423cb3401b50c5"
+            }
+          ]
+        },
+        {
+          "category": "Improved",
+          "text": "**Fit a table column to its contents.** Double-click a column header to widen it to fit the visible contents.",
+          "sources": [
+            {
+              "repository": "frontend",
+              "commit": "ba08486a3fdbd8cf90b8b6a2532abaee1a4bfc1f",
+              "introduced_by": "59610fdabff18fd1273aa594ab423cb3401b50c5"
+            }
+          ]
+        },
+        {
+          "category": "Fixed",
+          "text": "A link to a specific chat message jumps to that message more reliably, and repeated artifact cards are removed from affected answers.",
+          "sources": [
+            {
+              "repository": "frontend",
+              "commit": "e7d1f64ea3abe655190c17aed77460460b1ca895",
+              "introduced_by": "59610fdabff18fd1273aa594ab423cb3401b50c5"
+            },
+            {
+              "repository": "frontend",
+              "commit": "d3ab3e5963c0c5f1b8148741aa78295dd5f327cc",
+              "introduced_by": "59610fdabff18fd1273aa594ab423cb3401b50c5"
+            }
+          ]
+        },
+        {
+          "category": "Fixed",
+          "text": "Completed analysis results remain available if writing the final response fails. The assistant can also recover from more failed queries.",
+          "sources": [
+            {
+              "repository": "backend",
+              "commit": "d967be66ea2b014a4bcd0e3a90400aa39c93575d",
+              "introduced_by": "f1e458012b872703b7268a2e23ed2378cc24682d"
+            },
+            {
+              "repository": "backend",
+              "commit": "104dfb911867c2f291c5188994a8865083930a46",
+              "introduced_by": "9bb850faf826f5149dc767f206de65b90e73f4bc"
+            }
+          ]
+        },
+        {
+          "category": "Fixed",
+          "text": "Deleting an artifact updates the interface more consistently, and text between `<` and `>` remains visible in your messages.",
+          "sources": [
+            {
+              "repository": "frontend",
+              "commit": "4579e388a2995b915310a103354e29b16a79f1b7",
+              "introduced_by": "4a5017f2528fea8f953daadf78d8e9b246a1b508"
+            },
+            {
+              "repository": "backend",
+              "commit": "18919dde6ac006dabdae178f0ea6cc0a9cbe54a1",
+              "introduced_by": "336d4fd26e00f31441cd57accf8e97cfda404408"
+            },
+            {
+              "repository": "frontend",
+              "commit": "794cdd0461233ae736a21cdea5d3c3af47bbbf6b",
+              "introduced_by": "a9eb0185c59fb015b1221e28f35d136674746681"
+            }
+          ]
+        }
+      ],
+      "legacy_fragments": []
+    }
+  ]
+}

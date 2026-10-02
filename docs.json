@@ -7,114 +7,216 @@
     "light": "#0b99ff",
     "dark": "#2376ca"
   },
-  "favicon": "https://framerusercontent.com/images/0S3XhBBKzV0qjE4LjhFxGAHazU.png",
+  "favicon": {
+    "light": "/favicon.svg",
+    "dark": "/favicon-dark.svg"
+  },
   "navigation": {
     "tabs": [
       {
-        "tab": "Docs",
-        "icon": "/icons/help.svg",
+        "tab": "Documentation",
+        "icon": "book-open",
         "groups": [
           {
-            "group": "Getting started",
-            "icon": "/icons/rocket.svg",
+            "group": "Get started",
             "pages": [
               "index",
-              "quickstart",
-              "development"
+              "getting-started/quickstart",
+              "getting-started/concepts"
             ]
           },
           {
-            "group": "Features",
-            "icon": "/icons/star.svg",
+            "group": "Ask questions",
             "pages": [
-              "workspace",
-              "ask-agents",
-              "agents",
-              "data-sources",
-              "dashboard",
-              "automations",
-              "datasites",
-              "tools",
-              "connect-supaboard-to-claude",
-              "connect-supaboard-to-slack",
-              "white-label",
-              "embed",
-              "query-builder"
+              "analyst/overview",
+              "analyst/interacting-with-ai",
+              "analyst/insights-in-ask-agents",
+              "analyst/managing-chats",
+              {
+                "group": "Ask from other apps",
+                "pages": [
+                  "analyst/integrations/connect-supaboard-to-slack",
+                  "analyst/integrations/connect-supaboard-to-claude"
+                ]
+              }
             ]
           },
           {
-            "group": "Supaboard Release Notes",
+            "group": "Organize your work",
             "pages": [
-              "changelog",
-              "apr-24-2026",
-              "may-8-2026",
-              "may-22-2026",
-              "may-23-2026",
-              "may-30-2026",
-              "june-6-2026",
-              "june-13-2026",
-              "june-20-2026",
-              "june-27-2026",
-              "july-4-2026",
-              "july-11-2026",
-              "july-18-2026",
-              "july-25-2026",
-              "august-1-2026",
-              "august-8-2026",
-              "august-22-2026",
-              "september-4-2026",
-              "september-25-2026"
+              "projects/overview",
+              "artifacts/overview"
+            ]
+          },
+          {
+            "group": "Create and share",
+            "pages": [
+              {
+                "group": "Dashboards",
+                "pages": [
+                  "dashboards/overview",
+                  {
+                    "group": "How-to guides",
+                    "pages": [
+                      "dashboards/how-to/create-a-dashboard",
+                      "dashboards/how-to/edit-a-dashboard",
+                      "dashboards/filters/how-to-add-filters-to-your-dashboard",
+                      "dashboards/filters/filter-dashboards-from-table-data",
+                      "dashboards/how-to/explore-dashboard-data",
+                      "dashboards/expand-rows-in-dashboard-tables",
+                      "dashboards/how-to/share-a-dashboard",
+                      "dashboards/how-to/export-dashboard-reports"
+                    ]
+                  },
+                  {
+                    "group": "Widget settings",
+                    "pages": [
+                      "dashboards/widgets/chart-widget",
+                      "dashboards/widgets/table-widget",
+                      "dashboards/widgets/kpi-widget"
+                    ]
+                  },
+                  "dashboards/insights-in-dashboard",
+                  "dashboards/filters/ignore-filtering-for-a-given-table",
+                  {
+                    "group": "Embedding",
+                    "pages": [
+                      "dashboards/embedding/overview",
+                      "dashboards/embedding/add-filters-and-environments-in-embedded-dashboard-programatically"
+                    ]
+                  }
+                ]
+              },
+              {
+                "group": "Datasites",
+                "pages": [
+                  "datasites/overview",
+                  "datasites/create-a-datasite",
+                  "datasites/publish-and-share",
+                  "datasites/datasite-custom-domains",
+                  "datasites/datasite-variables"
+                ]
+              },
+              {
+                "group": "Automations",
+                "pages": [
+                  "automations/overview",
+                  "automations/create-an-automation",
+                  "automations/schedule-dashboard-reports"
+                ]
+              },
+              "artifacts/reports-and-presentations"
+            ]
+          },
+          {
+            "group": "Connect and explore data",
+            "pages": [
+              {
+                "group": "Connectors",
+                "pages": [
+                  "data-sources/overview",
+                  "data-sources/connect-a-data-source",
+                  "data-sources/connectors/big-query",
+                  "data-sources/connectors/clickhouse",
+                  "data-sources/connectors/databricks",
+                  "data-sources/connectors/fivetran",
+                  "data-sources/connectors/microsoft-sql-server",
+                  "data-sources/connectors/mongodb",
+                  "data-sources/connectors/mysql",
+                  "data-sources/connectors/oracle",
+                  "data-sources/connectors/postgres",
+                  "data-sources/connectors/redshift",
+                  "data-sources/connectors/snowflake",
+                  "data-sources/connectors/supabase"
+                ]
+              },
+              "data-sources/security/ipsec-vpn",
+              "query-bench/overview",
+              "query-bench/create-and-save-a-query",
+              "query-bench/writing-sql-queries"
+            ]
+          },
+          {
+            "group": "Configure agents",
+            "pages": [
+              "agents/overview",
+              "agents/set-up-an-agent",
+              "agents/tools"
+            ]
+          },
+          {
+            "group": "Manage your workspace",
+            "pages": [
+              "workspace/overview",
+              "workspace/invite-and-manage-access",
+              "workspace/usage-and-billing",
+              "workspace/white-label"
             ]
           }
         ]
       },
       {
-        "tab": "Guides",
-        "icon": "/icons/bulb.svg",
+        "tab": "Release notes",
+        "icon": "clock-rotate-left",
         "groups": [
           {
-            "group": "Data Sources",
-            "icon": "/icons/data.svg",
+            "group": "Latest updates",
             "pages": [
-              "big-query",
-              "clickhouse",
-              "databricks",
-              "fivetran",
-              "ipsec-vpn",
-              "microsoft-sql-server",
-              "mongodb",
-              "mysql",
-              "oracle",
-              "postgres",
-              "redshift",
-              "snowflake",
-              "supabase"
+              "release-notes/overview"
             ]
           },
           {
-            "group": "Visualisation",
-            "icon": "/icons/chart.svg",
+            "group": "2026",
             "pages": [
-              "table-widget",
-              "chart-widget",
-              "kpi-widget",
-              "insights-in-ask-agents",
-              "insights-in-dashboard"
-            ]
-          },
-          {
-            "group": "How To",
-            "icon": "/icons/checklist.svg",
-            "pages": [
-              "interacting-with-ai",
-              "writing-sql-queries",
-              "add-filters-and-environments-in-embedded-dashboard-programatically",
-              "expand-rows-in-dashboard-tables",
-              "ignore-filtering-for-a-given-table",
-              "how-to-add-filters-to-your-dashboard",
-              "filter-dashboards-from-table-data",
-              "datasite-custom-domains",
-              "datasite-variables"
+              {
+                "group": "September",
+                "pages": [
+                  "release-notes/2026/09-30",
+                  "release-notes/2026/09-25",
+                  "release-notes/2026/09-04"
+                ]
+              },
+              {
+                "group": "August",
+                "pages": [
+                  "release-notes/2026/08-22",
+                  "release-notes/2026/08-08",
+                  "release-notes/2026/08-01"
+                ]
+              },
+              {
+                "group": "July",
+                "pages": [
+                  "release-notes/2026/07-25",
+                  "release-notes/2026/07-18",
+                  "release-notes/2026/07-11",
+                  "release-notes/2026/07-04"
+                ]
+              },
+              {
+                "group": "June",
+                "pages": [
+                  "release-notes/2026/06-27",
+                  "release-notes/2026/06-20",
+                  "release-notes/2026/06-13",
+                  "release-notes/2026/06-06"
+                ]
+              },
+              {
+                "group": "May",
+                "pages": [
+                  "release-notes/2026/05-30",
+                  "release-notes/2026/05-23",
+                  "release-notes/2026/05-22",
+                  "release-notes/2026/05-08"
+                ]
+              },
+              {
+                "group": "April",
+                "pages": [
+                  "release-notes/2026/04-24"
+                ]
+              }
             ]
           }
         ]
@@ -124,10 +226,15 @@
   "logo": {
     "light": "/images/logo-light.png",
     "dark": "/images/logo-dark.png",
-    "href": "https://supaboard.ai"
+    "href": "/"
   },
   "navbar": {
-    "links": [],
+    "links": [
+      {
+        "label": "Supaboard website",
+        "href": "https://supaboard.ai"
+      }
+    ],
     "primary": {
       "type": "button",
       "label": "Get Started",
@@ -154,7 +261,7 @@
     }
   },
   "styling": {
-    "eyebrows": "section"
+    "eyebrows": "breadcrumbs"
   },
   "fonts": {
     "family": "fkGroteskNeue",
@@ -182,6 +289,313 @@
     "indexing": "navigable"
   },
   "interaction": {
-    "drilldown": true
-  }
+    "drilldown": false
+  },
+  "redirects": [
+    {
+      "source": "/quickstart",
+      "destination": "/getting-started/quickstart",
+      "permanent": true
+    },
+    {
+      "source": "/development",
+      "destination": "/getting-started/concepts",
+      "permanent": true
+    },
+    {
+      "source": "/ask-agents",
+      "destination": "/analyst/overview",
+      "permanent": true
+    },
+    {
+      "source": "/interacting-with-ai",
+      "destination": "/analyst/interacting-with-ai",
+      "permanent": true
+    },
+    {
+      "source": "/insights-in-ask-agents",
+      "destination": "/analyst/insights-in-ask-agents",
+      "permanent": true
+    },
+    {
+      "source": "/connect-supaboard-to-claude",
+      "destination": "/analyst/integrations/connect-supaboard-to-claude",
+      "permanent": true
+    },
+    {
+      "source": "/connect-supaboard-to-slack",
+      "destination": "/analyst/integrations/connect-supaboard-to-slack",
+      "permanent": true
+    },
+    {
+      "source": "/agents",
+      "destination": "/agents/overview",
+      "permanent": true
+    },
+    {
+      "source": "/tools",
+      "destination": "/agents/tools",
+      "permanent": true
+    },
+    {
+      "source": "/workspace",
+      "destination": "/workspace/overview",
+      "permanent": true
+    },
+    {
+      "source": "/white-label",
+      "destination": "/workspace/white-label",
+      "permanent": true
+    },
+    {
+      "source": "/dashboard",
+      "destination": "/dashboards/overview",
+      "permanent": true
+    },
+    {
+      "source": "/insights-in-dashboard",
+      "destination": "/dashboards/insights-in-dashboard",
+      "permanent": true
+    },
+    {
+      "source": "/expand-rows-in-dashboard-tables",
+      "destination": "/dashboards/expand-rows-in-dashboard-tables",
+      "permanent": true
+    },
+    {
+      "source": "/embed",
+      "destination": "/dashboards/embedding/overview",
+      "permanent": true
+    },
+    {
+      "source": "/add-filters-and-environments-in-embedded-dashboard-programatically",
+      "destination": "/dashboards/embedding/add-filters-and-environments-in-embedded-dashboard-programatically",
+      "permanent": true
+    },
+    {
+      "source": "/datasites",
+      "destination": "/datasites/overview",
+      "permanent": true
+    },
+    {
+      "source": "/datasite-custom-domains",
+      "destination": "/datasites/datasite-custom-domains",
+      "permanent": true
+    },
+    {
+      "source": "/datasite-variables",
+      "destination": "/datasites/datasite-variables",
+      "permanent": true
+    },
+    {
+      "source": "/automations",
+      "destination": "/automations/overview",
+      "permanent": true
+    },
+    {
+      "source": "/data-sources",
+      "destination": "/data-sources/overview",
+      "permanent": true
+    },
+    {
+      "source": "/ipsec-vpn",
+      "destination": "/data-sources/security/ipsec-vpn",
+      "permanent": true
+    },
+    {
+      "source": "/query-builder",
+      "destination": "/query-bench/overview",
+      "permanent": true
+    },
+    {
+      "source": "/writing-sql-queries",
+      "destination": "/query-bench/writing-sql-queries",
+      "permanent": true
+    },
+    {
+      "source": "/changelog",
+      "destination": "/release-notes/overview",
+      "permanent": true
+    },
+    {
+      "source": "/table-widget",
+      "destination": "/dashboards/widgets/table-widget",
+      "permanent": true
+    },
+    {
+      "source": "/chart-widget",
+      "destination": "/dashboards/widgets/chart-widget",
+      "permanent": true
+    },
+    {
+      "source": "/kpi-widget",
+      "destination": "/dashboards/widgets/kpi-widget",
+      "permanent": true
+    },
+    {
+      "source": "/how-to-add-filters-to-your-dashboard",
+      "destination": "/dashboards/filters/how-to-add-filters-to-your-dashboard",
+      "permanent": true
+    },
+    {
+      "source": "/filter-dashboards-from-table-data",
+      "destination": "/dashboards/filters/filter-dashboards-from-table-data",
+      "permanent": true
+    },
+    {
+      "source": "/ignore-filtering-for-a-given-table",
+      "destination": "/dashboards/filters/ignore-filtering-for-a-given-table",
+      "permanent": true
+    },
+    {
+      "source": "/big-query",
+      "destination": "/data-sources/connectors/big-query",
+      "permanent": true
+    },
+    {
+      "source": "/clickhouse",
+      "destination": "/data-sources/connectors/clickhouse",
+      "permanent": true
+    },
+    {
+      "source": "/databricks",
+      "destination": "/data-sources/connectors/databricks",
+      "permanent": true
+    },
+    {
+      "source": "/fivetran",
+      "destination": "/data-sources/connectors/fivetran",
+      "permanent": true
+    },
+    {
+      "source": "/microsoft-sql-server",
+      "destination": "/data-sources/connectors/microsoft-sql-server",
+      "permanent": true
+    },
+    {
+      "source": "/mongodb",
+      "destination": "/data-sources/connectors/mongodb",
+      "permanent": true
+    },
+    {
+      "source": "/mysql",
+      "destination": "/data-sources/connectors/mysql",
+      "permanent": true
+    },
+    {
+      "source": "/oracle",
+      "destination": "/data-sources/connectors/oracle",
+      "permanent": true
+    },
+    {
+      "source": "/postgres",
+      "destination": "/data-sources/connectors/postgres",
+      "permanent": true
+    },
+    {
+      "source": "/redshift",
+      "destination": "/data-sources/connectors/redshift",
+      "permanent": true
+    },
+    {
+      "source": "/snowflake",
+      "destination": "/data-sources/connectors/snowflake",
+      "permanent": true
+    },
+    {
+      "source": "/supabase",
+      "destination": "/data-sources/connectors/supabase",
+      "permanent": true
+    },
+    {
+      "source": "/september-25-2026",
+      "destination": "/release-notes/2026/09-25",
+      "permanent": true
+    },
+    {
+      "source": "/may-30-2026",
+      "destination": "/release-notes/2026/05-30",
+      "permanent": true
+    },
+    {
+      "source": "/august-8-2026",
+      "destination": "/release-notes/2026/08-08",
+      "permanent": true
+    },
+    {
+      "source": "/july-18-2026",
+      "destination": "/release-notes/2026/07-18",
+      "permanent": true
+    },
+    {
+      "source": "/apr-24-2026",
+      "destination": "/release-notes/2026/04-24",
+      "permanent": true
+    },
+    {
+      "source": "/may-8-2026",
+      "destination": "/release-notes/2026/05-08",
+      "permanent": true
+    },
+    {
+      "source": "/july-25-2026",
+      "destination": "/release-notes/2026/07-25",
+      "permanent": true
+    },
+    {
+      "source": "/july-4-2026",
+      "destination": "/release-notes/2026/07-04",
+      "permanent": true
+    },
+    {
+      "source": "/august-1-2026",
+      "destination": "/release-notes/2026/08-01",
+      "permanent": true
+    },
+    {
+      "source": "/july-11-2026",
+      "destination": "/release-notes/2026/07-11",
+      "permanent": true
+    },
+    {
+      "source": "/june-27-2026",
+      "destination": "/release-notes/2026/06-27",
+      "permanent": true
+    },
+    {
+      "source": "/june-13-2026",
+      "destination": "/release-notes/2026/06-13",
+      "permanent": true
+    },
+    {
+      "source": "/june-6-2026",
+      "destination": "/release-notes/2026/06-06",
+      "permanent": true
+    },
+    {
+      "source": "/august-22-2026",
+      "destination": "/release-notes/2026/08-22",
+      "permanent": true
+    },
+    {
+      "source": "/june-20-2026",
+      "destination": "/release-notes/2026/06-20",
+      "permanent": true
+    },
+    {
+      "source": "/may-22-2026",
+      "destination": "/release-notes/2026/05-22",
+      "permanent": true
+    },
+    {
+      "source": "/may-23-2026",
+      "destination": "/release-notes/2026/05-23",
+      "permanent": true
+    },
+    {
+      "source": "/september-4-2026",
+      "destination": "/release-notes/2026/09-04",
+      "permanent": true
+    }
+  ]
 }
