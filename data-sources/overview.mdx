@@ -1,5 +1,5 @@
 ---
-description: "Connect your databases and apps, then explore the data available to your team."
+description: "Connect your databases and warehouses, then explore the data available to your team."
 title: "Data Sources"
 sidebarTitle: "Overview"
 ---
@@ -9,7 +9,7 @@ A **Data Source** is a live connection from Supaboard to an external database or
 
 ## Before you begin
 
-Choose the database or app you want to analyze. To add a connection, you need permission to manage data sources and the connection details from its administrator.
+Choose the database or warehouse you want to analyze. To add a connection, you need permission to manage data sources and the connection details from its administrator.
 
 Follow [Connect a data source](/data-sources/connect-a-data-source) for the complete setup workflow.
 
@@ -67,13 +67,21 @@ Open **Data sources → Connect Data Source**, or use the connection action in *
 
 For databases (PostgreSQL, Snowflake, etc.), you connect directly by entering your host, credentials, and any advanced options (SSL, SSH tunnel). See [Available Connectors](#available-connectors) for the full list.
 
-### Non-database connections via Fivetran
+<span id="non-database-connections-via-fivetran" />
+<span id="fivetran-powered-connectors" />
+<span id="fivetran-sources-keep-their-own-identity" />
 
-For SaaS tools and third-party services (Shopify, Google Analytics, Airtable, Stripe, and others), Supaboard uses **Fivetran** as the ETL layer. Fivetran handles syncing data from those services into a queryable form — you authenticate with the source service through Fivetran's OAuth flow, and Supaboard takes care of the rest.
+### Existing Fivetran connections
 
-The two kinds behave differently at question time. A direct database is queried live, so an answer reflects the data as it is now. A Fivetran source is batch: the first sync lands within a day, and after that it refreshes on a schedule, hourly to daily, so an answer reflects the last completed sync. See [Fivetran](/data-sources/connectors/fivetran).
+You can no longer create Fivetran connections. Fivetran connections created before this change keep working. A Fivetran source is synced rather than live: it refreshes on a schedule, hourly to daily, so an answer reflects the last completed sync. It keeps the original service's name and logo, such as Stripe, across Supaboard.
 
-Some of these connectors are included on every plan and some require an upgrade — see [Available Connectors](#available-connectors). The connector grid tells you which is which before you commit: a connector that needs an upgrade shows an upgrade prompt when you select it.
+To let an agent use another service, connect it in [MCP & Tools](/agents/tools) instead.
+
+### Data source limits
+
+Every plan can use each of the connectors in [Available Connectors](#available-connectors). Plans differ in how many data sources a workspace can connect: Free includes one, Starter includes two, and Individual and above have no limit. See [pricing](https://supaboard.ai/pricing) for current plan details. MCP & Tools connections are not data sources and don't count toward this limit.
+
+If your workspace already has more data sources than its plan allows, those connections keep working. Adding another one shows an upgrade prompt.
 
 ### What happens after you save
 
@@ -87,7 +95,7 @@ Some of these connectors are included on every plan and some require an upgrade 
 
 ## Available Connectors
 
-The connector grid holds well over a hundred integrations and is searchable by name. The tables below cover the ones with a dedicated setup guide, plus which are included on every plan.
+The connector grid is searchable by name. Supaboard connects directly to these databases and warehouses on every plan:
 
 ### Direct database connectors — all plans
 
@@ -105,20 +113,6 @@ The connector grid holds well over a hundred integrations and is searchable by n
 | [**Microsoft SQL Server**](/data-sources/connectors/microsoft-sql-server) | Supports SSH tunnel, SSL, JDBC params        |
 | **MotherDuck / DuckDB**                           | Database, schema, and MotherDuck token       |
 | [**Oracle**](/data-sources/connectors/oracle)                             | Supports IPsec VPN                           |
-
-### Fivetran-powered connectors
-
-These sync through Fivetran. The following are **included on every plan**, alongside the direct databases above:
-
-Google Analytics · Typeform · Calendly · Stripe · Linear · Asana · YouTube Analytics · Notion · Auth0 · Airtable
-
-Everything else in the catalogue — including Shopify — requires an upgrade. Selecting one shows the upgrade prompt with the plan you'd need; see [pricing](https://supaboard.ai/pricing).
-
-[Learn more about Fivetran-powered connectors here.](/data-sources/connectors/fivetran)
-
-### Fivetran sources keep their own identity
-
-A source synced through Fivetran lands in a shared warehouse, but Supaboard attributes it to the **original service**. A Stripe-via-Fivetran connection shows Stripe's name and logo everywhere — the data source card, the connection header, the resource picker — rather than the warehouse it physically lives in.
 
 
 ## Testing a Connection

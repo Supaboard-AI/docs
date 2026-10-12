@@ -52,6 +52,12 @@
             "group": "Create and share",
             "pages": [
               {
+                "group": "Sheets",
+                "pages": [
+                  "sheets/overview"
+                ]
+              },
+              {
                 "group": "Dashboards",
                 "pages": [
                   "dashboards/overview",
@@ -119,7 +125,6 @@
                   "data-sources/connectors/big-query",
                   "data-sources/connectors/clickhouse",
                   "data-sources/connectors/databricks",
-                  "data-sources/connectors/fivetran",
                   "data-sources/connectors/microsoft-sql-server",
                   "data-sources/connectors/mongodb",
                   "data-sources/connectors/mysql",
@@ -141,7 +146,8 @@
             "pages": [
               "agents/overview",
               "agents/set-up-an-agent",
-              "agents/tools"
+              "agents/tools",
+              "agents/embed-an-agent"
             ]
           },
           {
@@ -168,6 +174,12 @@
           {
             "group": "2026",
             "pages": [
+              {
+                "group": "October",
+                "pages": [
+                  "release-notes/2026/10-12"
+                ]
+              },
               {
                 "group": "September",
                 "pages": [
@@ -464,7 +476,12 @@
     },
     {
       "source": "/fivetran",
-      "destination": "/data-sources/connectors/fivetran",
+      "destination": "/data-sources/overview",
+      "permanent": true
+    },
+    {
+      "source": "/data-sources/connectors/fivetran",
+      "destination": "/data-sources/overview",
       "permanent": true
     },
     {

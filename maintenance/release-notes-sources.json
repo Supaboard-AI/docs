@@ -1,8 +1,8 @@
 {
-  "reviewed_on": "2026-10-02",
+  "reviewed_on": "2026-10-12",
   "timezone": "Asia/Kolkata",
   "method": "Roundups of user-visible changes introduced through first-parent merges into production. Remote production heads were checked with git ls-remote. Dates are roundup cutoffs, not deployment confirmations. Frontend and backend readiness were considered together. Internal refactors, CI, secrets/configuration changes, and unverified performance claims are omitted.",
-  "coverage": "April 1 through September 30, 2026. Frontend history covers the full interval; the supplied backend repository begins April 25 and its first staging-to-production PR is May 8. Earlier backend claims cannot be established from this repository.",
+  "coverage": "April 1 through October 12, 2026. Frontend history covers the full interval; the supplied backend repository begins April 25 and its first staging-to-production PR is May 8. Earlier backend claims cannot be established from this repository.",
   "editorial_references": [
     "https://www.mintlify.com/blog/five-changelog-principles-from-best-developer-brands",
     "https://www.mintlify.com/library/how-to-write-release-notes"
@@ -10,11 +10,11 @@
   "repositories": {
     "frontend": {
       "url": "https://github.com/Supaboard-AI/supaboard-frontend",
-      "production_head": "a9eb0185c59fb015b1221e28f35d136674746681"
+      "production_head": "c98f6bd48426993f624a9215f4c2ea75f0052f43"
     },
     "backend": {
       "url": "https://github.com/Supaboard-AI/go-supaboard-backend",
-      "production_head": "9bb850faf826f5149dc767f206de65b90e73f4bc"
+      "production_head": "47ec57a2a736869fb50f5b711241ca2111606cf0"
     }
   },
   "roundups": [
@@ -915,7 +915,7 @@
         },
         {
           "category": "Fixed",
-          "text": "Fivetran setup no longer creates duplicate data sources in the affected connection flow. [Connect with Fivetran](/data-sources/connectors/fivetran).",
+          "text": "Fivetran setup no longer creates duplicate data sources in the affected connection flow. [Data sources](/data-sources/overview).",
           "sources": [
             {
               "repository": "backend",
@@ -3279,6 +3279,377 @@
         }
       ],
       "legacy_fragments": []
+    },
+    {
+      "page": "release-notes/2026/10-12",
+      "from": "2026-10-01",
+      "through": "2026-10-12",
+      "production_merges": [
+        {
+          "repository": "frontend",
+          "sha": "dbe0eec7a41497e28931df1268bd79973bf49f53",
+          "merged_at": "2026-10-06T17:05:54+05:30",
+          "url": "https://github.com/Supaboard-AI/supaboard-frontend/pull/831"
+        },
+        {
+          "repository": "frontend",
+          "sha": "53f07a06ef91ea3e11dfc1e2ba1bd2115d197227",
+          "merged_at": "2026-10-06T20:59:29+05:30",
+          "url": "https://github.com/Supaboard-AI/supaboard-frontend/pull/833"
+        },
+        {
+          "repository": "frontend",
+          "sha": "341136e9ec68c5c1c91e8104b342becb9b8c7598",
+          "merged_at": "2026-10-07T00:45:45+05:30",
+          "url": "https://github.com/Supaboard-AI/supaboard-frontend/pull/835"
+        },
+        {
+          "repository": "frontend",
+          "sha": "19bbcb573714573ffb9625852431bf7772f198e2",
+          "merged_at": "2026-10-07T17:17:38+05:30",
+          "url": "https://github.com/Supaboard-AI/supaboard-frontend/pull/841"
+        },
+        {
+          "repository": "frontend",
+          "sha": "e69f286575d092bace0e19fe6850d72551a5f65f",
+          "merged_at": "2026-10-08T17:25:17+05:30",
+          "url": "https://github.com/Supaboard-AI/supaboard-frontend/pull/845"
+        },
+        {
+          "repository": "frontend",
+          "sha": "90b85ef448645d4343f08b955bb1bfd482ae5eb0",
+          "merged_at": "2026-10-10T17:37:22+05:30",
+          "url": "https://github.com/Supaboard-AI/supaboard-frontend/pull/852"
+        },
+        {
+          "repository": "frontend",
+          "sha": "c98f6bd48426993f624a9215f4c2ea75f0052f43",
+          "merged_at": "2026-10-12T01:29:03+05:30",
+          "url": "https://github.com/Supaboard-AI/supaboard-frontend/pull/854"
+        },
+        {
+          "repository": "backend",
+          "sha": "c0f3d8979a4a8f257f688adf0a2b7c7ea36ed980",
+          "merged_at": "2026-10-06T16:39:10+05:30",
+          "url": "https://github.com/Supaboard-AI/go-supaboard-backend/pull/420"
+        },
+        {
+          "repository": "backend",
+          "sha": "7e381e2c7da8c8e9d2f47af5052cf2c44a093f02",
+          "merged_at": "2026-10-06T16:51:07+05:30",
+          "url": "https://github.com/Supaboard-AI/go-supaboard-backend/pull/423"
+        },
+        {
+          "repository": "backend",
+          "sha": "65793dfd402accbcfd1f47f3af37f345b0283085",
+          "merged_at": "2026-10-06T21:00:43+05:30",
+          "url": "https://github.com/Supaboard-AI/go-supaboard-backend/pull/425"
+        },
+        {
+          "repository": "backend",
+          "sha": "e7d191a95c3c410b87c9035540b3ff48f96c18a1",
+          "merged_at": "2026-10-06T21:25:55+05:30",
+          "url": "https://github.com/Supaboard-AI/go-supaboard-backend/commit/e7d191a95c3c410b87c9035540b3ff48f96c18a1"
+        },
+        {
+          "repository": "backend",
+          "sha": "df6a394f6b66294fb3079098b13cd36f0c5e40bb",
+          "merged_at": "2026-10-07T15:53:37+05:30",
+          "url": "https://github.com/Supaboard-AI/go-supaboard-backend/pull/430"
+        },
+        {
+          "repository": "backend",
+          "sha": "e80bcf9601dc4fbd2bf438cdb14fc9b60edb158a",
+          "merged_at": "2026-10-08T16:01:33+05:30",
+          "url": "https://github.com/Supaboard-AI/go-supaboard-backend/pull/433"
+        },
+        {
+          "repository": "backend",
+          "sha": "47ec57a2a736869fb50f5b711241ca2111606cf0",
+          "merged_at": "2026-10-12T01:29:53+05:30",
+          "url": "https://github.com/Supaboard-AI/go-supaboard-backend/pull/442"
+        }
+      ],
+      "changes": [
+        {
+          "category": "New",
+          "text": "**Work with spreadsheets in Sheets.** Create a spreadsheet, import a workbook, edit cells and formulas, and share or export the result. Choose workspace storage when creating the first spreadsheet. [Use Sheets](/sheets/overview).",
+          "sources": [
+            {
+              "repository": "frontend",
+              "commit": "dbb5808399b7170a1c0b76fd134c1a7710082495",
+              "introduced_by": "dbe0eec7a41497e28931df1268bd79973bf49f53"
+            },
+            {
+              "repository": "backend",
+              "commit": "9b2b5a0750bbd9000a8554d9d95fbff43fc906fd",
+              "introduced_by": "c0f3d8979a4a8f257f688adf0a2b7c7ea36ed980"
+            },
+            {
+              "repository": "backend",
+              "commit": "4202ce5c655a5c18849aa77ab54cb77e07e70517",
+              "introduced_by": "c0f3d8979a4a8f257f688adf0a2b7c7ea36ed980"
+            }
+          ]
+        },
+        {
+          "category": "New",
+          "text": "**Put an agent chat on your website.** Set up a service account and server-issued tokens, then add the chat widget to your pages. [Add website chat](/agents/embed-an-agent).",
+          "sources": [
+            {
+              "repository": "frontend",
+              "commit": "fab92dde420a74a79d4a20f0fc9d017193277b0c",
+              "introduced_by": "c98f6bd48426993f624a9215f4c2ea75f0052f43"
+            },
+            {
+              "repository": "backend",
+              "commit": "0871c1d4cd3938277492c02e9c7e70cf58c92179",
+              "introduced_by": "47ec57a2a736869fb50f5b711241ca2111606cf0"
+            }
+          ]
+        },
+        {
+          "category": "Improved",
+          "text": "**Turn uploads into editable data.** Spreadsheet attachments become Sheets that the default agent can query. Files and artifacts created in a project chat stay with that project. [Attach context](/analyst/overview#files-and-artifacts).",
+          "sources": [
+            {
+              "repository": "frontend",
+              "commit": "1abc14b0b442a1d2335d9beb103aa50348f9f234",
+              "introduced_by": "dbe0eec7a41497e28931df1268bd79973bf49f53"
+            },
+            {
+              "repository": "backend",
+              "commit": "ea9d3454e48c92376c6fb2da6ccbe00614208fd0",
+              "introduced_by": "c0f3d8979a4a8f257f688adf0a2b7c7ea36ed980"
+            },
+            {
+              "repository": "backend",
+              "commit": "550e311f21d7181ea3a98f50bc00064a4537c55b",
+              "introduced_by": "c0f3d8979a4a8f257f688adf0a2b7c7ea36ed980"
+            },
+            {
+              "repository": "backend",
+              "commit": "05d2bc50aa664c0397f379f996d108fceb1427ac",
+              "introduced_by": "df6a394f6b66294fb3079098b13cd36f0c5e40bb"
+            },
+            {
+              "repository": "backend",
+              "commit": "e2efdc65302e76d351c8f6790e22ac44c2b376eb",
+              "introduced_by": "47ec57a2a736869fb50f5b711241ca2111606cf0"
+            },
+            {
+              "repository": "frontend",
+              "commit": "efeb0d38815ed687cd299fd54d38db763dcfd0cd",
+              "introduced_by": "c98f6bd48426993f624a9215f4c2ea75f0052f43"
+            },
+            {
+              "repository": "backend",
+              "commit": "89da66a66f0de1f4a2d8344ccc25c7631549eee3",
+              "introduced_by": "47ec57a2a736869fb50f5b711241ca2111606cf0"
+            }
+          ]
+        },
+        {
+          "category": "Improved",
+          "text": "**Choose a chart that fits the question.** The chart picker groups compatible chart families by purpose, with new options for rankings, distributions, relationships, and flows. [Configure charts](/dashboards/widgets/chart-widget).",
+          "sources": [
+            {
+              "repository": "frontend",
+              "commit": "83dcc346cd822ae680fec1c36e163b2f3074d84b",
+              "introduced_by": "c98f6bd48426993f624a9215f4c2ea75f0052f43"
+            },
+            {
+              "repository": "backend",
+              "commit": "9713b899128f2a5c402b91e336b3282ec6a661b7",
+              "introduced_by": "47ec57a2a736869fb50f5b711241ca2111606cf0"
+            }
+          ]
+        },
+        {
+          "category": "Improved",
+          "text": "**Build richer KPI cards.** Choose Number, Change, Progress, Trend, Breakdown, or Multi, then map result columns in Data and format the card in Display. [Configure KPIs](/dashboards/widgets/kpi-widget).",
+          "sources": [
+            {
+              "repository": "frontend",
+              "commit": "24ad5a3fcda8e89201c6a14bf1a362916cd26649",
+              "introduced_by": "dbe0eec7a41497e28931df1268bd79973bf49f53"
+            },
+            {
+              "repository": "frontend",
+              "commit": "83dcc346cd822ae680fec1c36e163b2f3074d84b",
+              "introduced_by": "c98f6bd48426993f624a9215f4c2ea75f0052f43"
+            },
+            {
+              "repository": "backend",
+              "commit": "68e7cefec21e4e39949e681cfb39b0d19d7adc00",
+              "introduced_by": "c0f3d8979a4a8f257f688adf0a2b7c7ea36ed980"
+            },
+            {
+              "repository": "backend",
+              "commit": "9713b899128f2a5c402b91e336b3282ec6a661b7",
+              "introduced_by": "47ec57a2a736869fb50f5b711241ca2111606cf0"
+            }
+          ]
+        },
+        {
+          "category": "Improved",
+          "text": "**Refine dashboard text and layout.** Format text blocks with the floating toolbar and review the layout before saving. [Edit a dashboard](/dashboards/how-to/edit-a-dashboard).",
+          "sources": [
+            {
+              "repository": "frontend",
+              "commit": "83dcc346cd822ae680fec1c36e163b2f3074d84b",
+              "introduced_by": "c98f6bd48426993f624a9215f4c2ea75f0052f43"
+            }
+          ]
+        },
+        {
+          "category": "Improved",
+          "text": "**Open Datasites as previews and edit in chat.** Direct in-app links open the preview workspace. Choose Edit with AI to continue building beside an Analyst conversation. [Create a Datasite](/datasites/create-a-datasite).",
+          "sources": [
+            {
+              "repository": "frontend",
+              "commit": "3cee811a8440a385e75adacdc03b80d406099f3d",
+              "introduced_by": "90b85ef448645d4343f08b955bb1bfd482ae5eb0"
+            }
+          ]
+        },
+        {
+          "category": "Improved",
+          "text": "**Keep your preferred agent and give clearer feedback.** Use Make default for new chats and rate finished answers from 1 to 5 when prompted. Agent memory distinguishes Must-have, Preference, and Suggestion. [Configure agents](/agents/overview).",
+          "sources": [
+            {
+              "repository": "frontend",
+              "commit": "79e581867ae9b6dbf7235cb31bb3ff2cfba8b599",
+              "introduced_by": "19bbcb573714573ffb9625852431bf7772f198e2"
+            },
+            {
+              "repository": "frontend",
+              "commit": "086db7953b562c53f8f1228b07bf2902691334b4",
+              "introduced_by": "dbe0eec7a41497e28931df1268bd79973bf49f53"
+            },
+            {
+              "repository": "frontend",
+              "commit": "431c52f63363ff12fe1ee09bb9c51d90f7f268e1",
+              "introduced_by": "e69f286575d092bace0e19fe6850d72551a5f65f"
+            },
+            {
+              "repository": "backend",
+              "commit": "9b04af9f8808ee1b0c5241c86c51245a01579d22",
+              "introduced_by": "c0f3d8979a4a8f257f688adf0a2b7c7ea36ed980"
+            },
+            {
+              "repository": "backend",
+              "commit": "49357d4f842113a16729a6ecd0fdb8e48f6e141a",
+              "introduced_by": "c0f3d8979a4a8f257f688adf0a2b7c7ea36ed980"
+            },
+            {
+              "repository": "backend",
+              "commit": "dd10d7589c863e1b3aa9ccb06a17d90a4c2fb149",
+              "introduced_by": "7e381e2c7da8c8e9d2f47af5052cf2c44a093f02"
+            }
+          ]
+        },
+        {
+          "category": "Improved",
+          "text": "**Start on Free and review storage usage.** New workspaces start on a Free plan with a one-time AI allowance. Paid plans offer monthly or annual billing, and managed storage usage is visible alongside plan details. [Review billing](/workspace/usage-and-billing).",
+          "sources": [
+            {
+              "repository": "frontend",
+              "commit": "600e0cc361d6c4cd133252e77a04f08c40a16f49",
+              "introduced_by": "c98f6bd48426993f624a9215f4c2ea75f0052f43"
+            },
+            {
+              "repository": "frontend",
+              "commit": "fb9b6327cbdde20490ad04949bc3b07d926b4d5a",
+              "introduced_by": "c98f6bd48426993f624a9215f4c2ea75f0052f43"
+            },
+            {
+              "repository": "backend",
+              "commit": "a6ef9edb5a57449a8db1a5de0ef72501a3acd76b",
+              "introduced_by": "47ec57a2a736869fb50f5b711241ca2111606cf0"
+            },
+            {
+              "repository": "backend",
+              "commit": "999197d0e5001e4334bab5783f7ca6cbbd6904a6",
+              "introduced_by": "47ec57a2a736869fb50f5b711241ca2111606cf0"
+            }
+          ]
+        },
+        {
+          "category": "Fixed",
+          "text": "Dashboard widget queries apply saved dashboard filters, and an empty data source no longer leaves chat waiting indefinitely for a sync.",
+          "sources": [
+            {
+              "repository": "frontend",
+              "commit": "58838508a3d9114e76bae701d57174569fea2e6a",
+              "introduced_by": "19bbcb573714573ffb9625852431bf7772f198e2"
+            },
+            {
+              "repository": "backend",
+              "commit": "1305db05aeb0fb1c48464c54818991ea7c25d201",
+              "introduced_by": "df6a394f6b66294fb3079098b13cd36f0c5e40bb"
+            }
+          ]
+        },
+        {
+          "category": "Fixed",
+          "text": "Sheets supports more reliable AI undo, saved filter views, and edits involving formulas. A weaker memory no longer replaces a stronger instruction.",
+          "sources": [
+            {
+              "repository": "backend",
+              "commit": "66942f3d9c9e00ac0256623a286dc1f86b45050a",
+              "introduced_by": "df6a394f6b66294fb3079098b13cd36f0c5e40bb"
+            },
+            {
+              "repository": "backend",
+              "commit": "9ab37e32e972aa88d96f348db913747a09cac72e",
+              "introduced_by": "df6a394f6b66294fb3079098b13cd36f0c5e40bb"
+            },
+            {
+              "repository": "backend",
+              "commit": "bf8943d7cd26ebe1721ee13d27209a1a4b786de9",
+              "introduced_by": "df6a394f6b66294fb3079098b13cd36f0c5e40bb"
+            },
+            {
+              "repository": "backend",
+              "commit": "0da46d1f6d45ee1cecf39cb9efba28f511af5d0c",
+              "introduced_by": "df6a394f6b66294fb3079098b13cd36f0c5e40bb"
+            },
+            {
+              "repository": "backend",
+              "commit": "dd10d7589c863e1b3aa9ccb06a17d90a4c2fb149",
+              "introduced_by": "7e381e2c7da8c8e9d2f47af5052cf2c44a093f02"
+            }
+          ]
+        }
+      ]
     }
-  ]
+  ],
+  "documentation_review": {
+    "reviewed_on": "2026-10-12",
+    "baseline_heads": {
+      "frontend": "a9eb0185c59fb015b1221e28f35d136674746681",
+      "backend": "9bb850faf826f5149dc767f206de65b90e73f4bc"
+    },
+    "scope": "Current feature guides and October 1–12 production source changes. Existing uncommitted edits preserved. Production source availability does not establish deployment or runtime acceptance.",
+    "pages": [
+      "sheets/overview",
+      "agents/embed-an-agent",
+      "agents/overview",
+      "analyst/overview",
+      "artifacts/overview",
+      "datasites/overview",
+      "datasites/create-a-datasite",
+      "dashboards/how-to/edit-a-dashboard",
+      "dashboards/widgets/chart-widget",
+      "dashboards/widgets/kpi-widget",
+      "workspace/usage-and-billing",
+      "agents/set-up-an-agent"
+    ],
+    "excluded": [
+      "Browser Python sandbox is shipped disabled by default; not documented as generally available.",
+      "Internal implementation, refactoring, CI, and credentials are omitted.",
+      "No numeric pricing or allowance claims inferred from seeded plan records."
+    ]
+  }
 }

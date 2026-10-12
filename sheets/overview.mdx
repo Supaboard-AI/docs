@@ -1,0 +1,64 @@
+---
+title: "Sheets"
+sidebarTitle: "Overview"
+description: "Create, import, edit, and analyze spreadsheets in Supaboard."
+---
+
+Sheets brings editable spreadsheets into your workspace. Work in a grid yourself, or ask the Analyst to read and change the data. A Sheets artifact contains tabs called **booklets**; a **leaf** is a table range that the Analyst can query.
+
+## Before you begin
+
+You need permission to create Sheets and editing access to change existing data. Your plan's artifact and storage limits apply. Reading a shared spreadsheet does not grant permission to edit it.
+
+## Create your first spreadsheet
+
+1. Open **Artifacts → New Artifact → Sheets**.
+2. Enter a name, optionally add a description and project, and review the timezone.
+3. Select **Build Manually** for an empty grid, or **Build with AI** to continue with a brief in the Analyst.
+4. When creating the workspace's first Sheets, answer **Where should Sheets live?**
+
+| Storage choice | What to know |
+| --- | --- |
+| **Supaboard Datastore** | Supaboard hosts the storage. Your plan's storage allowance applies. |
+| **Your own PostgreSQL** | A workspace admin or owner connects a database you run. Use a direct connection, with a database user that has `CREATE` permission. This storage does not count toward the plan's managed storage allowance. |
+
+This choice applies to every Sheets artifact in the workspace. Moving existing Sheets between storage providers is not available. Review storage and default settings under **Settings → Sheets**.
+
+## Import a workbook
+
+Open a Sheets artifact, then choose **File → Import workbook… → Choose a file**. Supported files are CSV, TSV, XLSX, and XLSM, up to **100 MB** per file. Each worksheet becomes a new booklet tab. Wait for the import to finish before checking the rows, headers, and detected column types.
+
+You can also attach a spreadsheet to an [Analyst chat](/analyst/overview#files-and-artifacts). The upload creates Sheets that the workspace's default agent can query. Work created from a project chat stays with that project.
+
+## Edit the grid
+
+Type into cells, paste a range, or enter a formula beginning with `=`. Use the formula bar and function browser to inspect or build a calculation. Available functions are listed in the browser; do not assume every function from another spreadsheet application is supported.
+
+Use **Insert** to add rows, columns, or a booklet. The **Edit** menu includes fill, find and replace, paste special, and clearing contents. The toolbar and **Format** menu control number formats, text, alignment, wrapping, and cell colors.
+
+Edits save as you work. Watch the save or connection status before leaving. Use **Undo** and **Redo** for recent edits, or **File → History & snapshots** to inspect earlier versions. Restoring a version changes the current data; review it before proceeding.
+
+## Make data available for analysis
+
+Keep headers meaningful and data columns consistent. Use **Insert → Leaf from selection…** to name a table range, or **Scan for tables** in the leaves panel to review suggested ranges. Check the header rows and boundaries before accepting a suggestion.
+
+A leaf gives the Analyst a structured table to query. Ask a specific question such as “Summarize completed orders by region from this spreadsheet.” For edits, describe the intended change and check the affected rows afterward.
+
+## Organize and validate
+
+- **Filter views** save filters and sort orders without changing the underlying rows. A view can be personal or shared with the workspace.
+- **Format → Conditional formatting…** highlights cells that match a rule.
+- **Format → Data validation…** adds constraints or dropdown choices. Warning rules flag an invalid value; rejection rules prevent it from being saved.
+- Range protection controls who can change selected cells. It does not replace the artifact's sharing permissions.
+
+## Share and export
+
+Use **Share** to review who can access the artifact. Changes also require the appropriate workspace role.
+
+Choose **File → Export workbook…**, select an available format and the current booklet or **All booklets**, then select **Prepare export**. Download the file when it is ready. Exporting all booklets as CSV creates a ZIP file.
+
+If storage is full, reading and exporting remain available, but new rows, imports, and pastes can be refused. Review **Settings → Sheets** and [usage and billing](/workspace/usage-and-billing) before continuing.
+
+## Next steps
+
+[Ask the Analyst](/analyst/overview), [find artifacts](/artifacts/overview), or [organize work in a project](/projects/overview).
