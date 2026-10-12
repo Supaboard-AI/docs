@@ -35,6 +35,7 @@ Check the affected pages in the browser at desktop and phone widths, in light an
 | `artifacts/` | Artifact library, reports, and presentations |
 | `dashboards/` | Dashboards, widgets, filters, exploration, and embedding |
 | `datasites/` | Datasites, custom domains, and variables |
+| `sheets/` | Spreadsheet creation, imports, editing, analysis, and storage |
 | `automations/` | Workflow automation and scheduled reporting |
 | `data-sources/` | Data sources, connector setup, and network security |
 | `query-bench/` | Query editing and SQL guidance |
@@ -79,7 +80,7 @@ Before adding or correcting an entry:
 4. Preserve dated article paths, redirects, and legacy heading IDs when rewriting. Older roundup cutoffs may fall after the last merge they cover; do not assign a feature to a roundup before its production merge.
 5. Update the timeline and month navigation, run both Mintlify checks, and review the index and affected notes on desktop and phone widths. Check article links, native update filters, and any action-required notice.
 
-Production merges establish source availability, not successful deployment or runtime acceptance. The current evidence covers April 1–September 30, 2026. The supplied backend history begins April 25, so earlier backend claims cannot be verified from it. The ledger records this limitation and the exact reviewed heads.
+Production merges establish source availability, not successful deployment or runtime acceptance. The current evidence covers April 1–October 12, 2026. The supplied backend history begins April 25, so earlier backend claims cannot be verified from it. The ledger records this limitation and the exact reviewed heads.
 
 Editorial references: [Mintlify's five changelog principles](https://www.mintlify.com/blog/five-changelog-principles-from-best-developer-brands) and [how to write release notes](https://www.mintlify.com/library/how-to-write-release-notes).
 

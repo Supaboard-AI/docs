@@ -8,7 +8,7 @@ A **Datasite** is a custom analytics site that an AI analyst builds for you out 
 
 Where a [dashboard](/dashboards/overview) is a grid of widgets you arrange yourself, a datasite is a designed page — your layout, your sections, your narrative — that you shape by talking to it. Under the hood it's a real React application with real saved queries, and you can read and edit both.
 
-Use **Artifacts → Datasites** to find your sites. Availability depends on your workspace plan and access.
+Use **Artifacts → Datasites** to find your sites. Free includes one datasite and can't publish it; paid plans can publish, and custom domains need Individual or above. See [pricing](https://supaboard.ai/pricing).
 
 
 ## Before you begin
@@ -24,7 +24,7 @@ You need Datasites feature access and permission to create a site. Choose an age
 
 Open **Artifacts → Datasites** to find existing sites. Choose **New Artifact → Datasite**, enter a name and description, optionally select a project, and choose **Build with AI** to open the Analyst with your brief.
 
-Use **Build Manually** if you want to start with an empty site in the editor. You need permission to create a Datasite and access to the data it will use.
+Use **Build Manually** if you want to start with an empty site in the chat workspace. You need permission to create a Datasite and access to the data it will use.
 
 ### Other ways in
 
@@ -32,7 +32,7 @@ Use **Build Manually** if you want to start with an empty site in the editor. Yo
 - Ask for a Datasite in an existing Analyst chat.
 - Use **Create as Datasite** from a dashboard's options menu to start from its charts, tables, and KPIs. Use **Add Page** in that dialog to include more than one dashboard page.
 
-In the Datasite editor, you can attach supporting files, select an agent, and use the **Build**, **Plan**, or **Ask** modes described below.
+In the chat workspace, attach supporting files, select an agent, and describe the next change. The Analyst uses the same Flash, Pro, and Max modes as other chats.
 
 
 
@@ -52,73 +52,36 @@ You can course-correct at any point, so don't over-plan. But a prompt with struc
 
 Open **Artifacts → Datasites** to browse your sites. Search by name, filter by project or ownership, and switch between **Grid** and **Table** views. Status distinguishes draft and published sites.
 
-Open a site to work on it. Its **⋯** menu contains the editing, sharing, and management actions available to you. See [Artifacts](/artifacts/overview) for the shared library controls.
+Opening a site from the library or a shared in-app link shows its preview. Choose **Edit with AI** to work on it beside an Analyst chat. Its **⋯** menu contains the editing, sharing, and management actions available to you. See [Artifacts](/artifacts/overview) for the shared library controls.
 
 ## The Editor
 
-The editor is split: the analyst chat on the left, your datasite on the right. Drag the divider to resize.
+A Datasite opened directly is a preview workspace. Use its toolbar to inspect **Preview**, **Code**, and **Glossary**, switch device sizes or environments, and access sharing and publishing controls when your permissions allow them.
 
-A brand-new datasite starts with the chat filling the window and reveals the right-hand pane once the first version has built.
+Select **Edit with AI** to open the site beside an Analyst chat. This chat workspace is where you send requests, choose an agent and analysis mode, attach files, and select elements for AI edits. **Build Manually** also starts here for a new site.
 
-**Toolbar:**
-
-| Control        | What it does                                                             |
-| -------------- | ------------------------------------------------------------------------ |
-| Back arrow     | Returns to the library                                                   |
-| Title + pencil | Rename the datasite in place                                             |
-| **Share**      | Invite workspace members                                                 |
-| **Publish**    | Make the current build live (see [Publishing](#publishing-and-embedding)) |
-
-**Above the right-hand pane:**
-
-| Control                     | What it does                                                    |
-| --------------------------- | --------------------------------------------------------------- |
-| **Preview / Code / Glossary** | Switch between the running site, its source, and its queries   |
-| **Desktop / Tablet / Phone** | Preview at different widths, with a device frame                |
-| Environment picker          | Run the preview against a different data source mapping         |
-| **Variables** (key icon)    | API keys and config values for the site — see [Datasite Variables](/datasites/datasite-variables) |
-| **Select & edit elements**  | Click something in the preview to talk about it                 |
-| **Refresh this view**       | Rebuild the preview, or refetch files and queries               |
-| Panel toggle                | Hide or show the chat                                           |
-
+Preview changes and published changes remain separate. A successful build updates the preview; use **Publish** or **Update** when you are ready to change the live site.
 
 ## Working With the Analyst
 
 ### Conversations
 
-The analyst keeps separate conversation threads. The panel header shows the current thread's name — click it to switch threads or start a **New conversation**, and use the pencil and trash icons to rename or delete one.
+Datasite editing uses the Analyst's chat workspace. Return to the supporting conversation from the sidebar or **All chats**, and keep follow-up changes in that chat so the earlier brief remains available. See [Managing chats](/analyst/managing-chats).
 
-- A new thread isn't created until you actually send something, and it names itself from your first message
-- Opening the editor lands you in your most recently active thread
-- Leaving a thread mid-turn is safe — the work continues server-side and the thread re-attaches to it when you come back
-- Chats from before threads existed live on in a single adopted thread
+<span id="modes" />
+<span id="the-plan-build-handoff" />
 
-### Modes
+### Plan and build requests
 
-The chat has three modes. The mode pill sits above the message box, and the tooltip summarises them:
+Use the normal Analyst mode picker for **Flash**, **Pro**, or **Max**. The current chat workspace does not have a separate Build / Plan / Ask switch.
 
-> _"Build writes code + glossary; Plan updates PLAN.md; Ask is read-only Q&A"_
-
-| Mode      | What it does                                                                            | Reach for it when                                                    |
-| --------- | ---------------------------------------------------------------------------------------- | -------------------------------------------------------------------- |
-| **Build** | Writes queries and code, then compiles to check its work. The default.                   | You want something built or changed.                                  |
-| **Plan**  | Explores your data and writes a plan into `PLAN.md`. Touches no application code.        | The datasite is substantial and you want to agree the shape first.    |
-| **Ask**   | Read-only. Answers questions about the datasite and its data.                            | You want to understand what's there without changing anything.        |
-
-### The Plan → Build handoff
-
-When a Plan turn finishes, a **Build this Plan** button appears on the message. Clicking it hands the plan straight to a Build turn. The editor also switches to the Code tab with `PLAN.md` open so you can read — and edit — the plan before committing to it.
-
-`PLAN.md` renders as formatted text with an **Edit as text** link if you'd rather rewrite it by hand.
+For a larger site, ask for a proposed approach before requesting the build. Review its sections, metric definitions, and data sources, then describe what to create. If the site contains `PLAN.md`, open it from **Code** to read it.
 
 ### While it works
 
-Assistant messages show a **Thought for N steps** toggle that expands into what it actually did — every query it ran, every file it wrote. Worth opening when a result surprises you.
+The chat's activity display shows the work in progress. Open the Datasite artifact to inspect its latest compiled preview. If work stops or a build fails, review the message and ask the Analyst to continue or fix the reported error.
 
-Turns keep running even if you close the tab; the work continues server-side and shows up in the history when it's done.
-
-The send button becomes a **Stop** button while a turn is running. Stopping is safe — anything already finished, like a saved query or a written file, is kept.
-
+Publishing remains a separate step after you have checked the preview.
 
 ## The Glossary
 
@@ -182,7 +145,7 @@ There's no autosave and no diff view of the analyst's changes, so save deliberat
 
 The most direct way to change something you can see.
 
-Click **Select & edit elements** in the preview toolbar. A strip appears — _"Select mode on — click any element to edit it"_ — and the cursor becomes a crosshair. Click anything in the preview.
+Open **Edit with AI**, then click **Select & edit elements** for the Datasite preview in the chat workspace. A strip appears — _"Select mode on — click any element to edit it"_ — and the cursor becomes a crosshair. Click anything in the preview.
 
 Select mode switches itself off and a chip appears above the message box naming what you picked. Your next message is scoped to that element: _"make this number bigger and put the change percentage underneath it"_.
 

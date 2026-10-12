@@ -70,7 +70,7 @@ Navigate to **Settings → Team Members** and click **Invite Members**. You can 
 
 Controls what actions they can take across the workspace — see [Roles and permissions](#roles-and-permissions). Options are **Viewer**, **Editor**, and **Admin**.
 
-> Editors and Admins consume a **billable seat**; Viewers are free. The invite form shows the cost per row before you send — see [Seats and billing](#seats-and-billing).
+> Owners, Admins, Editors, and service accounts each use a **billable seat**; Viewers are free. The invite form shows the cost per row before you send — see [Seats and billing](#seats-and-billing).
 
 #### Which features they can use
 
@@ -239,9 +239,21 @@ The current plan card shows your subscription, billable seats, and renewal detai
 
 Inviting or promoting a member may add a billable seat. Review the amount and timing shown in the invitation or role-change confirmation. [Team access](/workspace/invite-and-manage-access) explains how to choose the role and access settings.
 
-### Trials
+<span id="trials" />
 
-If your workspace is on a trial, its plan card shows the remaining time and upgrade options.
+### Free plan
+
+Every workspace starts on the Free plan, and returns to it when its paid plan stops: when a payment fails, or when a cancelled subscription reaches the end of its billing period. Free can't be chosen in the plan picker. It includes Flash mode, a one-time AI allowance that doesn't reset, 100 MB of storage, one data source, one agent, and one each of dashboards, datasites, sheets, saved queries, and automations.
+
+Free doesn't include Slack, extra credits, custom domains, or datasite publishing. Its storage stops at the cap. Choose **Upgrade** to move to a paid plan; see [pricing](https://supaboard.ai/pricing) for what each plan includes.
+
+### Storage
+
+Each plan includes a storage allowance. On paid plans, storage beyond the allowance is billed monthly; Enterprise storage is set by contract. See [pricing](https://supaboard.ai/pricing).
+
+### Plan limits
+
+Plans set how many dashboards, datasites, sheets, saved queries, automations, data sources, and agents a workspace can create, and which [Analyst modes](/analyst/overview#query-modes) are available. If your workspace already has more of something than its plan allows, existing items keep working. Creating another shows an upgrade prompt.
 
 ### Billing management
 
@@ -252,7 +264,7 @@ From **Plans and Billings** you can:
 - **Update payment method** — change the card on file (last 4 digits shown)
 - **Manage billing address** — the legal address used on invoices
 - **View and download invoices** — full history with a PDF per invoice
-- **Cancel subscription** — a confirmation shows the cancellation date; access continues to the end of the billing period
+- **Cancel subscription** — a confirmation shows the cancellation date; access continues to the end of the billing period, then the workspace moves to Free
 - **Upgrade** — jump to plan selection and generate a payment link
 
 For plan tiers and prices, see [pricing](https://supaboard.ai/pricing).

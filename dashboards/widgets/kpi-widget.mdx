@@ -15,9 +15,10 @@ Add a KPI using the [dashboard editor](/dashboards/how-to/edit-a-dashboard) or r
 
 1. Enter **More options → Edit manually** on the dashboard.
 2. Open the KPI's **Edit KPI** control.
-3. In **Customize**, set a clear **Title** and choose the **Format**.
-4. For a currency, select the currency and symbol position. Choose compact notation and decimal places to suit your audience.
-5. Review the preview, select **Save Changes**, then save the dashboard edits.
+3. In **Data**, choose the card type and map its value, comparison, period, or category columns. Check any warnings about unused data.
+4. In **Display**, set a clear **Title** and choose the **Format**.
+5. For a currency, select the currency and symbol position. Choose compact notation and decimal places to suit your audience.
+6. Review the preview, select **Save Changes**, then save the dashboard edits.
 
 <Frame caption="The preview shows how the chosen currency, compact notation, and decimal places will appear.">
   <img src="/images/guides/kpi-formatting.png" alt="KPI preview displaying net revenue with currency format, USD, Auto compact notation, and one decimal place" />
@@ -29,9 +30,18 @@ A KPI shows a prepared metric result. Check its definition, filters, and period 
 
 ## KPI types
 
-A result can be a number, percentage, trend, or comparison. These describe the result itself. The **Format** control changes how its values are displayed; it does not turn a single number into a meaningful comparison with a previous period.
+Choose a **Card type** in **Data**. The query must return the columns the card needs.
 
-Ask the Analyst for the calculation you need, such as “Show completed-order revenue for last month and compare it with the month before.”
+| Type | Required result |
+| --- | --- |
+| **Number** | One row with a headline number |
+| **Change** | Current and previous values side by side |
+| **Progress** | A value and a target, such as a fixed total or target column |
+| **Trend** | One row per period with a date or period and value |
+| **Breakdown** | One row per part, with a category and value |
+| **Multi** | Several metric columns; optionally one row per period for sparklines |
+
+Changing card type does not create a missing baseline or time series. Map the columns deliberately and inspect the preview. Ask the Analyst for the calculation you need, such as “Show completed-order revenue for last month and compare it with the month before.”
 
 ## Display options
 

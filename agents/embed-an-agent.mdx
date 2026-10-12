@@ -1,0 +1,45 @@
+---
+title: "Add an agent to your website"
+sidebarTitle: "Website chat"
+description: "Embed an agent chat with a service account and a server-issued token."
+---
+
+The agent widget adds a chat button to your website. Visitors ask questions through the agent and the permissions of its service account.
+
+## Before you begin
+
+You need an agent, a service account with workspace and agent access, and access to the data the agent will read. Ask your workspace administrator to configure these permissions. You also need someone who can add a token endpoint to your server and a script to your website.
+
+## 1. Open the setup instructions
+
+On the agent home page, select **Website → Embed** under **Where people use it** to open **Add to your website**. It provides the token endpoint example and script for your environment and selected agent.
+
+## 2. Configure the service account
+
+Use **Open service accounts** to create or select an account. Grant only the workspace role, agent, and data access required by the chat.
+
+An Editor service account can also create artifacts. Those artifacts are shared with the person who created the service account; visitors do not see them in the widget.
+
+## 3. Issue tokens from your server
+
+Adapt the dialog's server example to your application. Keep the service account's email and password on the server. Protect your token endpoint with your application's login so only intended users can request tokens.
+
+The server exchanges those credentials for an agent token that lasts **10 minutes**. The widget's `getToken` callback requests a fresh token when needed.
+
+## 4. Add the website script
+
+Copy the script from the dialog into your page. Optionally choose an artifact so new chats begin with that artifact as context. You can also pass properties such as your application's user identifier; these are recorded with messages and appear in **Settings → Usage**.
+
+If your website uses a Content Security Policy, allow the widget script's origin in `script-src` and the API's origin in `connect-src`. Call `SupaboardAgent("shutdown")` when the visitor signs out.
+
+## Internal applications without a server
+
+The agent list offers **Copy embed code** when an eligible service account can use the agent. This alternative uses that service account's API key directly in the page. Anyone who can open the page can read the key, so use this route only for an internal application where that access is intended. Use server-issued tokens for a customer-facing website.
+
+## Check the result
+
+Open your website, start a chat, and verify that the agent can answer using only the intended data. Test sign-out and a fresh session before sharing the page.
+
+## Next steps
+
+[Configure the agent](/agents/overview) or [review workspace access](/workspace/overview).

@@ -12,6 +12,8 @@ A good agent is not a one-off setup. It has a confidence score you can watch, an
 
 Connect the relevant data sources and gather the business definitions the agent should follow. You need Agents feature access and permission to create or configure an agent.
 
+Your plan sets how many agents a workspace can have: Free includes one, Starter two, Individual five, and Business and Enterprise have no limit. See [pricing](https://supaboard.ai/pricing).
+
 Start with [Set up an agent for your team](/agents/set-up-an-agent), then use this page as the reference for each setting.
 
 <Frame caption="Agents holds the assistants your team can configure and select in the Analyst.">
@@ -64,49 +66,34 @@ Opening an agent lands you on its home page — a dashboard of how well the agen
 | **Try in Chat** | Opens a conversation with this agent so you can test a change immediately |
 | **Tune with AI** | Opens the [tuning assistant](#the-tuning-assistant) side panel |
 
-### Cards
+<span id="cards" />
 
-| Card | What it shows |
-| --- | --- |
-| **Confidence Score** | A gauge of the agent's current accuracy, a trend line over recent evaluations, and a **Re-evaluate** button. Reads *"Not enough evals in the last 7 days yet"* until you've run some. |
-| **Issues** | Problems found by evaluation, each with **Mark as fixed** / **Reopen** |
-| **Quick Actions** | **Self Improve** and **AI Insights** toggles (the same settings as **Enable Self-Improvement** and **Enable Data Access** on Who am I), plus Slack and Teams tiles |
+### Overview
 
-> The Slack and Teams tiles on this page are not wired yet — clicking either shows a placeholder message. Slack is connected from Slack itself, not from here: see [Connect Supaboard to Slack](/analyst/integrations/connect-supaboard-to-slack). Teams is not available.
+The agent opens on **Overview**, showing its purpose, data sources, accuracy, owner, and recent activity. Select **Edit** beside **What it's for** to change the agent's identity and instructions.
 
-### Fine Tuning Setup
+**Readiness** links to **Tables described**, **Examples**, **Evals**, and **Knowledge** so you can check what still needs attention. Accuracy depends on evaluation results; an agent without tests does not yet have a verified score.
 
-A grid of seven tiles that doubles as the agent's navigation and its to-do list. Tiles carrying open issues are flagged.
+Under **Channels and behaviour**, **Where people use it** offers **Slack → Connect** and **Website → Embed**. Slack requires a plan with Slack access; see [Connect Supaboard to Slack](/analyst/integrations/connect-supaboard-to-slack). For website chat, see [Add an agent to your website](/agents/embed-an-agent). Teams is marked **Soon**.
 
-| Tile | Purpose |
-| --- | --- |
-| **Who am I** | Identity, data access, and controls |
-| **Knowledge Base** | Your business tribal knowledge |
-| **Memory** | What the agent has learned from past conversations |
-| **Rules** | Guardrails followed on every query |
-| **Table Configuration** | Context on your data so queries land right |
-| **Verified Queries** | Answers you've signed off on |
-| **Skills** | Reusable procedures the agent loads on demand |
+**How it behaves** controls **Learn from conversations** and **Explain charts from the data**. Review these alongside the agent's permissions.
 
-Below that, the latest evaluation run is summarised.
-
+<span id="fine-tuning-setup" />
 
 ## Navigating an Agent
 
-There is no tab bar. Use the **breadcrumb dropdown** in the topbar to move between sections, or the Fine Tuning Setup tiles on the home page.
+Use the section tabs across the agent page:
 
-| Section | What it covers |
+| Tab | What it covers |
 | --- | --- |
-| **Who am I** | Name, description, image, data scope, overview, access controls |
-| **Knowledge Base** | Uploaded reference documents, broken into searchable chunks |
-| **Memory** | Facts the agent has retained from real conversations |
-| **Rules** | Hard rules the agent must follow |
-| **Table Configuration** | Per-table business context |
-| **Verified Queries** | Pre-approved SQL for known questions |
-| **Evaluation** | Test suites and run history |
-| **Skills** | Packaged instructions for particular kinds of task |
+| **Overview** | Identity, data access, readiness, channels, and recent activity |
+| **Knowledge** | Business context, rules, context files, and skills |
+| **Tables** | Per-table business context and schema |
+| **Examples** | Questions paired with verified queries |
+| **Memory** | Facts and instructions retained from conversations |
+| **Evals** | Test questions and evaluation history |
 
-> If you used Supaboard before mid-2026: **Setup** is now **Who am I**, **Master Ruleset** is now **Rules**, and **Fine Tuning** is now **Verified Queries**.
+Some older guides and linked pages use **Who am I**, **Table Configuration**, **Verified Queries**, and **Evaluation**. These correspond to setup from Overview, Tables, Examples, and Evals.
 
 ### Sharing an agent
 
@@ -121,7 +108,7 @@ A share icon in the topbar opens **Share `{agent}`**, where you invite workspace
 | --- | --- |
 | **Name** | Rename the agent at any time |
 | **Description** | The summary shown in the agents list |
-| **Image** | Upload a custom image (max 32 MB). Supaboard extracts the dominant colour for theming. Requires the custom agent image feature on your plan — see [pricing](https://supaboard.ai/pricing). |
+| **Image** | Upload a custom image (max 32 MB). Supaboard extracts the dominant colour for theming. |
 
 ### Data source access
 
@@ -208,6 +195,8 @@ Memory is what the agent has retained from real conversations. Unlike the knowle
 | **Action** | Row menu |
 
 Click any row to open **Memory Details**, showing the **Extracted Memory** in full with **Copy** and **Delete**.
+
+Memories carry a strength: **Must-have** applies to every answer, **Preference** guides choices, and **Suggestion** provides lighter guidance. Review the scope and source before relying on a memory. Weaker memories do not replace a stronger instruction.
 
 > Memory is captured in the background — there is nothing to run or schedule. Review it periodically and delete anything wrong: a bad memory is worse than no memory, because the agent will keep applying it.
 
@@ -381,7 +370,9 @@ Draft edits are held in your browser for the current tab and restored if you nav
 
 ### The default agent
 
-Every workspace gets an agent named **Stella** automatically, created the first time a data source finishes syncing. It's scoped to General and can be selected in the Analyst; you can create and choose other agents for different tasks.
+Every workspace gets a default agent named **Stella**. Uploaded spreadsheet data is made available to the workspace's default agent.
+
+To choose which agent your new chats start with, open an agent's list menu and select **Make default**. This also selects it in the current tab. You can still choose a different agent for an individual conversation.
 
 
 ## Permissions

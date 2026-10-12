@@ -4,15 +4,15 @@ sidebarTitle: "Connect a source"
 description: "Add a connection, confirm its tables are available, and make it usable by an agent."
 ---
 
-Connect the database or app that holds the information you want to analyze. Once the connection is ready, Supaboard can use it in questions, queries, and artifacts.
+Connect the database or warehouse that holds the information you want to analyze. Once the connection is ready, Supaboard can use it in questions, queries, and artifacts.
 
 ## Before you begin
 
-You need permission to add data sources. For a database, ask the person who manages it for its connection details and the approved network access method. Use the [connector-specific guide](/data-sources/overview#available-connectors) for required fields and permissions.
+You need permission to add data sources. For a database, ask the person who manages it for its connection details and the approved network access method. Use the [connector-specific guide](/data-sources/overview#available-connectors) for required fields and permissions. Your plan sets how many data sources the workspace can connect; see [Data source limits](/data-sources/overview#data-source-limits).
 
 ## 1. Choose the connector
 
-Open **Data sources → Connect Data Source**. Search for your database or app, or browse **Databases** and **Apps & Services**.
+Open **Data sources → Connect Data Source**. Search for your database or warehouse, or browse **Databases**.
 
 <Frame caption="Choose the service that holds your data.">
   <img src="/images/guides/connector-picker.png" alt="Connect your data source dialog with database and app connectors" />
@@ -24,7 +24,7 @@ Give the connection a name your team will recognize. For a database, enter its c
 
 The database form shows Supaboard IP addresses to allow in your firewall. Copy the current list from the form rather than using addresses from a screenshot.
 
-For an app connector, follow its authorization and synchronization flow. Check the connector's guide for availability and setup requirements.
+New Fivetran app connections can't be created. Existing ones keep working; see [Existing Fivetran connections](/data-sources/overview#existing-fivetran-connections).
 
 ## 3. Connect and wait for discovery
 
